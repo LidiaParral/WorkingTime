@@ -31,7 +31,9 @@ public class HomeScreen extends javax.swing.JFrame {
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
         mnPago = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mnImpuestos = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnPerfil = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -52,9 +54,17 @@ public class HomeScreen extends javax.swing.JFrame {
         mnbHome.add(mnHorario);
 
         mnPago.setText("Pago");
+
+        jMenuItem1.setText("Nómina");
+        mnPago.add(jMenuItem1);
+
         mnbHome.add(mnPago);
 
         mnImpuestos.setText("Impuestos");
+
+        jMenuItem2.setText("IRPF");
+        mnImpuestos.add(jMenuItem2);
+
         mnbHome.add(mnImpuestos);
 
         mnPerfil.setText("Perfil");
@@ -119,6 +129,8 @@ public class HomeScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnHorario;
     private javax.swing.JMenu mnImpuestos;
     private javax.swing.JMenu mnPago;
