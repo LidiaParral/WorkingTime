@@ -30,10 +30,11 @@ public class HomeScreen extends javax.swing.JFrame {
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
+        mnRegistroAusencias = new javax.swing.JMenuItem();
         mnPago = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        mnImpuestos = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnNomina = new javax.swing.JMenuItem();
+        mnDocumentos = new javax.swing.JMenu();
+        mnTodosDocumentos = new javax.swing.JMenuItem();
         mnPerfil = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -51,21 +52,39 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnHorario.add(mnRegistroJornada);
 
+        mnRegistroAusencias.setText("Registro ausencias");
+        mnRegistroAusencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRegistroAusenciasActionPerformed(evt);
+            }
+        });
+        mnHorario.add(mnRegistroAusencias);
+
         mnbHome.add(mnHorario);
 
         mnPago.setText("Pago");
 
-        jMenuItem1.setText("Nómina");
-        mnPago.add(jMenuItem1);
+        mnNomina.setText("Nómina");
+        mnNomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnNominaActionPerformed(evt);
+            }
+        });
+        mnPago.add(mnNomina);
 
         mnbHome.add(mnPago);
 
-        mnImpuestos.setText("Impuestos");
+        mnDocumentos.setText("Documentos");
 
-        jMenuItem2.setText("IRPF");
-        mnImpuestos.add(jMenuItem2);
+        mnTodosDocumentos.setText("Todos los documentos");
+        mnTodosDocumentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTodosDocumentosActionPerformed(evt);
+            }
+        });
+        mnDocumentos.add(mnTodosDocumentos);
 
-        mnbHome.add(mnImpuestos);
+        mnbHome.add(mnDocumentos);
 
         mnPerfil.setText("Perfil");
         mnPerfil.setBorderPainted(false);
@@ -91,6 +110,21 @@ public class HomeScreen extends javax.swing.JFrame {
         HorarioScreen horario = new HorarioScreen();
         horario.setVisible(true);
     }//GEN-LAST:event_mnRegistroJornadaActionPerformed
+
+    private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
+        NominaScreen nomina = new NominaScreen();
+        nomina.setVisible(true);
+    }//GEN-LAST:event_mnNominaActionPerformed
+
+    private void mnTodosDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosDocumentosActionPerformed
+        DocumentosScreen doc = new DocumentosScreen();
+        doc.setVisible(true);
+    }//GEN-LAST:event_mnTodosDocumentosActionPerformed
+
+    private void mnRegistroAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroAusenciasActionPerformed
+        AusenciasScreen aus = new AusenciasScreen();
+        aus.setVisible(true);
+    }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,22 +154,21 @@ public class HomeScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomeScreen().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new HomeScreen().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu mnDocumentos;
     private javax.swing.JMenu mnHorario;
-    private javax.swing.JMenu mnImpuestos;
+    public javax.swing.JMenuItem mnNomina;
     private javax.swing.JMenu mnPago;
     private javax.swing.JMenu mnPerfil;
+    private javax.swing.JMenuItem mnRegistroAusencias;
     private javax.swing.JMenuItem mnRegistroJornada;
+    public javax.swing.JMenuItem mnTodosDocumentos;
     private javax.swing.JMenuBar mnbHome;
     // End of variables declaration//GEN-END:variables
 }
