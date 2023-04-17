@@ -34,8 +34,10 @@ public class HomeScreen extends javax.swing.JFrame {
         mnPago = new javax.swing.JMenu();
         mnNomina = new javax.swing.JMenuItem();
         mnDocumentos = new javax.swing.JMenu();
+        mnAddDoc = new javax.swing.JMenuItem();
         mnTodosDocumentos = new javax.swing.JMenuItem();
         mnPerfil = new javax.swing.JMenu();
+        mnPerfilUser = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -76,6 +78,9 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnDocumentos.setText("Documentos");
 
+        mnAddDoc.setText("Añadir documento");
+        mnDocumentos.add(mnAddDoc);
+
         mnTodosDocumentos.setText("Todos los documentos");
         mnTodosDocumentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +93,10 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnPerfil.setText("Perfil");
         mnPerfil.setBorderPainted(false);
+
+        mnPerfilUser.setText("Perfil del usuario");
+        mnPerfil.add(mnPerfilUser);
+
         mnbHome.add(mnPerfil);
 
         setJMenuBar(mnbHome);
@@ -161,11 +170,13 @@ public class HomeScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem mnAddDoc;
     private javax.swing.JMenu mnDocumentos;
     private javax.swing.JMenu mnHorario;
     public javax.swing.JMenuItem mnNomina;
     private javax.swing.JMenu mnPago;
     private javax.swing.JMenu mnPerfil;
+    public javax.swing.JMenuItem mnPerfilUser;
     private javax.swing.JMenuItem mnRegistroAusencias;
     private javax.swing.JMenuItem mnRegistroJornada;
     public javax.swing.JMenuItem mnTodosDocumentos;

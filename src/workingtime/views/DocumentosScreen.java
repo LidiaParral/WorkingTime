@@ -35,7 +35,7 @@ public class DocumentosScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btnSaveDoc = new javax.swing.JButton();
+        btnDeleteDoc = new javax.swing.JButton();
         btnUpdateDoc = new javax.swing.JButton();
         btnDownloadDoc = new javax.swing.JButton();
 
@@ -124,7 +124,7 @@ public class DocumentosScreen extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        btnSaveDoc.setText("GUARDAR");
+        btnDeleteDoc.setText("ELIMINAR");
 
         btnUpdateDoc.setText("ACTUALIZAR");
 
@@ -136,7 +136,7 @@ public class DocumentosScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(btnUpdateDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -150,7 +150,7 @@ public class DocumentosScreen extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnUpdateDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                        .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDeleteDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnDownloadDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
@@ -217,9 +217,9 @@ public class DocumentosScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnDeleteDoc;
     public javax.swing.JButton btnDownloadDoc;
     private javax.swing.JButton btnReturn;
-    public javax.swing.JButton btnSaveDoc;
     public javax.swing.JButton btnSearchDoc;
     public javax.swing.JButton btnUpdateDoc;
     private com.toedter.calendar.JDateChooser jDateChooser1;
