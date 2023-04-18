@@ -4,6 +4,8 @@
  */
 package workingtime.views;
 
+import java.awt.Color;
+
 /**
  *
  * @author Lidia Parral
@@ -15,6 +17,9 @@ public class HomeScreen extends javax.swing.JFrame {
      */
     public HomeScreen() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
+
     }
 
     /**
@@ -26,7 +31,7 @@ public class HomeScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
@@ -38,11 +43,25 @@ public class HomeScreen extends javax.swing.JFrame {
         mnTodosDocumentos = new javax.swing.JMenuItem();
         mnPerfil = new javax.swing.JMenu();
         mnPerfilUser = new javax.swing.JMenuItem();
+        mnEmple = new javax.swing.JMenu();
+        mnControlEmp = new javax.swing.JMenuItem();
+        mnAllEmp = new javax.swing.JMenuItem();
 
-        jMenu1.setText("jMenu1");
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 857, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
 
         mnHorario.setText("Horario");
 
@@ -99,17 +118,32 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnbHome.add(mnPerfil);
 
+        mnEmple.setText("Empleados");
+
+        mnControlEmp.setText("Control empleados");
+        mnControlEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnControlEmpActionPerformed(evt);
+            }
+        });
+        mnEmple.add(mnControlEmp);
+
+        mnAllEmp.setText("Todos los empleados");
+        mnEmple.add(mnAllEmp);
+
+        mnbHome.add(mnEmple);
+
         setJMenuBar(mnbHome);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 857, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -134,6 +168,11 @@ public class HomeScreen extends javax.swing.JFrame {
         AusenciasScreen aus = new AusenciasScreen();
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
+
+    private void mnControlEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnControlEmpActionPerformed
+        ControlEmpScreen control = new ControlEmpScreen();
+        control.setVisible(true);
+    }//GEN-LAST:event_mnControlEmpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,9 +208,12 @@ public class HomeScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mnAddDoc;
+    public javax.swing.JMenuItem mnAllEmp;
+    public javax.swing.JMenuItem mnControlEmp;
     private javax.swing.JMenu mnDocumentos;
+    public javax.swing.JMenu mnEmple;
     private javax.swing.JMenu mnHorario;
     public javax.swing.JMenuItem mnNomina;
     private javax.swing.JMenu mnPago;

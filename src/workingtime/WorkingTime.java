@@ -5,6 +5,7 @@
 package workingtime;
 
 import workingtime.views.LoginScreen;
+import workingtime.views.SplashScreen;
 
 /**
  *
@@ -17,9 +18,12 @@ public class WorkingTime {
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
+        SplashScreen splash = new SplashScreen();
+        splash.setVisible(true);
+        Thread.sleep(1800);
+        splash.dispose();
         LoginScreen login = new LoginScreen();
         login.setVisible(true);
-        Thread.sleep(500);
     }
     
 }
