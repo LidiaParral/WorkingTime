@@ -19,7 +19,6 @@ public class HomeScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-
     }
 
     /**
@@ -47,7 +46,7 @@ public class HomeScreen extends javax.swing.JFrame {
         mnControlEmp = new javax.swing.JMenuItem();
         mnAllEmp = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -98,6 +97,11 @@ public class HomeScreen extends javax.swing.JFrame {
         mnDocumentos.setText("Documentos");
 
         mnAddDoc.setText("Añadir documento");
+        mnAddDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAddDocActionPerformed(evt);
+            }
+        });
         mnDocumentos.add(mnAddDoc);
 
         mnTodosDocumentos.setText("Todos los documentos");
@@ -173,6 +177,11 @@ public class HomeScreen extends javax.swing.JFrame {
         ControlEmpScreen control = new ControlEmpScreen();
         control.setVisible(true);
     }//GEN-LAST:event_mnControlEmpActionPerformed
+
+    private void mnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddDocActionPerformed
+        AddDocScreen addDoc = new AddDocScreen();
+        addDoc.setVisible(true);
+    }//GEN-LAST:event_mnAddDocActionPerformed
 
     /**
      * @param args the command line arguments
