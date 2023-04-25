@@ -19,6 +19,8 @@ public class HomeScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
+        lblIdEmp.setVisible(false);
+        lblNomEmp.setVisible(false); 
     }
 
     /**
@@ -31,6 +33,8 @@ public class HomeScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lblNomEmp = new javax.swing.JLabel();
+        lblIdEmp = new javax.swing.JLabel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
@@ -51,15 +55,31 @@ public class HomeScreen extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        lblNomEmp.setEnabled(false);
+        lblNomEmp.setFocusable(false);
+
+        lblIdEmp.setEnabled(false);
+        lblIdEmp.setFocusable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 857, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(765, Short.MAX_VALUE)
+                .addComponent(lblNomEmp)
+                .addGap(32, 32, 32)
+                .addComponent(lblIdEmp)
+                .addGap(60, 60, 60))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(478, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomEmp)
+                    .addComponent(lblIdEmp))
+                .addGap(29, 29, 29))
         );
 
         mnHorario.setText("Horario");
@@ -133,6 +153,11 @@ public class HomeScreen extends javax.swing.JFrame {
         mnEmple.add(mnControlEmp);
 
         mnAllEmp.setText("Todos los empleados");
+        mnAllEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAllEmpActionPerformed(evt);
+            }
+        });
         mnEmple.add(mnAllEmp);
 
         mnbHome.add(mnEmple);
@@ -183,6 +208,11 @@ public class HomeScreen extends javax.swing.JFrame {
         addDoc.setVisible(true);
     }//GEN-LAST:event_mnAddDocActionPerformed
 
+    private void mnAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllEmpActionPerformed
+        TodosEmpScreen todos = new TodosEmpScreen();
+        todos.setVisible(true);
+    }//GEN-LAST:event_mnAllEmpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +248,8 @@ public class HomeScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel lblIdEmp;
+    public javax.swing.JLabel lblNomEmp;
     private javax.swing.JMenuItem mnAddDoc;
     public javax.swing.JMenuItem mnAllEmp;
     public javax.swing.JMenuItem mnControlEmp;

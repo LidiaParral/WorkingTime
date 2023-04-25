@@ -27,15 +27,15 @@ public class NominaScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblNombreEmp = new javax.swing.JLabel();
+        lblApellidosEmp = new javax.swing.JLabel();
+        lblDNIEmp = new javax.swing.JLabel();
+        lblNumSSEmp = new javax.swing.JLabel();
+        lblFechaLiquiEmp = new javax.swing.JLabel();
+        lblMesEmp = new javax.swing.JLabel();
+        lblPuestoEmp = new javax.swing.JLabel();
+        lblGrupoCotizEmp = new javax.swing.JLabel();
+        lblGrupoProfEmp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -47,23 +47,23 @@ public class NominaScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Nombre");
+        lblNombreEmp.setText("Nombre");
 
-        jLabel2.setText("Apellidos");
+        lblApellidosEmp.setText("Apellidos");
 
-        jLabel3.setText("DNI");
+        lblDNIEmp.setText("DNI");
 
-        jLabel4.setText("NumeroSS");
+        lblNumSSEmp.setText("NumeroSS");
 
-        jLabel5.setText("FechaPeriodoLiquidacion");
+        lblFechaLiquiEmp.setText("FechaPeriodoLiquidacion");
 
-        jLabel6.setText("Mes");
+        lblMesEmp.setText("Mes");
 
-        jLabel7.setText("PuestoTrabajo");
+        lblPuestoEmp.setText("PuestoTrabajo");
 
-        jLabel8.setText("GrupoCotizacion");
+        lblGrupoCotizEmp.setText("GrupoCotizacion");
 
-        jLabel9.setText("GrupoProfesional");
+        lblGrupoProfEmp.setText("GrupoProfesional");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,19 +72,19 @@ public class NominaScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(lblNombreEmp)
+                    .addComponent(lblApellidosEmp)
+                    .addComponent(lblDNIEmp))
                 .addGap(149, 149, 149)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addComponent(lblNumSSEmp)
+                    .addComponent(lblPuestoEmp)
+                    .addComponent(lblGrupoCotizEmp))
                 .addGap(112, 112, 112)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel5))
+                    .addComponent(lblMesEmp)
+                    .addComponent(lblGrupoProfEmp)
+                    .addComponent(lblFechaLiquiEmp))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -92,19 +92,19 @@ public class NominaScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(lblNombreEmp)
+                    .addComponent(lblNumSSEmp)
+                    .addComponent(lblFechaLiquiEmp))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel2))
+                    .addComponent(lblMesEmp)
+                    .addComponent(lblPuestoEmp)
+                    .addComponent(lblApellidosEmp))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(lblDNIEmp)
+                    .addComponent(lblGrupoCotizEmp)
+                    .addComponent(lblGrupoProfEmp))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -268,19 +268,19 @@ public class NominaScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnSaveNomina;
     private javax.swing.JButton btnUpdateNomina;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    public javax.swing.JLabel lblApellidosEmp;
+    public javax.swing.JLabel lblDNIEmp;
+    public javax.swing.JLabel lblFechaLiquiEmp;
+    public javax.swing.JLabel lblGrupoCotizEmp;
+    public javax.swing.JLabel lblGrupoProfEmp;
+    public javax.swing.JLabel lblMesEmp;
+    public javax.swing.JLabel lblNombreEmp;
+    public javax.swing.JLabel lblNumSSEmp;
+    public javax.swing.JLabel lblPuestoEmp;
     // End of variables declaration//GEN-END:variables
 }
