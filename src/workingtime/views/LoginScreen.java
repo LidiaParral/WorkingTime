@@ -13,12 +13,15 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
+import workingtime.model.ResetarCampos;
 
 /**
  *
  * @author Lidia Parral
  */
 public class LoginScreen extends javax.swing.JFrame {
+
+    public ResetarCampos reset = new ResetarCampos();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -141,11 +144,6 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-//        if(user.equalsIgnoreCase("Admin") && pass.equals("1234")){
-//           existEmpleado(); 
-//        } else {
-//            existEmpleado();
-//        }
         existEmpleado();
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -162,9 +160,9 @@ public class LoginScreen extends javax.swing.JFrame {
 
             if (user.equals("") || pass.equals("")) {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
-                //reset.Reset(jPanel1);
+                reset.ResetFrame(this);
             } else {
-                sql = "SELECT IdEmpleado, Nombre FROM empleado WHERE Usuario='" + user + "' AND Password='"
+                sql = "SELECT IdEmpleado, Nombre FROM empleados WHERE Usuario='" + user + "' AND Password='"
                         + pass + "'";
 
                 conect = conn.getConexion();

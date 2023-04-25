@@ -5,12 +5,34 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+import workingtime.database.Conexion;
+import workingtime.model.ResetarCampos;
 
 /**
  *
  * @author Lidia Parral
  */
-public class TodosEmpScreen extends javax.swing.JFrame {
+public final class TodosEmpScreen extends javax.swing.JFrame {
+
+    public ResetarCampos reset = new ResetarCampos();
+
+    Conexion conn = new Conexion();
+    Connection conect;
+
+    DefaultTableModel modelo;
+
+    PreparedStatement ps;
+    Statement st;
+
+    ResultSet rs;
+
+    String sql;
 
     /**
      * Creates new form TodosEmpScreen
@@ -19,6 +41,7 @@ public class TodosEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
+        consultar();
     }
 
     /**
@@ -35,43 +58,50 @@ public class TodosEmpScreen extends javax.swing.JFrame {
         btnSearchEmp = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaEmp = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnUpdateEmp = new javax.swing.JButton();
         btnDeleteEmp = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnSearchEmp.setText("BUSCAR");
+        btnSearchEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchEmpActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Apellidos", "DNI", "Email", "Fecha de Nacimiento", "Departamento"
+                "Id", "Nombre", "Apellidos", "DNI", "Email", "Fecha de Nacimiento", "Departamento"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                true, true, false, true, false, true
+                false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaEmp);
+        if (TablaEmp.getColumnModel().getColumnCount() > 0) {
+            TablaEmp.getColumnModel().getColumn(0).setResizable(false);
+            TablaEmp.getColumnModel().getColumn(1).setResizable(false);
+            TablaEmp.getColumnModel().getColumn(2).setResizable(false);
+            TablaEmp.getColumnModel().getColumn(3).setResizable(false);
+            TablaEmp.getColumnModel().getColumn(4).setResizable(false);
+            TablaEmp.getColumnModel().getColumn(5).setResizable(false);
+            TablaEmp.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -158,6 +188,87 @@ public class TodosEmpScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSearchEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmpActionPerformed
+         if (TablaEmp.getRowCount() == 0) {
+            existEmp();
+        } else {
+            limpiarTabla();
+            existEmp();
+        }
+    }//GEN-LAST:event_btnSearchEmpActionPerformed
+
+    public void consultar() {
+        sql = "SELECT * FROM empleados";
+
+        try {
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            Object[] empleado = new Object[7];
+            modelo = (DefaultTableModel) TablaEmp.getModel();
+            while (rs.next()) {
+                empleado[0] = rs.getInt("IdEmpleado");
+                empleado[1] = rs.getString("Nombre");
+                empleado[2] = rs.getString("Apellidos");
+                empleado[3] = rs.getString("DNI");
+                empleado[4] = rs.getString("Email");
+                empleado[5] = rs.getDate("FechaNac");
+                empleado[6] = rs.getString("Departamento");
+                
+                modelo.addRow(empleado);
+            }
+            TablaEmp.setModel(modelo);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        reset.ResetPanel(jPanel2);
+    }
+    
+    /**
+     * Método que permite comprobar si existe un cliente con ese nombre en la tabla Clientes de la base de datos.
+     */
+    public void existEmp() {
+        sql = "SELECT * FROM empleados WHERE Nombre LIKE'%" + txtSearchEmp.getText() + "%'";
+
+        try {
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            Object[] empleado = new Object[7];
+            modelo = (DefaultTableModel) TablaEmp.getModel();
+            while (rs.next()) {
+                empleado[0] = rs.getInt("IdEmpleado");
+                empleado[1] = rs.getString("Nombre");
+                empleado[2] = rs.getString("Apellidos");
+                empleado[3] = rs.getString("DNI");
+                empleado[4] = rs.getString("Email");
+                empleado[5] = rs.getDate("FechaNac");
+                empleado[6] = rs.getString("Departamento");
+
+                modelo.addRow(empleado);
+            }
+            TablaEmp.setModel(modelo);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        reset.ResetPanel(jPanel2);
+        reset.ResetPanel(jPanel1);
+
+    }
+
+    /**
+     * Método que permite limpiar todos los registros de la tabla TablaClientes.
+     */
+    public void limpiarTabla() {
+        int rowCount = modelo.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -186,14 +297,13 @@ public class TodosEmpScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TodosEmpScreen().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TodosEmpScreen().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaEmp;
     public javax.swing.JButton btnDeleteEmp;
     private javax.swing.JButton btnSearchEmp;
     public javax.swing.JButton btnUpdateEmp;
@@ -201,7 +311,6 @@ public class TodosEmpScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     public javax.swing.JTextField txtSearchEmp;
     // End of variables declaration//GEN-END:variables
 }
