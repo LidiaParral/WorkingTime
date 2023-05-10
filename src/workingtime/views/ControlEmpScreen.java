@@ -391,7 +391,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 conect = conn.getConexion();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Registro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Recuerde las credenciales.\nRegistro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);

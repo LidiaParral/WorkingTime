@@ -19,8 +19,8 @@ public class HomeScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblIdEmp.setVisible(false);
-        lblNomEmp.setVisible(false); 
+        lblIdEmp.setVisible(true);
+        lblNomEmp.setVisible(true);
     }
 
     /**
@@ -35,9 +35,13 @@ public class HomeScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblNomEmp = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
+        lblEmailEmp = new javax.swing.JLabel();
+        lblApellidosEmp = new javax.swing.JLabel();
+        lblPuestoEmp = new javax.swing.JLabel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
+        mnTodosHorarios = new javax.swing.JMenuItem();
         mnRegistroAusencias = new javax.swing.JMenuItem();
         mnPago = new javax.swing.JMenu();
         mnNomina = new javax.swing.JMenuItem();
@@ -61,25 +65,52 @@ public class HomeScreen extends javax.swing.JFrame {
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
 
+        lblEmailEmp.setEnabled(false);
+        lblEmailEmp.setFocusable(false);
+
+        lblApellidosEmp.setEnabled(false);
+        lblApellidosEmp.setFocusable(false);
+
+        lblPuestoEmp.setEnabled(false);
+        lblPuestoEmp.setFocusable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(765, Short.MAX_VALUE)
-                .addComponent(lblNomEmp)
-                .addGap(32, 32, 32)
-                .addComponent(lblIdEmp)
-                .addGap(60, 60, 60))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(542, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblApellidosEmp)
+                                .addGap(140, 140, 140))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblIdEmp)
+                                .addGap(113, 113, 113))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(283, 283, 283))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(281, 281, 281))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(478, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomEmp)
-                    .addComponent(lblIdEmp))
-                .addGap(29, 29, 29))
+                .addGap(27, 27, 27)
+                .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                .addComponent(lblApellidosEmp)
+                .addGap(43, 43, 43)
+                .addComponent(lblIdEmp)
+                .addGap(56, 56, 56))
         );
 
         mnHorario.setText("Horario");
@@ -91,6 +122,14 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
         mnHorario.add(mnRegistroJornada);
+
+        mnTodosHorarios.setText("Todos los registros");
+        mnTodosHorarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTodosHorariosActionPerformed(evt);
+            }
+        });
+        mnHorario.add(mnTodosHorarios);
 
         mnRegistroAusencias.setText("Registro ausencias");
         mnRegistroAusencias.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +219,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void mnRegistroJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroJornadaActionPerformed
         HorarioScreen horario = new HorarioScreen();
+        horario.lblIdEmp.setText(lblIdEmp.getText());
         horario.setVisible(true);
     }//GEN-LAST:event_mnRegistroJornadaActionPerformed
 
@@ -195,6 +235,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void mnRegistroAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroAusenciasActionPerformed
         AusenciasScreen aus = new AusenciasScreen();
+        aus.lblIdEmp.setText(lblIdEmp.getText());
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
 
@@ -212,6 +253,13 @@ public class HomeScreen extends javax.swing.JFrame {
         TodosEmpScreen todos = new TodosEmpScreen();
         todos.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
+
+    private void mnTodosHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosHorariosActionPerformed
+        TodosHorariosScreen todosHora = new TodosHorariosScreen();
+        todosHora.lblIdEmp.setText(lblIdEmp.getText());
+        todosHora.existJornada();
+        todosHora.setVisible(true);        
+    }//GEN-LAST:event_mnTodosHorariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,8 +296,11 @@ public class HomeScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel lblApellidosEmp;
+    public javax.swing.JLabel lblEmailEmp;
     public javax.swing.JLabel lblIdEmp;
     public javax.swing.JLabel lblNomEmp;
+    public javax.swing.JLabel lblPuestoEmp;
     private javax.swing.JMenuItem mnAddDoc;
     public javax.swing.JMenuItem mnAllEmp;
     public javax.swing.JMenuItem mnControlEmp;
@@ -263,6 +314,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnRegistroAusencias;
     private javax.swing.JMenuItem mnRegistroJornada;
     public javax.swing.JMenuItem mnTodosDocumentos;
+    public javax.swing.JMenuItem mnTodosHorarios;
     private javax.swing.JMenuBar mnbHome;
     // End of variables declaration//GEN-END:variables
 }

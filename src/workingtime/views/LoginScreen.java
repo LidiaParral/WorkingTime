@@ -37,6 +37,7 @@ public class LoginScreen extends javax.swing.JFrame {
     String pass;
     String user;
     String nombre;
+    String idUser;
     /**
      * Creates new form LoginScreen
      */
@@ -70,7 +71,7 @@ public class LoginScreen extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ID de usuario:");
+        jLabel2.setText("Nombre de usuario:");
 
         lblForgotPss.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         lblForgotPss.setText("¿Olvidaste la contraseña?");
@@ -111,7 +112,7 @@ public class LoginScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
-                                .addGap(39, 39, 39)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +145,8 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        existEmpleado();
+        existEmpleado();        
+        this.hide();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblForgotPssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPssMouseClicked
@@ -153,6 +155,7 @@ public class LoginScreen extends javax.swing.JFrame {
         this.hide();
     }//GEN-LAST:event_lblForgotPssMouseClicked
 
+     
      public void existEmpleado() {
         pass = txtPswLogin.getText();
         user = txtUserLogin.getText();
@@ -162,7 +165,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
                 reset.ResetFrame(this);
             } else {
-                sql = "SELECT IdEmpleado, Nombre FROM empleados WHERE Usuario='" + user + "' AND Password='"
+                sql = "SELECT * FROM empleados WHERE Usuario LIKE '%" + user + "%' AND Password='"
                         + pass + "'";
 
                 conect = conn.getConexion();
@@ -171,10 +174,10 @@ public class LoginScreen extends javax.swing.JFrame {
 
                 if (rs.next()) {
                     HomeScreen home = new HomeScreen();
-                    home.setVisible(true);
-                    this.hide();
+                    
+                    home.lblIdEmp.setText(rs.getString("IdEmpleado"));               
                     home.lblNomEmp.setText(rs.getString("Nombre"));
-                    home.lblIdEmp.setText(rs.getString("IdEmpleado"));
+                    home.setVisible(true);
 
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
                 } else {
