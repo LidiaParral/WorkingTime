@@ -200,6 +200,13 @@ public class LoginScreen extends javax.swing.JFrame {
                     
                     home.lblIdEmp.setText(rs.getString("IdEmpleado"));               
                     home.lblNomEmp.setText(rs.getString("Nombre"));
+                    home.lblApellidosEmp.setText(rs.getString("Apellidos"));
+                    home.lblEmailEmp.setText(rs.getString("Email"));
+                    home.lblDNIEmp.setText(rs.getString("DNI"));
+                    home.lblGrupoCot.setText(rs.getString("GrupoCotizacion"));
+                    home.lblGrupoProf.setText(rs.getString("GrupoProfesional"));
+                    home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
+                    home.lblPuestoEmp.setText(rs.getString("PuestoTrabajo"));
                     home.setVisible(true);
 
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);

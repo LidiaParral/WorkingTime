@@ -5,13 +5,28 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import workingtime.database.Conexion;
+import workingtime.model.ExportExcel;
 import workingtime.model.ResetarCampos;
 
 /**
@@ -21,6 +36,7 @@ import workingtime.model.ResetarCampos;
 public final class NominaScreen extends javax.swing.JFrame {
 
     public ResetarCampos reset = new ResetarCampos();
+    public ExportExcel export = new ExportExcel();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -40,7 +56,7 @@ public final class NominaScreen extends javax.swing.JFrame {
         initComponents();      
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        existEmp();
+        lblIdUser.setVisible(false);
     }
 
     /**
@@ -63,6 +79,7 @@ public final class NominaScreen extends javax.swing.JFrame {
         lblGrupoCotizEmp = new javax.swing.JLabel();
         lblGrupoProfEmp = new javax.swing.JLabel();
         lblIdUser = new javax.swing.JLabel();
+        btnDownloadNomina = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaNomina = new javax.swing.JTable();
@@ -70,7 +87,6 @@ public final class NominaScreen extends javax.swing.JFrame {
         btnSaveNomina = new javax.swing.JButton();
         btnUpdateNomina = new javax.swing.JButton();
         btnReturn = new javax.swing.JButton();
-        btnDownloadNomina = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -95,7 +111,16 @@ public final class NominaScreen extends javax.swing.JFrame {
 
         lblGrupoProfEmp.setText("GrupoProfesional");
 
-        lblIdUser.setText("jLabel1");
+        btnDownloadNomina.setForeground(new java.awt.Color(255, 255, 255));
+        btnDownloadNomina.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\documento (3).png")); // NOI18N
+        btnDownloadNomina.setToolTipText("Este botón permite descargar el documento de la nómina.");
+        btnDownloadNomina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDownloadNomina.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDownloadNomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadNominaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,13 +145,19 @@ public final class NominaScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(lblIdUser)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblIdUser)
-                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIdUser)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnDownloadNomina)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEmp)
                     .addComponent(lblNumSSEmp)
@@ -155,7 +186,7 @@ public final class NominaScreen extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -229,25 +260,18 @@ public final class NominaScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnDownloadNomina.setBackground(new java.awt.Color(38, 70, 166));
-        btnDownloadNomina.setForeground(new java.awt.Color(255, 255, 255));
-        btnDownloadNomina.setText("DESCARGAR");
-        btnDownloadNomina.setToolTipText("Este botón permite descargar el documento de la nómina.");
-        btnDownloadNomina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDownloadNomina.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnDownloadNomina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(218, 218, 218)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -255,14 +279,9 @@ public final class NominaScreen extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,34 +307,14 @@ public final class NominaScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
-    
-     /**
-     * Método que permite comprobar si existe un cliente con ese nombre en la tabla Clientes de la base de datos.
-     */
-    public void existEmp() {
-        sql = "SELECT * FROM empleados WHERE IdEmpleado='" + lblIdUser.getText() + "'";
-
+    private void btnDownloadNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadNominaActionPerformed
         try {
-            conect = conn.getConexion();
-            ps = conect.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            if (rs.next()) {
-                lblNombreEmp.setText(rs.getString("Nombre"));
-                lblApellidosEmp.setText(rs.getString("Apellidos"));
-                lblDNIEmp.setText(rs.getString("DNI"));
-                lblNumSSEmp.setText(rs.getString("NumeroSeguridadSocial"));
-                lblPuestoEmp.setText(rs.getString("PuestoTrabajo"));
-                lblGrupoCotizEmp.setText(rs.getString("GrupoCotizacion"));
-                lblGrupoProfEmp.setText(rs.getString("GrupoProfesional"));
-            }
-
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
+            export.exportarExcel(TablaNomina);
+        } catch (IOException ex) {
+            Logger.getLogger(NominaScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        reset.ResetPanel(jPanel2);
-        reset.ResetPanel(jPanel1);
+    }//GEN-LAST:event_btnDownloadNominaActionPerformed
 
-    }
     /**
      * @param args the command line arguments
      */

@@ -5,17 +5,47 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import workingtime.database.Conexion;
+import workingtime.model.ExportExcel;
+import workingtime.model.LimpiarTabla;
+import workingtime.model.ResetarCampos;
 
 /**
  *
  * @author Lidia Parral
  */
-public class DocumentosScreen extends javax.swing.JFrame {
+public class TodosDocumentosScreen extends javax.swing.JFrame {
 
+    public ExportExcel export = new ExportExcel();
+    public ResetarCampos reset = new ResetarCampos();
+    public LimpiarTabla lmp = new LimpiarTabla();
+
+    Conexion conn = new Conexion();
+    Connection conect;
+
+    DefaultTableModel modelo = new DefaultTableModel();
+
+    PreparedStatement ps;
+    Statement st;
+
+    ResultSet rs;
+
+    String sql;
+    String search;
     /**
      * Creates new form DocumentosScreen
      */
-    public DocumentosScreen() {
+    public TodosDocumentosScreen() {
         initComponents();       
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
@@ -32,16 +62,16 @@ public class DocumentosScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        dtFechaSubida = new com.toedter.calendar.JDateChooser();
         btnReturn = new javax.swing.JButton();
         btnSearchDoc = new javax.swing.JButton();
+        btnDownloadDoc = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaDoc = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnDeleteDoc = new javax.swing.JButton();
         btnUpdateDoc = new javax.swing.JButton();
-        btnDownloadDoc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -63,6 +93,25 @@ public class DocumentosScreen extends javax.swing.JFrame {
         btnSearchDoc.setForeground(new java.awt.Color(255, 255, 255));
         btnSearchDoc.setText("BUSCAR");
         btnSearchDoc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSearchDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchDocActionPerformed(evt);
+            }
+        });
+
+        btnDownloadDoc.setForeground(new java.awt.Color(255, 255, 255));
+        btnDownloadDoc.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\documento (3).png")); // NOI18N
+        btnDownloadDoc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDownloadDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDownloadDocMouseClicked(evt);
+            }
+        });
+        btnDownloadDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadDocActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,14 +121,19 @@ public class DocumentosScreen extends javax.swing.JFrame {
                 .addGap(108, 108, 108)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dtFechaSubida, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnSearchDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnDownloadDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,36 +144,35 @@ public class DocumentosScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtFechaSubida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSearchDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDownloadDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaDoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Descargar", "Nombre", "Tipo de Documento", "Archivo", "Fecha subida"
+                "Nombre", "Tipo de Documento", "Archivo", "Fecha subida"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-        }
+        jScrollPane1.setViewportView(TablaDoc);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -148,38 +201,25 @@ public class DocumentosScreen extends javax.swing.JFrame {
         btnUpdateDoc.setText("ACTUALIZAR");
         btnUpdateDoc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnDownloadDoc.setBackground(new java.awt.Color(38, 70, 166));
-        btnDownloadDoc.setForeground(new java.awt.Color(255, 255, 255));
-        btnDownloadDoc.setText("DESCARGAR");
-        btnDownloadDoc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDownloadDoc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDownloadDocMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeleteDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
                 .addComponent(btnUpdateDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnDownloadDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGap(40, 40, 40)
+                .addComponent(btnDeleteDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDownloadDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdateDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeleteDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,6 +252,59 @@ public class DocumentosScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDownloadDocMouseClicked
 
+    private void btnDownloadDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadDocActionPerformed
+        try {
+            export.exportarExcel(TablaDoc);
+        } catch (IOException ex) {
+            Logger.getLogger(TodosDocumentosScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDownloadDocActionPerformed
+
+    private void btnSearchDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDocActionPerformed
+        search = dtFechaSubida.getDateFormatString();
+        if (search.equals("")) {
+            JOptionPane.showMessageDialog(null, "No puede estar vacío este campo.", "TODOS LOS EMPLEADOS", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (TablaDoc.getRowCount() == 0) {
+                existDoc();
+            } else {
+                lmp.limpiarTabla(modelo);
+                existDoc();
+            }
+        }
+        btnSearchDoc.setBackground(new Color(38,70,166));
+    }//GEN-LAST:event_btnSearchDocActionPerformed
+
+    
+    public void existDoc() {
+
+        sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='%" + dtFechaSubida.getDateFormatString() + "'";
+
+        try {
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            Object[] documento = new Object[4];
+            modelo = (DefaultTableModel) TablaDoc.getModel();
+            while (rs.next()) {
+                documento[0] = rs.getString("NombreDoc");
+                documento[1] = rs.getString("TipoDocumento");
+                documento[2] = rs.getString("RutaArchivo");
+                documento[3] = rs.getString("FechaSubida");
+
+                modelo.addRow(documento);
+            }
+            TablaDoc.setModel(modelo);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+
+        reset.ResetPanel(jPanel2);
+        reset.ResetPanel(jPanel1);
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -229,34 +322,35 @@ public class DocumentosScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new DocumentosScreen().setVisible(true);
+            new TodosDocumentosScreen().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaDoc;
     public javax.swing.JButton btnDeleteDoc;
     public javax.swing.JButton btnDownloadDoc;
     private javax.swing.JButton btnReturn;
     public javax.swing.JButton btnSearchDoc;
     public javax.swing.JButton btnUpdateDoc;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser dtFechaSubida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

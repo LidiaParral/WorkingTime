@@ -19,8 +19,16 @@ public class HomeScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblIdEmp.setVisible(true);
-        lblNomEmp.setVisible(true);
+        lblIdEmp.setVisible(false);
+        lblNomEmp.setVisible(false);
+        lblApellidosEmp.setVisible(false);
+        lblDNIEmp.setVisible(false);
+        lblEmailEmp.setVisible(false);
+        lblGrupoCot.setVisible(false);
+        lblGrupoProf.setVisible(false);
+        lblNumSS.setVisible(false);
+        lblPuestoEmp.setVisible(false);
+        
     }
 
     /**
@@ -32,13 +40,17 @@ public class HomeScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblNomEmp = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
         lblEmailEmp = new javax.swing.JLabel();
         lblApellidosEmp = new javax.swing.JLabel();
         lblPuestoEmp = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
+        lblNumSS = new javax.swing.JLabel();
+        lblGrupoCot = new javax.swing.JLabel();
+        lblGrupoProf = new javax.swing.JLabel();
+        lblDNIEmp = new javax.swing.JLabel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
@@ -58,8 +70,6 @@ public class HomeScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home.png")); // NOI18N
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblNomEmp.setEnabled(false);
@@ -77,43 +87,72 @@ public class HomeScreen extends javax.swing.JFrame {
         lblPuestoEmp.setEnabled(false);
         lblPuestoEmp.setFocusable(false);
 
+        fondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home.png")); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(461, Short.MAX_VALUE)
+                .addContainerGap(170, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(37, 37, 37)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblApellidosEmp)
+                                .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblApellidosEmp)
-                                .addGap(140, 140, 140))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblDNIEmp)
+                                .addGap(90, 90, 90)
                                 .addComponent(lblIdEmp)
                                 .addGap(113, 113, 113))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(283, 283, 283))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(281, 281, 281))))
+                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNumSS)
+                        .addGap(46, 46, 46)
+                        .addComponent(lblGrupoCot)
+                        .addGap(58, 58, 58)
+                        .addComponent(lblGrupoProf)
+                        .addGap(98, 98, 98))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
-                .addComponent(lblApellidosEmp)
-                .addGap(43, 43, 43)
-                .addComponent(lblIdEmp)
-                .addGap(56, 56, 56))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblApellidosEmp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNumSS)
+                            .addComponent(lblGrupoCot)
+                            .addComponent(lblGrupoProf))
+                        .addGap(37, 37, 37)
+                        .addComponent(lblIdEmp)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDNIEmp)
+                        .addGap(48, 48, 48))))
         );
 
         mnHorario.setText("Horario");
@@ -213,20 +252,10 @@ public class HomeScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 75, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(186, 186, 186)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(186, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(19, 19, 19)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(20, Short.MAX_VALUE)))
         );
 
         pack();
@@ -240,12 +269,19 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
         NominaScreen nomina = new NominaScreen();
-        nomina.lblIdUser.setText(lblIdEmp.getText());
+        nomina.lblIdUser.setText(lblIdEmp.getText().toLowerCase());
+        nomina.lblNombreEmp.setText(lblNomEmp.getText());
+        nomina.lblApellidosEmp.setText(lblApellidosEmp.getText());
+        nomina.lblDNIEmp.setText(lblDNIEmp.getText());
+        nomina.lblGrupoCotizEmp.setText(lblGrupoCot.getText());
+        nomina.lblGrupoProfEmp.setText(lblGrupoProf.getText());
+        nomina.lblNumSSEmp.setText(lblNumSS.getText());
+        nomina.lblPuestoEmp.setText(lblPuestoEmp.getText());
         nomina.setVisible(true);
     }//GEN-LAST:event_mnNominaActionPerformed
 
     private void mnTodosDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosDocumentosActionPerformed
-        DocumentosScreen doc = new DocumentosScreen();
+        TodosDocumentosScreen doc = new TodosDocumentosScreen();
         doc.setVisible(true);
     }//GEN-LAST:event_mnTodosDocumentosActionPerformed
 
@@ -312,12 +348,16 @@ public class HomeScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblApellidosEmp;
+    public javax.swing.JLabel lblDNIEmp;
     public javax.swing.JLabel lblEmailEmp;
+    public javax.swing.JLabel lblGrupoCot;
+    public javax.swing.JLabel lblGrupoProf;
     public javax.swing.JLabel lblIdEmp;
     public javax.swing.JLabel lblNomEmp;
+    public javax.swing.JLabel lblNumSS;
     public javax.swing.JLabel lblPuestoEmp;
     private javax.swing.JMenuItem mnAddDoc;
     public javax.swing.JMenuItem mnAllEmp;

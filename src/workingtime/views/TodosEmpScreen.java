@@ -8,12 +8,12 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
+import workingtime.model.LimpiarTabla;
 import workingtime.model.ResetarCampos;
 
 /**
@@ -23,6 +23,8 @@ import workingtime.model.ResetarCampos;
 public final class TodosEmpScreen extends javax.swing.JFrame {
 
     public ResetarCampos reset = new ResetarCampos();
+    
+    public LimpiarTabla lmp = new LimpiarTabla();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -253,7 +255,7 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             if (TablaEmp.getRowCount() == 0) {
                 existEmp();
             } else {
-                limpiarTabla();
+                lmp.limpiarTabla(modelo);
                 existEmp();
             }
         }
@@ -285,7 +287,7 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteEmpMousePressed
 
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
-        // TODO add your handling code here:
+        
         
         btnUpdateEmp.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnUpdateEmpActionPerformed
@@ -304,24 +306,19 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             st = conect.createStatement();
             rs = st.executeQuery(sql);
 
-            ResultSetMetaData rsm = rs.getMetaData();
-            int columns = rsm.getColumnCount();
-
-            modelo.addColumn("Nº Empleado");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellidos");
-            modelo.addColumn("DNI");
-            modelo.addColumn("Fecha de Nacimiento");
-            modelo.addColumn("Email");
-            modelo.addColumn("Departamento");
-
+           Object[] empleado = new Object[7];
+            modelo = (DefaultTableModel) TablaEmp.getModel();
             while (rs.next()) {
-                Object[] filas = new Object[columns];
-                for (int i = 0; i < columns; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
-            }       
+                empleado[0] = rs.getInt("IdEmpleado");
+                empleado[1] = rs.getString("Nombre");
+                empleado[2] = rs.getString("Apellidos");
+                empleado[3] = rs.getString("DNI");
+                empleado[4] = rs.getString("Email");
+                empleado[5] = rs.getDate("FechaNac");
+                empleado[6] = rs.getString("Departamento");
+
+                modelo.addRow(empleado);
+            }
             TablaEmp.setModel(modelo);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
@@ -363,17 +360,6 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel2);
         reset.ResetPanel(jPanel1);
 
-    }
-
-    /**
-     * Método que permite limpiar todos los registros de la tabla TablaClientes.
-     */
-    public void limpiarTabla() {
-        int rowCount = modelo.getRowCount();
-        //Remove rows one by one from the end of the table
-        for (int i = rowCount - 1; i >= 0; i--) {
-            modelo.removeRow(i);
-        }
     }
 
     /**
