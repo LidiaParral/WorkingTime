@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
@@ -90,6 +92,14 @@ public class LoginScreen extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("LOGIN");
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnLoginMousePressed(evt);
+            }
+        });
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -145,8 +155,12 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        existEmpleado();        
-        this.hide();
+        try {        
+            existEmpleado();
+            this.hide();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblForgotPssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPssMouseClicked
@@ -155,8 +169,16 @@ public class LoginScreen extends javax.swing.JFrame {
         this.hide();
     }//GEN-LAST:event_lblForgotPssMouseClicked
 
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        btnLogin.setBackground(new Color(252, 201, 131));
+    }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
+        btnLogin.setBackground(new Color(252, 201, 131));
+    }//GEN-LAST:event_btnLoginMousePressed
+
      
-     public void existEmpleado() {
+     public void existEmpleado() throws InterruptedException {
         pass = txtPswLogin.getText();
         user = txtUserLogin.getText();
         try {
@@ -173,6 +195,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 rs = ps.executeQuery(sql);
 
                 if (rs.next()) {
+                    Thread.sleep(200);
                     HomeScreen home = new HomeScreen();
                     
                     home.lblIdEmp.setText(rs.getString("IdEmpleado"));               

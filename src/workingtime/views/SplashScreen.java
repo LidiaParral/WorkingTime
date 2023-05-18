@@ -36,7 +36,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        pgbarSplash = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -48,8 +48,9 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\worktime5.gif")); // NOI18N
 
-        jProgressBar1.setForeground(new java.awt.Color(44, 67, 115));
-        jProgressBar1.setStringPainted(true);
+        pgbarSplash.setForeground(new java.awt.Color(255, 153, 51));
+        pgbarSplash.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pgbarSplash.setStringPainted(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -59,7 +60,7 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pgbarSplash, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -71,7 +72,7 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pgbarSplash, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
@@ -127,17 +128,18 @@ public class SplashScreen extends javax.swing.JFrame {
     }
     
     private void loadSplash(){
-        Thread hilo = new Thread(){
+        Thread hilo;
+        hilo = new Thread(){
             @Override
             public void run(){
-              for(int i = 1; i<= 100; i++){
-                try{
-                    sleep(10);
-                    jProgressBar1.setValue(i);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+                for(int i = 1; i<= 100; i++){
+                    try{
+                        sleep(10);
+                        pgbarSplash.setValue(i);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }  
             }
              
         };
@@ -147,6 +149,6 @@ public class SplashScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar pgbarSplash;
     // End of variables declaration//GEN-END:variables
 }

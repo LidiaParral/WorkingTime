@@ -4,6 +4,7 @@
  */
 package workingtime.views;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +42,9 @@ public final class AusenciasScreen extends javax.swing.JFrame {
      * Creates new form AusenciasScreen
      */
     public AusenciasScreen() {
-        initComponents();
+        initComponents();       
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(true);
     }
 
@@ -79,6 +82,9 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         btnDeleteAusencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
@@ -169,6 +175,8 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                 .addGap(74, 74, 74))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -191,21 +199,34 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnSaveAusencia.setBackground(new java.awt.Color(38, 70, 166));
+        btnSaveAusencia.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveAusencia.setText("GUARDAR");
+        btnSaveAusencia.setToolTipText("Este botón permite guarda la ausencia.");
+        btnSaveAusencia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSaveAusencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveAusenciaActionPerformed(evt);
             }
         });
 
+        btnUpdateAusencia.setBackground(new java.awt.Color(38, 70, 166));
+        btnUpdateAusencia.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateAusencia.setText("ACTUALIZAR");
+        btnUpdateAusencia.setToolTipText("Este botón permite actualizar la ausencia seleccionada.");
+        btnUpdateAusencia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        btnDeleteAusencia.setBackground(new java.awt.Color(255, 126, 60));
+        btnDeleteAusencia.setForeground(new java.awt.Color(255, 255, 255));
         btnDeleteAusencia.setText("ELIMINAR");
+        btnDeleteAusencia.setToolTipText("Este botón permite eliminar la asusencia seleccionada");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

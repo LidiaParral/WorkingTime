@@ -109,6 +109,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -278,14 +279,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnSaveEmp.setBackground(new java.awt.Color(38, 70, 166));
+        btnSaveEmp.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveEmp.setText("GUARDAR");
+        btnSaveEmp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSaveEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveEmpActionPerformed(evt);
             }
         });
 
+        btnReturn.setBackground(new java.awt.Color(204, 204, 204));
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("CANCELAR");
+        btnReturn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);
@@ -356,7 +363,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbPaisEmpItemStateChanged
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
     public void agregarEmpleado() {

@@ -82,6 +82,7 @@ public final class HorarioScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
 
         jLabel1.setText("Inicio:");
 
@@ -106,6 +107,11 @@ public final class HorarioScreen extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         cmbOtherHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESCANSO", "TRABAJO EXTERIOR", "FORMACION" }));
 
@@ -232,6 +238,10 @@ public final class HorarioScreen extends javax.swing.JFrame {
         lblFechaActual.setText(fechaAct);
         }
     }//GEN-LAST:event_fechaActualPropertyChange
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
