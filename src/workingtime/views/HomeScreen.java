@@ -28,6 +28,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblGrupoProf.setVisible(false);
         lblNumSS.setVisible(false);
         lblPuestoEmp.setVisible(false);
+        lblDepartamento.setVisible(false);
         
     }
 
@@ -51,6 +52,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblGrupoCot = new javax.swing.JLabel();
         lblGrupoProf = new javax.swing.JLabel();
         lblDNIEmp = new javax.swing.JLabel();
+        lblDepartamento = new javax.swing.JLabel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
@@ -106,8 +108,13 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblDNIEmp)
-                                .addGap(90, 90, 90)
-                                .addComponent(lblIdEmp)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addComponent(lblIdEmp))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(lblDepartamento)))
                                 .addGap(113, 113, 113))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,16 +146,21 @@ public class HomeScreen extends javax.swing.JFrame {
                                 .addComponent(lblApellidosEmp)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNumSS)
                             .addComponent(lblGrupoCot)
                             .addComponent(lblGrupoProf))
-                        .addGap(37, 37, 37)
-                        .addComponent(lblIdEmp)
-                        .addGap(56, 56, 56))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(lblIdEmp))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(lblDepartamento)))
+                        .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblDNIEmp)
@@ -269,14 +281,15 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
         NominaScreen nomina = new NominaScreen();
-        nomina.lblIdUser.setText(lblIdEmp.getText().toLowerCase());
-        nomina.lblNombreEmp.setText(lblNomEmp.getText());
-        nomina.lblApellidosEmp.setText(lblApellidosEmp.getText());
+        nomina.lblIdUser.setText(lblIdEmp.getText());
+        nomina.lblNombreEmp.setText(lblNomEmp.getText().toUpperCase());
+        nomina.lblApellidosEmp.setText(lblApellidosEmp.getText().toUpperCase());
         nomina.lblDNIEmp.setText(lblDNIEmp.getText());
         nomina.lblGrupoCotizEmp.setText(lblGrupoCot.getText());
-        nomina.lblGrupoProfEmp.setText(lblGrupoProf.getText());
+        nomina.lblGrupoProfEmp.setText(lblGrupoProf.getText().toUpperCase());
         nomina.lblNumSSEmp.setText(lblNumSS.getText());
-        nomina.lblPuestoEmp.setText(lblPuestoEmp.getText());
+        nomina.lblPuestoEmp.setText(lblPuestoEmp.getText().toUpperCase());
+        nomina.existNominas();
         nomina.setVisible(true);
     }//GEN-LAST:event_mnNominaActionPerformed
 
@@ -288,6 +301,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void mnRegistroAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroAusenciasActionPerformed
         AusenciasScreen aus = new AusenciasScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
+        aus.lblDepartamento.setText(lblDepartamento.getText());
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
 
@@ -352,6 +366,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblApellidosEmp;
     public javax.swing.JLabel lblDNIEmp;
+    public javax.swing.JLabel lblDepartamento;
     public javax.swing.JLabel lblEmailEmp;
     public javax.swing.JLabel lblGrupoCot;
     public javax.swing.JLabel lblGrupoProf;

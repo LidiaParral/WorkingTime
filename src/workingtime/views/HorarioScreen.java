@@ -36,7 +36,7 @@ public final class HorarioScreen extends javax.swing.JFrame {
     Statement st;
 
     ResultSet rs;
-    
+
     String sql;
     String idUser;
     String fechaHoy;
@@ -46,6 +46,8 @@ public final class HorarioScreen extends javax.swing.JFrame {
     String horaRazInicio;
     String horaRazFin;
     String fec;
+    String fechaAct;
+
     /**
      * Creates new form HorarioScreen
      */
@@ -82,6 +84,7 @@ public final class HorarioScreen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnActualizarHora = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -150,69 +153,81 @@ public final class HorarioScreen extends javax.swing.JFrame {
 
         jLabel8.setText("Fin:");
 
+        btnActualizarHora.setBackground(new java.awt.Color(38, 70, 166));
+        btnActualizarHora.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizarHora.setText("ACTUALIZAR");
+        btnActualizarHora.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnActualizarHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarHoraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(lblFechaActual)
-                        .addGap(110, 110, 110))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblFechaActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(fechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dtRazFin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(cmbOtherHora, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel1)
-                                                .addComponent(jLabel2))
-                                            .addGap(29, 29, 29)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(dtFinHora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(dtInicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dtRazInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(88, 88, 88))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblIdEmp)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbOtherHora, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnGuardarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37)
-                                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(23, 23, 23))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dtFinHora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dtInicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(dtRazInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnActualizarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dtRazFin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(183, 183, 183)))
+                        .addGap(88, 88, 88))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblIdEmp)
+                                .addGap(139, 139, 139))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblIdEmp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFechaActual)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(dtInicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,7 +235,7 @@ public final class HorarioScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dtFinHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbOtherHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,17 +247,21 @@ public final class HorarioScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dtRazFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnActualizarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(fechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFechaActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(26, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -253,17 +272,21 @@ public final class HorarioScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarHoraActionPerformed
 
     private void fechaActualPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaActualPropertyChange
-        if(evt.getOldValue() != null){
-        Date fecha = fechaActual.getDate();
-        DateFormat f=new SimpleDateFormat("dd-MM-yyyy");
-        String fechaAct =f.format(fecha);
-        lblFechaActual.setText(fechaAct);
+        if (evt.getOldValue() != null) {
+            Date fecha = fechaActual.getDate();
+            DateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+            fechaAct = f.format(fecha);
+            lblFechaActual.setText(fechaAct);
         }
     }//GEN-LAST:event_fechaActualPropertyChange
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnActualizarHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarHoraActionPerformed
+        actualizarHorarioJornada();
+    }//GEN-LAST:event_btnActualizarHoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,7 +321,6 @@ public final class HorarioScreen extends javax.swing.JFrame {
         });
     }
 
-     
     public void agregarHorarioJornada() {
         idUser = lblIdEmp.getText();
         fechaHoy = lblFechaActual.getText();
@@ -306,29 +328,57 @@ public final class HorarioScreen extends javax.swing.JFrame {
         horaFin = new SimpleDateFormat("HH:mm:ss").format(dtInicioHora.getDate());
         horaRazFin = new SimpleDateFormat("HH:mm:ss").format(dtRazFin.getDate());
         horaRazInicio = new SimpleDateFormat("HH:mm:ss").format(dtRazInicio.getDate());
-        
+
         otrasRazones();
         try {
             sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones) VALUES "
-                        + "('" + idUser + "','" + fechaHoy + "', STR_TO_DATE('" + horaInicio + "','%H:%i:%s')" +
-                    ", STR_TO_DATE('" + horaFin + "','%H:%i:%s'),'" + razon +"', STR_TO_DATE('" + horaRazInicio + "','%H:%i:%s')" 
+                    + "('" + idUser + "','" + fechaAct + "', STR_TO_DATE('" + horaInicio + "','%H:%i:%s')"
+                    + ", STR_TO_DATE('" + horaFin + "','%H:%i:%s'),'" + razon + "', STR_TO_DATE('" + horaRazInicio + "','%H:%i:%s')"
                     + ", STR_TO_DATE('" + horaRazFin + "','%H:%i:%s')" + ")";
 
-                conect = conn.getConexion();
-                st = conect.createStatement();
-                st.executeUpdate(sql);
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        
+
         dtInicioHora.setDateFormatString("");
         dtFinHora.setDateFormatString("");
         dtRazInicio.setDateFormatString("");
         dtRazFin.setDateFormatString("");
         lblFechaActual.setText("");
     }
-      
+
+    public void actualizarHorarioJornada() {
+        idUser = lblIdEmp.getText();
+        fechaHoy = lblFechaActual.getText();
+        horaInicio = new SimpleDateFormat("HH:mm:ss").format(dtInicioHora.getDate());
+        horaFin = new SimpleDateFormat("HH:mm:ss").format(dtInicioHora.getDate());
+        horaRazFin = new SimpleDateFormat("HH:mm:ss").format(dtRazFin.getDate());
+        horaRazInicio = new SimpleDateFormat("HH:mm:ss").format(dtRazInicio.getDate());
+
+        otrasRazones();
+        try {
+            sql = "UPDATE registro_horas SET fechaActual='" + fechaHoy + "', HoraInicio='" + horaInicio + "', HoraFin='" + horaFin
+                    + "', OtrasRazones='" + razon + "', HoraInicioRazones='" + horaRazInicio + "', HoraFinRazones='"
+                    + horaRazFin + "' WHERE IdEmpleado='" + idUser + "'";
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "El registro se actualizó correctamente.", "ACTUALIZACIÓN JORNADA", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException | SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+
+        dtInicioHora.setDateFormatString("");
+        dtFinHora.setDateFormatString("");
+        dtRazInicio.setDateFormatString("");
+        dtRazFin.setDateFormatString("");
+        lblFechaActual.setText("");
+    }
+
     void otrasRazones() {
         switch (cmbOtherHora.getSelectedIndex()) {
             case 0:
@@ -346,6 +396,7 @@ public final class HorarioScreen extends javax.swing.JFrame {
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarHora;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardarHora;
     private javax.swing.JComboBox<String> cmbOtherHora;
