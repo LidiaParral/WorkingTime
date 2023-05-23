@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -64,6 +65,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         getDepartamentos();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
+        cmbPuesto.setEnabled(false);
     }
 
     /**
@@ -104,6 +106,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         txtTlfEmp = new javax.swing.JTextField();
         cmbPuesto = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnSaveEmp = new javax.swing.JButton();
         btnReturn = new javax.swing.JButton();
@@ -147,6 +150,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         dateFechaNacEmp.setDateFormatString("dd-MMMM-yyyy");
 
+        dateFechaAntigEmp.setMaxSelectableDate(new Date());
+
         txtCapitalEmp.setEnabled(false);
 
         cmbPaisEmp.addItemListener(new java.awt.event.ItemListener() {
@@ -157,6 +162,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         jLabel14.setText("Teléfono:");
 
+        jLabel15.setText("@workingtime.com");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,9 +171,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtCapitalEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,7 +210,11 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15)))
                         .addContainerGap(30, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -241,7 +249,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTlfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTlfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -350,6 +359,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
     private void cmbDepartamentoEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoEmpItemStateChanged
         if(cmbDepartamentoEmp.getSelectedIndex() > 0){
+            cmbPuesto.setEnabled(true);
             cmbPuesto.removeAllItems();
             getPuestoEmpleado();
         }
@@ -373,7 +383,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         numSegSocial = txtNumSSEmp.getText();
         fechaNac = new SimpleDateFormat("dd-MM-yyyy").format(dateFechaNacEmp.getDate());
         fechaAntig = new SimpleDateFormat("dd-MM-yyyy").format(dateFechaAntigEmp.getDate());
-        email = txtEmailEmp.getText();
+        email = txtEmailEmp.getText().concat("@workingtime.com");
         telefono = txtTlfEmp.getText();
         user = cadenaAleatoria(15);
         password = generateRandomPassword(12, 48, 122);
@@ -550,6 +560,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
