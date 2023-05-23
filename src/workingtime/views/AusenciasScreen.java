@@ -327,8 +327,8 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         idUser = lblIdEmp.getText();
         dpto = lblDepartamento.getText();
         responsable = txtResponsable.getText();
-        fechaInicio = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(dtFechaIniAus.getDate());
-        fechaFin = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(dtFechaFinAus.getDate());
+        fechaInicio = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaIniAus.getDate());
+        fechaFin = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaFinAus.getDate());
         motivo = txtaMotivoAus.getText();
         try {
             tipoSolicitud();
@@ -337,8 +337,8 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                     + ",STR_TO_DATE('" + fechaFin + "','%d-%m-%Y'),'" + tipoSolicitud + "','" + motivo + "')";
 
             conect = conn.getConexion();
-            ps = conect.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
+            st = conect.createStatement();
+            st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO AUSENCIA", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);

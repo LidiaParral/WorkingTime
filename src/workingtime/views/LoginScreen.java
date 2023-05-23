@@ -40,6 +40,7 @@ public class LoginScreen extends javax.swing.JFrame {
     String user;
     String nombre;
     String idUser;
+
     /**
      * Creates new form LoginScreen
      */
@@ -155,9 +156,9 @@ public class LoginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {        
+
+        try {
             existEmpleado();
-            this.hide();
         } catch (InterruptedException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -177,8 +178,7 @@ public class LoginScreen extends javax.swing.JFrame {
         btnLogin.setBackground(new Color(252, 201, 131));
     }//GEN-LAST:event_btnLoginMousePressed
 
-     
-     public void existEmpleado() throws InterruptedException {
+    public boolean existEmpleado() throws InterruptedException {
         pass = txtPswLogin.getText();
         user = txtUserLogin.getText();
         try {
@@ -193,12 +193,10 @@ public class LoginScreen extends javax.swing.JFrame {
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
-
                 if (rs.next()) {
                     Thread.sleep(200);
                     HomeScreen home = new HomeScreen();
-                    
-                    home.lblIdEmp.setText(rs.getString("IdEmpleado"));               
+                    home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                     home.lblNomEmp.setText(rs.getString("Nombre"));
                     home.lblApellidosEmp.setText(rs.getString("Apellidos"));
                     home.lblEmailEmp.setText(rs.getString("Email"));
@@ -207,17 +205,21 @@ public class LoginScreen extends javax.swing.JFrame {
                     home.lblGrupoProf.setText(rs.getString("GrupoProfesional"));
                     home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
                     home.lblPuestoEmp.setText(rs.getString("PuestoTrabajo"));
+                    home.lblDepartamento.setText(rs.getString("Departamento"));
                     home.setVisible(true);
-
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
+                    return true;
                 } else {
-                    JOptionPane.showMessageDialog(null, "No existen las credenciales del empleado en la base de datos.", "LOGIN", JOptionPane.INFORMATION_MESSAGE);
+                    txtPswLogin.setText("");
+                    txtUserLogin.setText("");
+                    JOptionPane.showMessageDialog(null, "Usuario incorrecto.\nVuelva a intentarlo", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return false;
                 }
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        //reset.Reset(jPanel1);
+        return true;
     }
 
     /**
@@ -227,7 +229,7 @@ public class LoginScreen extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

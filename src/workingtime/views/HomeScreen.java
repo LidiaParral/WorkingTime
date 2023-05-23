@@ -12,6 +12,7 @@ import java.awt.Color;
  */
 public class HomeScreen extends javax.swing.JFrame {
 
+    private LoginScreen login = new LoginScreen();
     /**
      * Creates new form HomeScreen
      */
@@ -29,7 +30,6 @@ public class HomeScreen extends javax.swing.JFrame {
         lblNumSS.setVisible(false);
         lblPuestoEmp.setVisible(false);
         lblDepartamento.setVisible(false);
-        
     }
 
     /**
@@ -53,6 +53,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblGrupoProf = new javax.swing.JLabel();
         lblDNIEmp = new javax.swing.JLabel();
         lblDepartamento = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegistroJornada = new javax.swing.JMenuItem();
@@ -69,8 +70,13 @@ public class HomeScreen extends javax.swing.JFrame {
         mnControlEmp = new javax.swing.JMenuItem();
         mnAllEmp = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -91,6 +97,15 @@ public class HomeScreen extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home.png")); // NOI18N
 
+        btnLogout.setBackground(new java.awt.Color(38, 70, 166));
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,27 +113,6 @@ public class HomeScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(170, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(37, 37, 37)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblApellidosEmp)
-                                .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblDNIEmp)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(90, 90, 90)
-                                        .addComponent(lblIdEmp))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(lblDepartamento)))
-                                .addGap(113, 113, 113))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(283, 283, 283))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(127, 127, 127))
@@ -129,6 +123,31 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGap(58, 58, 58)
                         .addComponent(lblGrupoProf)
                         .addGap(98, 98, 98))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblApellidosEmp)
+                            .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblDNIEmp)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(90, 90, 90)
+                                    .addComponent(lblIdEmp))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(28, 28, 28)
+                                    .addComponent(lblDepartamento)))
+                            .addGap(113, 113, 113))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(283, 283, 283)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,8 +182,10 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDNIEmp)
-                        .addGap(48, 48, 48))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDNIEmp))
+                        .addGap(17, 17, 17))))
         );
 
         mnHorario.setText("Horario");
@@ -328,6 +349,16 @@ public class HomeScreen extends javax.swing.JFrame {
         todosHora.setVisible(true);        
     }//GEN-LAST:event_mnTodosHorariosActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        this.dispose();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.dispose();
+        login.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +393,7 @@ public class HomeScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblApellidosEmp;
