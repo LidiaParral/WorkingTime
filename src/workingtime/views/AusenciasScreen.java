@@ -5,15 +5,18 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
+import workingtime.model.LimpiarTabla;
 import workingtime.model.ResetarCampos;
 
 /**
@@ -23,6 +26,7 @@ import workingtime.model.ResetarCampos;
 public final class AusenciasScreen extends javax.swing.JFrame {
 
     public ResetarCampos reset = new ResetarCampos();
+    public LimpiarTabla lmp = new LimpiarTabla();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -43,6 +47,7 @@ public final class AusenciasScreen extends javax.swing.JFrame {
     String tipoSolicitud;
     String motivo;
 
+    int selectedRow;
     /**
      * Creates new form AusenciasScreen
      */
@@ -180,9 +185,17 @@ public final class AusenciasScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha Inicio", "Fecha Fin", "Tipo de Solicitud", "Motivo"
+                "Responsable", "Fecha Inicio", "Fecha Fin", "Tipo de Solicitud", "Motivo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(TablaAusencia);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -289,41 +302,31 @@ public final class AusenciasScreen extends javax.swing.JFrame {
 
     private void btnSaveAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAusenciaActionPerformed
         saveAusencia();
+        lmp.limpiarTabla(modelo);
+        consultar();
     }//GEN-LAST:event_btnSaveAusenciaActionPerformed
 
     private void btnUpdateAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAusenciaActionPerformed
-        // TODO add your handling code here:
+        selectedRow = TablaAusencia.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            updateAusencia();
+            consultar();
+        }
     }//GEN-LAST:event_btnUpdateAusenciaActionPerformed
 
     private void btnDeleteAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAusenciaActionPerformed
-        // TODO add your handling code here:
+        selectedRow = TablaAusencia.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            deleteAusencia();
+            consultar();
+        }
     }//GEN-LAST:event_btnDeleteAusenciaActionPerformed
 
-    public void existEmpleado() {
-        try {
-            sql = "SELECT * FROM registro_ausencia WHERE IdEmpleado='" + idUser + "'";
-
-            conect = conn.getConexion();
-            ps = conect.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            
-            Object[] ausencia = new Object[4];
-            modelo = (DefaultTableModel) TablaAusencia.getModel();
-            while (rs.next()) {
-                ausencia[0] = rs.getInt("FechaInicio");
-                ausencia[1] = rs.getString("FechaFin");
-                ausencia[2] = rs.getString("TipoSolicitud");
-                ausencia[3] = rs.getString("Motivo");
-
-                modelo.addRow(ausencia);
-            }
-            TablaAusencia.setModel(modelo);
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
-        }
-    }
-
-    public void saveAusencia() {     
+    public void saveAusencia() {
         idUser = lblIdEmp.getText();
         dpto = lblDepartamento.getText();
         responsable = txtResponsable.getText();
@@ -343,9 +346,76 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
+        reset.ResetPanel(jPanel1);
+        dtFechaIniAus.setDateFormatString("");
+        dtFechaFinAus.setDateFormatString("");
+        cmbTipoSolicitudAus.setSelectedIndex(0);
+        txtaMotivoAus.setText("");
     }
 
-     void tipoSolicitud() {
+    public void updateAusencia() {
+        idUser = lblIdEmp.getText();     
+        fechaInicio = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 1));
+        fechaFin = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 2));
+        tipoSolicitud = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 3));
+        motivo = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 4));
+        try {
+            sql = "UPDATE registro_ausencia SET TipoSolicitud='" + tipoSolicitud + "', MotivoAusencia='" + motivo + "' WHERE IdEmpleado='" + idUser + "'"
+                    + "AND FechaInicio='" + fechaInicio +"' AND FechaFin='" + fechaFin + "'" ;
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "El registro se actualizó correctamente.", "ACTUALIZACIÓN AUSENCIA", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException | SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        lmp.limpiarTabla(modelo);
+    }
+
+     public void deleteAusencia() {
+        idUser = lblIdEmp.getText();        
+        fechaInicio = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 1));
+        fechaFin = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 2));
+        try {
+            sql = "DELETE FROM registro_ausencia WHERE IdEmpleado='" + idUser + "'"
+                    + "AND FechaInicio='" + fechaInicio +"' AND FechaFin='" + fechaFin + "'" ;
+
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        lmp.limpiarTabla(modelo);
+    }
+     
+    public void consultar() {
+        sql = "SELECT Responsable,FechaInicio,FechaFin,TipoSolicitud,MotivoAusencia FROM registro_ausencia";
+
+        try {
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+
+            Object[] ausencia = new Object[5];
+            modelo = (DefaultTableModel) TablaAusencia.getModel();
+            while (rs.next()) {
+                ausencia[0] = rs.getString("Responsable");
+                ausencia[1] = rs.getString("FechaInicio");
+                ausencia[2] = rs.getString("FechaFin");
+                ausencia[3] = rs.getString("TipoSolicitud");
+                ausencia[4] = rs.getString("MotivoAusencia");
+
+                modelo.addRow(ausencia);
+            }
+            TablaAusencia.setModel(modelo);
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+    }
+
+    void tipoSolicitud() {
         switch (cmbTipoSolicitudAus.getSelectedIndex()) {
             case 0:
                 tipoSolicitud = "VACACIONES";
@@ -370,6 +440,7 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * @param args the command line arguments
      */

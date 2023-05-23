@@ -323,6 +323,7 @@ public class HomeScreen extends javax.swing.JFrame {
         AusenciasScreen aus = new AusenciasScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
         aus.lblDepartamento.setText(lblDepartamento.getText());
+        aus.consultar();
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
 

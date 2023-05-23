@@ -178,7 +178,7 @@ public class LoginScreen extends javax.swing.JFrame {
         btnLogin.setBackground(new Color(252, 201, 131));
     }//GEN-LAST:event_btnLoginMousePressed
 
-    public boolean existEmpleado() throws InterruptedException {
+    public void existEmpleado() throws InterruptedException {
         pass = txtPswLogin.getText();
         user = txtUserLogin.getText();
         try {
@@ -208,18 +208,18 @@ public class LoginScreen extends javax.swing.JFrame {
                     home.lblDepartamento.setText(rs.getString("Departamento"));
                     home.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
-                    return true;
+                   
                 } else {
                     txtPswLogin.setText("");
                     txtUserLogin.setText("");
                     JOptionPane.showMessageDialog(null, "Usuario incorrecto.\nVuelva a intentarlo", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    return false;
+
                 }
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        return true;
+        reset.ResetFrame(this);
     }
 
     /**
