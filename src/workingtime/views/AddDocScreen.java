@@ -66,9 +66,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         initComponents();      
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        txtIdDoc.setVisible(false);
         txtPathDoc.setVisible(false);
-        lblIdDoc.setVisible(false);
         lblIdEmp.setVisible(false);
     }
 
@@ -83,11 +81,9 @@ public class AddDocScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        lblIdDoc = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtIdDoc = new javax.swing.JTextField();
         txtNomDoc = new javax.swing.JTextField();
         dtFechaSubDoc = new com.toedter.calendar.JDateChooser();
         cmbTipoDoc = new javax.swing.JComboBox<>();
@@ -107,18 +103,11 @@ public class AddDocScreen extends javax.swing.JFrame {
         jPanel3.setMaximumSize(new java.awt.Dimension(470, 359));
         jPanel3.setMinimumSize(new java.awt.Dimension(470, 359));
 
-        lblIdDoc.setText("Id:");
-        lblIdDoc.setEnabled(false);
-        lblIdDoc.setFocusable(false);
-
         jLabel2.setText("Tipo de documento:");
 
         jLabel3.setText("Nombre del documento:");
 
         jLabel4.setText("Fecha de subida:");
-
-        txtIdDoc.setEnabled(false);
-        txtIdDoc.setFocusable(false);
 
         dtFechaSubDoc.setBackground(new java.awt.Color(255, 255, 255));
         dtFechaSubDoc.setMaxSelectableDate(new Date());
@@ -158,10 +147,6 @@ public class AddDocScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblIdDoc)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtIdDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
                         .addComponent(lblIdEmp)
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -183,15 +168,11 @@ public class AddDocScreen extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIdEmp)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblIdDoc)
-                                .addComponent(txtIdDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(8, 8, 8)
+                        .addComponent(lblIdEmp)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,9 +399,7 @@ public class AddDocScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lblIdDoc;
     public javax.swing.JLabel lblIdEmp;
-    public javax.swing.JTextField txtIdDoc;
     public javax.swing.JTextField txtNomDoc;
     public javax.swing.JTextField txtPathDoc;
     // End of variables declaration//GEN-END:variables

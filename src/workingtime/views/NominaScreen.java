@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.ExportExcel;
@@ -262,6 +263,9 @@ public final class NominaScreen extends javax.swing.JFrame {
         btnSearchNomina.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\lupa (2).png")); // NOI18N
         btnSearchNomina.setToolTipText("Este botón permite buscar la nómina del empleado por fecha");
         btnSearchNomina.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSearchNomina.setMaximumSize(new java.awt.Dimension(28, 28));
+        btnSearchNomina.setMinimumSize(new java.awt.Dimension(28, 28));
+        btnSearchNomina.setPreferredSize(new java.awt.Dimension(28, 28));
         btnSearchNomina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchNominaActionPerformed(evt);
@@ -270,7 +274,7 @@ public final class NominaScreen extends javax.swing.JFrame {
 
         btnDownloadNomina.setForeground(new java.awt.Color(255, 255, 255));
         btnDownloadNomina.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\documento (3).png")); // NOI18N
-        btnDownloadNomina.setToolTipText("Este botón permite descargar el documento de la nómina.");
+        btnDownloadNomina.setToolTipText("Este botón permite descargar el documento de la nómina seleccionada.");
         btnDownloadNomina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDownloadNomina.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDownloadNomina.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +283,7 @@ public final class NominaScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Fecha seleccionada:");
+        jLabel1.setText("Fecha de búsqueda:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -293,7 +297,7 @@ public final class NominaScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(dtFechaNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -305,16 +309,21 @@ public final class NominaScreen extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dtFechaNomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
                         .addComponent(btnDownloadNomina)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dtFechaNomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,6 +355,7 @@ public final class NominaScreen extends javax.swing.JFrame {
 
     private void btnDownloadNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadNominaActionPerformed
         try {
+             JOptionPane.showMessageDialog(null, "Se va a descargar el documento en Excel", "EXPORTAR DOCUMENTO", JOptionPane.PLAIN_MESSAGE);
             export.exportarExcel(TablaNomina);
         } catch (IOException ex) {
             Logger.getLogger(NominaScreen.class.getName()).log(Level.SEVERE, null, ex);

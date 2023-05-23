@@ -12,7 +12,7 @@ import java.awt.Color;
  */
 public class HomeScreen extends javax.swing.JFrame {
 
-    private LoginScreen login = new LoginScreen();
+    private final LoginScreen login = new LoginScreen();
     /**
      * Creates new form HomeScreen
      */
@@ -70,13 +70,10 @@ public class HomeScreen extends javax.swing.JFrame {
         mnControlEmp = new javax.swing.JMenuItem();
         mnAllEmp = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        setMaximumSize(new java.awt.Dimension(851, 534));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -346,6 +343,10 @@ public class HomeScreen extends javax.swing.JFrame {
     private void mnTodosHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosHorariosActionPerformed
         TodosHorariosScreen todosHora = new TodosHorariosScreen();
         todosHora.lblIdEmp.setText(lblIdEmp.getText());
+        todosHora.lblId.setText(lblIdEmp.getText());
+        todosHora.lblNom.setText(lblNomEmp.getText());
+        todosHora.lblPuesto.setText(lblPuestoEmp.getText());
+        todosHora.lblDpto.setText(lblDepartamento.getText());
         todosHora.existJornada();
         todosHora.setVisible(true);        
     }//GEN-LAST:event_mnTodosHorariosActionPerformed
@@ -354,11 +355,6 @@ public class HomeScreen extends javax.swing.JFrame {
         this.dispose();
         login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.dispose();
-        login.setVisible(true);
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
