@@ -249,6 +249,11 @@ public class HomeScreen extends javax.swing.JFrame {
         mnPerfil.setBorderPainted(false);
 
         mnPerfilUser.setText("Perfil del usuario");
+        mnPerfilUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPerfilUserActionPerformed(evt);
+            }
+        });
         mnPerfil.add(mnPerfilUser);
 
         mnbHome.add(mnPerfil);
@@ -306,13 +311,14 @@ public class HomeScreen extends javax.swing.JFrame {
         nomina.lblGrupoCotizEmp.setText(lblGrupoCot.getText());
         nomina.lblGrupoProfEmp.setText(lblGrupoProf.getText().toUpperCase());
         nomina.lblNumSSEmp.setText(lblNumSS.getText());
-        nomina.lblPuestoEmp.setText(lblPuestoEmp.getText().toUpperCase());
         nomina.existNominas();
         nomina.setVisible(true);
     }//GEN-LAST:event_mnNominaActionPerformed
 
     private void mnTodosDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosDocumentosActionPerformed
         TodosDocumentosScreen doc = new TodosDocumentosScreen();
+        doc.lblIdEmp.setText(lblIdEmp.getText());
+        doc.consultar();
         doc.setVisible(true);
     }//GEN-LAST:event_mnTodosDocumentosActionPerformed
 
@@ -355,6 +361,13 @@ public class HomeScreen extends javax.swing.JFrame {
         this.dispose();
         login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void mnPerfilUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPerfilUserActionPerformed
+        ProfileEmpScreen profile = new ProfileEmpScreen();
+        profile.txtIdEmp.setText(lblIdEmp.getText());
+        profile.consultar();
+        profile.setVisible(true);
+    }//GEN-LAST:event_mnPerfilUserActionPerformed
 
     /**
      * @param args the command line arguments

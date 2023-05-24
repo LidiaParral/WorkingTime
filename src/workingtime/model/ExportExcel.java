@@ -42,7 +42,7 @@ public class ExportExcel {
                     Sheet hoja;
                     hoja = libro.createSheet("Nueva Hoja");
                     hoja.setDisplayGridlines(false);
-                    for (int f = 0; f < t.getRowCount(); f++) {
+                    for (int f = 0; f < t.getSelectedRowCount(); f++) {
                         Row fila = hoja.createRow(f);
                         for (int c = 0; c < t.getColumnCount(); c++) {
                             Cell celda = fila.createCell(c);
@@ -52,7 +52,7 @@ public class ExportExcel {
                         }
                     }
                     int filaInicio = 1;
-                    for (int f = 0; f < t.getRowCount(); f++) {
+                    for (int f = 0; f < t.getSelectedRowCount(); f++) {
                         Row fila = hoja.createRow(filaInicio);
                         filaInicio++;
                         for (int c = 0; c < t.getColumnCount(); c++) {

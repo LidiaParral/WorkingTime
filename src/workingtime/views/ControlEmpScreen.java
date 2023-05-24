@@ -515,12 +515,11 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }
 
     public String cadenaAleatoria(int longitud) {
-        //String banco = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String banco = nombre + apellidos;
+        String username = nombre + apellidos;
         String cadena = "";
         for (int x = 0; x < longitud; x++) {
-            int indiceAleatorio = numeroAleatorioEnRango(0, banco.length() - 1);
-            char caracterAleatorio = banco.charAt(indiceAleatorio);
+            int indiceAleatorio = numeroAleatorioEnRango(0, username.length() - 1);
+            char caracterAleatorio = username.charAt(indiceAleatorio);
             cadena += caracterAleatorio;
         }
         return cadena;
