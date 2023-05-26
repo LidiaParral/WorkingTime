@@ -209,6 +209,15 @@ public class LoginScreen extends javax.swing.JFrame {
                 if (rs.next()) {
                     Thread.sleep(200);
                     HomeScreen home = new HomeScreen();
+                    if (user.equals("ADMIN") && pass.equals("HOLA123")) {
+                        home.mnControlEmp.setVisible(true);
+                        home.mnAllEmp.setVisible(true);
+                        home.mnEmple.setVisible(true);
+                    } else {
+                        home.mnControlEmp.setVisible(false);
+                        home.mnAllEmp.setVisible(false);
+                        home.mnEmple.setVisible(false);
+                    }
                     home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                     home.lblNomEmp.setText(rs.getString("Nombre"));
                     home.lblApellidosEmp.setText(rs.getString("Apellidos"));
@@ -221,7 +230,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     home.lblDepartamento.setText(rs.getString("Departamento"));
                     home.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
-                   
+
                 } else {
                     txtPswLogin.setText("");
                     txtUserLogin.setText("");
