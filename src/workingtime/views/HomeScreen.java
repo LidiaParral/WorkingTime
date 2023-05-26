@@ -343,6 +343,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void mnAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllEmpActionPerformed
         TodosEmpScreen todos = new TodosEmpScreen();
+        todos.consultar();
         todos.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
 
@@ -358,6 +359,7 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_mnTodosHorariosActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        btnLogout.setBackground(new Color(252, 201, 131));
         this.dispose();
         login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
@@ -385,15 +387,11 @@ public class HomeScreen extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */

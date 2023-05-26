@@ -5,15 +5,12 @@
 package workingtime.views;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
@@ -44,6 +41,8 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
     String sql;
     String search;
     String fecha;
+    String nomDoc;
+    String idUser;
 
     int selectedRow;
     /**
@@ -272,18 +271,34 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchDocActionPerformed
 
     private void btnUpdateDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDocActionPerformed
-        // TODO add your handling code here:
+        selectedRow = TablaDoc.getSelectedRow();
+        btnUpdateDoc.setBackground(new Color(252, 201, 131));
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            updateDocument();
+            consultar();
+        }
+        btnUpdateDoc.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnUpdateDocActionPerformed
 
     private void btnDeleteDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDocActionPerformed
-        // TODO add your handling code here:
+       selectedRow = TablaDoc.getSelectedRow();
+       btnDeleteDoc.setBackground(new Color(145, 150, 255));
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            deleteDocument();
+            consultar();
+        }
+        btnDeleteDoc.setBackground(new Color(255,126,60));
     }//GEN-LAST:event_btnDeleteDocActionPerformed
 
     public void existDoc() {
         fecha = new SimpleDateFormat("yyyy-MM-dd").format(dtFechaSubida.getDate());
-        sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='" + fecha + "'";
-
         try {
+            sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='" + fecha + "'";
+                    
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
@@ -308,9 +323,10 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
     }
 
     public void consultar() {
-        sql = "SELECT * FROM documentos_empleado WHERE IdEmpleado ='" + lblIdEmp.getText() + "'";
-
+       idUser = lblIdEmp.getText();
         try {
+            sql = "SELECT * FROM documentos_empleado WHERE IdEmpleado ='" + idUser + "'";
+
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
@@ -333,6 +349,38 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel2);
     }
 
+     public void updateDocument() {
+        nomDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
+        idUser = lblIdEmp.getText();
+        try {
+
+            sql = "UPDATE documentos_empleado SET NombreDoc='" + nomDoc + "' WHERE IdEmpleado ='" + idUser + "'";
+
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        lmp.limpiarTabla(modelo);
+    }
+     
+    public void deleteDocument() {
+        idUser = lblIdEmp.getText();
+        try {
+            sql = "DELETE FROM documentos_empleado WHERE IdEmpleado='" + idUser + "'";
+
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        lmp.limpiarTabla(modelo);
+    }
+     
     /**
      * @param args the command line arguments
      */

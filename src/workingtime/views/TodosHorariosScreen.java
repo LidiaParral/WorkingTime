@@ -124,14 +124,6 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         btnUpdateHorario.setText("ACTUALIZAR");
         btnUpdateHorario.setToolTipText("Este botón permite actualizar el registro seleccionado");
         btnUpdateHorario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnUpdateHorario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUpdateHorarioMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnUpdateHorarioMousePressed(evt);
-            }
-        });
         btnUpdateHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateHorarioActionPerformed(evt);
@@ -142,14 +134,6 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         btnDeleteHorario.setForeground(new java.awt.Color(255, 255, 255));
         btnDeleteHorario.setText("ELIMINAR");
         btnDeleteHorario.setToolTipText("Este botón permite borrar el registro seleccionado.");
-        btnDeleteHorario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteHorarioMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnDeleteHorarioMousePressed(evt);
-            }
-        });
         btnDeleteHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteHorarioActionPerformed(evt);
@@ -298,43 +282,31 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
 
     private void btnDeleteHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHorarioActionPerformed
         selectedRow = tblHorario.getSelectedRow();
+        btnDeleteHorario.setBackground(new Color(145, 150, 255));
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            eliminarJornada();
+            deleteJornada();
             existJornada();
         }
+        btnDeleteHorario.setBackground(new Color(255,126,60));
     }//GEN-LAST:event_btnDeleteHorarioActionPerformed
 
     private void btnUpdateHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateHorarioActionPerformed
         selectedRow = tblHorario.getSelectedRow();
+        btnUpdateHorario.setBackground(new Color(252, 201, 131));
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            editarJornada();
+            updateJornada();
             existJornada();
         }
+        btnUpdateHorario.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnUpdateHorarioActionPerformed
-
-    private void btnUpdateHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateHorarioMouseClicked
-        btnUpdateHorario.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnUpdateHorarioMouseClicked
-
-    private void btnDeleteHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteHorarioMouseClicked
-        btnDeleteHorario.setBackground(new Color(145, 150, 255));
-    }//GEN-LAST:event_btnDeleteHorarioMouseClicked
-
-    private void btnUpdateHorarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateHorarioMousePressed
-         btnUpdateHorario.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnUpdateHorarioMousePressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnDeleteHorarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteHorarioMousePressed
-        btnDeleteHorario.setBackground(new Color(145, 150, 255));
-    }//GEN-LAST:event_btnDeleteHorarioMousePressed
 
     public void existJornada() {
         sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
@@ -362,7 +334,7 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         }
     }
 
-    public void eliminarJornada() {
+    public void deleteJornada() {
         idUser = lblIdEmp.getText();
         try {
             sql = "DELETE FROM registro_horas WHERE IdEmpleado='" + idUser + "'";
@@ -377,7 +349,7 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         lmp.limpiarTabla(modelo);
     }
 
-    public void editarJornada() {
+    public void updateJornada() {
         fec = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 0));
         horaInicio = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 1));
         horaFin = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 2));

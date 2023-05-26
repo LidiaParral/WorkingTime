@@ -4,17 +4,46 @@
  */
 package workingtime.views;
 
+import java.awt.Color;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import workingtime.database.Conexion;
+import workingtime.model.ResetarCampos;
+
 /**
  *
  * @author Lidia Parral
  */
 public class ForgotPsswdScreen extends javax.swing.JFrame {
 
+    public ResetarCampos reset = new ResetarCampos();
+
+    Conexion conn = new Conexion();
+    Connection conect;
+
+    PreparedStatement ps;
+    Statement st;
+
+    ResultSet rs;
+
+    String sql;
+    String passOld;
+    String passNew;
+    String confiPassNew;
+    String idUser;
+
     /**
      * Creates new form ForgotPasswordScreen
      */
     public ForgotPsswdScreen() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.WHITE);
     }
 
     /**
@@ -31,11 +60,15 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnSavePsswd = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtPsswdActual = new javax.swing.JTextField();
-        txtPsswdNew = new javax.swing.JTextField();
-        txtConfirPsswd = new javax.swing.JTextField();
+        lblIdEmp = new javax.swing.JLabel();
+        txtOldPass = new javax.swing.JPasswordField();
+        txtPassNew = new javax.swing.JPasswordField();
+        txtConfPass = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
@@ -49,6 +82,11 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         btnSavePsswd.setForeground(new java.awt.Color(255, 255, 255));
         btnSavePsswd.setText("GUARDAR");
         btnSavePsswd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSavePsswd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavePsswdActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -60,49 +98,75 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\bloquear.png")); // NOI18N
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\bloquear.png")); // NOI18N
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\candado.png")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(151, 151, 151)
                 .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(41, 41, 41)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIdEmp)
+                .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPsswdActual)
-                    .addComponent(txtPsswdNew)
-                    .addComponent(txtConfirPsswd, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-                .addGap(128, 128, 128))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPassNew)
+                            .addComponent(txtOldPass, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                    .addComponent(txtConfPass))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addContainerGap()
+                .addComponent(lblIdEmp)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPsswdActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(39, 39, 39)
+                    .addComponent(jLabel1)
+                    .addComponent(txtOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPsswdNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(40, 40, 40)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPassNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtConfirPsswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                    .addComponent(txtConfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,6 +175,51 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSavePsswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePsswdActionPerformed
+        consultar();
+    }//GEN-LAST:event_btnSavePsswdActionPerformed
+
+    public void consultar() {
+        passOld = txtOldPass.getText();
+        try {
+            sql = "SELECT * FROM empleados WHERE Password='" + passOld + "'";
+
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                lblIdEmp.setText(rs.getString("IdEmpleado"));
+                changePassword();
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el empleado en la base de datos.", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+    }
+
+    public void changePassword() {
+        idUser = lblIdEmp.getText();
+        passNew = txtPassNew.getText();
+        confiPassNew = txtConfPass.getText();
+
+        if (passNew.equalsIgnoreCase(confiPassNew)) {
+            try {
+                sql = "UPDATE empleados SET Password='" + passNew + "' WHERE IdEmpleado='" + idUser + "'";
+                conect = conn.getConexion();
+                st = conect.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "La contraseña se actualizó correctamente.", "ACTUALIZACIÓN CONTRASEÑA", JOptionPane.INFORMATION_MESSAGE);
+            } catch (HeadlessException | SQLException ex) {
+                System.err.println("Error:" + ex);
+            }
+        } else if(passNew.equals("") || confiPassNew.equals("") || passOld.equals("")) {
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE); 
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de coincidir la nueva contraseña con la confirmación.", "ERROR", JOptionPane.ERROR_MESSAGE); 
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -154,8 +263,12 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    public javax.swing.JTextField txtConfirPsswd;
-    public javax.swing.JTextField txtPsswdActual;
-    public javax.swing.JTextField txtPsswdNew;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel lblIdEmp;
+    public javax.swing.JPasswordField txtConfPass;
+    public javax.swing.JPasswordField txtOldPass;
+    public javax.swing.JPasswordField txtPassNew;
     // End of variables declaration//GEN-END:variables
 }

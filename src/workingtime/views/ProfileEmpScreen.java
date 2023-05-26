@@ -36,9 +36,10 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     String apellidos;
     String telefono;
     String email;
-    
+
     Object[] opciones = {"Aceptar", "Cancelar"};
     int eleccion;
+
     /**
      * Creates new form ProfileEmpScreen
      */
@@ -289,11 +290,13 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         eleccion = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+        btnUpdateProfile.setBackground(new Color(252, 201, 131));
         if (eleccion == JOptionPane.YES_OPTION) {
             updateProfile();
         } else if (eleccion == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
+        btnUpdateProfile.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateProfileActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
@@ -327,26 +330,29 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         }
     }
 
-    
     public void updateProfile() {
         nombre = txtNombre.getText();
         apellidos = txtApellidos.getText();
         telefono = txtTelefono.getText();
         email = txtEmail.getText();
-        
-         try {
-            sql = "UPDATE empleados SET Nombre='" + nombre + "', Apellidos='" + apellidos + "', Telefono='" + telefono +
-                    "', Email='" + email + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
-            conect = conn.getConexion();
-            st = conect.createStatement();
-            st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "El perfil se actualizó correctamente.", "ACTUALIZACIÓN PERFIL", JOptionPane.INFORMATION_MESSAGE);
-        } catch (HeadlessException | SQLException ex) {
-            System.err.println("Error:" + ex);
+
+        if (!txtIdEmp.equals("") && !nombre.isEmpty() && !apellidos.isEmpty() && !txtDNI.equals("") && !telefono.isEmpty()
+                && !email.isEmpty() && !txtDpto.equals("") && !txtPuesto.equals("") && !txtCiudad.equals("") && !txtPais.equals("") && !txtFecha.equals("")) {
+            try {
+                sql = "UPDATE empleados SET Nombre='" + nombre + "', Apellidos='" + apellidos + "', Telefono='" + telefono
+                        + "', Email='" + email + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
+                conect = conn.getConexion();
+                st = conect.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "El perfil se actualizó correctamente.", "ACTUALIZACIÓN PERFIL", JOptionPane.INFORMATION_MESSAGE);
+            } catch (HeadlessException | SQLException ex) {
+                System.err.println("Error:" + ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -367,7 +373,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ProfileEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */

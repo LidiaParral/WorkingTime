@@ -37,6 +37,12 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
 
     String sql;
     String search;
+    String email;
+    String dpto;
+    String tlf;
+    String idUser;
+    
+    int selectedRow;
     /**
      * Creates new form TodosEmpScreen
      */
@@ -44,7 +50,6 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        consultar();
     }
 
     /**
@@ -99,14 +104,14 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "DNI", "Email", "Fecha de Nacimiento", "Departamento"
+                "Id", "Nombre", "Apellidos", "Fecha de Nacimiento", "DNI", "Email", "Telefono", "Departamento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, false, false, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -118,13 +123,11 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             }
         });
         TablaEmp.setColumnSelectionAllowed(true);
-        TablaEmp.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        TablaEmp.setSelectionBackground(new java.awt.Color(255, 204, 153));
         jScrollPane1.setViewportView(TablaEmp);
         TablaEmp.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (TablaEmp.getColumnModel().getColumnCount() > 0) {
             TablaEmp.getColumnModel().getColumn(0).setResizable(false);
-            TablaEmp.getColumnModel().getColumn(1).setResizable(false);
-            TablaEmp.getColumnModel().getColumn(2).setResizable(false);
             TablaEmp.getColumnModel().getColumn(3).setResizable(false);
             TablaEmp.getColumnModel().getColumn(4).setResizable(false);
             TablaEmp.getColumnModel().getColumn(5).setResizable(false);
@@ -218,8 +221,8 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -235,7 +238,7 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,17 +247,13 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearchEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))
+                    .addComponent(btnSearchEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -287,7 +286,6 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
                 existEmp();
             }
         }
-        btnSearchEmp.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnSearchEmpActionPerformed
 
     private void btnUpdateEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateEmpMouseClicked
@@ -315,14 +313,26 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteEmpMousePressed
 
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
-        
-        
+        selectedRow = TablaEmp.getSelectedRow();
+        btnUpdateEmp.setBackground(new Color(252, 201, 131));
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            updateEmp();
+            consultar();
+        }       
         btnUpdateEmp.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnUpdateEmpActionPerformed
 
     private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
-        // TODO add your handling code here:
-        
+        selectedRow = TablaEmp.getSelectedRow();
+        btnDeleteEmp.setBackground(new Color(145, 150, 255));
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            deleteEmp();
+            consultar();
+        } 
         btnDeleteEmp.setBackground(new Color(255,126,60));
     }//GEN-LAST:event_btnDeleteEmpActionPerformed
 
@@ -331,23 +341,24 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void consultar() {
-        sql = "SELECT IdEmpleado,Nombre,Apellidos,DNI,FechaNac,Departamento,Email FROM empleados";
+        sql = "SELECT IdEmpleado,Nombre,Apellidos,DNI,FechaNac,Departamento,Email,Telefono FROM empleados";
 
         try {
             conect = conn.getConexion();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
 
-           Object[] empleado = new Object[7];
+           Object[] empleado = new Object[8];
             modelo = (DefaultTableModel) TablaEmp.getModel();
             while (rs.next()) {
                 empleado[0] = rs.getInt("IdEmpleado");
                 empleado[1] = rs.getString("Nombre");
                 empleado[2] = rs.getString("Apellidos");
-                empleado[3] = rs.getString("DNI");
-                empleado[4] = rs.getString("Email");
-                empleado[5] = rs.getDate("FechaNac");
-                empleado[6] = rs.getString("Departamento");
+                empleado[3] = rs.getString("DNI");              
+                empleado[4] = rs.getDate("FechaNac");
+                empleado[5] = rs.getString("Email");              
+                empleado[6] = rs.getString("Telefono");
+                empleado[7] = rs.getString("Departamento");
 
                 modelo.addRow(empleado);
             }
@@ -357,6 +368,40 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         }
     }
 
+    public void updateEmp(){
+        idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
+        email = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 5));
+        tlf =  String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 6));
+        dpto = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 7));
+        try {
+
+            sql = "UPDATE empleados SET Email='" + email + "', Telefono='" + tlf + "', Departamento='" + dpto
+                    + "' WHERE IdEmpleado ='" + idUser +"'";
+
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        lmp.limpiarTabla(modelo);
+    }
+    
+    public void deleteEmp(){
+        idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
+        try {
+            sql = "DELETE FROM empleados WHERE IdEmpleado='" + idUser + "'";
+
+            conect = conn.getConexion();
+            st = conect.createStatement();
+            st.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+        lmp.limpiarTabla(modelo);
+    }
     /**
      * Método que permite comprobar si existe un cliente con ese nombre en la
      * tabla Clientes de la base de datos.
@@ -369,16 +414,17 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
-            Object[] empleado = new Object[7];
+            Object[] empleado = new Object[8];
             modelo = (DefaultTableModel) TablaEmp.getModel();
             while (rs.next()) {
                 empleado[0] = rs.getInt("IdEmpleado");
                 empleado[1] = rs.getString("Nombre");
                 empleado[2] = rs.getString("Apellidos");
-                empleado[3] = rs.getString("DNI");
-                empleado[4] = rs.getString("Email");
-                empleado[5] = rs.getDate("FechaNac");
-                empleado[6] = rs.getString("Departamento");
+                empleado[3] = rs.getString("DNI");              
+                empleado[4] = rs.getDate("FechaNac");
+                empleado[5] = rs.getString("Email");              
+                empleado[6] = rs.getString("Telefono");
+                empleado[7] = rs.getString("Departamento");
 
                 modelo.addRow(empleado);
             }
