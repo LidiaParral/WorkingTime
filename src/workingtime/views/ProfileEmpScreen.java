@@ -5,6 +5,7 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,6 +48,19 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
+        lblNumEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblNomEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblApeEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblDNIEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblTlfEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblEmailEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblDptoEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblPuestoEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblCountryEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblCapitalEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblDateBirthEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnUpdateProfile.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnReturn.setFont(new Font("Montserrat",Font.PLAIN,12));
     }
 
     /**
@@ -58,17 +72,17 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lblNumEmp = new javax.swing.JLabel();
+        lblApeEmp = new javax.swing.JLabel();
+        lblNomEmp = new javax.swing.JLabel();
+        lblDNIEmp = new javax.swing.JLabel();
+        lblEmailEmp = new javax.swing.JLabel();
+        lblTlfEmp = new javax.swing.JLabel();
+        lblDptoEmp = new javax.swing.JLabel();
+        lblPuestoEmp = new javax.swing.JLabel();
+        lblCapitalEmp = new javax.swing.JLabel();
+        lblDateBirthEmp = new javax.swing.JLabel();
+        lblCountryEmp = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnUpdateProfile = new javax.swing.JButton();
         btnReturn = new javax.swing.JButton();
@@ -89,27 +103,27 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
-        jLabel1.setText("Nº. Empleado:");
+        lblNumEmp.setText("Nº. Empleado:");
 
-        jLabel2.setText("Apellidos:");
+        lblApeEmp.setText("Apellidos:");
 
-        jLabel3.setText("Nombre:");
+        lblNomEmp.setText("Nombre:");
 
-        jLabel4.setText("DNI:");
+        lblDNIEmp.setText("DNI:");
 
-        jLabel5.setText("Email:");
+        lblEmailEmp.setText("Email:");
 
-        jLabel6.setText("Teléfono:");
+        lblTlfEmp.setText("Teléfono:");
 
-        jLabel7.setText("Departamento:");
+        lblDptoEmp.setText("Departamento:");
 
-        jLabel8.setText("Puesto de Trabajo:");
+        lblPuestoEmp.setText("Puesto de Trabajo:");
 
-        jLabel9.setText("Ciudad:");
+        lblCapitalEmp.setText("Capital:");
 
-        jLabel10.setText("Fecha de Nacimiento:");
+        lblDateBirthEmp.setText("Fecha de Nacimiento:");
 
-        jLabel12.setText("País:");
+        lblCountryEmp.setText("País:");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -187,14 +201,14 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
+                            .addComponent(lblTlfEmp)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                    .addComponent(lblNumEmp)
+                                    .addComponent(lblNomEmp)
+                                    .addComponent(lblApeEmp)
+                                    .addComponent(lblDNIEmp)
+                                    .addComponent(lblEmailEmp))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -204,27 +218,25 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
                                         .addComponent(txtTelefono)
                                         .addComponent(txtDNI))
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
+                    .addComponent(jLabel11))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
+                                .addComponent(lblDateBirthEmp)
                                 .addGap(33, 33, 33)
                                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                        .addComponent(lblDptoEmp)
                                         .addGap(36, 36, 36))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel9))
+                                            .addComponent(lblCountryEmp)
+                                            .addComponent(lblPuestoEmp)
+                                            .addComponent(lblCapitalEmp))
                                         .addGap(18, 18, 18)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,46 +253,46 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel7)
+                    .addComponent(lblNumEmp)
+                    .addComponent(lblDptoEmp)
                     .addComponent(txtIdEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDpto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8)
+                    .addComponent(lblNomEmp)
+                    .addComponent(lblPuestoEmp)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel12)
+                    .addComponent(lblApeEmp)
+                    .addComponent(lblCountryEmp)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel9)
+                    .addComponent(lblDNIEmp)
+                    .addComponent(lblCapitalEmp)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
+                    .addComponent(lblDateBirthEmp)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblTlfEmp)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
+                            .addComponent(lblEmailEmp)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -300,9 +312,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateProfileActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        this.dispose();
-        HomeScreen home = new HomeScreen();
-        home.setVisible(true);      
+        this.dispose();      
     }//GEN-LAST:event_btnReturnActionPerformed
 
     public void consultar() {
@@ -387,19 +397,19 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnUpdateProfile;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblApeEmp;
+    private javax.swing.JLabel lblCapitalEmp;
+    private javax.swing.JLabel lblCountryEmp;
+    private javax.swing.JLabel lblDNIEmp;
+    private javax.swing.JLabel lblDateBirthEmp;
+    private javax.swing.JLabel lblDptoEmp;
+    private javax.swing.JLabel lblEmailEmp;
+    private javax.swing.JLabel lblNomEmp;
+    private javax.swing.JLabel lblNumEmp;
+    private javax.swing.JLabel lblPuestoEmp;
+    private javax.swing.JLabel lblTlfEmp;
     public javax.swing.JTextField txtApellidos;
     public javax.swing.JTextField txtCiudad;
     public javax.swing.JTextField txtDNI;

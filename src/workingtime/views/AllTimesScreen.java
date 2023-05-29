@@ -5,6 +5,7 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +58,13 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         lblIdEmp.setVisible(false);
+        lblNumEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblNomEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblJobEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblDptoEmp.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnUpdateTime.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnDeleteTime.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnCancelar.setFont(new Font("Montserrat",Font.PLAIN,12));
     }
 
     /**
@@ -77,10 +85,10 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         btnDeleteTime = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblNumEmp = new javax.swing.JLabel();
+        lblNomEmp = new javax.swing.JLabel();
+        lblJobEmp = new javax.swing.JLabel();
+        lblDptoEmp = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         lblNom = new javax.swing.JLabel();
         lblPuesto = new javax.swing.JLabel();
@@ -183,17 +191,17 @@ public final class AllTimesScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nº de Empleado:");
+        lblNumEmp.setBackground(new java.awt.Color(255, 255, 255));
+        lblNumEmp.setText("Nº de Empleado:");
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nombre:");
+        lblNomEmp.setBackground(new java.awt.Color(255, 255, 255));
+        lblNomEmp.setText("Nombre:");
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Puesto de Trabajo:");
+        lblJobEmp.setBackground(new java.awt.Color(255, 255, 255));
+        lblJobEmp.setText("Puesto de Trabajo:");
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Departamento:");
+        lblDptoEmp.setBackground(new java.awt.Color(255, 255, 255));
+        lblDptoEmp.setText("Departamento:");
 
         lblId.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -220,14 +228,14 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(lblNumEmp)
                             .addComponent(lblId)
-                            .addComponent(jLabel3)
+                            .addComponent(lblNomEmp)
                             .addComponent(lblNom))
                         .addGap(103, 103, 103)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
+                            .addComponent(lblDptoEmp)
+                            .addComponent(lblJobEmp)
                             .addComponent(lblPuesto)
                             .addComponent(lblDpto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,16 +252,16 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(lblNumEmp)
+                            .addComponent(lblJobEmp))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblId)
                             .addComponent(lblPuesto))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
+                            .addComponent(lblNomEmp)
+                            .addComponent(lblDptoEmp))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDpto)
@@ -324,8 +332,6 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-        HomeScreen home = new HomeScreen();
-        home.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void existWorkingDay() {
@@ -429,18 +435,18 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDeleteTime;
     private javax.swing.JButton btnUpdateTime;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblDpto;
+    private javax.swing.JLabel lblDptoEmp;
     public javax.swing.JLabel lblId;
     public javax.swing.JLabel lblIdEmp;
     private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblJobEmp;
     public javax.swing.JLabel lblNom;
+    private javax.swing.JLabel lblNomEmp;
+    private javax.swing.JLabel lblNumEmp;
     public javax.swing.JLabel lblPuesto;
     // End of variables declaration//GEN-END:variables
 }

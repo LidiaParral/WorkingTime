@@ -5,6 +5,8 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,6 +75,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         setMaximumSize(new java.awt.Dimension(506, 390));
         setMinimumSize(new java.awt.Dimension(506, 390));
         setResizable(false);
@@ -242,6 +245,13 @@ public class LoginScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
         }
         reset.ResetFrame(this);
+    }
+
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     /**

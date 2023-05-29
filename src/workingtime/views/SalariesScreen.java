@@ -5,6 +5,9 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +33,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
     public ResetFields reset = new ResetFields();
     public ExportExcel export = new ExportExcel();
     public CleanTable lmp = new CleanTable();
-
+    
     Conexion conn = new Conexion();
     Connection conect;
 
@@ -58,7 +61,16 @@ public final class SalariesScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblIdUser.setVisible(false);
+        lblIdUser.setVisible(false);      
+        lblName.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblSurnames.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblNumSSEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblGrupoCotizEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblGrupoProfEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDNIEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDateSearch.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnUpdateNomina.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
     }
 
     /**
@@ -78,8 +90,8 @@ public final class SalariesScreen extends javax.swing.JFrame {
         lblGrupoCotizEmp = new javax.swing.JLabel();
         lblGrupoProfEmp = new javax.swing.JLabel();
         lblIdUser = new javax.swing.JLabel();
-        lblNombreEmp1 = new javax.swing.JLabel();
-        lblApellidosEmp1 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblSurnames = new javax.swing.JLabel();
         lblDNIEmp1 = new javax.swing.JLabel();
         lblNumSSEmp1 = new javax.swing.JLabel();
         lblGrupoCotizEmp1 = new javax.swing.JLabel();
@@ -94,7 +106,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
         btnSearchNomina = new javax.swing.JButton();
         btnDownloadNomina = new javax.swing.JButton();
         dtDateSalaries = new com.toedter.calendar.JDateChooser();
-        jLabel1 = new javax.swing.JLabel();
+        lblDateSearch = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -114,9 +126,9 @@ public final class SalariesScreen extends javax.swing.JFrame {
 
         lblGrupoProfEmp.setText("GrupoProfesional");
 
-        lblNombreEmp1.setText("Nombre:");
+        lblName.setText("Nombre:");
 
-        lblApellidosEmp1.setText("Apellidos:");
+        lblSurnames.setText("Apellidos:");
 
         lblDNIEmp1.setText("DNI:");
 
@@ -139,32 +151,22 @@ public final class SalariesScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDNIEmp)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblNombreEmp1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblNombreEmp)
-                        .addGap(94, 94, 94)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblGrupoCotizEmp1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblGrupoCotizEmp))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblGrupoProfEmp1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblGrupoProfEmp))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblNumSSEmp1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNumSSEmp))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblApellidosEmp1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblApellidosEmp))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblDNIEmp1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDNIEmp)))
+                            .addComponent(lblName)
+                            .addComponent(lblSurnames)
+                            .addComponent(lblNombreEmp)
+                            .addComponent(lblApellidosEmp)
+                            .addComponent(lblDNIEmp1))
+                        .addGap(145, 145, 145)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblGrupoProfEmp1)
+                            .addComponent(lblNumSSEmp)
+                            .addComponent(lblNumSSEmp1)
+                            .addComponent(lblGrupoCotizEmp1)
+                            .addComponent(lblGrupoProfEmp)
+                            .addComponent(lblGrupoCotizEmp))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
@@ -177,27 +179,32 @@ public final class SalariesScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombreEmp1)
-                            .addComponent(lblNombreEmp)
-                            .addComponent(lblNumSSEmp1)
-                            .addComponent(lblNumSSEmp))
-                        .addGap(20, 20, 20)
+                            .addComponent(lblName)
+                            .addComponent(lblNumSSEmp1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblApellidosEmp1)
+                            .addComponent(lblNombreEmp)
+                            .addComponent(lblNumSSEmp))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSurnames)
+                            .addComponent(lblGrupoCotizEmp1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblApellidosEmp)
-                            .addComponent(lblGrupoCotizEmp1)
                             .addComponent(lblGrupoCotizEmp))
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDNIEmp1)
+                            .addComponent(lblGrupoProfEmp1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDNIEmp)
-                            .addComponent(lblGrupoProfEmp1)
-                            .addComponent(lblGrupoProfEmp))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblGrupoProfEmp)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -299,26 +306,28 @@ public final class SalariesScreen extends javax.swing.JFrame {
         dtDateSalaries.setBackground(new java.awt.Color(255, 255, 255));
         dtDateSalaries.setDateFormatString("yyyy-MM-dd");
 
-        jLabel1.setText("Fecha de búsqueda:");
+        lblDateSearch.setText("Fecha de búsqueda:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lblDateSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(313, 313, 313)
-                        .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -326,22 +335,19 @@ public final class SalariesScreen extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnDownloadNomina)
-                                .addGap(4, 4, 4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addGap(24, 24, 24))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDateSearch)
+                        .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDownloadNomina)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -355,8 +361,8 @@ public final class SalariesScreen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -366,8 +372,6 @@ public final class SalariesScreen extends javax.swing.JFrame {
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
-        HomeScreen home = new HomeScreen();
-        home.setVisible(true);
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnDownloadNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadNominaActionPerformed
@@ -484,6 +488,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+
     /**
      * @param args the command line arguments
      */
@@ -525,24 +530,24 @@ public final class SalariesScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchNomina;
     public javax.swing.JButton btnUpdateNomina;
     public com.toedter.calendar.JDateChooser dtDateSalaries;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblApellidosEmp;
-    public javax.swing.JLabel lblApellidosEmp1;
     public javax.swing.JLabel lblDNIEmp;
     public javax.swing.JLabel lblDNIEmp1;
+    private javax.swing.JLabel lblDateSearch;
     public javax.swing.JLabel lblGrupoCotizEmp;
     public javax.swing.JLabel lblGrupoCotizEmp1;
     public javax.swing.JLabel lblGrupoProfEmp;
     public javax.swing.JLabel lblGrupoProfEmp1;
     public javax.swing.JLabel lblIdUser;
+    public javax.swing.JLabel lblName;
     public javax.swing.JLabel lblNombreEmp;
-    public javax.swing.JLabel lblNombreEmp1;
     public javax.swing.JLabel lblNumSSEmp;
     public javax.swing.JLabel lblNumSSEmp1;
+    public javax.swing.JLabel lblSurnames;
     // End of variables declaration//GEN-END:variables
 }

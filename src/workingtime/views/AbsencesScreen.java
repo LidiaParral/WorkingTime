@@ -5,7 +5,10 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,6 +62,14 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
         lblDepartment.setVisible(false);
+        lblManager.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDateStart.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDateFin.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblTypeRequest.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblReason.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnUpdateAusencia.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnDeleteAusencia.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnSaveAusencia.setFont(new Font("Century Gothic",Font.BOLD,12));
     }
 
     /**
@@ -73,15 +84,15 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblIdEmp = new javax.swing.JLabel();
         lblDepartment = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblManager = new javax.swing.JLabel();
+        lblDateStart = new javax.swing.JLabel();
+        lblDateFin = new javax.swing.JLabel();
         txtManager = new javax.swing.JTextField();
         dtDateStartAb = new com.toedter.calendar.JDateChooser();
         dtDateFinAb = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
+        lblTypeRequest = new javax.swing.JLabel();
         cmbTypeRequestVacation = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
+        lblReason = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaReasonAb = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -95,6 +106,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -106,19 +118,19 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
 
-        jLabel4.setText("Responsable");
+        lblManager.setText("Responsable");
 
-        jLabel6.setText("Fecha de inicio:");
+        lblDateStart.setText("Fecha de inicio:");
 
-        jLabel7.setText("Fecha de fin:");
+        lblDateFin.setText("Fecha de fin:");
 
         dtDateStartAb.setDateFormatString("EEEE dd-MMM-yyyy");
 
-        jLabel8.setText("Tipo de solicitud");
+        lblTypeRequest.setText("Tipo de solicitud");
 
         cmbTypeRequestVacation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "PERMISO RETRIBUIDO", "PERMISO NO RETRIBUIDO", "DÍA LIBRE", "DÍA FESTIVO", "CITA MEDICA" }));
 
-        jLabel9.setText("Motivo de ausencia:");
+        lblReason.setText("Motivo de ausencia:");
 
         txtaReasonAb.setColumns(20);
         txtaReasonAb.setRows(5);
@@ -134,38 +146,30 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(lblDepartment)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblIdEmp))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblDepartment)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7))
-                                        .addGap(59, 59, 59)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtManager)
-                                            .addComponent(dtDateStartAb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dtDateFinAb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmbTypeRequestVacation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblIdEmp)))
-                        .addGap(0, 40, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(lblManager)
+                            .addComponent(lblDateStart)
+                            .addComponent(lblDateFin)
+                            .addComponent(lblTypeRequest)
+                            .addComponent(lblReason))
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtManager)
+                                .addComponent(dtDateStartAb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dtDateFinAb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbTypeRequestVacation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,24 +186,24 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                            .addComponent(lblManager))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDateStart, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dtDateStartAb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
+                    .addComponent(lblDateFin)
                     .addComponent(dtDateFinAb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(lblTypeRequest)
                     .addComponent(cmbTypeRequestVacation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(80, 80, 80))
+                    .addComponent(lblReason))
+                .addGap(60, 60, 60))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -373,8 +377,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         this.dispose();
-        HomeScreen home = new HomeScreen();
-        home.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     public void saveAbsence() {
@@ -497,6 +499,13 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         }
 
     }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
 
     /**
      * @param args the command line arguments
@@ -541,18 +550,18 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     public com.toedter.calendar.JDateChooser dtDateFinAb;
     public com.toedter.calendar.JDateChooser dtDateStartAb;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblDateFin;
+    private javax.swing.JLabel lblDateStart;
     public javax.swing.JLabel lblDepartment;
     public javax.swing.JLabel lblIdEmp;
+    private javax.swing.JLabel lblManager;
+    private javax.swing.JLabel lblReason;
+    private javax.swing.JLabel lblTypeRequest;
     public javax.swing.JTextField txtManager;
     public javax.swing.JTextArea txtaReasonAb;
     // End of variables declaration//GEN-END:variables

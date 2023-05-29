@@ -5,6 +5,7 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -30,6 +31,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblNumSS.setVisible(false);
         lblJobEmp.setVisible(false);
         lblDepartmentEmp.setVisible(false);
+        btnLogout.setFont(new Font("Century Gothic",Font.BOLD,12));
     }
 
     /**
@@ -296,14 +298,12 @@ public class HomeScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnRegistroJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroJornadaActionPerformed
-        this.hide();
         TimeScreen time = new TimeScreen();
         time.lblIdEmp.setText(lblIdEmp.getText());
         time.setVisible(true);
     }//GEN-LAST:event_mnRegistroJornadaActionPerformed
 
     private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
-        this.hide();
         SalariesScreen salaries = new SalariesScreen();
         salaries.lblIdUser.setText(lblIdEmp.getText());
         salaries.lblNombreEmp.setText(lblNamEmp.getText().toUpperCase());
@@ -317,7 +317,6 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_mnNominaActionPerformed
 
     private void mnTodosDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosDocumentosActionPerformed
-        this.hide();
         AllDocumentsScreen doc = new AllDocumentsScreen();
         doc.lblIdEmp.setText(lblIdEmp.getText());
         doc.consultar();
@@ -325,7 +324,6 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_mnTodosDocumentosActionPerformed
 
     private void mnRegistroAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroAusenciasActionPerformed
-        this.hide();
         AbsencesScreen aus = new AbsencesScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
         aus.lblDepartment.setText(lblDepartmentEmp.getText());
@@ -334,27 +332,23 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
 
     private void mnControlEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnControlEmpActionPerformed
-        this.hide();
         ControlEmpScreen control = new ControlEmpScreen();
         control.setVisible(true);
     }//GEN-LAST:event_mnControlEmpActionPerformed
 
     private void mnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddDocActionPerformed
-        this.hide();
         AddDocScreen addDoc = new AddDocScreen();
         addDoc.lblIdEmp.setText(lblIdEmp.getText());
         addDoc.setVisible(true);
     }//GEN-LAST:event_mnAddDocActionPerformed
 
     private void mnAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllEmpActionPerformed
-        this.hide();
         AllEmpScreen allEmp = new AllEmpScreen();
         allEmp.consultar();
         allEmp.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
 
     private void mnTodosHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosHorariosActionPerformed
-        this.hide();
         AllTimesScreen allTimes = new AllTimesScreen();
         allTimes.lblIdEmp.setText(lblIdEmp.getText());
         allTimes.lblId.setText(lblIdEmp.getText());
@@ -372,7 +366,6 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void mnPerfilUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPerfilUserActionPerformed
-        this.hide();
         ProfileEmpScreen profile = new ProfileEmpScreen();
         profile.txtIdEmp.setText(lblIdEmp.getText());
         profile.consultar();

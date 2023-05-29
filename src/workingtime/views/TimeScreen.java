@@ -5,6 +5,7 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,7 +57,15 @@ public final class TimeScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         lblIdEmp.setVisible(false);
-        
+        lblTimeStart.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblTimeFin.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblOtherReasons.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblTimeStartR.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblTimeFinR.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblDateNow.setFont(new Font("Montserrat",Font.BOLD,12));
+        lblDateActual.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnSaveTime.setFont(new Font("Montserrat",Font.BOLD,12));
+        btnCancelar.setFont(new Font("Montserrat",Font.PLAIN,12));
     }
 
     /**
@@ -68,22 +77,22 @@ public final class TimeScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTimeStart = new javax.swing.JLabel();
         dtTimeStart = new com.toedter.calendar.JDateChooser();
         dateAct = new com.toedter.calendar.JCalendar();
-        jLabel2 = new javax.swing.JLabel();
+        lblTimeFin = new javax.swing.JLabel();
         dtTimeFin = new com.toedter.calendar.JDateChooser();
         btnCancelar = new javax.swing.JButton();
         cmbOtherReasons = new javax.swing.JComboBox<>();
         dtReasonStart = new com.toedter.calendar.JDateChooser();
         btnSaveTime = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblOtherReasons = new javax.swing.JLabel();
         lblDateActual = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblDateNow = new javax.swing.JLabel();
         dtReasonFin = new com.toedter.calendar.JDateChooser();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lblTimeStartR = new javax.swing.JLabel();
+        lblTimeFinR = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -95,7 +104,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Inicio:");
+        lblTimeStart.setText("Inicio:");
 
         dtTimeStart.setDateFormatString("HH:mm:ss");
         dtTimeStart.setMaxSelectableDate(new Date());
@@ -110,7 +119,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Fin:");
+        lblTimeFin.setText("Fin:");
 
         dtTimeFin.setDateFormatString("HH:mm:ss");
         dtTimeFin.setMaxSelectableDate(new Date());
@@ -141,20 +150,20 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Otras razones:");
+        lblOtherReasons.setText("Otras razones:");
 
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
 
-        jLabel4.setText("Fecha de hoy:");
+        lblDateNow.setText("Fecha de hoy:");
 
         dtReasonFin.setDateFormatString("HH:mm:ss");
         dtReasonFin.setMaxSelectableDate(new Date());
         dtReasonFin.setMinSelectableDate(new Date());
 
-        jLabel7.setText("Inicio:");
+        lblTimeStartR.setText("Inicio:");
 
-        jLabel8.setText("Fin:");
+        lblTimeFinR.setText("Fin:");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\eficiencia - copia.png")); // NOI18N
@@ -172,13 +181,13 @@ public final class TimeScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2))
+                                            .addComponent(lblTimeStart)
+                                            .addComponent(lblTimeFin))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(dtTimeFin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(dtTimeStart, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel3))
+                                    .addComponent(lblOtherReasons))
                                 .addGap(98, 98, 98)
                                 .addComponent(lblIdEmp))
                             .addGroup(layout.createSequentialGroup()
@@ -187,7 +196,7 @@ public final class TimeScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dateAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
+                                        .addComponent(lblDateNow)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblDateActual, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -195,8 +204,8 @@ public final class TimeScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
+                                    .addComponent(lblTimeStartR)
+                                    .addComponent(lblTimeFinR))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dtReasonFin, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,11 +227,11 @@ public final class TimeScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
+                            .addComponent(lblTimeStartR)
                             .addComponent(dtReasonStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
+                            .addComponent(lblTimeFinR)
                             .addComponent(dtReasonFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,18 +240,18 @@ public final class TimeScreen extends javax.swing.JFrame {
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(lblTimeStart)
                             .addComponent(dtTimeStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
+                            .addComponent(lblDateNow)
                             .addComponent(lblDateActual, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dtTimeFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
+                                    .addComponent(lblTimeFin))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
+                                .addComponent(lblOtherReasons)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbOtherReasons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(189, 189, 189))
@@ -277,8 +286,6 @@ public final class TimeScreen extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-        HomeScreen home = new HomeScreen();
-        home.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -378,14 +385,14 @@ public final class TimeScreen extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dtReasonStart;
     private com.toedter.calendar.JDateChooser dtTimeFin;
     private com.toedter.calendar.JDateChooser dtTimeStart;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblDateActual;
+    private javax.swing.JLabel lblDateNow;
     public javax.swing.JLabel lblIdEmp;
+    private javax.swing.JLabel lblOtherReasons;
+    private javax.swing.JLabel lblTimeFin;
+    private javax.swing.JLabel lblTimeFinR;
+    private javax.swing.JLabel lblTimeStart;
+    private javax.swing.JLabel lblTimeStartR;
     // End of variables declaration//GEN-END:variables
 }
