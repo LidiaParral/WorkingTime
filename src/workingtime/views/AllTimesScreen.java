@@ -13,22 +13,22 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.LimpiarTabla;
-import workingtime.model.ResetarCampos;
+import workingtime.model.CleanTable;
+import workingtime.model.ResetFields;
 
 /**
  *
  * @author Lidia Parral
  */
-public final class TodosHorariosScreen extends javax.swing.JFrame {
+public final class AllTimesScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
-    public LimpiarTabla lmp = new LimpiarTabla();
+    public ResetFields reset = new ResetFields();
+    public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
     Connection conect;
 
-    DefaultTableModel modelo;
+    DefaultTableModel model;
 
     PreparedStatement ps;
     Statement st;
@@ -37,20 +37,22 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
 
     String sql;
     String idUser;
-    String fechaHoy;
-    String razon;
-    String horaInicio;
-    String horaFin;
-    String horaRazInicio;
-    String horaRazFin;
-    String fec;
+    String dateNow;
+    String reason;
+    String timeStart;
+    String timeFin;
+    String timeReasonStart;
+    String timeReasonFin;
+    String date;
 
     int selectedRow;
+    Object[] options = {"Aceptar", "Cancelar"};
+    int election;
 
     /**
      * Creates new form TodosHorariosScreen
      */
-    public TodosHorariosScreen() {
+    public AllTimesScreen() {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
@@ -68,11 +70,11 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHorario = new javax.swing.JTable();
+        TableTime = new javax.swing.JTable();
         lblImage = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnUpdateHorario = new javax.swing.JButton();
-        btnDeleteHorario = new javax.swing.JButton();
+        btnUpdateTime = new javax.swing.JButton();
+        btnDeleteTime = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -89,7 +91,7 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblHorario.setModel(new javax.swing.table.DefaultTableModel(
+        TableTime.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -112,31 +114,31 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblHorario);
+        jScrollPane1.setViewportView(TableTime);
 
         lblImage.setBackground(new java.awt.Color(255, 255, 255));
         lblImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\gestion-del-tiempo.png")); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnUpdateHorario.setBackground(new java.awt.Color(38, 70, 166));
-        btnUpdateHorario.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateHorario.setText("ACTUALIZAR");
-        btnUpdateHorario.setToolTipText("Este botón permite actualizar el registro seleccionado");
-        btnUpdateHorario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnUpdateHorario.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateTime.setBackground(new java.awt.Color(38, 70, 166));
+        btnUpdateTime.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateTime.setText("ACTUALIZAR");
+        btnUpdateTime.setToolTipText("Este botón permite actualizar el registro seleccionado");
+        btnUpdateTime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnUpdateTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateHorarioActionPerformed(evt);
+                btnUpdateTimeActionPerformed(evt);
             }
         });
 
-        btnDeleteHorario.setBackground(new java.awt.Color(255, 126, 60));
-        btnDeleteHorario.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeleteHorario.setText("ELIMINAR");
-        btnDeleteHorario.setToolTipText("Este botón permite borrar el registro seleccionado.");
-        btnDeleteHorario.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteTime.setBackground(new java.awt.Color(255, 126, 60));
+        btnDeleteTime.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteTime.setText("ELIMINAR");
+        btnDeleteTime.setToolTipText("Este botón permite borrar el registro seleccionado.");
+        btnDeleteTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteHorarioActionPerformed(evt);
+                btnDeleteTimeActionPerformed(evt);
             }
         });
 
@@ -153,10 +155,9 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                         .addGap(327, 327, 327)
                         .addComponent(lblIdEmp))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(btnUpdateHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDeleteHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnDeleteTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,8 +166,8 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnUpdateHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDeleteHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDeleteTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblIdEmp))
                 .addGap(26, 26, 26))
         );
@@ -182,21 +183,25 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nº de Empleado:");
 
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre:");
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Puesto de Trabajo:");
 
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Departamento:");
 
-        lblId.setText("Nº de Empleado");
+        lblId.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNom.setText("Nombre");
+        lblNom.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblPuesto.setText("PuestoTrabajo");
+        lblPuesto.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblDpto.setText("Departamento");
+        lblDpto.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -210,18 +215,16 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(lblId)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNom)))
-                        .addGap(95, 95, 95)
+                            .addComponent(jLabel3)
+                            .addComponent(lblNom))
+                        .addGap(103, 103, 103)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
@@ -250,16 +253,17 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(lblNom)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDpto)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDpto)
+                            .addComponent(lblNom))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -280,35 +284,51 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHorarioActionPerformed
-        selectedRow = tblHorario.getSelectedRow();
-        btnDeleteHorario.setBackground(new Color(145, 150, 255));
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            deleteJornada();
-            existJornada();
+    private void btnDeleteTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTimeActionPerformed
+        selectedRow = TableTime.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
+        btnDeleteTime.setBackground(new Color(145, 150, 255));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                deleteWorkingDay();
+                existWorkingDay();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
-        btnDeleteHorario.setBackground(new Color(255,126,60));
-    }//GEN-LAST:event_btnDeleteHorarioActionPerformed
+        btnDeleteTime.setBackground(new Color(255, 126, 60));
+    }//GEN-LAST:event_btnDeleteTimeActionPerformed
 
-    private void btnUpdateHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateHorarioActionPerformed
-        selectedRow = tblHorario.getSelectedRow();
-        btnUpdateHorario.setBackground(new Color(252, 201, 131));
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            updateJornada();
-            existJornada();
+    private void btnUpdateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTimeActionPerformed
+        selectedRow = TableTime.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
+        btnUpdateTime.setBackground(new Color(252, 201, 131));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                updateWorkingDay();
+                existWorkingDay();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
-        btnUpdateHorario.setBackground(new Color(38,70,166));
-    }//GEN-LAST:event_btnUpdateHorarioActionPerformed
+        btnUpdateTime.setBackground(new Color(38, 70, 166));
+    }//GEN-LAST:event_btnUpdateTimeActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
+        HomeScreen home = new HomeScreen();
+        home.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    public void existJornada() {
+    public void existWorkingDay() {
         sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
 
         try {
@@ -316,7 +336,7 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             Object[] horario = new Object[6];
-            modelo = (DefaultTableModel) tblHorario.getModel();
+            model = (DefaultTableModel) TableTime.getModel();
             while (rs.next()) {
                 horario[0] = rs.getString("FechaActual");
                 horario[1] = rs.getTime("HoraInicio");
@@ -325,16 +345,16 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                 horario[4] = rs.getTime("HoraInicioRazones");
                 horario[5] = rs.getTime("HoraFinRazones");
 
-                modelo.addRow(horario);
+                model.addRow(horario);
             }
-            tblHorario.setModel(modelo);
+            TableTime.setModel(model);
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
 
-    public void deleteJornada() {
+    public void deleteWorkingDay() {
         idUser = lblIdEmp.getText();
         try {
             sql = "DELETE FROM registro_horas WHERE IdEmpleado='" + idUser + "'";
@@ -346,19 +366,19 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(model);
     }
 
-    public void updateJornada() {
-        fec = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 0));
-        horaInicio = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 1));
-        horaFin = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 2));
-        horaRazInicio = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 4));
-        horaRazFin = String.valueOf(modelo.getValueAt(tblHorario.getSelectedRow(), 5));
+    public void updateWorkingDay() {
+        date = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 0));
+        timeStart = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 1));
+        timeFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 2));
+        timeReasonStart = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 4));
+        timeReasonFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 5));
         try {
 
-            sql = "UPDATE registro_horas SET HoraInicio='" + horaInicio + "', HoraFin='" + horaFin + "', HoraInicioRazones='" + horaRazInicio + "', HoraFinRazones='" + horaRazFin
-                    + "' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + fec + "'";
+            sql = "UPDATE registro_horas SET HoraInicio='" + timeStart + "', HoraFin='" + timeFin + "', HoraInicioRazones='" + timeReasonStart + "', HoraFinRazones='" + timeReasonFin
+                    + "' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -367,7 +387,7 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(model);
     }
 
     /**
@@ -387,26 +407,28 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TodosHorariosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllTimesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TodosHorariosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllTimesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TodosHorariosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllTimesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TodosHorariosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllTimesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new TodosHorariosScreen().setVisible(true);
+            new AllTimesScreen().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableTime;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnDeleteHorario;
-    private javax.swing.JButton btnUpdateHorario;
+    private javax.swing.JButton btnDeleteTime;
+    private javax.swing.JButton btnUpdateTime;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -420,6 +442,5 @@ public final class TodosHorariosScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblImage;
     public javax.swing.JLabel lblNom;
     public javax.swing.JLabel lblPuesto;
-    private javax.swing.JTable tblHorario;
     // End of variables declaration//GEN-END:variables
 }

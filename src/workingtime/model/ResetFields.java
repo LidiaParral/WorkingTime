@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  * @version 1.0 Diciembre del 2022
  * @author Lidia Parral
  */
-public class ResetarCampos {
+public class ResetFields {
     
     /**
      * Método que permite resetear los componentes del JPanel.

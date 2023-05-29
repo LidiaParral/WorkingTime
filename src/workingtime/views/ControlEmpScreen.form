@@ -62,20 +62,20 @@
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNomEmp" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
-                      <Component id="txtApellidosEmp" alignment="0" min="-2" pref="349" max="-2" attributes="0"/>
-                      <Component id="txtNumSSEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
+                      <Component id="txtNameEmp" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
+                      <Component id="txtSurnamesEmp" alignment="0" min="-2" pref="349" max="-2" attributes="0"/>
+                      <Component id="txtSSNumEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDNIEmp" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
-                      <Component id="cmbPuesto" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
+                      <Component id="cmbEmpJob" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtGrupoProfEmp" min="-2" pref="214" max="-2" attributes="0"/>
+                      <Component id="txtGroupProfEmp" min="-2" pref="214" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="txtEmailEmp" min="-2" pref="107" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -96,22 +96,22 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTlfEmp" min="-2" pref="248" max="-2" attributes="0"/>
-                              <Component id="txtGrupoCotEmp" min="-2" pref="214" max="-2" attributes="0"/>
+                              <Component id="txtPhoneEmp" min="-2" pref="248" max="-2" attributes="0"/>
+                              <Component id="txtGroupCotEmp" min="-2" pref="214" max="-2" attributes="0"/>
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbDepartamentoEmp" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="cmbEmpDepartment" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmbPaisEmp" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="dateFechaNacEmp" min="-2" pref="168" max="-2" attributes="0"/>
+                              <Component id="cmbEmpCountry" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="dtDateOfBirthEmp" min="-2" pref="168" max="-2" attributes="0"/>
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateFechaAntigEmp" min="-2" pref="162" max="-2" attributes="0"/>
+                              <Component id="dtDateOfSeniorityEmp" min="-2" pref="162" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -127,7 +127,7 @@
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtNomEmp" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNameEmp" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -140,7 +140,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Component id="txtApellidosEmp" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSurnamesEmp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txtDNIEmp" min="-2" max="-2" attributes="0"/>
-                      <Component id="dateFechaNacEmp" min="-2" max="-2" attributes="0"/>
+                      <Component id="dtDateOfBirthEmp" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -159,7 +159,7 @@
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtNumSSEmp" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSSNumEmp" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -167,8 +167,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cmbPuesto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbDepartamentoEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEmpJob" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEmpDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -179,7 +179,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtEmailEmp" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTlfEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPhoneEmp" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -189,24 +189,24 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtCapitalEmp" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbPaisEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEmpCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="dateFechaAntigEmp" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="dtDateOfSeniorityEmp" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtGrupoProfEmp" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtGroupProfEmp" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="18" max="32767" attributes="0"/>
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtGrupoCotEmp" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtGroupCotEmp" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -275,12 +275,12 @@
             <Property name="text" type="java.lang.String" value="Grupo de Cotizaci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNomEmp">
+        <Component class="javax.swing.JTextField" name="txtNameEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtApellidosEmp">
+        <Component class="javax.swing.JTextField" name="txtSurnamesEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -290,19 +290,19 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNumSSEmp">
+        <Component class="javax.swing.JTextField" name="txtSSNumEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbDepartamentoEmp">
+        <Component class="javax.swing.JComboBox" name="cmbEmpDepartment">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbDepartamentoEmpItemStateChanged"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbEmpDepartmentItemStateChanged"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -319,7 +319,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dateFechaNacEmp">
+        <Component class="com.toedter.calendar.JDateChooser" name="dtDateOfBirthEmp">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="dd-MMMM-yyyy"/>
           </Properties>
@@ -327,7 +327,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dateFechaAntigEmp">
+        <Component class="com.toedter.calendar.JDateChooser" name="dtDateOfSeniorityEmp">
           <Properties>
             <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new Date()" type="code"/>
@@ -345,21 +345,21 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbPaisEmp">
+        <Component class="javax.swing.JComboBox" name="cmbEmpCountry">
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbPaisEmpItemStateChanged"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbEmpCountryItemStateChanged"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGrupoProfEmp">
+        <Component class="javax.swing.JTextField" name="txtGroupProfEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGrupoCotEmp">
+        <Component class="javax.swing.JTextField" name="txtGroupCotEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -369,12 +369,12 @@
             <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTlfEmp">
+        <Component class="javax.swing.JTextField" name="txtPhoneEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbPuesto">
+        <Component class="javax.swing.JComboBox" name="cmbEmpJob">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
@@ -424,9 +424,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnSaveEmp" min="-2" pref="102" max="-2" attributes="0"/>
+                  <Component id="btnSaveEmp" min="-2" pref="106" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="btnReturn" min="-2" pref="104" max="-2" attributes="0"/>
+                  <Component id="btnReturn" min="-2" pref="106" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -436,8 +436,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSaveEmp" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="btnReturn" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="btnSaveEmp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnReturn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>

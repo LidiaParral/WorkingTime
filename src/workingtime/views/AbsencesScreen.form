@@ -11,6 +11,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -26,7 +29,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -37,7 +40,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -51,7 +54,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -74,7 +77,7 @@
                                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="lblDepartamento" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -86,10 +89,10 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtResponsable" max="32767" attributes="0"/>
-                                              <Component id="dtFechaIniAus" max="32767" attributes="0"/>
-                                              <Component id="dtFechaFinAus" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="cmbTipoSolicitudAus" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtManager" max="32767" attributes="0"/>
+                                              <Component id="dtDateStartAb" max="32767" attributes="0"/>
+                                              <Component id="dtDateFinAb" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="cmbTypeRequestVacation" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -124,7 +127,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblIdEmp" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="lblDepartamento" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -132,7 +135,7 @@
                           <Component id="jLabel1" min="-2" pref="139" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtResponsable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtManager" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -140,17 +143,17 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="dtFechaIniAus" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="dtDateStartAb" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <Component id="dtFechaFinAus" min="-2" max="-2" attributes="0"/>
+                      <Component id="dtDateFinAb" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbTipoSolicitudAus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbTypeRequestVacation" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -172,7 +175,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblDepartamento">
+        <Component class="javax.swing.JLabel" name="lblDepartment">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -192,17 +195,20 @@
             <Property name="text" type="java.lang.String" value="Fecha de fin:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtResponsable">
+        <Component class="javax.swing.JTextField" name="txtManager">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dtFechaIniAus">
+        <Component class="com.toedter.calendar.JDateChooser" name="dtDateStartAb">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="EEEE dd-MMM-yyyy"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dtFechaFinAus">
+        <Component class="com.toedter.calendar.JDateChooser" name="dtDateFinAb">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -212,7 +218,7 @@
             <Property name="text" type="java.lang.String" value="Tipo de solicitud"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbTipoSolicitudAus">
+        <Component class="javax.swing.JComboBox" name="cmbTypeRequestVacation">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="6">
@@ -242,7 +248,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="txtaMotivoAus">
+            <Component class="javax.swing.JTextArea" name="txtaReasonAb">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -276,18 +282,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" pref="496" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="371" max="-2" attributes="0"/>
-                  <EmptySpace pref="60" max="32767" attributes="0"/>
+                  <EmptySpace pref="57" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -300,7 +306,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="TablaAusencia">
+            <Component class="javax.swing.JTable" name="TableAbsence">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
@@ -361,11 +367,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Component id="btnSaveAusencia" min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="btnSaveAusencia" min="-2" pref="106" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="btnUpdateAusencia" min="-2" pref="111" max="-2" attributes="0"/>
+                  <Component id="btnUpdateAusencia" min="-2" pref="106" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="btnDeleteAusencia" min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="btnDeleteAusencia" min="-2" pref="106" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -375,9 +381,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="24" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSaveAusencia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="btnUpdateAusencia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="btnDeleteAusencia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnSaveAusencia" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnUpdateAusencia" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnDeleteAusencia" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>

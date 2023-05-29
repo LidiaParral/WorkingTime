@@ -21,15 +21,15 @@ public class HomeScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
-        lblNomEmp.setVisible(false);
-        lblApellidosEmp.setVisible(false);
+        lblNamEmp.setVisible(false);
+        lblSurnamesEmp.setVisible(false);
         lblDNIEmp.setVisible(false);
         lblEmailEmp.setVisible(false);
-        lblGrupoCot.setVisible(false);
-        lblGrupoProf.setVisible(false);
+        lblGroupCot.setVisible(false);
+        lblGroupProf.setVisible(false);
         lblNumSS.setVisible(false);
-        lblPuestoEmp.setVisible(false);
-        lblDepartamento.setVisible(false);
+        lblJobEmp.setVisible(false);
+        lblDepartmentEmp.setVisible(false);
     }
 
     /**
@@ -42,17 +42,17 @@ public class HomeScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblNomEmp = new javax.swing.JLabel();
+        lblNamEmp = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
         lblEmailEmp = new javax.swing.JLabel();
-        lblApellidosEmp = new javax.swing.JLabel();
-        lblPuestoEmp = new javax.swing.JLabel();
+        lblSurnamesEmp = new javax.swing.JLabel();
+        lblJobEmp = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
         lblNumSS = new javax.swing.JLabel();
-        lblGrupoCot = new javax.swing.JLabel();
-        lblGrupoProf = new javax.swing.JLabel();
+        lblGroupCot = new javax.swing.JLabel();
+        lblGroupProf = new javax.swing.JLabel();
         lblDNIEmp = new javax.swing.JLabel();
-        lblDepartamento = new javax.swing.JLabel();
+        lblDepartmentEmp = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
@@ -72,13 +72,12 @@ public class HomeScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(851, 534));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNomEmp.setEnabled(false);
-        lblNomEmp.setFocusable(false);
+        lblNamEmp.setEnabled(false);
+        lblNamEmp.setFocusable(false);
 
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
@@ -86,11 +85,11 @@ public class HomeScreen extends javax.swing.JFrame {
         lblEmailEmp.setEnabled(false);
         lblEmailEmp.setFocusable(false);
 
-        lblApellidosEmp.setEnabled(false);
-        lblApellidosEmp.setFocusable(false);
+        lblSurnamesEmp.setEnabled(false);
+        lblSurnamesEmp.setFocusable(false);
 
-        lblPuestoEmp.setEnabled(false);
-        lblPuestoEmp.setFocusable(false);
+        lblJobEmp.setEnabled(false);
+        lblJobEmp.setFocusable(false);
 
         fondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home.png")); // NOI18N
 
@@ -116,21 +115,21 @@ public class HomeScreen extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblNumSS)
                         .addGap(46, 46, 46)
-                        .addComponent(lblGrupoCot)
+                        .addComponent(lblGroupCot)
                         .addGap(58, 58, 58)
-                        .addComponent(lblGrupoProf)
+                        .addComponent(lblGroupProf)
                         .addGap(98, 98, 98))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNamEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblApellidosEmp)
-                            .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblSurnamesEmp)
+                            .addComponent(lblJobEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblDNIEmp)
@@ -140,7 +139,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                     .addComponent(lblIdEmp))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(28, 28, 28)
-                                    .addComponent(lblDepartamento)))
+                                    .addComponent(lblDepartmentEmp)))
                             .addGap(113, 113, 113))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,26 +155,26 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(lblNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblNamEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(lblApellidosEmp)
+                                .addComponent(lblSurnamesEmp)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblJobEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNumSS)
-                            .addComponent(lblGrupoCot)
-                            .addComponent(lblGrupoProf))
+                            .addComponent(lblGroupCot)
+                            .addComponent(lblGroupProf))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addComponent(lblIdEmp))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
-                                .addComponent(lblDepartamento)))
+                                .addComponent(lblDepartmentEmp)))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -297,65 +296,73 @@ public class HomeScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnRegistroJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroJornadaActionPerformed
-        HorarioScreen horario = new HorarioScreen();
-        horario.lblIdEmp.setText(lblIdEmp.getText());
-        horario.setVisible(true);
+        this.hide();
+        TimeScreen time = new TimeScreen();
+        time.lblIdEmp.setText(lblIdEmp.getText());
+        time.setVisible(true);
     }//GEN-LAST:event_mnRegistroJornadaActionPerformed
 
     private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
-        NominaScreen nomina = new NominaScreen();
-        nomina.lblIdUser.setText(lblIdEmp.getText());
-        nomina.lblNombreEmp.setText(lblNomEmp.getText().toUpperCase());
-        nomina.lblApellidosEmp.setText(lblApellidosEmp.getText().toUpperCase());
-        nomina.lblDNIEmp.setText(lblDNIEmp.getText());
-        nomina.lblGrupoCotizEmp.setText(lblGrupoCot.getText());
-        nomina.lblGrupoProfEmp.setText(lblGrupoProf.getText().toUpperCase());
-        nomina.lblNumSSEmp.setText(lblNumSS.getText());
-        nomina.existNominas();
-        nomina.setVisible(true);
+        this.hide();
+        SalariesScreen salaries = new SalariesScreen();
+        salaries.lblIdUser.setText(lblIdEmp.getText());
+        salaries.lblNombreEmp.setText(lblNamEmp.getText().toUpperCase());
+        salaries.lblApellidosEmp.setText(lblSurnamesEmp.getText().toUpperCase());
+        salaries.lblDNIEmp.setText(lblDNIEmp.getText());
+        salaries.lblGrupoCotizEmp.setText(lblGroupCot.getText());
+        salaries.lblGrupoProfEmp.setText(lblGroupProf.getText().toUpperCase());
+        salaries.lblNumSSEmp.setText(lblNumSS.getText());
+        salaries.existSalary();
+        salaries.setVisible(true);
     }//GEN-LAST:event_mnNominaActionPerformed
 
     private void mnTodosDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosDocumentosActionPerformed
-        TodosDocumentosScreen doc = new TodosDocumentosScreen();
+        this.hide();
+        AllDocumentsScreen doc = new AllDocumentsScreen();
         doc.lblIdEmp.setText(lblIdEmp.getText());
         doc.consultar();
         doc.setVisible(true);
     }//GEN-LAST:event_mnTodosDocumentosActionPerformed
 
     private void mnRegistroAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroAusenciasActionPerformed
-        AusenciasScreen aus = new AusenciasScreen();
+        this.hide();
+        AbsencesScreen aus = new AbsencesScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
-        aus.lblDepartamento.setText(lblDepartamento.getText());
-        aus.consultar();
+        aus.lblDepartment.setText(lblDepartmentEmp.getText());
+        aus.consult();
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
 
     private void mnControlEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnControlEmpActionPerformed
+        this.hide();
         ControlEmpScreen control = new ControlEmpScreen();
         control.setVisible(true);
     }//GEN-LAST:event_mnControlEmpActionPerformed
 
     private void mnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddDocActionPerformed
+        this.hide();
         AddDocScreen addDoc = new AddDocScreen();
         addDoc.lblIdEmp.setText(lblIdEmp.getText());
         addDoc.setVisible(true);
     }//GEN-LAST:event_mnAddDocActionPerformed
 
     private void mnAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllEmpActionPerformed
-        TodosEmpScreen todos = new TodosEmpScreen();
-        todos.consultar();
-        todos.setVisible(true);
+        this.hide();
+        AllEmpScreen allEmp = new AllEmpScreen();
+        allEmp.consultar();
+        allEmp.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
 
     private void mnTodosHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosHorariosActionPerformed
-        TodosHorariosScreen todosHora = new TodosHorariosScreen();
-        todosHora.lblIdEmp.setText(lblIdEmp.getText());
-        todosHora.lblId.setText(lblIdEmp.getText());
-        todosHora.lblNom.setText(lblNomEmp.getText());
-        todosHora.lblPuesto.setText(lblPuestoEmp.getText());
-        todosHora.lblDpto.setText(lblDepartamento.getText());
-        todosHora.existJornada();
-        todosHora.setVisible(true);        
+        this.hide();
+        AllTimesScreen allTimes = new AllTimesScreen();
+        allTimes.lblIdEmp.setText(lblIdEmp.getText());
+        allTimes.lblId.setText(lblIdEmp.getText());
+        allTimes.lblNom.setText(lblNamEmp.getText());
+        allTimes.lblPuesto.setText(lblJobEmp.getText());
+        allTimes.lblDpto.setText(lblDepartmentEmp.getText());
+        allTimes.existWorkingDay();
+        allTimes.setVisible(true);        
     }//GEN-LAST:event_mnTodosHorariosActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -365,6 +372,7 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void mnPerfilUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPerfilUserActionPerformed
+        this.hide();
         ProfileEmpScreen profile = new ProfileEmpScreen();
         profile.txtIdEmp.setText(lblIdEmp.getText());
         profile.consultar();
@@ -404,16 +412,16 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JLabel lblApellidosEmp;
     public javax.swing.JLabel lblDNIEmp;
-    public javax.swing.JLabel lblDepartamento;
+    public javax.swing.JLabel lblDepartmentEmp;
     public javax.swing.JLabel lblEmailEmp;
-    public javax.swing.JLabel lblGrupoCot;
-    public javax.swing.JLabel lblGrupoProf;
+    public javax.swing.JLabel lblGroupCot;
+    public javax.swing.JLabel lblGroupProf;
     public javax.swing.JLabel lblIdEmp;
-    public javax.swing.JLabel lblNomEmp;
+    public javax.swing.JLabel lblJobEmp;
+    public javax.swing.JLabel lblNamEmp;
     public javax.swing.JLabel lblNumSS;
-    public javax.swing.JLabel lblPuestoEmp;
+    public javax.swing.JLabel lblSurnamesEmp;
     private javax.swing.JMenuItem mnAddDoc;
     public javax.swing.JMenuItem mnAllEmp;
     public javax.swing.JMenuItem mnControlEmp;

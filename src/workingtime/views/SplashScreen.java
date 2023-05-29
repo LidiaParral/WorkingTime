@@ -134,7 +134,7 @@ public class SplashScreen extends javax.swing.JFrame {
             public void run(){
                 for(int i = 1; i<= 100; i++){
                     try{
-                        sleep(10);
+                        sleep(280);
                         pgbarSplash.setValue(i);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);

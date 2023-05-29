@@ -24,7 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.ResetarCampos;
+import workingtime.model.ResetFields;
 
 /**
  *
@@ -32,7 +32,7 @@ import workingtime.model.ResetarCampos;
  */
 public class AddDocScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
+    public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -45,13 +45,13 @@ public class AddDocScreen extends javax.swing.JFrame {
     ResultSet rs;
 
     String sql;
-    String nombre;
-    String fecha;
-    String tipoDoc;
+    String name;
+    String date;
+    String typeDoc;
     String idEmp;
     String path;
     
-    JFileChooser seleccionado = new JFileChooser();
+    JFileChooser selected = new JFileChooser();
     byte[] img;
     
     FileInputStream input;
@@ -86,7 +86,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtNomDoc = new javax.swing.JTextField();
         dtFechaSubDoc = new com.toedter.calendar.JDateChooser();
-        cmbTipoDoc = new javax.swing.JComboBox<>();
+        cmbTypeDoc = new javax.swing.JComboBox<>();
         btnAddDoc = new javax.swing.JButton();
         btnSaveDoc = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
@@ -95,9 +95,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         txtPathDoc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(470, 359));
         setMinimumSize(new java.awt.Dimension(470, 359));
-        setPreferredSize(new java.awt.Dimension(470, 359));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setMaximumSize(new java.awt.Dimension(470, 359));
@@ -112,7 +110,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         dtFechaSubDoc.setBackground(new java.awt.Color(255, 255, 255));
         dtFechaSubDoc.setMaxSelectableDate(new Date());
 
-        cmbTipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PDF", "Excel", "Word" }));
+        cmbTypeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PDF", "Excel", "Word" }));
 
         btnAddDoc.setBackground(new java.awt.Color(255, 126, 60));
         btnAddDoc.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,7 +145,7 @@ public class AddDocScreen extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(94, 94, 94)
-                .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -158,10 +156,10 @@ public class AddDocScreen extends javax.swing.JFrame {
                     .addComponent(txtNomDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
-                    .addComponent(cmbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTypeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
         );
         jPanel3Layout.setVerticalGroup(
@@ -174,7 +172,7 @@ public class AddDocScreen extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTypeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,8 +184,8 @@ public class AddDocScreen extends javax.swing.JFrame {
                 .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -247,13 +245,14 @@ public class AddDocScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDocActionPerformed
-        if(seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
-            file = seleccionado.getSelectedFile();
+        btnAddDoc.setBackground(new Color(145, 150, 255));
+        if(selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
+            file = selected.getSelectedFile();
             if(file.canRead()){
                 if(file.getName().endsWith(".pdf") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx") 
                         || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")){
                     try {
-                        img = añadirFile(file);
+                        img = addFile(file);
                         txtPathDoc.setText(file.getAbsolutePath());
                         txtNomDoc.setText(file.getName());
                     } catch (IOException ex) {
@@ -265,18 +264,20 @@ public class AddDocScreen extends javax.swing.JFrame {
                 }
             }
         }
+        btnAddDoc.setBackground(new Color(255,126,60));
     }//GEN-LAST:event_btnAddDocActionPerformed
 
     private void btnSaveDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDocActionPerformed
-        if(seleccionado.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION){
-            file = seleccionado.getSelectedFile();
+        btnSaveDoc.setBackground(new Color(252, 201, 131));
+        if(selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION){
+            file = selected.getSelectedFile();
             if(!file.getName().endsWith(".pdf") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx") 
                         && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")){
                 JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
                         + ".pdf,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
             } else {
-                String respuesta = guardarFile(file, img);
-                save();
+                String respuesta = saveFile(file, img);
+                saveDocument();
                 if(respuesta != null){
                     JOptionPane.showMessageDialog(null, respuesta);
                 } else {
@@ -284,9 +285,10 @@ public class AddDocScreen extends javax.swing.JFrame {
                 }
             }
         }
+         btnSaveDoc.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnSaveDocActionPerformed
 
-    public byte[] añadirFile(File archivo) throws IOException{
+    public byte[] addFile(File archivo) throws IOException{
         byte[] contenido = new byte[1024*1000];
         try{
             input = new FileInputStream(archivo);
@@ -298,12 +300,12 @@ public class AddDocScreen extends javax.swing.JFrame {
     }
     
     
-    public String guardarFile(File archivo, byte[] contenido){
+    public String saveFile(File archivo, byte[] contenido){
         String resp = null;       
         try{
             out = new FileOutputStream(archivo);
             out.write(contenido);
-            resp = "Se guardo el archivo correctamente.";
+            resp = "Se ha guardado el archivo correctamente.";
         }catch(IOException e){
             
         } 
@@ -311,20 +313,20 @@ public class AddDocScreen extends javax.swing.JFrame {
     }
     
     
-    public void save(){
+    public void saveDocument(){
         idEmp = lblIdEmp.getText();
-        nombre = txtNomDoc.getText();
+        name = txtNomDoc.getText();
         path = txtPathDoc.getText();
-        fecha = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaSubDoc.getDate());
+        date = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaSubDoc.getDate());
 
         try {
-            tipoDocumentos();
-            if (nombre.equals("") || fecha.equals("")) {
+            typeDocuments();
+            if (name.equals("") || date.equals("")) {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
             } else {
                 sql = "INSERT INTO documentos_empleado(IdEmpleado,TipoDocumento,NombreDoc,RutaArchivo,FechaSubida) VALUES "
-                        + "('" + idEmp + "','" + tipoDoc + "','" + nombre + "','" + path + "'," 
-                        + "STR_TO_DATE('" + fecha + "','%d-%m-%Y')" + ")";
+                        + "('" + idEmp + "','" + typeDoc + "','" + name + "','" + path + "'," 
+                        + "STR_TO_DATE('" + date + "','%d-%m-%Y')" + ")";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();
@@ -336,16 +338,16 @@ public class AddDocScreen extends javax.swing.JFrame {
         }
     }
     
-     void tipoDocumentos() {
-        switch (cmbTipoDoc.getSelectedIndex()) {
+     void typeDocuments() {
+        switch (cmbTypeDoc.getSelectedIndex()) {
             case 0:
-                tipoDoc = "PDF";
+                typeDoc = "PDF";
                 break;
             case 1:
-                tipoDoc = "WORD";
+                typeDoc = "WORD";
                 break;
             case 2:
-                tipoDoc = "EXCEL";
+                typeDoc = "EXCEL";
                 break;
             default:
                 throw new AssertionError();
@@ -389,7 +391,7 @@ public class AddDocScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAddDoc;
     public javax.swing.JButton btnSaveDoc;
-    public javax.swing.JComboBox<String> cmbTipoDoc;
+    public javax.swing.JComboBox<String> cmbTypeDoc;
     public com.toedter.calendar.JDateChooser dtFechaSubDoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

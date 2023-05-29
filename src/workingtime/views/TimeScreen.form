@@ -12,6 +12,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -41,8 +44,8 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dtFinHora" min="-2" pref="154" max="-2" attributes="0"/>
-                                          <Component id="dtInicioHora" min="-2" pref="154" max="-2" attributes="0"/>
+                                          <Component id="dtTimeFin" min="-2" pref="154" max="-2" attributes="0"/>
+                                          <Component id="dtTimeStart" min="-2" pref="154" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -51,14 +54,14 @@
                               <Component id="lblIdEmp" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="cmbOtherHora" min="-2" pref="203" max="-2" attributes="0"/>
+                              <Component id="cmbOtherReasons" min="-2" pref="203" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="fechaActual" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dateAct" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblFechaActual" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="lblDateActual" min="-2" pref="129" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -74,19 +77,19 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dtRazFin" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <Component id="dtRazInicio" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="dtReasonFin" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="dtReasonStart" min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnSaveHora" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="btnSaveTime" min="-2" pref="106" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="btnCancelar" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" min="-2" pref="106" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -102,49 +105,50 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <Component id="dtRazInicio" min="-2" max="-2" attributes="0"/>
+                          <Component id="dtReasonStart" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="dtRazFin" min="-2" max="-2" attributes="0"/>
+                          <Component id="dtReasonFin" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSaveHora" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnSaveTime" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="dtInicioHora" min="-2" max="-2" attributes="0"/>
+                          <Component id="dtTimeStart" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFechaActual" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="lblDateActual" min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fechaActual" min="-2" pref="141" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dtFinHora" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dtTimeFin" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cmbOtherHora" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="cmbOtherReasons" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="dateAct" min="-2" pref="141" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jLabel5" min="-2" pref="163" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,7 +159,7 @@
         <Property name="text" type="java.lang.String" value="Inicio:"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dtInicioHora">
+    <Component class="com.toedter.calendar.JDateChooser" name="dtTimeStart">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -166,7 +170,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JCalendar" name="fechaActual">
+    <Component class="com.toedter.calendar.JCalendar" name="dateAct">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -179,7 +183,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="fechaActualPropertyChange"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dateActPropertyChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -187,7 +191,7 @@
         <Property name="text" type="java.lang.String" value="Fin:"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dtFinHora">
+    <Component class="com.toedter.calendar.JDateChooser" name="dtTimeFin">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -212,7 +216,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbOtherHora">
+    <Component class="javax.swing.JComboBox" name="cmbOtherReasons">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -226,7 +230,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dtRazInicio">
+    <Component class="com.toedter.calendar.JDateChooser" name="dtReasonStart">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -237,7 +241,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSaveHora">
+    <Component class="javax.swing.JButton" name="btnSaveTime">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="a6" green="46" red="26" type="rgb"/>
@@ -253,7 +257,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveHoraActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveTimeActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -264,7 +268,7 @@
         <Property name="text" type="java.lang.String" value="Otras razones:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblFechaActual">
+    <Component class="javax.swing.JLabel" name="lblDateActual">
     </Component>
     <Component class="javax.swing.JLabel" name="lblIdEmp">
       <Properties>
@@ -280,7 +284,7 @@
         <Property name="text" type="java.lang.String" value="Fecha de hoy:"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dtRazFin">
+    <Component class="com.toedter.calendar.JDateChooser" name="dtReasonFin">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">

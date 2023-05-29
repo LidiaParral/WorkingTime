@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.ResetarCampos;
+import workingtime.model.ResetFields;
 
 /**
  *
@@ -26,7 +26,7 @@ import workingtime.model.ResetarCampos;
  */
 public final class ControlEmpScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
+    public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -39,33 +39,33 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     ResultSet rs;
 
     String sql;
-    String nombre;
-    String apellidos;
-    String puesto;
-    String telefono;
+    String name;
+    String surnames;
+    String job;
+    String phone;
     String email;
-    String fechaNac;
-    String numSegSocial;
+    String dateOfBirth;
+    String SSNumber;
     String user;
     String password;
     String dni;
-    String departamento;
-    String pais;
-    String ciudad;
-    String fechaAntig;
-    String grupoProf;
-    String grupoCot;
+    String department;
+    String country;
+    String capital;
+    String dateOfSeniority;
+    String groupProf;
+    String groupCot;
 
     /**
      * Creates new form ControlEmpScreen
      */
     public ControlEmpScreen() {
         initComponents();
-        getPais();
-        getDepartamentos();
+        getCountry();
+        getDepartment();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        cmbPuesto.setEnabled(false);
+        cmbEmpJob.setEnabled(false);
     }
 
     /**
@@ -90,22 +90,22 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtNomEmp = new javax.swing.JTextField();
-        txtApellidosEmp = new javax.swing.JTextField();
+        txtNameEmp = new javax.swing.JTextField();
+        txtSurnamesEmp = new javax.swing.JTextField();
         txtDNIEmp = new javax.swing.JTextField();
-        txtNumSSEmp = new javax.swing.JTextField();
-        cmbDepartamentoEmp = new javax.swing.JComboBox<>();
+        txtSSNumEmp = new javax.swing.JTextField();
+        cmbEmpDepartment = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         txtEmailEmp = new javax.swing.JTextField();
-        dateFechaNacEmp = new com.toedter.calendar.JDateChooser();
-        dateFechaAntigEmp = new com.toedter.calendar.JDateChooser();
+        dtDateOfBirthEmp = new com.toedter.calendar.JDateChooser();
+        dtDateOfSeniorityEmp = new com.toedter.calendar.JDateChooser();
         txtCapitalEmp = new javax.swing.JTextField();
-        cmbPaisEmp = new javax.swing.JComboBox<>();
-        txtGrupoProfEmp = new javax.swing.JTextField();
-        txtGrupoCotEmp = new javax.swing.JTextField();
+        cmbEmpCountry = new javax.swing.JComboBox<>();
+        txtGroupProfEmp = new javax.swing.JTextField();
+        txtGroupCotEmp = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtTlfEmp = new javax.swing.JTextField();
-        cmbPuesto = new javax.swing.JComboBox<>();
+        txtPhoneEmp = new javax.swing.JTextField();
+        cmbEmpJob = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -142,23 +142,23 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         jLabel12.setText("Grupo de Cotización:");
 
-        cmbDepartamentoEmp.addItemListener(new java.awt.event.ItemListener() {
+        cmbEmpDepartment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbDepartamentoEmpItemStateChanged(evt);
+                cmbEmpDepartmentItemStateChanged(evt);
             }
         });
 
         jLabel13.setText("Departamento:");
 
-        dateFechaNacEmp.setDateFormatString("dd-MMMM-yyyy");
+        dtDateOfBirthEmp.setDateFormatString("dd-MMMM-yyyy");
 
-        dateFechaAntigEmp.setMaxSelectableDate(new Date());
+        dtDateOfSeniorityEmp.setMaxSelectableDate(new Date());
 
         txtCapitalEmp.setEnabled(false);
 
-        cmbPaisEmp.addItemListener(new java.awt.event.ItemListener() {
+        cmbEmpCountry.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbPaisEmpItemStateChanged(evt);
+                cmbEmpCountryItemStateChanged(evt);
             }
         });
 
@@ -180,19 +180,19 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(txtNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellidosEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumSSEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSurnamesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSSNumEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel10)
                     .addComponent(txtDNIEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEmpJob, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel4)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(txtGrupoProfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGroupProfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,20 +210,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(txtTlfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGrupoCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
-                            .addComponent(cmbDepartamentoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEmpDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbPaisEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateFechaNacEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEmpCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(dateFechaAntigEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -234,7 +234,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -243,7 +243,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(12, 12, 12)
-                .addComponent(txtApellidosEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSurnamesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -251,7 +251,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDNIEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateFechaNacEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -259,15 +259,15 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtNumSSEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSSNumEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbDepartamentoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbEmpJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEmpDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -276,7 +276,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)
-                            .addComponent(txtTlfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -284,20 +284,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCapitalEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbPaisEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(dateFechaAntigEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbEmpCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGrupoProfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGroupProfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGrupoCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60))))
         );
 
@@ -329,9 +329,9 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSaveEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSaveEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
         jPanel3Layout.setVerticalGroup(
@@ -339,8 +339,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSaveEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSaveEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -369,56 +369,60 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveEmpActionPerformed
-        agregarEmpleado();
+        btnSaveEmp.setBackground(new Color(252, 201, 131));
+        addEmployee();
+        btnSaveEmp.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnSaveEmpActionPerformed
 
-    private void cmbDepartamentoEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoEmpItemStateChanged
-        if(cmbDepartamentoEmp.getSelectedIndex() > 0){
-            cmbPuesto.setEnabled(true);
-            cmbPuesto.removeAllItems();
-            getPuestoEmpleado();
+    private void cmbEmpDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpDepartmentItemStateChanged
+        if(cmbEmpDepartment.getSelectedIndex() > 0){
+            cmbEmpJob.setEnabled(true);
+            cmbEmpJob.removeAllItems();
+            getEmpJob();
         }
-    }//GEN-LAST:event_cmbDepartamentoEmpItemStateChanged
+    }//GEN-LAST:event_cmbEmpDepartmentItemStateChanged
 
-    private void cmbPaisEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPaisEmpItemStateChanged
-        if(cmbPaisEmp.getSelectedIndex() > 0){
+    private void cmbEmpCountryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpCountryItemStateChanged
+        if(cmbEmpCountry.getSelectedIndex() > 0){
             txtCapitalEmp.setText("");
-            getCiudadEmpleado();
+            getEmpCountry();
         }
-    }//GEN-LAST:event_cmbPaisEmpItemStateChanged
+    }//GEN-LAST:event_cmbEmpCountryItemStateChanged
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
+        HomeScreen home = new HomeScreen();
+        home.setVisible(true);
     }//GEN-LAST:event_btnReturnActionPerformed
 
-    public void agregarEmpleado() {
-        nombre = txtNomEmp.getText().toUpperCase();
-        apellidos = txtApellidosEmp.getText().toUpperCase();
+    public void addEmployee() {
+        name = txtNameEmp.getText().toUpperCase();
+        surnames = txtSurnamesEmp.getText().toUpperCase();
         dni = txtDNIEmp.getText();
-        numSegSocial = txtNumSSEmp.getText();
-        fechaNac = new SimpleDateFormat("dd-MM-yyyy").format(dateFechaNacEmp.getDate());
-        fechaAntig = new SimpleDateFormat("dd-MM-yyyy").format(dateFechaAntigEmp.getDate());
+        SSNumber = txtSSNumEmp.getText();
+        dateOfBirth = new SimpleDateFormat("dd-MM-yyyy").format(dtDateOfBirthEmp.getDate());
+        dateOfSeniority = new SimpleDateFormat("dd-MM-yyyy").format(dtDateOfSeniorityEmp.getDate());
         email = txtEmailEmp.getText().concat("@workingtime.com");
-        telefono = txtTlfEmp.getText();
-        user = cadenaAleatoria(15);
+        phone = txtPhoneEmp.getText();
+        user = randomString(15);
         password = generateRandomPassword(12, 48, 122);
-        grupoProf = txtGrupoProfEmp.getText().toUpperCase();
-        grupoCot = txtGrupoCotEmp.getText();
-        departamento = cmbDepartamentoEmp.getSelectedItem().toString().toUpperCase();
-        pais = cmbPaisEmp.getSelectedItem().toString().toUpperCase();
-        puesto = cmbPuesto.getSelectedItem().toString().toUpperCase();
-        ciudad = txtCapitalEmp.getText().toUpperCase();
+        groupProf = txtGroupProfEmp.getText().toUpperCase();
+        groupCot = txtGroupCotEmp.getText();
+        department = cmbEmpDepartment.getSelectedItem().toString().toUpperCase();
+        country = cmbEmpCountry.getSelectedItem().toString().toUpperCase();
+        job = cmbEmpJob.getSelectedItem().toString().toUpperCase();
+        capital = txtCapitalEmp.getText().toUpperCase();
                 
         try {
-            if (nombre.equals("") || apellidos.equals("") || email.equals("") || telefono.equals("") || grupoProf.equals("") || grupoCot.equals("")
-                    || fechaAntig.equals("") || fechaNac.equals("") || telefono.equals("") || user.equals("") || dni.equals("")) {
+            if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || groupProf.equals("") || groupCot.equals("")
+                    || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
                 reset.ResetPanel(jPanel1);
             } else {
                 sql = "INSERT INTO empleados(Nombre,Apellidos,DNI,Usuario,Password,FechaNac,Departamento,PuestoTrabajo,Ciudad,Pais,Email,Telefono,NumeroSeguridadSocial,GrupoProfesional,GrupoCotizacion,FechaAntiguedad) VALUES "
-                        + "('" + nombre + "','" + apellidos + "','" + dni + "','" + user + "','" + password + "',STR_TO_DATE('" + fechaNac + "','%d-%m-%Y'),'" + departamento + "','"
-                        + puesto + "','" + ciudad + "','" + pais + "','" + email + "','" + telefono + "','" + numSegSocial + "','" + grupoProf
-                        + "','" + grupoCot + "',STR_TO_DATE('" + fechaAntig + "','%d-%m-%Y'))";
+                        + "('" + name + "','" + surnames + "','" + dni + "','" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + department + "','"
+                        + job + "','" + capital + "','" + country + "','" + email + "','" + phone + "','" + SSNumber + "','" + groupProf
+                        + "','" + groupCot + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y'))";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();
@@ -429,27 +433,27 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
         }
         reset.ResetPanel(jPanel1);
-        dateFechaNacEmp.setDateFormatString("");
+        dtDateOfBirthEmp.setDateFormatString("");
     }
 
-    public void getPuestoEmpleado() {
-        departamento = cmbDepartamentoEmp.getSelectedItem().toString();
+    public void getEmpJob() {
+        department = cmbEmpDepartment.getSelectedItem().toString();
         try {
-            sql = "SELECT PuestoTrabajo FROM departamentos WHERE Departamento='" + departamento + "'";
+            sql = "SELECT PuestoTrabajo FROM departamentos WHERE Departamento='" + department + "'";
 
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
 
                 while (rs.next()) {
-                    cmbPuesto.addItem(rs.getString("PuestoTrabajo"));
+                    cmbEmpJob.addItem(rs.getString("PuestoTrabajo"));
                 }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
 
-    private void getDepartamentos() {
+    private void getDepartment() {
           try {
             sql = "SELECT DISTINCT Departamento FROM departamentos";
 
@@ -458,7 +462,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             while (rs.next()) {
-                cmbDepartamentoEmp.addItem(rs.getString("Departamento"));
+                cmbEmpDepartment.addItem(rs.getString("Departamento"));
                 
             }
         } catch (HeadlessException | SQLException ex) {
@@ -466,10 +470,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         }
     }
 
-    public void getCiudadEmpleado() {
+    public void getEmpCountry() {
         try {
-            pais = cmbPaisEmp.getSelectedItem().toString();
-            sql = "SELECT Capital FROM paises WHERE Pais ='" + pais + "'";
+            country = cmbEmpCountry.getSelectedItem().toString();
+            sql = "SELECT Capital FROM paises WHERE Pais ='" + country + "'";
 
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
@@ -483,7 +487,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         }
     }
 
-    public void getPais() {
+    public void getCountry() {
         
         try {
             sql = "SELECT * FROM paises";
@@ -493,7 +497,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             while (rs.next()) {
-                cmbPaisEmp.addItem(rs.getString("Pais"));
+                cmbEmpCountry.addItem(rs.getString("Pais"));
                 
             }
         } catch (HeadlessException | SQLException ex) {
@@ -511,16 +515,16 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 .toString();
     }
 
-    public static int numeroAleatorioEnRango(int minimo, int maximo) {
+    public static int randomNumberInRange(int minimo, int maximo) {
         return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
 
     }
 
-    public String cadenaAleatoria(int longitud) {
-        String username = nombre + apellidos;
+    public String randomString(int longitud) {
+        String username = name + surnames;
         String cadena = "";
         for (int x = 0; x < longitud; x++) {
-            int indiceAleatorio = numeroAleatorioEnRango(0, username.length() - 1);
+            int indiceAleatorio = randomNumberInRange(0, username.length() - 1);
             char caracterAleatorio = username.charAt(indiceAleatorio);
             cadena += caracterAleatorio;
         }
@@ -563,11 +567,11 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnReturn;
     private javax.swing.JButton btnSaveEmp;
-    public javax.swing.JComboBox<String> cmbDepartamentoEmp;
-    public javax.swing.JComboBox<String> cmbPaisEmp;
-    public javax.swing.JComboBox<String> cmbPuesto;
-    public com.toedter.calendar.JDateChooser dateFechaAntigEmp;
-    public com.toedter.calendar.JDateChooser dateFechaNacEmp;
+    public javax.swing.JComboBox<String> cmbEmpCountry;
+    public javax.swing.JComboBox<String> cmbEmpDepartment;
+    public javax.swing.JComboBox<String> cmbEmpJob;
+    public com.toedter.calendar.JDateChooser dtDateOfBirthEmp;
+    public com.toedter.calendar.JDateChooser dtDateOfSeniorityEmp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -587,14 +591,14 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JTextField txtApellidosEmp;
     public javax.swing.JTextField txtCapitalEmp;
     public javax.swing.JTextField txtDNIEmp;
     public javax.swing.JTextField txtEmailEmp;
-    public javax.swing.JTextField txtGrupoCotEmp;
-    public javax.swing.JTextField txtGrupoProfEmp;
-    public javax.swing.JTextField txtNomEmp;
-    public javax.swing.JTextField txtNumSSEmp;
-    public javax.swing.JTextField txtTlfEmp;
+    public javax.swing.JTextField txtGroupCotEmp;
+    public javax.swing.JTextField txtGroupProfEmp;
+    public javax.swing.JTextField txtNameEmp;
+    public javax.swing.JTextField txtPhoneEmp;
+    public javax.swing.JTextField txtSSNumEmp;
+    public javax.swing.JTextField txtSurnamesEmp;
     // End of variables declaration//GEN-END:variables
 }

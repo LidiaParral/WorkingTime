@@ -15,18 +15,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.ExportExcel;
-import workingtime.model.LimpiarTabla;
-import workingtime.model.ResetarCampos;
+import workingtime.model.CleanTable;
+import workingtime.model.ResetFields;
 
 /**
  *
  * @author Lidia Parral
  */
-public class TodosDocumentosScreen extends javax.swing.JFrame {
+public class AllDocumentsScreen extends javax.swing.JFrame {
 
     public ExportExcel export = new ExportExcel();
-    public ResetarCampos reset = new ResetarCampos();
-    public LimpiarTabla lmp = new LimpiarTabla();
+    public ResetFields reset = new ResetFields();
+    public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -45,10 +45,13 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
     String idUser;
 
     int selectedRow;
+    Object[] options = {"Aceptar", "Cancelar"};
+    int election;
+
     /**
      * Creates new form DocumentosScreen
      */
-    public TodosDocumentosScreen() {
+    public AllDocumentsScreen() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
@@ -264,7 +267,7 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
             if (TablaDoc.getRowCount() == 0) {
                 existDoc();
             } else {
-                lmp.limpiarTabla(modelo);
+                lmp.tableCleaning(modelo);
                 existDoc();
             }
         }
@@ -272,33 +275,47 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
 
     private void btnUpdateDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDocActionPerformed
         selectedRow = TablaDoc.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnUpdateDoc.setBackground(new Color(252, 201, 131));
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            updateDocument();
-            consultar();
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                updateDocument();
+                consultar();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
-        btnUpdateDoc.setBackground(new Color(38,70,166));
+        btnUpdateDoc.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateDocActionPerformed
 
     private void btnDeleteDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDocActionPerformed
-       selectedRow = TablaDoc.getSelectedRow();
-       btnDeleteDoc.setBackground(new Color(145, 150, 255));
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            deleteDocument();
-            consultar();
+        selectedRow = TablaDoc.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");       
+        btnDeleteDoc.setBackground(new Color(145, 150, 255));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                deleteDocument();
+                consultar();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
-        btnDeleteDoc.setBackground(new Color(255,126,60));
+        btnDeleteDoc.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteDocActionPerformed
 
     public void existDoc() {
         fecha = new SimpleDateFormat("yyyy-MM-dd").format(dtFechaSubida.getDate());
         try {
             sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='" + fecha + "'";
-                    
+
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
@@ -323,7 +340,7 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
     }
 
     public void consultar() {
-       idUser = lblIdEmp.getText();
+        idUser = lblIdEmp.getText();
         try {
             sql = "SELECT * FROM documentos_empleado WHERE IdEmpleado ='" + idUser + "'";
 
@@ -349,7 +366,7 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel2);
     }
 
-     public void updateDocument() {
+    public void updateDocument() {
         nomDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
         idUser = lblIdEmp.getText();
         try {
@@ -363,9 +380,9 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(modelo);
     }
-     
+
     public void deleteDocument() {
         idUser = lblIdEmp.getText();
         try {
@@ -378,9 +395,9 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(modelo);
     }
-     
+
     /**
      * @param args the command line arguments
      */
@@ -398,20 +415,22 @@ public class TodosDocumentosScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllDocumentsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllDocumentsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllDocumentsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TodosDocumentosScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllDocumentsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new TodosDocumentosScreen().setVisible(true);
+            new AllDocumentsScreen().setVisible(true);
         });
     }
 

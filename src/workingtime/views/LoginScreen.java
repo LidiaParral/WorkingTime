@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.ResetarCampos;
+import workingtime.model.ResetFields;
 
 /**
  *
@@ -23,7 +23,7 @@ import workingtime.model.ResetarCampos;
  */
 public class LoginScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
+    public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -38,7 +38,7 @@ public class LoginScreen extends javax.swing.JFrame {
     String sql;
     String pass;
     String user;
-    String nombre;
+    String name;
     String idUser;
 
     /**
@@ -48,6 +48,7 @@ public class LoginScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
+        lblIdEmp.setVisible(false);
     }
 
     /**
@@ -66,8 +67,9 @@ public class LoginScreen extends javax.swing.JFrame {
         txtUserLogin = new javax.swing.JTextField();
         txtPswLogin = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblIconoUser = new javax.swing.JLabel();
+        lblIconoPass = new javax.swing.JLabel();
+        lblIdEmp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -95,25 +97,21 @@ public class LoginScreen extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("LOGIN");
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnLoginMousePressed(evt);
-            }
-        });
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\usuario.png")); // NOI18N
+        lblIconoUser.setBackground(new java.awt.Color(255, 255, 255));
+        lblIconoUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\usuario.png")); // NOI18N
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\desbloquear (4).png")); // NOI18N
+        lblIconoPass.setBackground(new java.awt.Color(255, 255, 255));
+        lblIconoPass.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\desbloquear (4).png")); // NOI18N
+
+        lblIdEmp.setBackground(new java.awt.Color(255, 255, 255));
+        lblIdEmp.setEnabled(false);
+        lblIdEmp.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,48 +132,55 @@ public class LoginScreen extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addGap(91, 91, 91))))
+                            .addComponent(lblIconoPass)
+                            .addComponent(lblIconoUser))
+                        .addGap(85, 85, 85))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIdEmp)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(lblIdEmp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2))
-                            .addComponent(jLabel1))
+                            .addComponent(lblIconoUser))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblIconoPass, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblForgotPss)
                 .addGap(32, 32, 32)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblFondoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        btnLogin.setBackground(new Color(252, 201, 131));
         try {
-            existEmpleado();
+            existEmployee();
         } catch (InterruptedException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        btnLogin.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblForgotPssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPssMouseClicked
@@ -184,15 +189,7 @@ public class LoginScreen extends javax.swing.JFrame {
         this.hide();
     }//GEN-LAST:event_lblForgotPssMouseClicked
 
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        btnLogin.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnLoginMouseClicked
-
-    private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
-        btnLogin.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnLoginMousePressed
-
-    public void existEmpleado() throws InterruptedException {
+    public void existEmployee() throws InterruptedException {
         pass = txtPswLogin.getText();
         user = txtUserLogin.getText();
         try {
@@ -207,9 +204,12 @@ public class LoginScreen extends javax.swing.JFrame {
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
                 if (rs.next()) {
+                    this.hide();
                     Thread.sleep(200);
+                    lblIdEmp.setText(rs.getString("IdEmpleado"));
+                    idUser = lblIdEmp.getText();
                     HomeScreen home = new HomeScreen();
-                    if (user.equals("ADMIN") && pass.equals("HOLA123")) {
+                    if (idUser.equals("1")) {
                         home.mnControlEmp.setVisible(true);
                         home.mnAllEmp.setVisible(true);
                         home.mnEmple.setVisible(true);
@@ -219,15 +219,15 @@ public class LoginScreen extends javax.swing.JFrame {
                         home.mnEmple.setVisible(false);
                     }
                     home.lblIdEmp.setText(rs.getString("IdEmpleado"));
-                    home.lblNomEmp.setText(rs.getString("Nombre"));
-                    home.lblApellidosEmp.setText(rs.getString("Apellidos"));
+                    home.lblNamEmp.setText(rs.getString("Nombre"));
+                    home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
                     home.lblEmailEmp.setText(rs.getString("Email"));
                     home.lblDNIEmp.setText(rs.getString("DNI"));
-                    home.lblGrupoCot.setText(rs.getString("GrupoCotizacion"));
-                    home.lblGrupoProf.setText(rs.getString("GrupoProfesional"));
+                    home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
+                    home.lblGroupProf.setText(rs.getString("GrupoProfesional"));
                     home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
-                    home.lblPuestoEmp.setText(rs.getString("PuestoTrabajo"));
-                    home.lblDepartamento.setText(rs.getString("Departamento"));
+                    home.lblJobEmp.setText(rs.getString("PuestoTrabajo"));
+                    home.lblDepartmentEmp.setText(rs.getString("Departamento"));
                     home.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
 
@@ -279,12 +279,13 @@ public class LoginScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnLogin;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblFondoLogin;
     public javax.swing.JLabel lblForgotPss;
+    private javax.swing.JLabel lblIconoPass;
+    private javax.swing.JLabel lblIconoUser;
+    public javax.swing.JLabel lblIdEmp;
     public javax.swing.JPasswordField txtPswLogin;
     public javax.swing.JTextField txtUserLogin;
     // End of variables declaration//GEN-END:variables

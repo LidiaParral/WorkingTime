@@ -18,23 +18,23 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.ExportExcel;
-import workingtime.model.LimpiarTabla;
-import workingtime.model.ResetarCampos;
+import workingtime.model.CleanTable;
+import workingtime.model.ResetFields;
 
 /**
  *
  * @author Lidia Parral
  */
-public final class NominaScreen extends javax.swing.JFrame {
+public final class SalariesScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
+    public ResetFields reset = new ResetFields();
     public ExportExcel export = new ExportExcel();
-    public LimpiarTabla lmp = new LimpiarTabla();
+    public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
     Connection conect;
 
-    DefaultTableModel modelo;
+    DefaultTableModel model;
 
     PreparedStatement ps;
     Statement st;
@@ -43,7 +43,7 @@ public final class NominaScreen extends javax.swing.JFrame {
 
     String sql;
     String idUser;
-    String fecha;
+    String date;
     String search;
     String dev;
     String ded;
@@ -54,7 +54,7 @@ public final class NominaScreen extends javax.swing.JFrame {
     /**
      * Creates new form NominaScreen
      */
-    public NominaScreen() {
+    public SalariesScreen() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
@@ -87,13 +87,13 @@ public final class NominaScreen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaNomina = new javax.swing.JTable();
+        TableSalaries = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnReturn = new javax.swing.JButton();
         btnUpdateNomina = new javax.swing.JButton();
         btnSearchNomina = new javax.swing.JButton();
         btnDownloadNomina = new javax.swing.JButton();
-        dtFechaNomina = new com.toedter.calendar.JDateChooser();
+        dtDateSalaries = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -202,7 +202,7 @@ public final class NominaScreen extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        TablaNomina.setModel(new javax.swing.table.DefaultTableModel(
+        TableSalaries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -225,7 +225,7 @@ public final class NominaScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TablaNomina);
+        jScrollPane1.setViewportView(TableSalaries);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -256,9 +256,9 @@ public final class NominaScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(btnUpdateNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -266,8 +266,8 @@ public final class NominaScreen extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -296,8 +296,8 @@ public final class NominaScreen extends javax.swing.JFrame {
             }
         });
 
-        dtFechaNomina.setBackground(new java.awt.Color(255, 255, 255));
-        dtFechaNomina.setDateFormatString("yyyy-MM-dd");
+        dtDateSalaries.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateSalaries.setDateFormatString("yyyy-MM-dd");
 
         jLabel1.setText("Fecha de búsqueda:");
 
@@ -308,18 +308,17 @@ public final class NominaScreen extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(441, 441, 441)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dtFechaNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(320, 320, 320)
+                        .addGap(313, 313, 313)
                         .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -327,20 +326,20 @@ public final class NominaScreen extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dtFechaNomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnDownloadNomina)
                                 .addGap(4, 4, 4))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(24, 24, 24))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -351,9 +350,7 @@ public final class NominaScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,49 +366,51 @@ public final class NominaScreen extends javax.swing.JFrame {
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
+        HomeScreen home = new HomeScreen();
+        home.setVisible(true);
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnDownloadNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadNominaActionPerformed
-        selectedRow = TablaNomina.getSelectedRow();
+        selectedRow = TableSalaries.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
             try {
                 JOptionPane.showMessageDialog(null, "Se va a descargar el documento en Excel", "EXPORTAR DOCUMENTO", JOptionPane.PLAIN_MESSAGE);
-                export.exportarExcel(TablaNomina);
+                export.exportarExcel(TableSalaries);
             } catch (IOException ex) {
-                Logger.getLogger(NominaScreen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SalariesScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnDownloadNominaActionPerformed
 
     private void btnSearchNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNominaActionPerformed
-        search = dtFechaNomina.getDateFormatString();
+        search = dtDateSalaries.getDateFormatString();
         if (search.equals("")) {
             JOptionPane.showMessageDialog(null, "No puede estar vacío este campo.", "TODOS LOS EMPLEADOS", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (TablaNomina.getRowCount() == 0) {
+            if (TableSalaries.getRowCount() == 0) {
                 searchNomina();
             } else {
-                lmp.limpiarTabla(modelo);
+                lmp.tableCleaning(model);
                 searchNomina();
             }
         }
     }//GEN-LAST:event_btnSearchNominaActionPerformed
 
     private void btnUpdateNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNominaActionPerformed
-        selectedRow = TablaNomina.getSelectedRow();
+        selectedRow = TableSalaries.getSelectedRow();
         btnUpdateNomina.setBackground(new Color(252, 201, 131));
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
             updateNomina();
-            existNominas();
+            existSalary();
         }
         btnUpdateNomina.setBackground(new Color(38,70,166));
     }//GEN-LAST:event_btnUpdateNominaActionPerformed
 
-    public void existNominas() {
+    public void existSalary() {
         idUser = lblIdUser.getText();
         try {
             sql = "SELECT * FROM nominas WHERE IdEmpleado='" + idUser + "'";
@@ -421,7 +420,7 @@ public final class NominaScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             Object[] nomina = new Object[7];
-            modelo = (DefaultTableModel) TablaNomina.getModel();
+            model = (DefaultTableModel) TableSalaries.getModel();
             while (rs.next()) {
                 nomina[0] = rs.getString("SalarioBase");
                 nomina[1] = rs.getString("TotalDevengado");
@@ -430,24 +429,24 @@ public final class NominaScreen extends javax.swing.JFrame {
                 nomina[4] = rs.getString("HorasTrabajadas");
                 nomina[5] = rs.getDate("FechaInicio");
                 nomina[6] = rs.getDate("FechaFin");
-                modelo.addRow(nomina);
+                model.addRow(nomina);
             }
-            TablaNomina.setModel(modelo);
+            TableSalaries.setModel(model);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
 
     public void searchNomina() {
-        fecha = new SimpleDateFormat("yyyy-MM-dd").format(dtFechaNomina.getDate());
+        date = new SimpleDateFormat("yyyy-MM-dd").format(dtDateSalaries.getDate());
         try {
-            sql = "SELECT * FROM nominas WHERE FechaInicio='" + fecha + "'";
+            sql = "SELECT * FROM nominas WHERE FechaInicio='" + date + "'";
 
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             Object[] nomina = new Object[7];
-            modelo = (DefaultTableModel) TablaNomina.getModel();
+            model = (DefaultTableModel) TableSalaries.getModel();
             while (rs.next()) {
                 nomina[0] = rs.getString("SalarioBase");
                 nomina[1] = rs.getString("TotalDevengado");
@@ -456,9 +455,9 @@ public final class NominaScreen extends javax.swing.JFrame {
                 nomina[4] = rs.getString("HorasTrabajadas");
                 nomina[5] = rs.getDate("FechaInicio");
                 nomina[6] = rs.getDate("FechaFin");
-                modelo.addRow(nomina);
+                model.addRow(nomina);
             }
-            TablaNomina.setModel(modelo);
+            TableSalaries.setModel(model);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
@@ -467,9 +466,9 @@ public final class NominaScreen extends javax.swing.JFrame {
     
      public void updateNomina() {
         idUser = lblIdUser.getText();
-        dev = String.valueOf(modelo.getValueAt(TablaNomina.getSelectedRow(), 1));
-        ded = String.valueOf(modelo.getValueAt(TablaNomina.getSelectedRow(), 2));
-        liqTotal = String.valueOf(modelo.getValueAt(TablaNomina.getSelectedRow(), 3));
+        dev = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 1));
+        ded = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 2));
+        liqTotal = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 3));
         try {
 
             sql = "UPDATE nominas SET TotalDevengado='" + dev + "', TotalDeducciones='" + ded + "', LiquidoTotal='" + liqTotal
@@ -482,7 +481,7 @@ public final class NominaScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(model);
     }
 
     /**
@@ -502,29 +501,30 @@ public final class NominaScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NominaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalariesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NominaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalariesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NominaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalariesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NominaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SalariesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new NominaScreen().setVisible(true);
+            new SalariesScreen().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaNomina;
+    private javax.swing.JTable TableSalaries;
     private javax.swing.JButton btnDownloadNomina;
     private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnSearchNomina;
     public javax.swing.JButton btnUpdateNomina;
-    public com.toedter.calendar.JDateChooser dtFechaNomina;
+    public com.toedter.calendar.JDateChooser dtDateSalaries;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -10,9 +10,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lidia Parral
  */
-public class LimpiarTabla {
+public class CleanTable {
     
-      public void limpiarTabla(DefaultTableModel modelo) {
+      public void tableCleaning(DefaultTableModel modelo) {
         int rowCount = modelo.getRowCount();
         //Remove rows one by one from the end of the table
         for (int i = rowCount - 1; i >= 0; i--) {

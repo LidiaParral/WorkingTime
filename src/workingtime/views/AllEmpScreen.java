@@ -13,17 +13,17 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.LimpiarTabla;
-import workingtime.model.ResetarCampos;
+import workingtime.model.CleanTable;
+import workingtime.model.ResetFields;
 
 /**
  *
  * @author Lidia Parral
  */
-public final class TodosEmpScreen extends javax.swing.JFrame {
+public final class AllEmpScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();  
-    public LimpiarTabla lmp = new LimpiarTabla();
+    public ResetFields reset = new ResetFields();
+    public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -41,12 +41,15 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
     String dpto;
     String tlf;
     String idUser;
-    
+
     int selectedRow;
+    Object[] options = {"Aceptar", "Cancelar"};
+    int election;
+
     /**
      * Creates new form TodosEmpScreen
      */
-    public TodosEmpScreen() {
+    public AllEmpScreen() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
@@ -83,14 +86,6 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         btnSearchEmp.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\lupa (2).png")); // NOI18N
         btnSearchEmp.setToolTipText("Este botón permite buscar al usuario por nombre o apellido");
         btnSearchEmp.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnSearchEmp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSearchEmpMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnSearchEmpMousePressed(evt);
-            }
-        });
         btnSearchEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchEmpActionPerformed(evt);
@@ -141,14 +136,6 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         btnUpdateEmp.setText("ACTUALIZAR");
         btnUpdateEmp.setToolTipText("Este botón permite actualizar los datos del empleado seleccionado");
         btnUpdateEmp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnUpdateEmp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUpdateEmpMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnUpdateEmpMousePressed(evt);
-            }
-        });
         btnUpdateEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateEmpActionPerformed(evt);
@@ -159,14 +146,6 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         btnDeleteEmp.setForeground(new java.awt.Color(255, 255, 255));
         btnDeleteEmp.setText("ELIMINAR");
         btnDeleteEmp.setToolTipText("Este botón permite eliminar al empleado seleccionado");
-        btnDeleteEmp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteEmpMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnDeleteEmpMousePressed(evt);
-            }
-        });
         btnDeleteEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteEmpActionPerformed(evt);
@@ -282,58 +261,48 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             if (TablaEmp.getRowCount() == 0) {
                 existEmp();
             } else {
-                lmp.limpiarTabla(modelo);
+                lmp.tableCleaning(modelo);
                 existEmp();
             }
         }
     }//GEN-LAST:event_btnSearchEmpActionPerformed
 
-    private void btnUpdateEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateEmpMouseClicked
-        btnUpdateEmp.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnUpdateEmpMouseClicked
-
-    private void btnUpdateEmpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateEmpMousePressed
-        btnUpdateEmp.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnUpdateEmpMousePressed
-
-    private void btnSearchEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEmpMouseClicked
-        btnSearchEmp.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnSearchEmpMouseClicked
-
-    private void btnSearchEmpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchEmpMousePressed
-        btnSearchEmp.setBackground(new Color(252, 201, 131));
-    }//GEN-LAST:event_btnSearchEmpMousePressed
-
-    private void btnDeleteEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEmpMouseClicked
-        btnDeleteEmp.setBackground(new Color(145, 150, 255));
-    }//GEN-LAST:event_btnDeleteEmpMouseClicked
-
-    private void btnDeleteEmpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEmpMousePressed
-        btnDeleteEmp.setBackground(new Color(145, 150, 255));
-    }//GEN-LAST:event_btnDeleteEmpMousePressed
-
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
         selectedRow = TablaEmp.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnUpdateEmp.setBackground(new Color(252, 201, 131));
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            updateEmp();
-            consultar();
-        }       
-        btnUpdateEmp.setBackground(new Color(38,70,166));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                updateEmp();
+                consultar();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
+        }
+        btnUpdateEmp.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateEmpActionPerformed
 
     private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
         selectedRow = TablaEmp.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnDeleteEmp.setBackground(new Color(145, 150, 255));
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            deleteEmp();
-            consultar();
-        } 
-        btnDeleteEmp.setBackground(new Color(255,126,60));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                deleteEmp();
+                consultar();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
+        }
+        btnDeleteEmp.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteEmpActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -348,15 +317,15 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
             st = conect.createStatement();
             rs = st.executeQuery(sql);
 
-           Object[] empleado = new Object[8];
+            Object[] empleado = new Object[8];
             modelo = (DefaultTableModel) TablaEmp.getModel();
             while (rs.next()) {
                 empleado[0] = rs.getInt("IdEmpleado");
                 empleado[1] = rs.getString("Nombre");
                 empleado[2] = rs.getString("Apellidos");
-                empleado[3] = rs.getString("DNI");              
+                empleado[3] = rs.getString("DNI");
                 empleado[4] = rs.getDate("FechaNac");
-                empleado[5] = rs.getString("Email");              
+                empleado[5] = rs.getString("Email");
                 empleado[6] = rs.getString("Telefono");
                 empleado[7] = rs.getString("Departamento");
 
@@ -368,15 +337,15 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         }
     }
 
-    public void updateEmp(){
+    public void updateEmp() {
         idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
         email = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 5));
-        tlf =  String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 6));
+        tlf = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 6));
         dpto = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 7));
         try {
 
             sql = "UPDATE empleados SET Email='" + email + "', Telefono='" + tlf + "', Departamento='" + dpto
-                    + "' WHERE IdEmpleado ='" + idUser +"'";
+                    + "' WHERE IdEmpleado ='" + idUser + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -385,10 +354,10 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(modelo);
     }
-    
-    public void deleteEmp(){
+
+    public void deleteEmp() {
         idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
         try {
             sql = "DELETE FROM empleados WHERE IdEmpleado='" + idUser + "'";
@@ -400,8 +369,9 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(modelo);
     }
+
     /**
      * Método que permite comprobar si existe un cliente con ese nombre en la
      * tabla Clientes de la base de datos.
@@ -420,9 +390,9 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
                 empleado[0] = rs.getInt("IdEmpleado");
                 empleado[1] = rs.getString("Nombre");
                 empleado[2] = rs.getString("Apellidos");
-                empleado[3] = rs.getString("DNI");              
+                empleado[3] = rs.getString("DNI");
                 empleado[4] = rs.getDate("FechaNac");
-                empleado[5] = rs.getString("Email");              
+                empleado[5] = rs.getString("Email");
                 empleado[6] = rs.getString("Telefono");
                 empleado[7] = rs.getString("Departamento");
 
@@ -456,19 +426,20 @@ public final class TodosEmpScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TodosEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TodosEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TodosEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TodosEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AllEmpScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new TodosEmpScreen().setVisible(true);
+            new AllEmpScreen().setVisible(true);
         });
     }
 

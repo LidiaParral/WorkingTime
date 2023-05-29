@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
-import workingtime.model.ResetarCampos;
+import workingtime.model.ResetFields;
 
 /**
  *
@@ -21,7 +21,7 @@ import workingtime.model.ResetarCampos;
  */
 public class ForgotPsswdScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
+    public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -44,6 +44,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
+        lblIdEmp.setVisible(false);
     }
 
     /**
@@ -78,7 +79,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
 
         jLabel3.setText("Confirmación contraseña:");
 
-        btnSavePsswd.setBackground(new java.awt.Color(38, 70, 166));
+        btnSavePsswd.setBackground(new java.awt.Color(255, 126, 60));
         btnSavePsswd.setForeground(new java.awt.Color(255, 255, 255));
         btnSavePsswd.setText("GUARDAR");
         btnSavePsswd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -98,6 +99,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             }
         });
 
+        lblIdEmp.setEnabled(false);
+        lblIdEmp.setFocusable(false);
+
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\bloquear.png")); // NOI18N
 
@@ -112,11 +116,11 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140)
+                .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblIdEmp)
@@ -164,9 +168,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,10 +178,14 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
+        LoginScreen login = new LoginScreen();
+        login.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSavePsswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePsswdActionPerformed
+        btnSavePsswd.setBackground(new Color(145, 150, 255));
         consultar();
+        btnSavePsswd.setBackground(new Color(255,126,60));
     }//GEN-LAST:event_btnSavePsswdActionPerformed
 
     public void consultar() {
@@ -197,6 +205,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
+        txtOldPass.setText("");
+        txtConfPass.setText("");
+        txtPassNew.setText("");
     }
 
     public void changePassword() {
@@ -250,10 +261,8 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ForgotPsswdScreen().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ForgotPsswdScreen().setVisible(true);
         });
     }
 

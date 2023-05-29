@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
-import workingtime.model.ResetarCampos;
+import workingtime.model.ResetFields;
 
 /**
  *
@@ -21,7 +21,7 @@ import workingtime.model.ResetarCampos;
  */
 public class ProfileEmpScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
+    public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -32,13 +32,13 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     ResultSet rs;
 
     String sql;
-    String nombre;
-    String apellidos;
-    String telefono;
+    String name;
+    String surnames;
+    String phone;
     String email;
 
-    Object[] opciones = {"Aceptar", "Cancelar"};
-    int eleccion;
+    Object[] options = {"Aceptar", "Cancelar"};
+    int election;
 
     /**
      * Creates new form ProfileEmpScreen
@@ -138,9 +138,9 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(btnUpdateProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,8 +148,8 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdateProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdateProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -287,13 +287,13 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateProfileActionPerformed
-        eleccion = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnUpdateProfile.setBackground(new Color(252, 201, 131));
-        if (eleccion == JOptionPane.YES_OPTION) {
+        if (election == JOptionPane.YES_OPTION) {
             updateProfile();
-        } else if (eleccion == JOptionPane.NO_OPTION) {
+        } else if (election == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
         btnUpdateProfile.setBackground(new Color(38, 70, 166));
@@ -301,6 +301,8 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
+        HomeScreen home = new HomeScreen();
+        home.setVisible(true);      
     }//GEN-LAST:event_btnReturnActionPerformed
 
     public void consultar() {
@@ -331,15 +333,15 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     }
 
     public void updateProfile() {
-        nombre = txtNombre.getText();
-        apellidos = txtApellidos.getText();
-        telefono = txtTelefono.getText();
+        name = txtNombre.getText();
+        surnames = txtApellidos.getText();
+        phone = txtTelefono.getText();
         email = txtEmail.getText();
 
-        if (!txtIdEmp.equals("") && !nombre.isEmpty() && !apellidos.isEmpty() && !txtDNI.equals("") && !telefono.isEmpty()
+        if (!txtIdEmp.equals("") && !name.isEmpty() && !surnames.isEmpty() && !txtDNI.equals("") && !phone.isEmpty()
                 && !email.isEmpty() && !txtDpto.equals("") && !txtPuesto.equals("") && !txtCiudad.equals("") && !txtPais.equals("") && !txtFecha.equals("")) {
             try {
-                sql = "UPDATE empleados SET Nombre='" + nombre + "', Apellidos='" + apellidos + "', Telefono='" + telefono
+                sql = "UPDATE empleados SET Nombre='" + name + "', Apellidos='" + surnames + "', Telefono='" + phone
                         + "', Email='" + email + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
                 conect = conn.getConexion();
                 st = conect.createStatement();

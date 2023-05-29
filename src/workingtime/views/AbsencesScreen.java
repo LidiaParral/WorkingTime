@@ -15,22 +15,22 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.LimpiarTabla;
-import workingtime.model.ResetarCampos;
+import workingtime.model.CleanTable;
+import workingtime.model.ResetFields;
 
 /**
  *
  * @author Lidia Parral
  */
-public final class AusenciasScreen extends javax.swing.JFrame {
+public final class AbsencesScreen extends javax.swing.JFrame {
 
-    public ResetarCampos reset = new ResetarCampos();
-    public LimpiarTabla lmp = new LimpiarTabla();
+    public ResetFields reset = new ResetFields();
+    public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
     Connection conect;
 
-    DefaultTableModel modelo;
+    DefaultTableModel model;
 
     PreparedStatement ps;
     Statement st;
@@ -40,22 +40,25 @@ public final class AusenciasScreen extends javax.swing.JFrame {
     String sql;
     String idUser;
     String dpto;
-    String responsable;
-    String fechaFin;
-    String fechaInicio;
-    String tipoSolicitud;
-    String motivo;
+    String manager;
+    String dateFin;
+    String dateStart;
+    String typeRequest;
+    String reason;
 
     int selectedRow;
+    Object[] options = {"Aceptar", "Cancelar"};
+    int election;
+
     /**
      * Creates new form AusenciasScreen
      */
-    public AusenciasScreen() {
+    public AbsencesScreen() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
-        lblDepartamento.setVisible(false);
+        lblDepartment.setVisible(false);
     }
 
     /**
@@ -69,22 +72,22 @@ public final class AusenciasScreen extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblIdEmp = new javax.swing.JLabel();
-        lblDepartamento = new javax.swing.JLabel();
+        lblDepartment = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtResponsable = new javax.swing.JTextField();
-        dtFechaIniAus = new com.toedter.calendar.JDateChooser();
-        dtFechaFinAus = new com.toedter.calendar.JDateChooser();
+        txtManager = new javax.swing.JTextField();
+        dtDateStartAb = new com.toedter.calendar.JDateChooser();
+        dtDateFinAb = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        cmbTipoSolicitudAus = new javax.swing.JComboBox<>();
+        cmbTypeRequestVacation = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtaMotivoAus = new javax.swing.JTextArea();
+        txtaReasonAb = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TablaAusencia = new javax.swing.JTable();
+        TableAbsence = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnSaveAusencia = new javax.swing.JButton();
         btnUpdateAusencia = new javax.swing.JButton();
@@ -92,6 +95,11 @@ public final class AusenciasScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -104,15 +112,17 @@ public final class AusenciasScreen extends javax.swing.JFrame {
 
         jLabel7.setText("Fecha de fin:");
 
+        dtDateStartAb.setDateFormatString("EEEE dd-MMM-yyyy");
+
         jLabel8.setText("Tipo de solicitud");
 
-        cmbTipoSolicitudAus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "PERMISO RETRIBUIDO", "PERMISO NO RETRIBUIDO", "DÍA LIBRE", "DÍA FESTIVO", "CITA MEDICA" }));
+        cmbTypeRequestVacation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "PERMISO RETRIBUIDO", "PERMISO NO RETRIBUIDO", "DÍA LIBRE", "DÍA FESTIVO", "CITA MEDICA" }));
 
         jLabel9.setText("Motivo de ausencia:");
 
-        txtaMotivoAus.setColumns(20);
-        txtaMotivoAus.setRows(5);
-        jScrollPane1.setViewportView(txtaMotivoAus);
+        txtaReasonAb.setColumns(20);
+        txtaReasonAb.setRows(5);
+        jScrollPane1.setViewportView(txtaReasonAb);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\tiempo.png")); // NOI18N
@@ -129,7 +139,7 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                                 .addGap(48, 48, 48)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblDepartamento)
+                                        .addComponent(lblDepartment)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel1))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -139,10 +149,10 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                                             .addComponent(jLabel7))
                                         .addGap(59, 59, 59)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtResponsable)
-                                            .addComponent(dtFechaIniAus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(dtFechaFinAus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmbTipoSolicitudAus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                            .addComponent(txtManager)
+                                            .addComponent(dtDateStartAb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dtDateFinAb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbTypeRequestVacation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(lblIdEmp)))
@@ -164,27 +174,27 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblIdEmp)
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblDepartamento)
+                        .addComponent(lblDepartment)
                         .addGap(95, 95, 95))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dtFechaIniAus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtDateStartAb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
-                    .addComponent(dtFechaFinAus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtDateFinAb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(cmbTipoSolicitudAus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTypeRequestVacation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +204,7 @@ public final class AusenciasScreen extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        TablaAusencia.setModel(new javax.swing.table.DefaultTableModel(
+        TableAbsence.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -210,23 +220,23 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TablaAusencia);
+        jScrollPane2.setViewportView(TableAbsence);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -269,11 +279,11 @@ public final class AusenciasScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(btnSaveAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSaveAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addComponent(btnUpdateAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnDeleteAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -281,9 +291,9 @@ public final class AusenciasScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSaveAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdateAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeleteAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSaveAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteAusencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -301,7 +311,7 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,74 +320,105 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAusenciaActionPerformed
-        saveAusencia();
-        lmp.limpiarTabla(modelo);
-        consultar();
+        btnSaveAusencia.setBackground(new Color(252, 201, 131));
+        saveAbsence();
+        consult();
+        btnSaveAusencia.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveAusenciaActionPerformed
 
     private void btnUpdateAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAusenciaActionPerformed
-        selectedRow = TablaAusencia.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            updateAusencia();
-            consultar();
+        selectedRow = TableAbsence.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
+        btnUpdateAusencia.setBackground(new Color(252, 201, 131));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                updateAbsence();
+                consult();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
+        btnUpdateAusencia.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateAusenciaActionPerformed
 
     private void btnDeleteAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAusenciaActionPerformed
-        selectedRow = TablaAusencia.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            deleteAusencia();
-            consultar();
+        selectedRow = TableAbsence.getSelectedRow();
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
+        btnDeleteAusencia.setBackground(new Color(145, 150, 255));
+        if (election == JOptionPane.YES_OPTION) {
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                deleteAbsence();
+                consult();
+            }
+        } else if (election == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
         }
+        btnDeleteAusencia.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteAusenciaActionPerformed
 
-    public void saveAusencia() {
-        idUser = lblIdEmp.getText();
-        dpto = lblDepartamento.getText();
-        responsable = txtResponsable.getText();
-        fechaInicio = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaIniAus.getDate());
-        fechaFin = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaFinAus.getDate());
-        motivo = txtaMotivoAus.getText();
-        try {
-            tipoSolicitud();
-            sql = "INSERT INTO registro_ausencia(IdEmpleado,Departamento,Responsable,FechaInicio,FechaFin,TipoSolicitud,MotivoAusencia) VALUES"
-                    + "('" + idUser + "','" + dpto + "','" + responsable + "',STR_TO_DATE('" + fechaInicio + "','%d-%m-%Y')"
-                    + ",STR_TO_DATE('" + fechaFin + "','%d-%m-%Y'),'" + tipoSolicitud + "','" + motivo + "')";
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.dispose();
+        HomeScreen home = new HomeScreen();
+        home.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
-            conect = conn.getConexion();
-            st = conect.createStatement();
-            st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO AUSENCIA", JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
+    public void saveAbsence() {
+        idUser = lblIdEmp.getText();
+        dpto = lblDepartment.getText();
+        manager = txtManager.getText();
+        dateStart = new SimpleDateFormat("dd-MM-yyyy").format(dtDateStartAb.getDate());
+        dateFin = new SimpleDateFormat("dd-MM-yyyy").format(dtDateFinAb.getDate());
+        reason = txtaReasonAb.getText();
+
+        if (dpto.isEmpty() || manager.isEmpty() || dateStart.isEmpty() || dateFin.isEmpty() || reason.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                typeRequest();
+                sql = "INSERT INTO registro_ausencia(IdEmpleado,Departamento,Responsable,FechaInicio,FechaFin,TipoSolicitud,MotivoAusencia) VALUES"
+                        + "('" + idUser + "','" + dpto + "','" + manager + "',STR_TO_DATE('" + dateStart + "','%d-%m-%Y')"
+                        + ",STR_TO_DATE('" + dateFin + "','%d-%m-%Y'),'" + typeRequest + "','" + reason + "')";
+
+                conect = conn.getConexion();
+                st = conect.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO AUSENCIA", JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException ex) {
+                System.err.println("Error:" + ex);
+            }
         }
         reset.ResetPanel(jPanel1);
-        dtFechaIniAus.setDateFormatString("");
-        dtFechaFinAus.setDateFormatString("");
-        cmbTipoSolicitudAus.setSelectedIndex(0);
-        txtaMotivoAus.setText("");
+        dtDateStartAb.setDateFormatString("");
+        dtDateFinAb.setDateFormatString("");
+        cmbTypeRequestVacation.setSelectedIndex(0);
+        txtaReasonAb.setText("");
+        lmp.tableCleaning(model);
     }
 
-    public void updateAusencia() {
-        idUser = lblIdEmp.getText();     
-        fechaInicio = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 1));
-        fechaFin = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 2));
-        tipoSolicitud = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 3));
-        motivo = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 4));
+    public void updateAbsence() {
+        idUser = lblIdEmp.getText();
+        dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
+        dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
+        typeRequest = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 3));
+        reason = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 4));
         try {
-            sql = "UPDATE registro_ausencia SET TipoSolicitud='" + tipoSolicitud + "', MotivoAusencia='" + motivo + "' WHERE IdEmpleado='" + idUser + "'"
-                    + "AND FechaInicio='" + fechaInicio +"' AND FechaFin='" + fechaFin + "'" ;
+            sql = "UPDATE registro_ausencia SET TipoSolicitud='" + typeRequest + "', MotivoAusencia='" + reason + "' WHERE IdEmpleado='" + idUser + "'"
+                    + "AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "'";
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
@@ -385,16 +426,16 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(model);
     }
 
-     public void deleteAusencia() {
-        idUser = lblIdEmp.getText();        
-        fechaInicio = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 1));
-        fechaFin = String.valueOf(modelo.getValueAt(TablaAusencia.getSelectedRow(), 2));
+    public void deleteAbsence() {
+        idUser = lblIdEmp.getText();
+        dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
+        dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
         try {
             sql = "DELETE FROM registro_ausencia WHERE IdEmpleado='" + idUser + "'"
-                    + "AND FechaInicio='" + fechaInicio +"' AND FechaFin='" + fechaFin + "'" ;
+                    + "AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -403,10 +444,10 @@ public final class AusenciasScreen extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
-        lmp.limpiarTabla(modelo);
+        lmp.tableCleaning(model);
     }
-     
-    public void consultar() {
+
+    public void consult() {
         sql = "SELECT Responsable,FechaInicio,FechaFin,TipoSolicitud,MotivoAusencia FROM registro_ausencia";
 
         try {
@@ -414,42 +455,42 @@ public final class AusenciasScreen extends javax.swing.JFrame {
             st = conect.createStatement();
             rs = st.executeQuery(sql);
 
-            Object[] ausencia = new Object[5];
-            modelo = (DefaultTableModel) TablaAusencia.getModel();
+            Object[] absence = new Object[5];
+            model = (DefaultTableModel) TableAbsence.getModel();
             while (rs.next()) {
-                ausencia[0] = rs.getString("Responsable");
-                ausencia[1] = rs.getString("FechaInicio");
-                ausencia[2] = rs.getString("FechaFin");
-                ausencia[3] = rs.getString("TipoSolicitud");
-                ausencia[4] = rs.getString("MotivoAusencia");
+                absence[0] = rs.getString("Responsable");
+                absence[1] = rs.getString("FechaInicio");
+                absence[2] = rs.getString("FechaFin");
+                absence[3] = rs.getString("TipoSolicitud");
+                absence[4] = rs.getString("MotivoAusencia");
 
-                modelo.addRow(ausencia);
+                model.addRow(absence);
             }
-            TablaAusencia.setModel(modelo);
+            TableAbsence.setModel(model);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
 
-    void tipoSolicitud() {
-        switch (cmbTipoSolicitudAus.getSelectedIndex()) {
+    void typeRequest() {
+        switch (cmbTypeRequestVacation.getSelectedIndex()) {
             case 0:
-                tipoSolicitud = "VACACIONES";
+                typeRequest = "VACACIONES";
                 break;
             case 1:
-                tipoSolicitud = "PERMISO RETRIBUIDO";
+                typeRequest = "PERMISO RETRIBUIDO";
                 break;
             case 2:
-                tipoSolicitud = "PERMISO NO RETRIBUIDO";
+                typeRequest = "PERMISO NO RETRIBUIDO";
                 break;
             case 3:
-                tipoSolicitud = "DIA LIBRE";
+                typeRequest = "DIA LIBRE";
                 break;
             case 4:
-                tipoSolicitud = "DIA FESTIVO";
+                typeRequest = "DIA FESTIVO";
                 break;
             case 5:
-                tipoSolicitud = "CITA MEDICA";
+                typeRequest = "CITA MEDICA";
                 break;
             default:
                 throw new AssertionError();
@@ -474,30 +515,31 @@ public final class AusenciasScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AusenciasScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsencesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AusenciasScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsencesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AusenciasScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsencesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AusenciasScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbsencesScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AusenciasScreen().setVisible(true);
+            new AbsencesScreen().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaAusencia;
+    private javax.swing.JTable TableAbsence;
     private javax.swing.JButton btnDeleteAusencia;
     private javax.swing.JButton btnSaveAusencia;
     private javax.swing.JButton btnUpdateAusencia;
-    public javax.swing.JComboBox<String> cmbTipoSolicitudAus;
-    public com.toedter.calendar.JDateChooser dtFechaFinAus;
-    public com.toedter.calendar.JDateChooser dtFechaIniAus;
+    public javax.swing.JComboBox<String> cmbTypeRequestVacation;
+    public com.toedter.calendar.JDateChooser dtDateFinAb;
+    public com.toedter.calendar.JDateChooser dtDateStartAb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -509,9 +551,9 @@ public final class AusenciasScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JLabel lblDepartamento;
+    public javax.swing.JLabel lblDepartment;
     public javax.swing.JLabel lblIdEmp;
-    public javax.swing.JTextField txtResponsable;
-    public javax.swing.JTextArea txtaMotivoAus;
+    public javax.swing.JTextField txtManager;
+    public javax.swing.JTextArea txtaReasonAb;
     // End of variables declaration//GEN-END:variables
 }

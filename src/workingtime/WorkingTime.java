@@ -20,7 +20,7 @@ public class WorkingTime {
     public static void main(String[] args) throws InterruptedException {
         SplashScreen splash = new SplashScreen();
         splash.setVisible(true);
-        Thread.sleep(1750);
+        Thread.sleep(30000);
         splash.dispose();
         LoginScreen login = new LoginScreen();
         login.setVisible(true);

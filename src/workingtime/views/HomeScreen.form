@@ -141,9 +141,6 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[851, 534]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -199,24 +196,24 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="lblGrupoCot" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGroupCot" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                          <Component id="lblGrupoProf" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGroupProf" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="btnLogout" min="-2" pref="94" max="-2" attributes="0"/>
+                  <Component id="btnLogout" min="-2" pref="106" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="lblNomEmp" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="lblNamEmp" min="-2" pref="27" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblApellidosEmp" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPuestoEmp" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="lblSurnamesEmp" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblJobEmp" min="-2" pref="77" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -229,7 +226,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="lblDepartamento" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblDepartmentEmp" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
@@ -253,13 +250,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="lblNomEmp" min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="lblNamEmp" min="-2" pref="27" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                  <Component id="lblApellidosEmp" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSurnamesEmp" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblPuestoEmp" min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="lblJobEmp" min="-2" pref="21" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="71" max="32767" attributes="0"/>
@@ -267,8 +264,8 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblNumSS" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblGrupoCot" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblGrupoProf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblGroupCot" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblGroupProf" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -277,7 +274,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="lblDepartamento" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDepartmentEmp" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -296,7 +293,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblNomEmp">
+        <Component class="javax.swing.JLabel" name="lblNamEmp">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -323,7 +320,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblApellidosEmp">
+        <Component class="javax.swing.JLabel" name="lblSurnamesEmp">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -332,7 +329,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPuestoEmp">
+        <Component class="javax.swing.JLabel" name="lblJobEmp">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -353,12 +350,12 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblGrupoCot">
+        <Component class="javax.swing.JLabel" name="lblGroupCot">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblGrupoProf">
+        <Component class="javax.swing.JLabel" name="lblGroupProf">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -368,7 +365,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblDepartamento">
+        <Component class="javax.swing.JLabel" name="lblDepartmentEmp">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
