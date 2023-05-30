@@ -6,6 +6,10 @@ package workingtime.views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -74,6 +78,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -349,14 +354,18 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_mnAllEmpActionPerformed
 
     private void mnTodosHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosHorariosActionPerformed
-        AllTimesScreen allTimes = new AllTimesScreen();
-        allTimes.lblIdEmp.setText(lblIdEmp.getText());
-        allTimes.lblId.setText(lblIdEmp.getText());
-        allTimes.lblNom.setText(lblNamEmp.getText());
-        allTimes.lblPuesto.setText(lblJobEmp.getText());
-        allTimes.lblDpto.setText(lblDepartmentEmp.getText());
-        allTimes.existWorkingDay();
-        allTimes.setVisible(true);        
+        try {
+            AllTimesScreen allTimes = new AllTimesScreen();
+            allTimes.lblIdEmp.setText(lblIdEmp.getText());
+            allTimes.lblId.setText(lblIdEmp.getText());
+            allTimes.lblNom.setText(lblNamEmp.getText());
+            allTimes.lblPuesto.setText(lblJobEmp.getText());
+            allTimes.lblDpto.setText(lblDepartmentEmp.getText());
+            allTimes.existWorkingDay();        
+            allTimes.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_mnTodosHorariosActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -399,6 +408,14 @@ public class HomeScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new HomeScreen().setVisible(true);
         });
+    }
+    
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

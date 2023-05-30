@@ -13,8 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
@@ -48,6 +53,23 @@ public final class TimeScreen extends javax.swing.JFrame {
     String timeReasonFin;
     String date;
     String dateActual;
+    String dayOfWeek;
+    String finR;
+    String startR;
+    String start;
+    String fin;
+
+    int diferencia;
+    int horas = 0;
+    int minutos = 0;
+    int dias = 0;
+    int totalHours;
+    int total;
+    
+    Date horaInicio;
+    Date horaFinal;
+
+    SimpleDateFormat dateFormat;
 
     /**
      * Creates new form HorarioScreen
@@ -57,15 +79,18 @@ public final class TimeScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         lblIdEmp.setVisible(false);
-        lblTimeStart.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblTimeFin.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblOtherReasons.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblTimeStartR.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblTimeFinR.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDateNow.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDateActual.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnSaveTime.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnCancelar.setFont(new Font("Montserrat",Font.PLAIN,12));
+        lblTimeStart.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblTimeFin.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblOtherReasons.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblTimeStartR.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblTimeFinR.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDateNow.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDateActual.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnSaveTime.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnCancelar.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        dateAct.setTodayButtonVisible(true);
+        dateAct.setTodayButtonText("Hoy");
+        dateAct.setWeekOfYearVisible(false);
     }
 
     /**
@@ -98,20 +123,13 @@ public final class TimeScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         lblTimeStart.setText("Inicio:");
 
         dtTimeStart.setDateFormatString("HH:mm:ss");
-        dtTimeStart.setMaxSelectableDate(new Date());
         dtTimeStart.setMinSelectableDate(new Date());
 
         dateAct.setBackground(new java.awt.Color(255, 255, 255));
-        dateAct.setMaxSelectableDate(new Date());
         dateAct.setMinSelectableDate(new Date());
         dateAct.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -122,7 +140,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         lblTimeFin.setText("Fin:");
 
         dtTimeFin.setDateFormatString("HH:mm:ss");
-        dtTimeFin.setMaxSelectableDate(new Date());
         dtTimeFin.setMinSelectableDate(new Date());
 
         btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
@@ -137,7 +154,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         cmbOtherReasons.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESCANSO", "TRABAJO EXTERIOR", "FORMACION" }));
 
         dtReasonStart.setDateFormatString("HH:mm:ss");
-        dtReasonStart.setMaxSelectableDate(new Date());
         dtReasonStart.setMinSelectableDate(new Date());
 
         btnSaveTime.setBackground(new java.awt.Color(38, 70, 166));
@@ -158,7 +174,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         lblDateNow.setText("Fecha de hoy:");
 
         dtReasonFin.setDateFormatString("HH:mm:ss");
-        dtReasonFin.setMaxSelectableDate(new Date());
         dtReasonFin.setMinSelectableDate(new Date());
 
         lblTimeStartR.setText("Inicio:");
@@ -268,7 +283,11 @@ public final class TimeScreen extends javax.swing.JFrame {
 
     private void btnSaveTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveTimeActionPerformed
         btnSaveTime.setBackground(new Color(252, 201, 131));
-        saveTimeWorkingDay();
+        try {
+            saveTimeWorkingDay();
+        } catch (ParseException ex) {
+            Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         btnSaveTime.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveTimeActionPerformed
 
@@ -278,9 +297,6 @@ public final class TimeScreen extends javax.swing.JFrame {
             DateFormat f = new SimpleDateFormat("dd-MM-yyyy");
             dateActual = f.format(fecha);
             lblDateActual.setText(dateActual);
-            dateAct.setTodayButtonVisible(true);
-            dateAct.setTodayButtonText("Hoy");
-            dateAct.setWeekOfYearVisible(false);
         }
     }//GEN-LAST:event_dateActPropertyChange
 
@@ -288,9 +304,134 @@ public final class TimeScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosing
+    public void getDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateAct.getDate());
+        dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
+//        System.out.println(dayOfWeek);  
+    }
+
+    public int getTimeOfDay() {
+        dateFormat = new SimpleDateFormat("HH:mm:ss");
+        start = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
+        fin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
+        try {
+            horaFinal = dateFormat.parse(fin);
+            horaInicio = dateFormat.parse(start);
+            diferencia = (int) ((horaFinal.getTime() - horaInicio.getTime()) / 1000);
+
+            if (diferencia > 86400) {
+                dias = (int) Math.floor(diferencia / 86400);
+                diferencia = diferencia - (dias * 86400);
+            }
+            if (diferencia > 3600) {
+                horas = (int) Math.floor(diferencia / 3600);
+                diferencia = diferencia - (horas * 3600);
+            }
+            if (diferencia > 60) {
+                minutos = (int) Math.floor(diferencia / 60);
+                diferencia = diferencia - (minutos * 60);
+            }
+            //System.out.println("Hay " + horas + " horas");
+
+        } catch (ParseException ex) {
+            Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return horas;
+    }
+
+    public int getTimeOfReason() {
+        dateFormat = new SimpleDateFormat("HH:mm:ss");
+        startR = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
+        finR = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate());
+        try {
+            horaFinal = dateFormat.parse(finR);
+            horaInicio = dateFormat.parse(startR);
+            diferencia = (int) ((horaFinal.getTime() - horaInicio.getTime()) / 1000);
+
+            if (diferencia > 86400) {
+                dias = (int) Math.floor(diferencia / 86400);
+                diferencia = diferencia - (dias * 86400);
+            }
+            if (diferencia > 3600) {
+                horas = (int) Math.floor(diferencia / 3600);
+                diferencia = diferencia - (horas * 3600);
+            }
+            if (diferencia > 60) {
+                minutos = (int) Math.floor(diferencia / 60);
+                diferencia = diferencia - (minutos * 60);
+            }
+            //System.out.println("Hay " + horas + " horas");
+
+        } catch (ParseException ex) {
+            Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return horas;
+    }
+
+    public int calculateHours(){    
+        int hoursDay = getTimeOfDay();
+        int hoursReason = getTimeOfReason();
+        
+        totalHours = hoursDay - hoursReason;
+ 
+        return totalHours;
+    }
+    public void saveTimeWorkingDay() throws ParseException {
+        idUser = lblIdEmp.getText();
+        dateNow = lblDateActual.getText();
+
+        timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
+        timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
+        timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate());
+        timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
+
+        total = calculateHours();
+        getDay();
+        otherReasons();
+        if (idUser.isEmpty() || dateActual.isEmpty() || timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty()
+                || timeReasonFin.isEmpty() || reason.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
+            JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas) VALUES "
+                        + "('" + idUser + "','" + dateActual + "', STR_TO_DATE('" + timeStart + "','%H:%i:%s')"
+                        + ", STR_TO_DATE('" + timeFin + "','%H:%i:%s'),'" + reason + "', STR_TO_DATE('" + timeReasonStart + "','%H:%i:%s')"
+                        + ", STR_TO_DATE('" + timeReasonFin + "','%H:%i:%s'),'" + total + "')";
+
+                conect = conn.getConexion();
+                st = conect.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
+            } catch (HeadlessException | SQLException ex) {
+                System.err.println("Error:" + ex);
+            }
+        }
+        dtTimeStart.setDateFormatString("");
+        dtTimeFin.setDateFormatString("");
+        dtReasonStart.setDateFormatString("");
+        dtReasonFin.setDateFormatString("");
+        lblDateActual.setText("");
+    }
+
+    void otherReasons() {
+        switch (cmbOtherReasons.getSelectedIndex()) {
+            case 0:
+                reason = "DESCANSO";
+                break;
+            case 1:
+                reason = "TRABAJO EXTERIOR";
+                break;
+            case 2:
+                reason = "FORMACION";
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -326,56 +467,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         });
     }
 
-    public void saveTimeWorkingDay() {
-        idUser = lblIdEmp.getText();
-        dateNow = lblDateActual.getText();
-        timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
-        timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
-        timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate());
-        timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
-
-        otherReasons();
-        if (idUser.isEmpty() || dateActual.isEmpty() || timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty()
-                || timeReasonFin.isEmpty() || reason.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones) VALUES "
-                        + "('" + idUser + "','" + dateActual + "', STR_TO_DATE('" + timeStart + "','%H:%i:%s')"
-                        + ", STR_TO_DATE('" + timeFin + "','%H:%i:%s'),'" + reason + "', STR_TO_DATE('" + timeReasonStart + "','%H:%i:%s')"
-                        + ", STR_TO_DATE('" + timeReasonFin + "','%H:%i:%s')" + ")";
-
-                conect = conn.getConexion();
-                st = conect.createStatement();
-                st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
-            } catch (HeadlessException | SQLException ex) {
-                System.err.println("Error:" + ex);
-            }
-        }
-        dtTimeStart.setDateFormatString("");
-        dtTimeFin.setDateFormatString("");
-        dtReasonStart.setDateFormatString("");
-        dtReasonFin.setDateFormatString("");
-        lblDateActual.setText("");
-    }
-
-    void otherReasons() {
-        switch (cmbOtherReasons.getSelectedIndex()) {
-            case 0:
-                reason = "DESCANSO";
-                break;
-            case 1:
-                reason = "TRABAJO EXTERIOR";
-                break;
-            case 2:
-                reason = "FORMACION";
-                break;
-            default:
-                throw new AssertionError();
-        }
-
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnSaveTime;

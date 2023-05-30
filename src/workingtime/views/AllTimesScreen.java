@@ -11,11 +11,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import workingtime.database.Conexion;
 import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
+import workingtime.model.SelectedRows;
 
 /**
  *
@@ -25,6 +29,8 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
     public CleanTable lmp = new CleanTable();
+    public TimeScreen time = new TimeScreen();
+    TableCellRenderer slcRows = new SelectedRows();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -45,6 +51,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     String timeReasonStart;
     String timeReasonFin;
     String date;
+    String hours;
 
     int selectedRow;
     Object[] options = {"Aceptar", "Cancelar"};
@@ -52,8 +59,9 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form TodosHorariosScreen
+     * @throws java.lang.ClassNotFoundException
      */
-    public AllTimesScreen() {
+    public AllTimesScreen() throws ClassNotFoundException {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
@@ -65,6 +73,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         btnUpdateTime.setFont(new Font("Montserrat",Font.BOLD,12));
         btnDeleteTime.setFont(new Font("Montserrat",Font.BOLD,12));
         btnCancelar.setFont(new Font("Montserrat",Font.PLAIN,12));
+        TableTime.setDefaultRenderer(Object.class,slcRows);      
     }
 
     /**
@@ -104,14 +113,14 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Hora Inicio", "Hora Fin", "Razon", "Hora Inicio Razon", "Hora Fin Razon"
+                "Fecha", "Hora Inicio", "Hora Fin", "Razon", "Hora Inicio", "Hora Fin", "Horas Imputadas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, true, true
+                false, true, true, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -216,39 +225,35 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNumEmp)
+                    .addComponent(lblId)
+                    .addComponent(lblNomEmp)
+                    .addComponent(lblNom))
+                .addGap(103, 103, 103)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDptoEmp)
+                    .addComponent(lblJobEmp)
+                    .addComponent(lblPuesto)
+                    .addComponent(lblDpto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblImage)
+                .addGap(76, 76, 76))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumEmp)
-                            .addComponent(lblId)
-                            .addComponent(lblNomEmp)
-                            .addComponent(lblNom))
-                        .addGap(103, 103, 103)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDptoEmp)
-                            .addComponent(lblJobEmp)
-                            .addComponent(lblPuesto)
-                            .addComponent(lblDpto))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -265,22 +270,30 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDpto)
-                            .addComponent(lblNom))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNom))
+                        .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,13 +348,13 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void existWorkingDay() {
-        sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
+        sql = "SELECT FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas FROM registro_horas WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
 
         try {
             conect = conn.getConexion();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
-            Object[] horario = new Object[6];
+            Object[] horario = new Object[7];
             model = (DefaultTableModel) TableTime.getModel();
             while (rs.next()) {
                 horario[0] = rs.getString("FechaActual");
@@ -350,7 +363,8 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                 horario[3] = rs.getString("OtrasRazones");
                 horario[4] = rs.getTime("HoraInicioRazones");
                 horario[5] = rs.getTime("HoraFinRazones");
-
+                horario[6] = rs.getInt("HorasImputadas");
+                
                 model.addRow(horario);
             }
             TableTime.setModel(model);
@@ -381,10 +395,12 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         timeFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 2));
         timeReasonStart = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 4));
         timeReasonFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 5));
+        hours = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 6));
+        
         try {
 
             sql = "UPDATE registro_horas SET HoraInicio='" + timeStart + "', HoraFin='" + timeFin + "', HoraInicioRazones='" + timeReasonStart + "', HoraFinRazones='" + timeReasonFin
-                    + "' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
+                    + "', HorasImputadas='"+ hours +"' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -426,7 +442,11 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AllTimesScreen().setVisible(true);
+            try {
+                new AllTimesScreen().setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AllTimesScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
@@ -449,4 +469,8 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumEmp;
     public javax.swing.JLabel lblPuesto;
     // End of variables declaration//GEN-END:variables
+
+    private Object getValueAt(int i, int column) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

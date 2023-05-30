@@ -12,9 +12,6 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -162,9 +159,6 @@
     <Component class="com.toedter.calendar.JDateChooser" name="dtTimeStart">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
-        <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Date()" type="code"/>
-        </Property>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
         </Property>
@@ -174,9 +168,6 @@
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Date()" type="code"/>
         </Property>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
@@ -194,9 +185,6 @@
     <Component class="com.toedter.calendar.JDateChooser" name="dtTimeFin">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
-        <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Date()" type="code"/>
-        </Property>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
         </Property>
@@ -233,9 +221,6 @@
     <Component class="com.toedter.calendar.JDateChooser" name="dtReasonStart">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
-        <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Date()" type="code"/>
-        </Property>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
         </Property>
@@ -287,9 +272,6 @@
     <Component class="com.toedter.calendar.JDateChooser" name="dtReasonFin">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
-        <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Date()" type="code"/>
-        </Property>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
         </Property>

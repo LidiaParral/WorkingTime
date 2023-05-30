@@ -5,6 +5,8 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +42,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(584, 382));
+        setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(584, 382));
         setUndecorated(true);
 
@@ -48,7 +50,7 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\worktime5.gif")); // NOI18N
 
-        pgbarSplash.setForeground(new java.awt.Color(255, 153, 51));
+        pgbarSplash.setForeground(new java.awt.Color(255, 126, 60));
         pgbarSplash.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         pgbarSplash.setStringPainted(true);
 
@@ -146,6 +148,14 @@ public class SplashScreen extends javax.swing.JFrame {
         hilo.start();
     }
 
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
