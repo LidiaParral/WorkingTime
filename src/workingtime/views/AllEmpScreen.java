@@ -391,7 +391,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
             Object[] empleado = new Object[8];
             modelo = (DefaultTableModel) TablaEmp.getModel();
-            while (rs.next()) {
+            if (rs.next()) {
                 empleado[0] = rs.getInt("IdEmpleado");
                 empleado[1] = rs.getString("Nombre");
                 empleado[2] = rs.getString("Apellidos");

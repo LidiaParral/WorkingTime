@@ -283,11 +283,7 @@ public final class TimeScreen extends javax.swing.JFrame {
 
     private void btnSaveTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveTimeActionPerformed
         btnSaveTime.setBackground(new Color(252, 201, 131));
-        try {
-            saveTimeWorkingDay();
-        } catch (ParseException ex) {
-            Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        existDate();
         btnSaveTime.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveTimeActionPerformed
 
@@ -377,10 +373,8 @@ public final class TimeScreen extends javax.swing.JFrame {
  
         return totalHours;
     }
-    public void saveTimeWorkingDay() throws ParseException {
+    public void saveTimeWorkingDay(){
         idUser = lblIdEmp.getText();
-        dateNow = lblDateActual.getText();
-
         timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
         timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
         timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate());
@@ -414,6 +408,25 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtReasonStart.setDateFormatString("");
         dtReasonFin.setDateFormatString("");
         lblDateActual.setText("");
+    }
+    
+    public void existDate() {
+        idUser = lblIdEmp.getText();       
+        dateNow = lblDateActual.getText();
+        try {
+            sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaActual='" + dateNow + "'";
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {         
+                JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
+                    + dateNow, "ERROR", JOptionPane.ERROR_MESSAGE); 
+            } else {        
+                saveTimeWorkingDay();
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
     }
 
     void otherReasons() {
