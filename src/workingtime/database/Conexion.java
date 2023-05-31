@@ -31,7 +31,7 @@ public class Conexion {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(URL, USER, CLAVE);           
-            JOptionPane.showMessageDialog(null, "Conexión establecida con éxito","Conexion",JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Conexión establecida con éxito","Conexion",JOptionPane.INFORMATION_MESSAGE);
         }catch(HeadlessException | ClassNotFoundException | SQLException e){
             System.out.println("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Conexión establecida errónea","Conexion",JOptionPane.ERROR_MESSAGE);

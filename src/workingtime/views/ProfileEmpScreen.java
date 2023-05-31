@@ -7,6 +7,8 @@ package workingtime.views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,19 +50,19 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblNumEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblNomEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblApeEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDNIEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblTlfEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblEmailEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDptoEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblPuestoEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblCountryEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblCapitalEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDateBirthEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnUpdateProfile.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnReturn.setFont(new Font("Montserrat",Font.PLAIN,12));
+        lblNumEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblNomEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblApeEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDNIEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblTlfEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblEmailEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblPuestoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblCountryEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblCapitalEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDateBirthEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        btnUpdateProfile.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
     }
 
     /**
@@ -101,6 +103,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         lblNumEmp.setText("Nº. Empleado:");
@@ -167,25 +170,40 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        txtIdEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtIdEmp.setEnabled(false);
         txtIdEmp.setFocusable(false);
+
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtApellidos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtDNI.setAutoscrolls(false);
         txtDNI.setEnabled(false);
         txtDNI.setFocusable(false);
 
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtDpto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDpto.setEnabled(false);
         txtDpto.setFocusable(false);
 
+        txtPuesto.setBackground(new java.awt.Color(242, 242, 242));
+        txtPuesto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtPuesto.setEnabled(false);
         txtPuesto.setFocusable(false);
 
+        txtPais.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtPais.setEnabled(false);
         txtPais.setFocusable(false);
 
+        txtCiudad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCiudad.setEnabled(false);
         txtCiudad.setFocusable(false);
 
+        txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtFecha.setEnabled(false);
         txtFecha.setFocusable(false);
 
@@ -392,6 +410,13 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new ProfileEmpScreen().setVisible(true);
         });
+    }
+
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

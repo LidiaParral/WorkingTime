@@ -7,6 +7,8 @@ package workingtime.views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,22 +69,22 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         cmbEmpJob.setEnabled(false);
-        lblName.setFont(new Font("Britannic.ttf",Font.BOLD,12));
-        lblSurnames.setFont(new Font("Britannic.ttf",Font.BOLD,12));
-        lblDNI.setFont(new Font("Montserrat.ttf",Font.BOLD,12));
-        lblDateBirth.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblNumSS.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDateOld.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblJob.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDpto.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblEmail.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblPhone.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblCapital.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblCountry.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblGroupCot.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblGroupPro.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnSaveEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnReturn.setFont(new Font("Montserrat",Font.PLAIN,12));
+        lblName.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblSurnames.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDNI.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDateBirth.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblNumSS.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDateOld.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblJob.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDpto.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblEmail.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblPhone.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblCapital.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblCountry.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblGroupCot.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblGroupPro.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnSaveEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
     }
 
     /**
@@ -131,6 +133,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         btnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -159,6 +162,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         lblGroupCot.setText("Grupo de Cotización:");
 
+        cmbEmpDepartment.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpDepartment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEmpDepartmentItemStateChanged(evt);
@@ -173,6 +177,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         txtCapitalEmp.setEnabled(false);
 
+        cmbEmpCountry.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpCountry.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEmpCountryItemStateChanged(evt);
@@ -577,6 +582,13 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new ControlEmpScreen().setVisible(true);
         });
+    }
+
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

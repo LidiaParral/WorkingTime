@@ -6,6 +6,8 @@ package workingtime.views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,13 +68,13 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         lblIdEmp.setVisible(false);
-        lblNumEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblNomEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblJobEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        lblDptoEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnUpdateTime.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnDeleteTime.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnCancelar.setFont(new Font("Montserrat",Font.PLAIN,12));
+        lblNumEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblNomEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblJobEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnUpdateTime.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnDeleteTime.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnCancelar.setFont(new Font("Century Gothic",Font.PLAIN,12));
         TableTime.setDefaultRenderer(Object.class,slcRows);      
     }
 
@@ -104,6 +106,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         lblDpto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -449,6 +452,14 @@ public final class AllTimesScreen extends javax.swing.JFrame {
             }
         });
     }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableTime;

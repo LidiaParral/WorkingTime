@@ -5,7 +5,10 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +48,11 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
+        lblPassOld.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblPassNew.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblConfPassNew.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnSavePsswd.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnCancelar.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -56,9 +64,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblPassOld = new javax.swing.JLabel();
+        lblPassNew = new javax.swing.JLabel();
+        lblConfPassNew = new javax.swing.JLabel();
         btnSavePsswd = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
@@ -71,13 +79,14 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         setUndecorated(true);
 
-        jLabel1.setText("Contraseña actual:");
+        lblPassOld.setText("Contraseña actual:");
 
-        jLabel2.setText("Contraseña nueva:");
+        lblPassNew.setText("Contraseña nueva:");
 
-        jLabel3.setText("Confirmación contraseña:");
+        lblConfPassNew.setText("Confirmación contraseña:");
 
         btnSavePsswd.setBackground(new java.awt.Color(255, 126, 60));
         btnSavePsswd.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,9 +137,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(lblConfPassNew)
+                    .addComponent(lblPassNew, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPassOld, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -153,17 +162,17 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
                 .addComponent(lblIdEmp)
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblPassOld)
                     .addComponent(txtOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblPassNew)
                     .addComponent(txtPassNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblConfPassNew)
                     .addComponent(txtConfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
@@ -265,17 +274,25 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             new ForgotPsswdScreen().setVisible(true);
         });
     }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnSavePsswd;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblConfPassNew;
     public javax.swing.JLabel lblIdEmp;
+    private javax.swing.JLabel lblPassNew;
+    private javax.swing.JLabel lblPassOld;
     public javax.swing.JPasswordField txtConfPass;
     public javax.swing.JPasswordField txtOldPass;
     public javax.swing.JPasswordField txtPassNew;

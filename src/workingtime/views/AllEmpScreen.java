@@ -54,10 +54,10 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblNamSearch.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnUpdateEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnDeleteEmp.setFont(new Font("Montserrat",Font.BOLD,12));
-        btnReturn.setFont(new Font("Montserrat",Font.PLAIN,12));
+        lblNamSearch.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnUpdateEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnDeleteEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
     }
 
     /**
