@@ -4,6 +4,8 @@
  */
 package workingtime.views;
 
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -55,11 +57,11 @@ public final class TimeScreen extends javax.swing.JFrame {
     String timeReasonFin;
     String date;
     String dateActual;
-    String dayOfWeek;
     String finR;
     String startR;
     String start;
     String fin;
+    String dayOfWeek;
 
     int diferencia;
     int horas = 0;
@@ -67,7 +69,7 @@ public final class TimeScreen extends javax.swing.JFrame {
     int dias = 0;
     int totalHours;
     int total;
-    
+
     Date horaInicio;
     Date horaFinal;
 
@@ -148,6 +150,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("CANCELAR");
+        btnCancelar.setToolTipText("Este botón permite volver a la página anterior.");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -162,6 +165,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         btnSaveTime.setBackground(new java.awt.Color(38, 70, 166));
         btnSaveTime.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveTime.setText("GUARDAR");
+        btnSaveTime.setToolTipText("Este botón permite guardar el horario del empleado.");
         btnSaveTime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSaveTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,13 +307,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    public void getDay() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dateAct.getDate());
-        dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
-//        System.out.println(dayOfWeek);  
-    }
-
     public int getTimeOfDay() {
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         start = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
@@ -368,15 +365,23 @@ public final class TimeScreen extends javax.swing.JFrame {
         return horas;
     }
 
-    public int calculateHours(){    
+    public void getDay(JCalendar day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(day.getDate());
+        dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
+//        System.out.println(dayOfWeek);  
+    }
+
+    public int calculateHours() {
         int hoursDay = getTimeOfDay();
         int hoursReason = getTimeOfReason();
-        
+
         totalHours = hoursDay - hoursReason;
- 
+
         return totalHours;
     }
-    public void saveTimeWorkingDay(){
+
+    public void saveTimeWorkingDay() {
         idUser = lblIdEmp.getText();
         timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
         timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
@@ -384,7 +389,11 @@ public final class TimeScreen extends javax.swing.JFrame {
         timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
 
         total = calculateHours();
-        getDay();
+        getDay(dateAct);
+        getDay(dtTimeStart.getJCalendar());
+        getDay(dtTimeFin.getJCalendar());
+        getDay(dtReasonStart.getJCalendar());
+        getDay(dtReasonFin.getJCalendar());
         otherReasons();
         if (idUser.isEmpty() || dateActual.isEmpty() || timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty()
                 || timeReasonFin.isEmpty() || reason.isEmpty()) {
@@ -412,19 +421,19 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtReasonFin.setDateFormatString("");
         lblDateActual.setText("");
     }
-    
+
     public void existDate() {
-        idUser = lblIdEmp.getText();       
+        idUser = lblIdEmp.getText();
         dateNow = lblDateActual.getText();
         try {
             sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaActual='" + dateNow + "'";
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
-            if (rs.next()) {         
+            if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
-                    + dateNow, "ERROR", JOptionPane.ERROR_MESSAGE); 
-            } else {        
+                        + dateNow, "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
                 saveTimeWorkingDay();
             }
         } catch (SQLException ex) {
@@ -482,8 +491,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             new TimeScreen().setVisible(true);
         });
     }
-    
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().

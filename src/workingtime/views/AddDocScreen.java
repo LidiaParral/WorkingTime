@@ -132,6 +132,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         btnAddDoc.setBackground(new java.awt.Color(255, 126, 60));
         btnAddDoc.setForeground(new java.awt.Color(255, 255, 255));
         btnAddDoc.setText("AÑADIR");
+        btnAddDoc.setToolTipText("Este botón permite añadir el documento");
         btnAddDoc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAddDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +143,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         btnSaveDoc.setBackground(new java.awt.Color(38, 70, 166));
         btnSaveDoc.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveDoc.setText("GUARDAR");
+        btnSaveDoc.setToolTipText("Este botón permite guardar el documento.");
         btnSaveDoc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSaveDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

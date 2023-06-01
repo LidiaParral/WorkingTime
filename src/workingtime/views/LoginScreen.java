@@ -43,7 +43,7 @@ public class LoginScreen extends javax.swing.JFrame {
     String user;
     String name;
     String idUser;
-
+    String dpto;
     /**
      * Creates new form LoginScreen
      */
@@ -77,6 +77,7 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIconoUser = new javax.swing.JLabel();
         lblIconoPass = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
+        lblDpto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -89,6 +90,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         lblForgotPss.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         lblForgotPss.setText("¿Olvidaste la contraseña?");
+        lblForgotPss.setToolTipText("Este enlace permite cambiar la contraseña.");
         lblForgotPss.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblForgotPssMouseClicked(evt);
@@ -104,6 +106,7 @@ public class LoginScreen extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("LOGIN");
+        btnLogin.setToolTipText("Este botón permite acceder al usuario a la aplicación.");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -119,6 +122,9 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIdEmp.setBackground(new java.awt.Color(255, 255, 255));
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
+
+        lblDpto.setEnabled(false);
+        lblDpto.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,17 +151,24 @@ public class LoginScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIconoPass)
                             .addComponent(lblIconoUser))
-                        .addGap(85, 85, 85))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblIdEmp)
-                .addContainerGap())
+                        .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblIdEmp))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDpto)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblIdEmp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDpto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,15 +228,18 @@ public class LoginScreen extends javax.swing.JFrame {
                     Thread.sleep(200);
                     lblIdEmp.setText(rs.getString("IdEmpleado"));
                     idUser = lblIdEmp.getText();
+                    dpto = lblDpto.getText();
                     HomeScreen home = new HomeScreen();
-                    if (idUser.equals("1")) {
+                    if (idUser.equals("1") || dpto.equalsIgnoreCase("RRHH")) {
                         home.mnControlEmp.setVisible(true);
                         home.mnAllEmp.setVisible(true);
                         home.mnEmple.setVisible(true);
+                        home.mnAddSalary.setVisible(true);
                     } else {
                         home.mnControlEmp.setVisible(false);
                         home.mnAllEmp.setVisible(false);
                         home.mnEmple.setVisible(false);
+                        home.mnAddSalary.setVisible(false);
                     }
                     home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                     home.lblNamEmp.setText(rs.getString("Nombre"));
@@ -293,6 +309,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnLogin;
+    public javax.swing.JLabel lblDpto;
     private javax.swing.JLabel lblFondoLogin;
     public javax.swing.JLabel lblForgotPss;
     private javax.swing.JLabel lblIconoPass;

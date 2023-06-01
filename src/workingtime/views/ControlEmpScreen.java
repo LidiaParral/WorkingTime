@@ -328,6 +328,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         btnSaveEmp.setBackground(new java.awt.Color(38, 70, 166));
         btnSaveEmp.setForeground(new java.awt.Color(255, 255, 255));
         btnSaveEmp.setText("GUARDAR");
+        btnSaveEmp.setToolTipText("Este botón permite guardar los datos del empleado.");
         btnSaveEmp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSaveEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,6 +339,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         btnReturn.setBackground(new java.awt.Color(204, 204, 204));
         btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("CANCELAR");
+        btnReturn.setToolTipText("Este botón permite volver a la página anterior.");
         btnReturn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

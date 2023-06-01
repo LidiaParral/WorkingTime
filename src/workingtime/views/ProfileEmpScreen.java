@@ -133,6 +133,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         btnUpdateProfile.setBackground(new java.awt.Color(38, 70, 166));
         btnUpdateProfile.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateProfile.setText("ACTUALIZAR");
+        btnUpdateProfile.setToolTipText("Este botón permite actualizar los datos del empleado.");
         btnUpdateProfile.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUpdateProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +144,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         btnReturn.setBackground(new java.awt.Color(204, 204, 204));
         btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.setText("CANCELAR");
+        btnReturn.setToolTipText("Este botón permite volver a la página anterior.");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReturnActionPerformed(evt);

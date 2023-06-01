@@ -213,14 +213,14 @@ public final class SalariesScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Salario Base", "Total Devengado", "Total Deducido", "Liquido Total", "Horas Trabajadas", "Fecha Inicio", "Fecha Fin"
+                "Salario Base", "Total Devengado", "Total Deducido", "Liquido Total", "Dias Trabajados", "Fecha Inicio", "Fecha Fin"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, false, false
+                false, true, true, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -249,6 +249,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
         btnUpdateNomina.setBackground(new java.awt.Color(38, 70, 166));
         btnUpdateNomina.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateNomina.setText("ACTUALIZAR");
+        btnUpdateNomina.setToolTipText("Este botón permite actualizar ls nómina seleccionada.");
         btnUpdateNomina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUpdateNomina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,7 +325,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDownloadNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 29, Short.MAX_VALUE))
@@ -333,18 +334,19 @@ public final class SalariesScreen extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDateSearch)
-                        .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDownloadNomina)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)))
+                        .addComponent(btnDownloadNomina)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dtDateSalaries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDateSearch))
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnSearchNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,7 +378,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
     private void btnDownloadNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadNominaActionPerformed
         selectedRow = TableSalaries.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para descargar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
             try {
                 JOptionPane.showMessageDialog(null, "Se va a descargar el documento en Excel", "EXPORTAR DOCUMENTO", JOptionPane.PLAIN_MESSAGE);
@@ -429,7 +431,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
                 nomina[1] = rs.getString("TotalDevengado");
                 nomina[2] = rs.getString("TotalDeducciones");
                 nomina[3] = rs.getString("LiquidoTotal");
-                nomina[4] = rs.getString("HorasTrabajadas");
+                nomina[4] = rs.getString("DiasTrabajados");
                 nomina[5] = rs.getDate("FechaInicio");
                 nomina[6] = rs.getDate("FechaFin");
                 model.addRow(nomina);
@@ -455,7 +457,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
                 nomina[1] = rs.getString("TotalDevengado");
                 nomina[2] = rs.getString("TotalDeducciones");
                 nomina[3] = rs.getString("LiquidoTotal");
-                nomina[4] = rs.getString("HorasTrabajadas");
+                nomina[4] = rs.getString("DiasTrabajados");
                 nomina[5] = rs.getDate("FechaInicio");
                 nomina[6] = rs.getDate("FechaFin");
                 model.addRow(nomina);
