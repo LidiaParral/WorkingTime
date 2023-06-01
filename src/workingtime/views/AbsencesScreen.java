@@ -407,8 +407,8 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         idUser = lblIdEmp.getText();
         dpto = lblDepartment.getText();
         manager = txtManager.getText();
-        dateStart = dtDateStartAb.getDate().toString();
-        dateFin = dtDateFinAb.getDate().toString();
+        dateStart = new SimpleDateFormat("dd-MM-yyyy").format(dtDateStartAb.getDate());
+        dateFin = new SimpleDateFormat("dd-MM-yyyy").format(dtDateFinAb.getDate());
         reason = txtaReasonAb.getText();
 
         getDay(dtDateStartAb.getJCalendar());
