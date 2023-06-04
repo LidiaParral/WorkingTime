@@ -78,19 +78,19 @@
                           <Component id="lblSurnames" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDNI" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtGroupProfEmp" min="-2" pref="214" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="txtEmailEmp" min="-2" pref="107" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lblCapital" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCapitalEmp" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
+                      <Component id="cmbGroupProf" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
+                      <Component id="txtCapitalEmp" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
                           <Component id="jLabel16" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" pref="174" max="-2" attributes="0"/>
@@ -100,21 +100,23 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
                               <Component id="txtPhoneEmp" min="-2" pref="248" max="-2" attributes="0"/>
-                              <Component id="txtGroupCotEmp" min="-2" pref="214" max="-2" attributes="0"/>
                               <Component id="lblGroupCot" min="-2" max="-2" attributes="0"/>
                               <Component id="lblDpto" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbEmpDepartment" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                               <Component id="lblDateBirth" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtGroupCotEmp" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cmbEmpCountry" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="dtDateOfBirthEmp" min="-2" pref="168" max="-2" attributes="0"/>
                               <Component id="lblDateOld" min="-2" max="-2" attributes="0"/>
-                              <Component id="dtDateOfSeniorityEmp" min="-2" pref="162" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="dtDateOfSeniorityEmp" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="dtDateOfBirthEmp" alignment="0" pref="168" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -202,7 +204,7 @@
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="lblGroupPro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtGroupProfEmp" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbGroupProf" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -327,7 +329,10 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dtDateOfBirthEmp">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd-MMMM-yyyy"/>
+            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+            <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new Date()" type="code"/>
+            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -335,6 +340,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dtDateOfSeniorityEmp">
           <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
             <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new Date()" type="code"/>
             </Property>
@@ -365,12 +371,11 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGroupProfEmp">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JTextField" name="txtGroupCotEmp">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -420,6 +425,31 @@
               <Image iconType="2" name="C:\Users\parra\Downloads\workingtime_home - copia.png"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbGroupProf">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="11">
+                <StringItem index="0" value="INGENIEROS Y LICENCIADOS"/>
+                <StringItem index="1" value="INGENIEROS T&#xc9;CNICOS, PERITOS Y AYUDANTES TITULADOS"/>
+                <StringItem index="2" value="JEFES ADMINISTRATIVOS Y DE TALLER"/>
+                <StringItem index="3" value="AYUDANTES NO TITULADOS"/>
+                <StringItem index="4" value="OFICIALES ADMINISTRATIVOS"/>
+                <StringItem index="5" value="SUBALTERNOS"/>
+                <StringItem index="6" value="AUXILIARES ADMINISTRATIVOS"/>
+                <StringItem index="7" value="OFICIALES DE PRIMERA Y SEGUNDA"/>
+                <StringItem index="8" value="OFICIALES DE TERCERA Y ESPECIALISTAS"/>
+                <StringItem index="9" value="PEONES"/>
+                <StringItem index="10" value=" "/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbGroupProfActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

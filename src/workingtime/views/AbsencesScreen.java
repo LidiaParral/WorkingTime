@@ -18,12 +18,12 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
+import workingtime.model.ValidateData;
 
 /**
  *
@@ -33,6 +33,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
     public CleanTable lmp = new CleanTable();
+    public ValidateData valid = new ValidateData();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -116,11 +117,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(getIconImage());
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,7 +129,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         lblDateFin.setText("Fecha de fin:");
 
-        dtDateStartAb.setDateFormatString("EEEE dd-MMM-yyyy");
+        dtDateStartAb.setDateFormatString("dd-MM-yyyy");
+
+        dtDateFinAb.setDateFormatString("dd-MM-yyyy");
 
         lblTypeRequest.setText("Tipo de solicitud");
 
@@ -217,11 +215,11 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Responsable", "Fecha Inicio", "Fecha Fin", "Tipo de Solicitud", "Motivo"
+                "Responsable", "Fecha Inicio", "Fecha Fin", "Tipo de Solicitud", "Motivo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -399,10 +397,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         btnDeleteAusencia.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteAusenciaActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.dispose();
-    }//GEN-LAST:event_formWindowClosing
-
     public void saveAbsence() {
         idUser = lblIdEmp.getText();
         dpto = lblDepartment.getText();
@@ -413,11 +407,16 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         getDay(dtDateStartAb.getJCalendar());
         getDay(dtDateFinAb.getJCalendar());
+
         if (dpto.isEmpty() || manager.isEmpty() || dateStart.isEmpty() || dateFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
             JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if(dtDateFinAb.getDate().before(dtDateStartAb.getDate())){
+            JOptionPane.showMessageDialog(null, "El campo de la fecha de fin no puede ser anterior a la fecha de inicio.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if(dtDateStartAb.getDate().after(dtDateFinAb.getDate())){
+            JOptionPane.showMessageDialog(null, "El campo de la fecha de inicio no puede ser posterior a la fecha de fin.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        }else {
             try {
                 typeRequest();
                 sql = "INSERT INTO registro_ausencia(IdEmpleado,Departamento,Responsable,FechaInicio,FechaFin,TipoSolicitud,MotivoAusencia) VALUES"
@@ -432,23 +431,29 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 System.err.println("Error:" + ex);
             }
         }
+        cleanData();
+        lmp.tableCleaning(model);
+    }
+
+    public void cleanData() {
         reset.ResetPanel(jPanel1);
-        dtDateStartAb.setDateFormatString("");
-        dtDateFinAb.setDateFormatString("");
+        dtDateStartAb.setCalendar(null);
+        dtDateFinAb.setCalendar(null);
         cmbTypeRequestVacation.setSelectedIndex(0);
         txtaReasonAb.setText("");
-        lmp.tableCleaning(model);
     }
 
     public void updateAbsence() {
         idUser = lblIdEmp.getText();
         dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
         dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
-        typeRequest = cmbTypeRequestVacation.getSelectedItem().toString();
-        reason = txtaReasonAb.getText();
+        typeRequest = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 3));
+        reason = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 4));
         try {
             sql = "UPDATE registro_ausencia SET TipoSolicitud='" + typeRequest + "', MotivoAusencia='" + reason + "' WHERE IdEmpleado='" + idUser + "'"
                     + "AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "'";
+            
+            System.out.println(sql);
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
@@ -457,16 +462,17 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
         }
         lmp.tableCleaning(model);
-        txtManager.setEnabled(true);
     }
 
     public void deleteAbsence() {
         idUser = lblIdEmp.getText();
         dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
         dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
+        typeRequest = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 3));
         try {
             sql = "DELETE FROM registro_ausencia WHERE IdEmpleado='" + idUser + "'"
-                    + "AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "'";
+                    + " AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "' AND"
+                    + " TipoSolicitud='" + typeRequest + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -486,15 +492,14 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             st = conect.createStatement();
             rs = st.executeQuery(sql);
 
-            Object[] absence = new Object[6];
+            Object[] absence = new Object[5];
             model = (DefaultTableModel) TableAbsence.getModel();
             while (rs.next()) {
-                absence[0] = rs.getInt("IdAusencia");
-                absence[1] = rs.getString("Responsable");
-                absence[2] = rs.getDate("FechaInicio");
-                absence[3] = rs.getDate("FechaFin");
-                absence[4] = rs.getString("TipoSolicitud");
-                absence[5] = rs.getString("MotivoAusencia");
+                absence[0] = rs.getString("Responsable");
+                absence[1] = rs.getDate("FechaInicio");
+                absence[2] = rs.getDate("FechaFin");
+                absence[3] = rs.getString("TipoSolicitud");
+                absence[4] = rs.getString("MotivoAusencia");
 
                 model.addRow(absence);
             }
@@ -504,29 +509,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         }
     }
 
-    public void existAbsence() {
-         sql = "SELECT * FROM registro_ausencia";
-
-        try {
-            conect = conn.getConexion();
-            st = conect.createStatement();
-            rs = st.executeQuery(sql);
-
-            if (rs.next()) {
-                txtManager.setText(rs.getString("Responsable"));
-                txtaReasonAb.setText(rs.getString("MotivoAusencia"));
-                cmbTypeRequestVacation.setSelectedItem(rs.getString("TipoSolicitud"));
-                dtDateStartAb.setDate(rs.getDate("FechaInicio"));
-                dtDateFinAb.setDate(rs.getDate("FechaFin"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el registro de la ausencia en la base de datos.", "REGISTRO AUSENCIA", JOptionPane.PLAIN_MESSAGE);
-                reset.ResetPanel(jPanel1);
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
-        }
-    }
-       
     void typeRequest() {
         switch (cmbTypeRequestVacation.getSelectedIndex()) {
             case 0:

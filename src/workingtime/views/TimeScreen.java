@@ -328,8 +328,6 @@ public final class TimeScreen extends javax.swing.JFrame {
                 minutos = (int) Math.floor(diferencia / 60);
                 diferencia = diferencia - (minutos * 60);
             }
-            //System.out.println("Hay " + horas + " horas");
-
         } catch (ParseException ex) {
             Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -357,8 +355,6 @@ public final class TimeScreen extends javax.swing.JFrame {
                 minutos = (int) Math.floor(diferencia / 60);
                 diferencia = diferencia - (minutos * 60);
             }
-            //System.out.println("Hay " + horas + " horas");
-
         } catch (ParseException ex) {
             Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -369,7 +365,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(day.getDate());
         dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
-//        System.out.println(dayOfWeek);  
     }
 
     public int calculateHours() {
@@ -398,8 +393,13 @@ public final class TimeScreen extends javax.swing.JFrame {
         if (idUser.isEmpty() || dateActual.isEmpty() || timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty()
                 || timeReasonFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cleanData();
         } else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
             JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cleanData();
+        } else if((dtTimeFin.getDate().before(dtTimeStart.getDate())) || (dtReasonFin.getDate().before(dtReasonStart.getDate()))){
+            JOptionPane.showMessageDialog(null, "El campo de la hora de fin no puede ser anterior a la hora de inicio .", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cleanData();
         } else {
             try {
                 sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas) VALUES "
@@ -415,11 +415,15 @@ public final class TimeScreen extends javax.swing.JFrame {
                 System.err.println("Error:" + ex);
             }
         }
-        dtTimeStart.setDateFormatString("");
-        dtTimeFin.setDateFormatString("");
-        dtReasonStart.setDateFormatString("");
-        dtReasonFin.setDateFormatString("");
-        lblDateActual.setText("");
+        cleanData();
+    }
+    
+    public void cleanData(){     
+        dtTimeStart.setCalendar(null);
+        dtTimeFin.setCalendar(null);
+        dtReasonStart.setCalendar(null);
+        dtReasonFin.setCalendar(null);      
+        lblDateActual.setText(""); 
     }
 
     public void existDate() {

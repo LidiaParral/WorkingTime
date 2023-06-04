@@ -9,6 +9,10 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,10 +22,13 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
+import workingtime.model.ValidateData;
 
 /**
  *
@@ -30,6 +37,7 @@ import workingtime.model.ResetFields;
 public final class ControlEmpScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
+    public ValidateData valid = new ValidateData();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -69,22 +77,22 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         cmbEmpJob.setEnabled(false);
-        lblName.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblSurnames.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDNI.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDateBirth.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblNumSS.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDateOld.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblJob.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDpto.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblEmail.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblPhone.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblCapital.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblCountry.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblGroupCot.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblGroupPro.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnSaveEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        lblName.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblSurnames.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDNI.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDateBirth.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblNumSS.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDateOld.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblJob.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDpto.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblEmail.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblPhone.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblCapital.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblCountry.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblGroupCot.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblGroupPro.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnSaveEmp.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -120,7 +128,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         dtDateOfSeniorityEmp = new com.toedter.calendar.JDateChooser();
         txtCapitalEmp = new javax.swing.JTextField();
         cmbEmpCountry = new javax.swing.JComboBox<>();
-        txtGroupProfEmp = new javax.swing.JTextField();
         txtGroupCotEmp = new javax.swing.JTextField();
         lblPhone = new javax.swing.JLabel();
         txtPhoneEmp = new javax.swing.JTextField();
@@ -128,6 +135,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        cmbGroupProf = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         btnSaveEmp = new javax.swing.JButton();
         btnReturn = new javax.swing.JButton();
@@ -171,8 +179,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         lblDpto.setText("Departamento:");
 
-        dtDateOfBirthEmp.setDateFormatString("dd-MMMM-yyyy");
+        dtDateOfBirthEmp.setDateFormatString("dd-MM-yyyy");
+        dtDateOfBirthEmp.setMaxSelectableDate(new Date());
 
+        dtDateOfSeniorityEmp.setDateFormatString("dd-MM-yyyy");
         dtDateOfSeniorityEmp.setMaxSelectableDate(new Date());
 
         txtCapitalEmp.setEnabled(false);
@@ -184,6 +194,9 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         });
 
+        txtGroupCotEmp.setEnabled(false);
+        txtGroupCotEmp.setFocusable(false);
+
         lblPhone.setText("Teléfono:");
 
         jLabel15.setText("@workingtime.com");
@@ -193,6 +206,13 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home - copia.png")); // NOI18N
+
+        cmbGroupProf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INGENIEROS Y LICENCIADOS", "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS", "JEFES ADMINISTRATIVOS Y DE TALLER", "AYUDANTES NO TITULADOS", "OFICIALES ADMINISTRATIVOS", "SUBALTERNOS", "AUXILIARES ADMINISTRATIVOS", "OFICIALES DE PRIMERA Y SEGUNDA", "OFICIALES DE TERCERA Y ESPECIALISTAS", "PEONES", " " }));
+        cmbGroupProf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGroupProfActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,17 +234,17 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblSurnames, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblDNI, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(txtGroupProfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15))
                     .addComponent(lblCapital)
-                    .addComponent(txtCapitalEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                    .addComponent(cmbGroupProf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCapitalEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGap(0, 5, Short.MAX_VALUE)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,19 +253,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCountry)
                             .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGroupCot)
                             .addComponent(lblDpto)
                             .addComponent(lblPhone)
                             .addComponent(cmbEmpDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDateBirth))
+                            .addComponent(lblDateBirth)
+                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbEmpCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDateOld)
-                            .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -313,7 +334,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblGroupPro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGroupProfEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbGroupProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
@@ -395,11 +416,11 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     private void btnSaveEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveEmpActionPerformed
         btnSaveEmp.setBackground(new Color(252, 201, 131));
         addEmployee();
-        btnSaveEmp.setBackground(new Color(38,70,166));
+        btnSaveEmp.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveEmpActionPerformed
 
     private void cmbEmpDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpDepartmentItemStateChanged
-        if(cmbEmpDepartment.getSelectedIndex() > 0){
+        if (cmbEmpDepartment.getSelectedIndex() > 0) {
             cmbEmpJob.setEnabled(true);
             cmbEmpJob.removeAllItems();
             getEmpJob();
@@ -407,7 +428,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEmpDepartmentItemStateChanged
 
     private void cmbEmpCountryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpCountryItemStateChanged
-        if(cmbEmpCountry.getSelectedIndex() > 0){
+        if (cmbEmpCountry.getSelectedIndex() > 0) {
             txtCapitalEmp.setText("");
             getEmpCountry();
         }
@@ -416,6 +437,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
+
+    private void cmbGroupProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGroupProfActionPerformed
+        groupProfesional();
+    }//GEN-LAST:event_cmbGroupProfActionPerformed
 
     public void addEmployee() {
         name = txtNameEmp.getText().toUpperCase();
@@ -426,21 +451,28 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         dateOfSeniority = new SimpleDateFormat("dd-MM-yyyy").format(dtDateOfSeniorityEmp.getDate());
         email = txtEmailEmp.getText().concat("@workingtime.com");
         phone = txtPhoneEmp.getText();
-        user = randomString(15);
+        user = txtEmailEmp.getText();
         password = generateRandomPassword(12, 48, 122);
-        groupProf = txtGroupProfEmp.getText().toUpperCase();
+        groupProf = cmbGroupProf.getSelectedItem().toString().toUpperCase();
         groupCot = txtGroupCotEmp.getText();
         department = cmbEmpDepartment.getSelectedItem().toString().toUpperCase();
         country = cmbEmpCountry.getSelectedItem().toString().toUpperCase();
         job = cmbEmpJob.getSelectedItem().toString().toUpperCase();
         capital = txtCapitalEmp.getText().toUpperCase();
-                
-        try {
-            if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || groupProf.equals("") || groupCot.equals("")
-                    || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
-                JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
-                reset.ResetPanel(jPanel1);
-            } else {
+        
+        
+        if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || groupProf.equals("") || groupCot.equals("")
+                || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if (!valid.validateNumNine(dni)) {
+            JOptionPane.showMessageDialog(null, "El campo del DNI debe contener 8 números y 1 caracter.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if (!valid.validateNumTwelve(SSNumber)) {
+            JOptionPane.showMessageDialog(null, "El campo del número de la seguridad social debe contener 12 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if (!valid.validateNumNine(phone)) {
+            JOptionPane.showMessageDialog(null, "El campo del número de teléfono debe contener 9 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+
                 sql = "INSERT INTO empleados(Nombre,Apellidos,DNI,Usuario,Password,FechaNac,Departamento,PuestoTrabajo,Ciudad,Pais,Email,Telefono,NumeroSeguridadSocial,GrupoProfesional,GrupoCotizacion,FechaAntiguedad) VALUES "
                         + "('" + name + "','" + surnames + "','" + dni + "','" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + department + "','"
                         + job + "','" + capital + "','" + country + "','" + email + "','" + phone + "','" + SSNumber + "','" + groupProf
@@ -450,12 +482,51 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 st = conect.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "Recuerde las credenciales.\nRegistro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
+                saveCredentials();
+
+            } catch (HeadlessException | SQLException ex) {
+                System.err.println("Error:" + ex);
             }
-        } catch (HeadlessException | SQLException ex) {
-            System.err.println("Error:" + ex);
         }
+        cleanData();
+    }
+
+    public void cleanData() {
         reset.ResetPanel(jPanel1);
-        dtDateOfBirthEmp.setDateFormatString("");
+        cmbEmpCountry.setSelectedIndex(0);
+        cmbEmpDepartment.setSelectedIndex(0);
+        cmbEmpJob.setSelectedIndex(0);
+    }
+
+    public void saveCredentials() {
+        File file = new File("C:\\Credentials.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                file.delete();
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            try ( FileWriter fw = new FileWriter(file, true)) {
+                fw.flush();
+                fw.write("Username: ");
+                fw.write(user);
+                fw.write("\n");
+                fw.write("Password: ");
+                fw.write(password);
+                fw.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void getEmpJob() {
@@ -463,20 +534,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         try {
             sql = "SELECT PuestoTrabajo FROM departamentos WHERE Departamento='" + department + "'";
 
-                conect = conn.getConexion();
-                ps = conect.prepareStatement(sql);
-                rs = ps.executeQuery(sql);
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
 
-                while (rs.next()) {
-                    cmbEmpJob.addItem(rs.getString("PuestoTrabajo"));
-                }
+            while (rs.next()) {
+                cmbEmpJob.addItem(rs.getString("PuestoTrabajo"));
+            }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
 
     private void getDepartment() {
-          try {
+        try {
             sql = "SELECT DISTINCT Departamento FROM departamentos";
 
             conect = conn.getConexion();
@@ -485,7 +556,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
             while (rs.next()) {
                 cmbEmpDepartment.addItem(rs.getString("Departamento"));
-                
+
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
@@ -497,20 +568,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             country = cmbEmpCountry.getSelectedItem().toString();
             sql = "SELECT Capital FROM paises WHERE Pais ='" + country + "'";
 
-                conect = conn.getConexion();
-                ps = conect.prepareStatement(sql);
-                rs = ps.executeQuery(sql);
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
 
-                if (rs.next()) {
-                    txtCapitalEmp.setText(rs.getString("Capital"));
-                }
+            if (rs.next()) {
+                txtCapitalEmp.setText(rs.getString("Capital"));
+            }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
 
     public void getCountry() {
-        
+
         try {
             sql = "SELECT * FROM paises";
 
@@ -520,7 +591,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
             while (rs.next()) {
                 cmbEmpCountry.addItem(rs.getString("Pais"));
-                
+
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
@@ -551,6 +622,54 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             cadena += caracterAleatorio;
         }
         return cadena;
+    }
+
+    void groupProfesional() {
+        switch (cmbGroupProf.getSelectedIndex()) {
+            case 0:
+                groupProf = "INGENIEROS Y LICENCIADOS";
+                txtGroupCotEmp.setText("1");
+                break;
+            case 1:
+                groupProf = "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS";
+                txtGroupCotEmp.setText("2");
+                break;
+            case 2:
+                groupProf = "JEFES ADMINISTRATIVOS Y DE TALLER";
+                txtGroupCotEmp.setText("3");
+                break;
+            case 3:
+                groupProf = "AYUDANTES NO TITULADOS";
+                txtGroupCotEmp.setText("4");
+                break;
+            case 4:
+                groupProf = "OFICIALES ADMINISTRATIVOS";
+                txtGroupCotEmp.setText("5");
+                break;
+            case 5:
+                groupProf = "SUBALTERNOS";
+                txtGroupCotEmp.setText("6");
+                break;
+            case 6:
+                groupProf = "AUXILIARES ADMINISTRATIVOS";
+                txtGroupCotEmp.setText("7");
+                break;
+            case 7:
+                groupProf = "OFICIALES DE PRIMERA Y SEGUNDA";
+                txtGroupCotEmp.setText("8");
+                break;
+            case 8:
+                groupProf = "OFICIALES DE TERCERA Y ESPECIALISTAS";
+                txtGroupCotEmp.setText("9");
+                break;
+            case 9:
+                groupProf = "PEONES";
+                txtGroupCotEmp.setText("10");
+                break;
+            default:
+                throw new AssertionError();
+        }
+
     }
 
     /**
@@ -599,6 +718,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cmbEmpCountry;
     public javax.swing.JComboBox<String> cmbEmpDepartment;
     public javax.swing.JComboBox<String> cmbEmpJob;
+    private javax.swing.JComboBox<String> cmbGroupProf;
     public com.toedter.calendar.JDateChooser dtDateOfBirthEmp;
     public com.toedter.calendar.JDateChooser dtDateOfSeniorityEmp;
     private javax.swing.JLabel jLabel15;
@@ -624,7 +744,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     public javax.swing.JTextField txtDNIEmp;
     public javax.swing.JTextField txtEmailEmp;
     public javax.swing.JTextField txtGroupCotEmp;
-    public javax.swing.JTextField txtGroupProfEmp;
     public javax.swing.JTextField txtNameEmp;
     public javax.swing.JTextField txtPhoneEmp;
     public javax.swing.JTextField txtSSNumEmp;

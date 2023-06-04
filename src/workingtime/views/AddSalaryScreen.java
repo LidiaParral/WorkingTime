@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
+import workingtime.model.ValidateData;
 
 /**
  *
@@ -24,6 +25,7 @@ import workingtime.model.ResetFields;
 public class AddSalaryScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
+    public ValidateData valid = new ValidateData();
     
     Conexion conn = new Conexion();
     Connection conect;
@@ -311,7 +313,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
       
         if (idUser.isEmpty() || dateS.isEmpty() || dateF.isEmpty() || salary.isEmpty() || totalDed.isEmpty()
                 || totalDev.isEmpty() || liqTotal.isEmpty() || days.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 sql = "INSERT INTO nominas(IdEmpleado,PuestoTrabajo,Mes,FechaInicio,FechaFin,SalarioBase,TotalDevengado,TotalDeducciones,LiquidoTotal,DiasTrabajados) VALUES "
@@ -327,8 +329,8 @@ public class AddSalaryScreen extends javax.swing.JFrame {
                 System.err.println("Error:" + ex);
             }
         }
-        dtDateS.setDateFormatString("");
-        dtDateF.setDateFormatString("");
+        dtDateS.setCalendar(null);
+        dtDateF.setCalendar(null);
         cmbMonths.setSelectedIndex(0);
         reset.ResetPanel(jPanel1);
     }

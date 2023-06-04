@@ -17,6 +17,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
+import workingtime.model.ValidateData;
 
 /**
  *
@@ -25,6 +26,7 @@ import workingtime.model.ResetFields;
 public class ForgotPsswdScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
+    public ValidateData valid = new ValidateData();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -262,10 +264,12 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             } catch (HeadlessException | SQLException ex) {
                 System.err.println("Error:" + ex);
             }
-        } else if(passNew.equals("") || confiPassNew.equals("") || passOld.equals("")) {
+        } else if(passNew.equals("") || confiPassNew.equals("") || passOld.equals("") || user.equals("")) {
             JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE); 
+        } else if((!valid.validatePasswd(passNew)) || (!valid.validatePasswd(passOld)) || (!valid.validatePasswd(confiPassNew))){
+            JOptionPane.showMessageDialog(null, "El campo debe contener 12 caracteres.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE); 
         } else {
-            JOptionPane.showMessageDialog(null, "Debe de coincidir la nueva contraseña con la confirmación.", "ERROR", JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(null, "Debe de coincidir ambas contraseñas.", "ERROR", JOptionPane.ERROR_MESSAGE); 
         }
         reset.ResetFrame(this);
     }
