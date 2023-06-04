@@ -46,6 +46,7 @@ public class HomeScreen extends javax.swing.JFrame {
         mnPerfilUser.setBackground(Color.WHITE);
         mnRegistroAusencias.setBackground(Color.WHITE);
         mnTodosHorarios.setBackground(Color.WHITE);
+        mnNomina.setBackground(Color.WHITE);
     }
 
     /**
