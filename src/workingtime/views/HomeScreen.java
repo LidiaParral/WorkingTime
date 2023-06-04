@@ -36,16 +36,32 @@ public class HomeScreen extends javax.swing.JFrame {
         lblJobEmp.setVisible(false);
         lblDepartmentEmp.setVisible(false);
         btnLogout.setFont(new Font("Century Gothic",Font.BOLD,12));
+        mnAddDoc.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnAddSalary.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnAllEmp.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnControlEmp.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnNomina.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnProfileUser.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnRegisterAbsence.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnRegisterWorkingDay.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnAllDocuments.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnAllTimes.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        mnDocuments.setFont(new Font("Century Gothic",Font.PLAIN,14));
+        mnEmple.setFont(new Font("Century Gothic",Font.PLAIN,14));
+        mnHorario.setFont(new Font("Century Gothic",Font.PLAIN,14));
+        mnSalary.setFont(new Font("Century Gothic",Font.PLAIN,14));
+        mnProfile.setFont(new Font("Century Gothic",Font.PLAIN,14));
+        
         mnAddDoc.setBackground(Color.WHITE);
         mnAddSalary.setBackground(Color.WHITE);
         mnAllEmp.setBackground(Color.WHITE);
         mnControlEmp.setBackground(Color.WHITE);
-        mnRegistroAusencias.setBackground(Color.WHITE);
-        mnRegistroJornada.setBackground(Color.WHITE);
-        mnTodosDocumentos.setBackground(Color.WHITE);
-        mnPerfilUser.setBackground(Color.WHITE);
-        mnRegistroAusencias.setBackground(Color.WHITE);
-        mnTodosHorarios.setBackground(Color.WHITE);
+        mnRegisterAbsence.setBackground(Color.WHITE);
+        mnRegisterWorkingDay.setBackground(Color.WHITE);
+        mnAllDocuments.setBackground(Color.WHITE);
+        mnProfileUser.setBackground(Color.WHITE);
+        mnRegisterAbsence.setBackground(Color.WHITE);
+        mnAllTimes.setBackground(Color.WHITE);
         mnNomina.setBackground(Color.WHITE);
     }
 
@@ -73,17 +89,17 @@ public class HomeScreen extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
-        mnRegistroJornada = new javax.swing.JMenuItem();
-        mnRegistroAusencias = new javax.swing.JMenuItem();
-        mnTodosHorarios = new javax.swing.JMenuItem();
-        mnPago = new javax.swing.JMenu();
+        mnRegisterWorkingDay = new javax.swing.JMenuItem();
+        mnRegisterAbsence = new javax.swing.JMenuItem();
+        mnAllTimes = new javax.swing.JMenuItem();
+        mnSalary = new javax.swing.JMenu();
         mnNomina = new javax.swing.JMenuItem();
         mnAddSalary = new javax.swing.JMenuItem();
         mnDocuments = new javax.swing.JMenu();
         mnAddDoc = new javax.swing.JMenuItem();
-        mnTodosDocumentos = new javax.swing.JMenuItem();
-        mnPerfil = new javax.swing.JMenu();
-        mnPerfilUser = new javax.swing.JMenuItem();
+        mnAllDocuments = new javax.swing.JMenuItem();
+        mnProfile = new javax.swing.JMenu();
+        mnProfileUser = new javax.swing.JMenuItem();
         mnEmple = new javax.swing.JMenu();
         mnControlEmp = new javax.swing.JMenuItem();
         mnAllEmp = new javax.swing.JMenuItem();
@@ -110,7 +126,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblJobEmp.setEnabled(false);
         lblJobEmp.setFocusable(false);
 
-        fondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home.png")); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/workingtime_home.png"))); // NOI18N
 
         btnLogout.setBackground(new java.awt.Color(38, 70, 166));
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
@@ -206,39 +222,39 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnHorario.setText("Horario");
 
-        mnRegistroJornada.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\hora (1) - copia.png")); // NOI18N
-        mnRegistroJornada.setText("Registro jornada");
-        mnRegistroJornada.setToolTipText("Esta opción permite registrar la jornada del empleado.");
-        mnRegistroJornada.addActionListener(new java.awt.event.ActionListener() {
+        mnRegisterWorkingDay.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\hora (1) - copia.png")); // NOI18N
+        mnRegisterWorkingDay.setText("Registro jornada");
+        mnRegisterWorkingDay.setToolTipText("Esta opción permite registrar la jornada del empleado.");
+        mnRegisterWorkingDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnRegistroJornadaActionPerformed(evt);
+                mnRegisterWorkingDayActionPerformed(evt);
             }
         });
-        mnHorario.add(mnRegistroJornada);
+        mnHorario.add(mnRegisterWorkingDay);
 
-        mnRegistroAusencias.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\fecha-limite (1) - copia.png")); // NOI18N
-        mnRegistroAusencias.setText("Registro ausencias");
-        mnRegistroAusencias.setToolTipText("Esta opción permite registrar la ausencia del empleado.");
-        mnRegistroAusencias.addActionListener(new java.awt.event.ActionListener() {
+        mnRegisterAbsence.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\fecha-limite (1) - copia.png")); // NOI18N
+        mnRegisterAbsence.setText("Registro ausencias");
+        mnRegisterAbsence.setToolTipText("Esta opción permite registrar la ausencia del empleado.");
+        mnRegisterAbsence.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnRegistroAusenciasActionPerformed(evt);
+                mnRegisterAbsenceActionPerformed(evt);
             }
         });
-        mnHorario.add(mnRegistroAusencias);
+        mnHorario.add(mnRegisterAbsence);
 
-        mnTodosHorarios.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\buscar - copia.png")); // NOI18N
-        mnTodosHorarios.setText("Todos los registros");
-        mnTodosHorarios.setToolTipText("Esta opción permite consultar todos los registros de jornada del empleado.");
-        mnTodosHorarios.addActionListener(new java.awt.event.ActionListener() {
+        mnAllTimes.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\buscar - copia.png")); // NOI18N
+        mnAllTimes.setText("Todos los registros");
+        mnAllTimes.setToolTipText("Esta opción permite consultar todos los registros de jornada del empleado.");
+        mnAllTimes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnTodosHorariosActionPerformed(evt);
+                mnAllTimesActionPerformed(evt);
             }
         });
-        mnHorario.add(mnTodosHorarios);
+        mnHorario.add(mnAllTimes);
 
         mnbHome.add(mnHorario);
 
-        mnPago.setText("Pago");
+        mnSalary.setText("Pago");
 
         mnNomina.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\buscar - copia.png")); // NOI18N
         mnNomina.setText("Nómina");
@@ -248,7 +264,7 @@ public class HomeScreen extends javax.swing.JFrame {
                 mnNominaActionPerformed(evt);
             }
         });
-        mnPago.add(mnNomina);
+        mnSalary.add(mnNomina);
 
         mnAddSalary.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\inversion - copia.png")); // NOI18N
         mnAddSalary.setText("Añadir nómina");
@@ -258,9 +274,9 @@ public class HomeScreen extends javax.swing.JFrame {
                 mnAddSalaryActionPerformed(evt);
             }
         });
-        mnPago.add(mnAddSalary);
+        mnSalary.add(mnAddSalary);
 
-        mnbHome.add(mnPago);
+        mnbHome.add(mnSalary);
 
         mnDocuments.setText("Documentos");
 
@@ -274,32 +290,32 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnDocuments.add(mnAddDoc);
 
-        mnTodosDocumentos.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\archivo (2) - copia.png")); // NOI18N
-        mnTodosDocumentos.setText("Todos los documentos");
-        mnTodosDocumentos.setToolTipText("Esta opción permite consultar todos los documentos");
-        mnTodosDocumentos.addActionListener(new java.awt.event.ActionListener() {
+        mnAllDocuments.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\archivo (2) - copia.png")); // NOI18N
+        mnAllDocuments.setText("Todos los documentos");
+        mnAllDocuments.setToolTipText("Esta opción permite consultar todos los documentos");
+        mnAllDocuments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnTodosDocumentosActionPerformed(evt);
+                mnAllDocumentsActionPerformed(evt);
             }
         });
-        mnDocuments.add(mnTodosDocumentos);
+        mnDocuments.add(mnAllDocuments);
 
         mnbHome.add(mnDocuments);
 
-        mnPerfil.setText("Perfil");
-        mnPerfil.setBorderPainted(false);
+        mnProfile.setText("Perfil");
+        mnProfile.setBorderPainted(false);
 
-        mnPerfilUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\wirte - copia.png")); // NOI18N
-        mnPerfilUser.setText("Perfil del usuario");
-        mnPerfilUser.setToolTipText("Esta opción permite actualizar los datos del empleado.");
-        mnPerfilUser.addActionListener(new java.awt.event.ActionListener() {
+        mnProfileUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\wirte - copia.png")); // NOI18N
+        mnProfileUser.setText("Perfil del usuario");
+        mnProfileUser.setToolTipText("Esta opción permite actualizar los datos del empleado.");
+        mnProfileUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnPerfilUserActionPerformed(evt);
+                mnProfileUserActionPerformed(evt);
             }
         });
-        mnPerfil.add(mnPerfilUser);
+        mnProfile.add(mnProfileUser);
 
-        mnbHome.add(mnPerfil);
+        mnbHome.add(mnProfile);
 
         mnEmple.setText("Empleados");
 
@@ -343,11 +359,11 @@ public class HomeScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnRegistroJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroJornadaActionPerformed
+    private void mnRegisterWorkingDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegisterWorkingDayActionPerformed
         TimeScreen time = new TimeScreen();
         time.lblIdEmp.setText(lblIdEmp.getText());
         time.setVisible(true);
-    }//GEN-LAST:event_mnRegistroJornadaActionPerformed
+    }//GEN-LAST:event_mnRegisterWorkingDayActionPerformed
 
     private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
         SalariesScreen salaries = new SalariesScreen();
@@ -362,20 +378,20 @@ public class HomeScreen extends javax.swing.JFrame {
         salaries.setVisible(true);
     }//GEN-LAST:event_mnNominaActionPerformed
 
-    private void mnTodosDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosDocumentosActionPerformed
+    private void mnAllDocumentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllDocumentsActionPerformed
         AllDocumentsScreen doc = new AllDocumentsScreen();
         doc.lblIdEmp.setText(lblIdEmp.getText());
         doc.consultar();
         doc.setVisible(true);
-    }//GEN-LAST:event_mnTodosDocumentosActionPerformed
+    }//GEN-LAST:event_mnAllDocumentsActionPerformed
 
-    private void mnRegistroAusenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegistroAusenciasActionPerformed
+    private void mnRegisterAbsenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegisterAbsenceActionPerformed
         AbsencesScreen aus = new AbsencesScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
         aus.lblDepartment.setText(lblDepartmentEmp.getText());
         aus.consult();
         aus.setVisible(true);
-    }//GEN-LAST:event_mnRegistroAusenciasActionPerformed
+    }//GEN-LAST:event_mnRegisterAbsenceActionPerformed
 
     private void mnControlEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnControlEmpActionPerformed
         ControlEmpScreen control = new ControlEmpScreen();
@@ -394,7 +410,7 @@ public class HomeScreen extends javax.swing.JFrame {
         allEmp.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
 
-    private void mnTodosHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTodosHorariosActionPerformed
+    private void mnAllTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllTimesActionPerformed
         try {
             AllTimesScreen allTimes = new AllTimesScreen();
             allTimes.lblIdEmp.setText(lblIdEmp.getText());
@@ -407,7 +423,7 @@ public class HomeScreen extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mnTodosHorariosActionPerformed
+    }//GEN-LAST:event_mnAllTimesActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         btnLogout.setBackground(new Color(252, 201, 131));
@@ -415,12 +431,12 @@ public class HomeScreen extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void mnPerfilUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPerfilUserActionPerformed
+    private void mnProfileUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProfileUserActionPerformed
         ProfileEmpScreen profile = new ProfileEmpScreen();
         profile.txtIdEmp.setText(lblIdEmp.getText());
         profile.consultar();
         profile.setVisible(true);
-    }//GEN-LAST:event_mnPerfilUserActionPerformed
+    }//GEN-LAST:event_mnProfileUserActionPerformed
 
     private void mnAddSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddSalaryActionPerformed
         AddSalaryScreen addS = new AddSalaryScreen();
@@ -482,19 +498,19 @@ public class HomeScreen extends javax.swing.JFrame {
     public javax.swing.JLabel lblSurnamesEmp;
     private javax.swing.JMenuItem mnAddDoc;
     public javax.swing.JMenuItem mnAddSalary;
+    public javax.swing.JMenuItem mnAllDocuments;
     public javax.swing.JMenuItem mnAllEmp;
+    public javax.swing.JMenuItem mnAllTimes;
     public javax.swing.JMenuItem mnControlEmp;
     private javax.swing.JMenu mnDocuments;
     public javax.swing.JMenu mnEmple;
     private javax.swing.JMenu mnHorario;
     public javax.swing.JMenuItem mnNomina;
-    private javax.swing.JMenu mnPago;
-    private javax.swing.JMenu mnPerfil;
-    public javax.swing.JMenuItem mnPerfilUser;
-    private javax.swing.JMenuItem mnRegistroAusencias;
-    private javax.swing.JMenuItem mnRegistroJornada;
-    public javax.swing.JMenuItem mnTodosDocumentos;
-    public javax.swing.JMenuItem mnTodosHorarios;
+    private javax.swing.JMenu mnProfile;
+    public javax.swing.JMenuItem mnProfileUser;
+    private javax.swing.JMenuItem mnRegisterAbsence;
+    private javax.swing.JMenuItem mnRegisterWorkingDay;
+    private javax.swing.JMenu mnSalary;
     private javax.swing.JMenuBar mnbHome;
     // End of variables declaration//GEN-END:variables
 }

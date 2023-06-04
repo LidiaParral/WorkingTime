@@ -71,9 +71,9 @@ public class AddDocScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         txtPathDoc.setVisible(false);
         lblIdEmp.setVisible(false);
-        lblDateUpdateDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblNamDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDateUpdateDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblTypeDoc.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblNamDoc.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDateUpdateDoc.setFont(new Font("Century Gothic",Font.BOLD,14));
         btnAddDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
         btnSaveDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
     }
@@ -120,11 +120,15 @@ public class AddDocScreen extends javax.swing.JFrame {
 
         lblDateUpdateDoc.setText("Fecha de subida:");
 
+        txtNomDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNomDoc.setEnabled(false);
         txtNomDoc.setFocusable(false);
 
         dtFechaSubDoc.setBackground(new java.awt.Color(255, 255, 255));
+        dtFechaSubDoc.setDateFormatString("dd-MM-yyyy");
+        dtFechaSubDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtFechaSubDoc.setMaxSelectableDate(new Date());
+        dtFechaSubDoc.setMinSelectableDate(new Date());
 
         cmbTypeDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbTypeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PDF", "Excel", "Word" }));
@@ -152,7 +156,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\bolsa-de-valores (1).png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/documents.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -173,39 +177,45 @@ public class AddDocScreen extends javax.swing.JFrame {
                             .addComponent(txtNomDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNamDoc)
                             .addComponent(lblTypeDoc)
-                            .addComponent(cmbTypeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbTypeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(93, 93, 93)
                         .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(46, 46, 46))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(lblIdEmp)
-                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblTypeDoc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblIdEmp)
+                                .addGap(23, 23, 23))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(lblTypeDoc)))
                         .addComponent(cmbTypeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
+                        .addGap(26, 26, 26)
                         .addComponent(lblNamDoc)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNomDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblDateUpdateDoc))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblDateUpdateDoc)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

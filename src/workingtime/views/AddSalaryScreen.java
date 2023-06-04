@@ -59,14 +59,14 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
         lblPuesto.setVisible(false);
-        lblMes.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDateF.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDateS.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblSalaryBase.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblTotalDed.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblTotalDev.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblLiquidoTotal.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblWorkingDays.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblMes.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDateF.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDateS.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblSalaryBase.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblTotalDed.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblTotalDev.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblLiquidoTotal.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblWorkingDays.setFont(new Font("Century Gothic",Font.BOLD,14));
         btnSaveSalary.setFont(new Font("Century Gothic",Font.BOLD,12));
         btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
     }
@@ -119,21 +119,32 @@ public class AddSalaryScreen extends javax.swing.JFrame {
 
         lblTotalDed.setText("Total Deducciones:");
 
-        lblTotalDev.setText("Total Devengado");
+        lblTotalDev.setText("Total Devengado:");
 
         lblLiquidoTotal.setText("Liquido Total:");
 
         lblWorkingDays.setText("Dias Trabajados:");
 
+        txtSalaryB.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtTotalDed.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtTotalDev.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtLiqTotal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtLiqTotal.setEnabled(false);
         txtLiqTotal.setFocusable(false);
+
+        txtWorkDays.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         dtDateS.setBackground(new java.awt.Color(255, 255, 255));
         dtDateS.setToolTipText("Seleccione una fecha inicial");
         dtDateS.setDateFormatString("dd-MM-yyyy");
+        dtDateS.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         dtDateF.setBackground(new java.awt.Color(255, 255, 255));
         dtDateF.setDateFormatString("dd-MM-yyyy");
+        dtDateF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
@@ -162,8 +173,8 @@ public class AddSalaryScreen extends javax.swing.JFrame {
                             .addComponent(lblDateF))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dtDateF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dtDateS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dtDateF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtDateS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblSalaryBase)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -256,7 +267,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\logo.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,10 +276,10 @@ public class AddSalaryScreen extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(btnSaveSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(btnSaveSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
@@ -279,8 +290,8 @@ public class AddSalaryScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSaveSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSaveSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)

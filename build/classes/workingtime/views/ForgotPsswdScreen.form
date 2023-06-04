@@ -219,7 +219,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\parra\Downloads\bloquear.png"/>
+          <Image iconType="3" name="/images/bloquear.png"/>
         </Property>
       </Properties>
     </Component>
@@ -229,7 +229,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\parra\Downloads\bloquear.png"/>
+          <Image iconType="3" name="/images/bloquear.png"/>
         </Property>
       </Properties>
     </Component>
@@ -239,7 +239,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\parra\Downloads\candado.png"/>
+          <Image iconType="3" name="/images/candado.png"/>
         </Property>
       </Properties>
     </Component>
@@ -256,7 +256,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\parra\Downloads\usuario.png"/>
+          <Image iconType="3" name="/images/usuario.png"/>
         </Property>
       </Properties>
     </Component>

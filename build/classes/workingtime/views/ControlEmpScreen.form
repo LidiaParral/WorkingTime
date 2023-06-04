@@ -63,10 +63,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNameEmp" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
-                      <Component id="txtSurnamesEmp" alignment="0" min="-2" pref="349" max="-2" attributes="0"/>
                       <Component id="txtSSNumEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
                       <Component id="lblJob" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="lblGroupPro" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -79,15 +77,17 @@
                           <Component id="lblDNI" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtEmailEmp" min="-2" pref="107" max="-2" attributes="0"/>
+                          <Component id="txtEmailEmp" min="-2" pref="132" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lblCapital" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="cmbGroupProf" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
                       <Component id="txtCapitalEmp" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
+                      <Component id="txtNameEmp" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
+                      <Component id="txtSurnamesEmp" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
@@ -97,25 +97,25 @@
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPhoneEmp" min="-2" pref="248" max="-2" attributes="0"/>
                               <Component id="lblGroupCot" min="-2" max="-2" attributes="0"/>
                               <Component id="lblDpto" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbEmpDepartment" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="cmbEmpDepartment" alignment="0" pref="196" max="32767" attributes="0"/>
                               <Component id="lblDateBirth" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="txtGroupCotEmp" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                              <Component id="txtPhoneEmp" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cmbEmpCountry" min="-2" pref="230" max="-2" attributes="0"/>
                               <Component id="lblDateOld" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="dtDateOfSeniorityEmp" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dtDateOfBirthEmp" alignment="0" pref="168" max="32767" attributes="0"/>
+                                  <Component id="dtDateOfSeniorityEmp" alignment="0" pref="171" max="32767" attributes="0"/>
+                                  <Component id="dtDateOfBirthEmp" alignment="0" pref="171" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -281,21 +281,41 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNameEmp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSurnamesEmp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDNIEmp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSSNumEmp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -323,13 +343,27 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailEmp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailEmpActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dtDateOfBirthEmp">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
             <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new Date()" type="code"/>
             </Property>
@@ -340,7 +374,13 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dtDateOfSeniorityEmp">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
             <Property name="maxSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new Date()" type="code"/>
             </Property>
@@ -351,6 +391,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCapitalEmp">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -373,6 +416,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtGroupCotEmp">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -386,12 +432,20 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPhoneEmp">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbEmpJob">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
@@ -403,6 +457,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="@workingtime.com"/>
           </Properties>
         </Component>
@@ -428,6 +485,9 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbGroupProf">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Century Gothic" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="11">
                 <StringItem index="0" value="INGENIEROS Y LICENCIADOS"/>

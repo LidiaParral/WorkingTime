@@ -210,7 +210,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         txtFecha.setFocusable(false);
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\logo.jpg")); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -52,8 +52,8 @@ public class LoginScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
-        lblUser.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblPassword.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblUser.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblPassword.setFont(new Font("Century Gothic", Font.BOLD, 14));
         btnLogin.setFont(new Font("Century Gothic", Font.BOLD, 12));
         lblForgotPss.setFont(new Font("Century Gothic", Font.PLAIN, 10));
     }
@@ -97,7 +97,7 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
 
-        lblFondoLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\login_2.png")); // NOI18N
+        lblFondoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login_2.png"))); // NOI18N
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Contraseña:");
@@ -114,10 +114,10 @@ public class LoginScreen extends javax.swing.JFrame {
         });
 
         lblIconoUser.setBackground(new java.awt.Color(255, 255, 255));
-        lblIconoUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\usuario.png")); // NOI18N
+        lblIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/usuario.png"))); // NOI18N
 
         lblIconoPass.setBackground(new java.awt.Color(255, 255, 255));
-        lblIconoPass.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\desbloquear (4).png")); // NOI18N
+        lblIconoPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/unlocked.png"))); // NOI18N
 
         lblIdEmp.setBackground(new java.awt.Color(255, 255, 255));
         lblIdEmp.setEnabled(false);

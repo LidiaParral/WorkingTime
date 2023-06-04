@@ -68,10 +68,10 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         lblIdEmp.setVisible(false);
-        lblNumEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblNomEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblJobEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblNumEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblNomEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblJobEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
+        lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
         btnUpdateTime.setFont(new Font("Century Gothic",Font.BOLD,12));
         btnDeleteTime.setFont(new Font("Century Gothic",Font.BOLD,12));
         btnCancelar.setFont(new Font("Century Gothic",Font.PLAIN,12));
@@ -92,8 +92,6 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         TableTime = new javax.swing.JTable();
         lblImage = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnUpdateTime = new javax.swing.JButton();
-        btnDeleteTime = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         lblNumEmp = new javax.swing.JLabel();
@@ -104,6 +102,8 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         lblNom = new javax.swing.JLabel();
         lblPuesto = new javax.swing.JLabel();
         lblDpto = new javax.swing.JLabel();
+        btnDeleteTime = new javax.swing.JButton();
+        btnUpdateTime = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getIconImage());
@@ -137,30 +137,9 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TableTime);
 
         lblImage.setBackground(new java.awt.Color(255, 255, 255));
-        lblImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\gestion-del-tiempo.png")); // NOI18N
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gestion-del-tiempo.png"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnUpdateTime.setBackground(new java.awt.Color(38, 70, 166));
-        btnUpdateTime.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateTime.setText("ACTUALIZAR");
-        btnUpdateTime.setToolTipText("Este botón permite actualizar el registro seleccionado");
-        btnUpdateTime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnUpdateTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateTimeActionPerformed(evt);
-            }
-        });
-
-        btnDeleteTime.setBackground(new java.awt.Color(255, 126, 60));
-        btnDeleteTime.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeleteTime.setText("ELIMINAR");
-        btnDeleteTime.setToolTipText("Este botón permite borrar el registro seleccionado.");
-        btnDeleteTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteTimeActionPerformed(evt);
-            }
-        });
 
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
@@ -170,25 +149,15 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addComponent(lblIdEmp))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnDeleteTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(327, 327, 327)
+                .addComponent(lblIdEmp)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDeleteTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblIdEmp))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(lblIdEmp)
                 .addGap(26, 26, 26))
         );
 
@@ -223,6 +192,27 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
         lblDpto.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnDeleteTime.setBackground(new java.awt.Color(255, 126, 60));
+        btnDeleteTime.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteTime.setText("ELIMINAR");
+        btnDeleteTime.setToolTipText("Este botón permite borrar el registro seleccionado.");
+        btnDeleteTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteTimeActionPerformed(evt);
+            }
+        });
+
+        btnUpdateTime.setBackground(new java.awt.Color(38, 70, 166));
+        btnUpdateTime.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateTime.setText("ACTUALIZAR");
+        btnUpdateTime.setToolTipText("Este botón permite actualizar el registro seleccionado");
+        btnUpdateTime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnUpdateTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateTimeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -249,8 +239,11 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnDeleteTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -278,16 +271,20 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDeleteTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

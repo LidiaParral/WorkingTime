@@ -50,10 +50,10 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
-        lblPassOld.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblPassNew.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblUsername.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblConfPassNew.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblPassOld.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblPassNew.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblUsername.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblConfPassNew.setFont(new Font("Century Gothic", Font.BOLD, 14));
         btnSavePsswd.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnCancelar.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
@@ -120,18 +120,18 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         lblIdEmp.setFocusable(false);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\bloquear.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bloquear.png"))); // NOI18N
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\bloquear.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bloquear.png"))); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\candado.png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/candado.png"))); // NOI18N
 
         lblUsername.setBackground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Nombre de usuario:");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\usuario.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/usuario.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

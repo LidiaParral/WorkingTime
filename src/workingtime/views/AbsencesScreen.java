@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -70,11 +71,11 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblIdEmp.setVisible(false);
         lblDepartment.setVisible(false);
         lblIdAbs.setVisible(true);
-        lblManager.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblDateStart.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblDateFin.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblTypeRequest.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblReason.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblManager.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDateStart.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDateFin.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblTypeRequest.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblReason.setFont(new Font("Century Gothic", Font.BOLD, 14));
         btnUpdateAusencia.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnDeleteAusencia.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnSaveAusencia.setFont(new Font("Century Gothic", Font.BOLD, 12));
@@ -129,9 +130,17 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         lblDateFin.setText("Fecha de fin:");
 
-        dtDateStartAb.setDateFormatString("dd-MM-yyyy");
+        txtManager.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
+        dtDateStartAb.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateStartAb.setDateFormatString("dd-MM-yyyy");
+        dtDateStartAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        dtDateStartAb.setMinSelectableDate(new Date());
+
+        dtDateFinAb.setBackground(new java.awt.Color(255, 255, 255));
         dtDateFinAb.setDateFormatString("dd-MM-yyyy");
+        dtDateFinAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        dtDateFinAb.setMinSelectableDate(new Date());
 
         lblTypeRequest.setText("Tipo de solicitud");
 
@@ -141,11 +150,12 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblReason.setText("Motivo de ausencia:");
 
         txtaReasonAb.setColumns(20);
+        txtaReasonAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtaReasonAb.setRows(5);
         jScrollPane1.setViewportView(txtaReasonAb);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\tiempo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tiempo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,7 +238,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TableAbsence);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\logo.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.jpg"))); // NOI18N
 
         lblIdAbs.setEnabled(false);
         lblIdAbs.setFocusable(false);

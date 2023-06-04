@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -77,20 +76,20 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         cmbEmpJob.setEnabled(false);
-        lblName.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblSurnames.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblDNI.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblDateBirth.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblNumSS.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblDateOld.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblJob.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblDpto.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblEmail.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblPhone.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblCapital.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblCountry.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblGroupCot.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        lblGroupPro.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblName.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblSurnames.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDNI.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDateBirth.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblNumSS.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDateOld.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblJob.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDpto.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblEmail.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblPhone.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblCapital.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblCountry.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblGroupCot.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblGroupPro.setFont(new Font("Century Gothic", Font.BOLD, 14));
         btnSaveEmp.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
@@ -170,6 +169,14 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         lblGroupCot.setText("Grupo de Cotización:");
 
+        txtNameEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtSurnamesEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtDNIEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtSSNumEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         cmbEmpDepartment.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpDepartment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -179,12 +186,24 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         lblDpto.setText("Departamento:");
 
+        txtEmailEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEmailEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailEmpActionPerformed(evt);
+            }
+        });
+
+        dtDateOfBirthEmp.setBackground(new java.awt.Color(255, 255, 255));
         dtDateOfBirthEmp.setDateFormatString("dd-MM-yyyy");
+        dtDateOfBirthEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateOfBirthEmp.setMaxSelectableDate(new Date());
 
+        dtDateOfSeniorityEmp.setBackground(new java.awt.Color(255, 255, 255));
         dtDateOfSeniorityEmp.setDateFormatString("dd-MM-yyyy");
+        dtDateOfSeniorityEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateOfSeniorityEmp.setMaxSelectableDate(new Date());
 
+        txtCapitalEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCapitalEmp.setEnabled(false);
 
         cmbEmpCountry.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -194,11 +213,17 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         });
 
+        txtGroupCotEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtGroupCotEmp.setEnabled(false);
         txtGroupCotEmp.setFocusable(false);
 
         lblPhone.setText("Teléfono:");
 
+        txtPhoneEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        cmbEmpJob.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel15.setText("@workingtime.com");
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -207,6 +232,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home - copia.png")); // NOI18N
 
+        cmbGroupProf.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbGroupProf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INGENIEROS Y LICENCIADOS", "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS", "JEFES ADMINISTRATIVOS Y DE TALLER", "AYUDANTES NO TITULADOS", "OFICIALES ADMINISTRATIVOS", "SUBALTERNOS", "AUXILIARES ADMINISTRATIVOS", "OFICIALES DE PRIMERA Y SEGUNDA", "OFICIALES DE TERCERA Y ESPECIALISTAS", "PEONES", " " }));
         cmbGroupProf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,10 +246,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblEmail)
-                    .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSurnamesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSSNumEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJob)
                     .addComponent(lblGroupPro)
@@ -235,13 +259,15 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addComponent(lblSurnames, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblDNI, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15))
                     .addComponent(lblCapital)
                     .addComponent(cmbGroupProf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCapitalEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                    .addComponent(txtCapitalEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSurnamesEmp))
+                .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 5, Short.MAX_VALUE)
@@ -250,23 +276,23 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblCountry)
-                            .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGroupCot)
                             .addComponent(lblDpto)
                             .addComponent(lblPhone)
-                            .addComponent(cmbEmpDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEmpDepartment, 0, 196, Short.MAX_VALUE)
                             .addComponent(lblDateBirth)
-                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneEmp))
+                        .addGap(0, 100, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbEmpCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDateOld)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
+                                .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -442,6 +468,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         groupProfesional();
     }//GEN-LAST:event_cmbGroupProfActionPerformed
 
+    private void txtEmailEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailEmpActionPerformed
+
     public void addEmployee() {
         name = txtNameEmp.getText().toUpperCase();
         surnames = txtSurnamesEmp.getText().toUpperCase();
@@ -539,7 +569,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             while (rs.next()) {
-                cmbEmpJob.addItem(rs.getString("PuestoTrabajo"));
+                cmbEmpJob.addItem(rs.getString("PuestoTrabajo").toUpperCase());
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
@@ -555,7 +585,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             while (rs.next()) {
-                cmbEmpDepartment.addItem(rs.getString("Departamento"));
+                cmbEmpDepartment.addItem(rs.getString("Departamento").toUpperCase());
 
             }
         } catch (HeadlessException | SQLException ex) {
@@ -573,7 +603,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             if (rs.next()) {
-                txtCapitalEmp.setText(rs.getString("Capital"));
+                txtCapitalEmp.setText(rs.getString("Capital").toUpperCase());
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
@@ -590,7 +620,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             rs = ps.executeQuery(sql);
 
             while (rs.next()) {
-                cmbEmpCountry.addItem(rs.getString("Pais"));
+                cmbEmpCountry.addItem(rs.getString("Pais").toUpperCase());
 
             }
         } catch (HeadlessException | SQLException ex) {

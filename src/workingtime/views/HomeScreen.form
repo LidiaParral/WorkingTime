@@ -9,7 +9,7 @@
             <Property name="text" type="java.lang.String" value="Horario"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnRegistroJornada">
+            <MenuItem class="javax.swing.JMenuItem" name="mnRegisterWorkingDay">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\parra\Downloads\hora (1) - copia.png"/>
@@ -18,10 +18,10 @@
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite registrar la jornada del empleado."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnRegistroJornadaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnRegisterWorkingDayActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnRegistroAusencias">
+            <MenuItem class="javax.swing.JMenuItem" name="mnRegisterAbsence">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\parra\Downloads\fecha-limite (1) - copia.png"/>
@@ -30,10 +30,10 @@
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite registrar la ausencia del empleado."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnRegistroAusenciasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnRegisterAbsenceActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnTodosHorarios">
+            <MenuItem class="javax.swing.JMenuItem" name="mnAllTimes">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\parra\Downloads\buscar - copia.png"/>
@@ -42,7 +42,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar todos los registros de jornada del empleado."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnTodosHorariosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAllTimesActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -50,7 +50,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnPago">
+        <Menu class="javax.swing.JMenu" name="mnSalary">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pago"/>
           </Properties>
@@ -104,7 +104,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAddDocActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnTodosDocumentos">
+            <MenuItem class="javax.swing.JMenuItem" name="mnAllDocuments">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\parra\Downloads\archivo (2) - copia.png"/>
@@ -113,7 +113,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar todos los documentos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnTodosDocumentosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAllDocumentsActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -121,13 +121,13 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnPerfil">
+        <Menu class="javax.swing.JMenu" name="mnProfile">
           <Properties>
             <Property name="text" type="java.lang.String" value="Perfil"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnPerfilUser">
+            <MenuItem class="javax.swing.JMenuItem" name="mnProfileUser">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\parra\Downloads\wirte - copia.png"/>
@@ -136,7 +136,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite actualizar los datos del empleado."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnPerfilUserActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnProfileUserActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -395,7 +395,7 @@
         <Component class="javax.swing.JLabel" name="fondo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\parra\Downloads\workingtime_home.png"/>
+              <Image iconType="3" name="/images/workingtime_home.png"/>
             </Property>
           </Properties>
         </Component>
