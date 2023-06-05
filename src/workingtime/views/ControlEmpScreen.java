@@ -27,7 +27,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
-import workingtime.model.ValidateData;
 
 /**
  *
@@ -36,7 +35,6 @@ import workingtime.model.ValidateData;
 public final class ControlEmpScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
-    public ValidateData valid = new ValidateData();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -494,11 +492,11 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || groupProf.equals("") || groupCot.equals("")
                 || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if (!valid.validateNumNine(dni)) {
-            JOptionPane.showMessageDialog(null, "El campo del DNI debe contener 8 números y 1 caracter.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if (!valid.validateNumTwelve(SSNumber)) {
+        } else if ((dni.length() > 9) || (dni.length() < 9)) {
+            JOptionPane.showMessageDialog(null, "El campo del DNI debe contener 8 números y 1 letra.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if ((SSNumber.length() > 12) || (SSNumber.length() < 12)) {
             JOptionPane.showMessageDialog(null, "El campo del número de la seguridad social debe contener 12 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if (!valid.validateNumNine(phone)) {
+        } else if ((phone.length() > 9) || (phone.length() < 9)) {
             JOptionPane.showMessageDialog(null, "El campo del número de teléfono debe contener 9 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
@@ -529,7 +527,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }
 
     public void saveCredentials() {
-        File file = new File("C:\\Credentials.txt");
+        File file = new File("\\data\\Credentials.txt");
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -545,8 +543,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         }
         try {
-            try ( FileWriter fw = new FileWriter(file, true)) {
-                fw.flush();
+            try (FileWriter fw = new FileWriter(file, true)) {               
                 fw.write("Username: ");
                 fw.write(user);
                 fw.write("\n");

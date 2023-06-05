@@ -59,10 +59,10 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
-        lblDateSearch.setFont(new Font("Century Gothic",Font.BOLD,14));
-        btnDeleteDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnUpdateDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        lblDateSearch.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        btnDeleteDoc.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnUpdateDoc.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -277,7 +277,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         selectedRow = TablaDoc.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
                 JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");       
+                JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnDeleteDoc.setBackground(new Color(145, 150, 255));
         if (election == JOptionPane.YES_OPTION) {
             if (selectedRow < 0) {
@@ -294,28 +294,33 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
 
     public void existDoc() {
         fecha = new SimpleDateFormat("yyyy-MM-dd").format(dtFechaSubida.getDate());
-        try {
-            sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='" + fecha + "'";
 
-            conect = conn.getConexion();
-            ps = conect.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            Object[] documento = new Object[4];
-            modelo = (DefaultTableModel) TablaDoc.getModel();
-            while (rs.next()) {
-                documento[0] = rs.getString("NombreDoc");
-                documento[1] = rs.getString("TipoDocumento");
-                documento[2] = rs.getString("RutaArchivo");
-                documento[3] = rs.getString("FechaSubida");
+        if (fecha.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Este campo no puede estar vacío", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='" + fecha + "'";
 
-                modelo.addRow(documento);
+                conect = conn.getConexion();
+                ps = conect.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                Object[] documento = new Object[4];
+                modelo = (DefaultTableModel) TablaDoc.getModel();
+                while (rs.next()) {
+                    documento[0] = rs.getString("NombreDoc");
+                    documento[1] = rs.getString("TipoDocumento");
+                    documento[2] = rs.getString("RutaArchivo");
+                    documento[3] = rs.getString("FechaSubida");
+
+                    modelo.addRow(documento);
+                }
+                TablaDoc.setModel(modelo);
+
+            } catch (SQLException ex) {
+                System.err.println("Error:" + ex);
             }
-            TablaDoc.setModel(modelo);
 
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
         }
-
         reset.ResetPanel(jPanel2);
 
     }
@@ -414,7 +419,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             new AllDocumentsScreen().setVisible(true);
         });
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().

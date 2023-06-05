@@ -275,20 +275,20 @@ public final class AllEmpScreen extends javax.swing.JFrame {
     private void btnSearchEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmpActionPerformed
         search = txtSearchEmp.getText();
         if (search.equals("")) {
-            JOptionPane.showMessageDialog(null, "No puede estar vacío este campo.", "TODOS LOS EMPLEADOS", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Este campo no puede estar vacío este campo.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else {
             if (TablaEmp.getRowCount() == 0) {
-                existEmp();
+                searchEmp();
             } else {
                 lmp.tableCleaning(modelo);
-                existEmp();
+                searchEmp();
             }
         }
     }//GEN-LAST:event_btnSearchEmpActionPerformed
 
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
         selectedRow = TablaEmp.getSelectedRow();
-        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de confirmación",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnUpdateEmp.setBackground(new Color(252, 201, 131));
@@ -307,7 +307,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
 
     private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
         selectedRow = TablaEmp.getSelectedRow();
-        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
+        election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de confirmación",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, "Aceptar");
         btnDeleteEmp.setBackground(new Color(145, 150, 255));
@@ -395,7 +395,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
      * Método que permite comprobar si existe un cliente con ese nombre en la
      * tabla Clientes de la base de datos.
      */
-    public void existEmp() {
+    public void searchEmp() {
         sql = "SELECT * FROM empleados WHERE Nombre LIKE'%" + txtSearchEmp.getText() + "%' OR Apellidos LIKE'%"
                 + txtSearchEmp.getText() + "%'";
 

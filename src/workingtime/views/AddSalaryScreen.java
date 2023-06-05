@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
-import workingtime.model.ValidateData;
 
 /**
  *
@@ -25,7 +24,6 @@ import workingtime.model.ValidateData;
 public class AddSalaryScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
-    public ValidateData valid = new ValidateData();
     
     Conexion conn = new Conexion();
     Connection conect;

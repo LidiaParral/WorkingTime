@@ -17,11 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import workingtime.database.Conexion;
 import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
-import workingtime.model.SelectedRows;
 
 /**
  *
@@ -31,8 +29,6 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
     public CleanTable lmp = new CleanTable();
-    public TimeScreen time = new TimeScreen();
-    TableCellRenderer slcRows = new SelectedRows();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -74,8 +70,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
         btnUpdateTime.setFont(new Font("Century Gothic",Font.BOLD,12));
         btnDeleteTime.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnCancelar.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        TableTime.setDefaultRenderer(Object.class,slcRows);      
+        btnCancelar.setFont(new Font("Century Gothic",Font.PLAIN,12)); 
     }
 
     /**
@@ -412,6 +407,15 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+        
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -449,14 +453,6 @@ public final class AllTimesScreen extends javax.swing.JFrame {
             }
         });
     }
-    
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableTime;

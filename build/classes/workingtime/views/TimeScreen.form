@@ -37,25 +37,23 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblTimeStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblTimeFin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dtTimeFin" min="-2" pref="154" max="-2" attributes="0"/>
-                                          <Component id="dtTimeStart" min="-2" pref="154" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="lblOtherReasons" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTimeStart" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTimeFin" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="dtTimeFin" min="-2" pref="171" max="-2" attributes="0"/>
+                                  <Component id="dtTimeStart" min="-2" pref="171" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                               <Component id="lblIdEmp" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="cmbOtherReasons" min="-2" pref="203" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cmbOtherReasons" min="-2" pref="215" max="-2" attributes="0"/>
+                                  <Component id="lblOtherReasons" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="dateAct" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
@@ -77,8 +75,8 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dtReasonFin" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <Component id="dtReasonStart" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="dtReasonFin" min="-2" pref="171" max="-2" attributes="0"/>
+                                  <Component id="dtReasonStart" min="-2" pref="171" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -101,8 +99,31 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="lblIdEmp" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblTimeStart" min="-2" max="-2" attributes="0"/>
+                  <Component id="dtTimeStart" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDateNow" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDateActual" min="-2" pref="16" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="dateAct" min="-2" pref="141" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="dtTimeFin" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTimeFin" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lblOtherReasons" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmbOtherReasons" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblTimeStartR" min="-2" max="-2" attributes="0"/>
                           <Component id="dtReasonStart" min="-2" max="-2" attributes="0"/>
@@ -119,35 +140,6 @@
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblTimeStart" min="-2" max="-2" attributes="0"/>
-                          <Component id="dtTimeStart" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDateNow" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDateActual" min="-2" pref="16" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dtTimeFin" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTimeFin" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblOtherReasons" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cmbOtherReasons" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="dateAct" min="-2" pref="141" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
               </Group>
           </Group>
       </Group>
@@ -161,7 +153,13 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dtTimeStart">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
+        <Property name="icon" type="javax.swing.ImageIcon" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
         </Property>
@@ -187,6 +185,9 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dtTimeFin">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
@@ -224,6 +225,9 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dtReasonStart">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>
@@ -276,6 +280,9 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dtReasonFin">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="dateFormatString" type="java.lang.String" value="HH:mm:ss"/>
         <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new Date()" type="code"/>

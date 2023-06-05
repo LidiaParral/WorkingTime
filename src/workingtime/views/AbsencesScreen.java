@@ -24,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
-import workingtime.model.ValidateData;
 
 /**
  *
@@ -34,7 +33,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     public ResetFields reset = new ResetFields();
     public CleanTable lmp = new CleanTable();
-    public ValidateData valid = new ValidateData();
 
     Conexion conn = new Conexion();
     Connection conect;
@@ -364,7 +362,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     private void btnSaveAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAusenciaActionPerformed
         btnSaveAusencia.setBackground(new Color(252, 201, 131));
-        saveAbsence();
+        existDate();
         consult();
         btnSaveAusencia.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveAusenciaActionPerformed
@@ -545,6 +543,28 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     }
 
+      public void existDate() {
+        idUser = lblIdEmp.getText();
+        dateStart = dtDateStartAb.getDateFormatString();
+        dateFin = dtDateFinAb.getDateFormatString();
+        try {
+            sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND "
+                    + "FechaFin='" + dateFin + "'";
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
+                        + dateStart, "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                saveAbsence();
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+    }
+      
+      
     public void getDay(JCalendar day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(day.getDate());
@@ -559,6 +579,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         return retValue;
     }
 
+    
     /**
      * @param args the command line arguments
      */
