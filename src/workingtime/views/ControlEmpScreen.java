@@ -5,6 +5,7 @@
 package workingtime.views;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -19,10 +20,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
@@ -168,14 +173,18 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         lblGroupCot.setText("Grupo de Cotización:");
 
         txtNameEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNameEmp.setToolTipText("El campo del nombre debe tener una longitud de 20 caracteres ");
 
         txtSurnamesEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtSurnamesEmp.setToolTipText("El campo de apellidos debe contener como máximo 100 caracteres ");
 
         txtDNIEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtDNIEmp.setToolTipText("El campo del DNI debe contener 8 números y 1 caracter");
 
         txtSSNumEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         cmbEmpDepartment.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbEmpDepartment.setToolTipText("Seleccione el departamento del usuario");
         cmbEmpDepartment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEmpDepartmentItemStateChanged(evt);
@@ -192,6 +201,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         });
 
         dtDateOfBirthEmp.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateOfBirthEmp.setToolTipText("El usuario registrado debe ser mayor de edad");
         dtDateOfBirthEmp.setDateFormatString("dd-MM-yyyy");
         dtDateOfBirthEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateOfBirthEmp.setMaxSelectableDate(new Date());
@@ -205,6 +215,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         txtCapitalEmp.setEnabled(false);
 
         cmbEmpCountry.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbEmpCountry.setToolTipText("Seleccione el pais del usuario");
         cmbEmpCountry.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEmpCountryItemStateChanged(evt);
@@ -220,6 +231,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         txtPhoneEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         cmbEmpJob.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbEmpJob.setToolTipText("Seleccione el puesto de trabajo del usuario");
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel15.setText("@workingtime.com");
@@ -231,7 +243,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\workingtime_home - copia.png")); // NOI18N
 
         cmbGroupProf.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbGroupProf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INGENIEROS Y LICENCIADOS", "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS", "JEFES ADMINISTRATIVOS Y DE TALLER", "AYUDANTES NO TITULADOS", "OFICIALES ADMINISTRATIVOS", "SUBALTERNOS", "AUXILIARES ADMINISTRATIVOS", "OFICIALES DE PRIMERA Y SEGUNDA", "OFICIALES DE TERCERA Y ESPECIALISTAS", "PEONES", " " }));
+        cmbGroupProf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INGENIEROS Y LICENCIADOS", "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS", "JEFES ADMINISTRATIVOS Y DE TALLER", "AYUDANTES NO TITULADOS", "OFICIALES ADMINISTRATIVOS", "SUBALTERNOS", "AUXILIARES ADMINISTRATIVOS", "OFICIALES DE PRIMERA Y SEGUNDA", "OFICIALES DE TERCERA Y ESPECIALISTAS", "PEONES" }));
+        cmbGroupProf.setToolTipText("Seleccione tipo de grupo profesional");
         cmbGroupProf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGroupProfActionPerformed(evt);
@@ -487,15 +500,13 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         country = cmbEmpCountry.getSelectedItem().toString().toUpperCase();
         job = cmbEmpJob.getSelectedItem().toString().toUpperCase();
         capital = txtCapitalEmp.getText().toUpperCase();
-        
-        
+
+        int edad = getAdultsAge();
         if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || groupProf.equals("") || groupCot.equals("")
                 || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if ((dni.length() > 9) || (dni.length() < 9)) {
-            JOptionPane.showMessageDialog(null, "El campo del DNI debe contener 8 números y 1 letra.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if ((SSNumber.length() > 12) || (SSNumber.length() < 12)) {
-            JOptionPane.showMessageDialog(null, "El campo del número de la seguridad social debe contener 12 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if (edad < 18) {
+            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de edad para poder ser registrado.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else if ((phone.length() > 9) || (phone.length() < 9)) {
             JOptionPane.showMessageDialog(null, "El campo del número de teléfono debe contener 9 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -526,8 +537,22 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         cmbEmpJob.setSelectedIndex(0);
     }
 
+    public int getAdultsAge(){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fechaNac = LocalDate.parse(dateOfBirth, fmt);
+        LocalDate ahora = LocalDate.now();
+
+        Period periodo = Period.between(fechaNac, ahora);
+//        if(periodo.getYears() < 18) {
+//             System.out.printf("Menor de edad");
+//        } else {
+//            System.out.printf("Mayor de edad");
+//        }
+        return periodo.getYears();
+    }
+    
     public void saveCredentials() {
-        File file = new File("\\data\\Credentials.txt");
+        File file = new File("Credentials.txt");
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -543,7 +568,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         }
         try {
-            try (FileWriter fw = new FileWriter(file, true)) {               
+            try ( FileWriter fw = new FileWriter(file, true)) {
                 fw.write("Username: ");
                 fw.write(user);
                 fw.write("\n");
@@ -553,6 +578,18 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JFileChooser window = new JFileChooser(System.getProperty("user.dir"));
+        if (window.showDialog(this, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
+            file = window.getSelectedFile();
+            if (file.canRead()) {
+                try {
+                    Desktop.getDesktop().open(file);
+                } catch (IOException ex) {
+                    Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 

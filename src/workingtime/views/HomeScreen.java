@@ -222,7 +222,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnHorario.setText("Horario");
 
-        mnRegisterWorkingDay.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\hora (1) - copia.png")); // NOI18N
+        mnRegisterWorkingDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hora.png"))); // NOI18N
         mnRegisterWorkingDay.setText("Registro jornada");
         mnRegisterWorkingDay.setToolTipText("Esta opción permite registrar la jornada del empleado.");
         mnRegisterWorkingDay.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +232,7 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnHorario.add(mnRegisterWorkingDay);
 
-        mnRegisterAbsence.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\fecha-limite (1) - copia.png")); // NOI18N
+        mnRegisterAbsence.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ausencias.png"))); // NOI18N
         mnRegisterAbsence.setText("Registro ausencias");
         mnRegisterAbsence.setToolTipText("Esta opción permite registrar la ausencia del empleado.");
         mnRegisterAbsence.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +242,7 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnHorario.add(mnRegisterAbsence);
 
-        mnAllTimes.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\buscar - copia.png")); // NOI18N
+        mnAllTimes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscar.png"))); // NOI18N
         mnAllTimes.setText("Todos los registros");
         mnAllTimes.setToolTipText("Esta opción permite consultar todos los registros de jornada del empleado.");
         mnAllTimes.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +256,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnSalary.setText("Pago");
 
-        mnNomina.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\buscar - copia.png")); // NOI18N
+        mnNomina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarnomina.png"))); // NOI18N
         mnNomina.setText("Nómina");
         mnNomina.setToolTipText("Esta opción permite consultar y actualizar la nómina del empleado.");
         mnNomina.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +266,7 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnSalary.add(mnNomina);
 
-        mnAddSalary.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\inversion - copia.png")); // NOI18N
+        mnAddSalary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nomina.png"))); // NOI18N
         mnAddSalary.setText("Añadir nómina");
         mnAddSalary.setToolTipText("Esta opción permite añadir los datos de la nómina del emplado");
         mnAddSalary.addActionListener(new java.awt.event.ActionListener() {
@@ -280,7 +280,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnDocuments.setText("Documentos");
 
-        mnAddDoc.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\carpeta - copia.png")); // NOI18N
+        mnAddDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carpeta.png"))); // NOI18N
         mnAddDoc.setText("Añadir documento");
         mnAddDoc.setToolTipText("Esta opción permite añadir los documentos necesarios para el empleado");
         mnAddDoc.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +290,7 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnDocuments.add(mnAddDoc);
 
-        mnAllDocuments.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\archivo (2) - copia.png")); // NOI18N
+        mnAllDocuments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/documentos.png"))); // NOI18N
         mnAllDocuments.setText("Todos los documentos");
         mnAllDocuments.setToolTipText("Esta opción permite consultar todos los documentos");
         mnAllDocuments.addActionListener(new java.awt.event.ActionListener() {
@@ -305,7 +305,7 @@ public class HomeScreen extends javax.swing.JFrame {
         mnProfile.setText("Perfil");
         mnProfile.setBorderPainted(false);
 
-        mnProfileUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\wirte - copia.png")); // NOI18N
+        mnProfileUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfil.png"))); // NOI18N
         mnProfileUser.setText("Perfil del usuario");
         mnProfileUser.setToolTipText("Esta opción permite actualizar los datos del empleado.");
         mnProfileUser.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +319,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnEmple.setText("Empleados");
 
-        mnControlEmp.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\redaccion - copia.png")); // NOI18N
+        mnControlEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empleados.png"))); // NOI18N
         mnControlEmp.setText("Añadir empleado");
         mnControlEmp.setToolTipText("Esta opción permite añadir un empleado");
         mnControlEmp.addActionListener(new java.awt.event.ActionListener() {
@@ -329,7 +329,7 @@ public class HomeScreen extends javax.swing.JFrame {
         });
         mnEmple.add(mnControlEmp);
 
-        mnAllEmp.setIcon(new javax.swing.ImageIcon("C:\\Users\\parra\\Downloads\\buscar (1) - copia.png")); // NOI18N
+        mnAllEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscar.png"))); // NOI18N
         mnAllEmp.setText("Todos los empleados");
         mnAllEmp.setToolTipText("Esta opción permite consultar todos los empleados.");
         mnAllEmp.addActionListener(new java.awt.event.ActionListener() {

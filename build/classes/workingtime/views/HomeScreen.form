@@ -12,7 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnRegisterWorkingDay">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\hora (1) - copia.png"/>
+                  <Image iconType="3" name="/images/hora.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registro jornada"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite registrar la jornada del empleado."/>
@@ -24,7 +24,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnRegisterAbsence">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\fecha-limite (1) - copia.png"/>
+                  <Image iconType="3" name="/images/ausencias.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registro ausencias"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite registrar la ausencia del empleado."/>
@@ -36,7 +36,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnAllTimes">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\buscar - copia.png"/>
+                  <Image iconType="3" name="/images/buscar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Todos los registros"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar todos los registros de jornada del empleado."/>
@@ -58,7 +58,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnNomina">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\buscar - copia.png"/>
+                  <Image iconType="3" name="/images/buscarnomina.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="N&#xf3;mina"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar y actualizar la n&#xf3;mina del empleado."/>
@@ -73,7 +73,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnAddSalary">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\inversion - copia.png"/>
+                  <Image iconType="3" name="/images/nomina.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir n&#xf3;mina"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite a&#xf1;adir los datos de la n&#xf3;mina del emplado"/>
@@ -95,7 +95,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnAddDoc">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\carpeta - copia.png"/>
+                  <Image iconType="3" name="/images/carpeta.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir documento"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite a&#xf1;adir los documentos necesarios para el empleado"/>
@@ -107,7 +107,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnAllDocuments">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\archivo (2) - copia.png"/>
+                  <Image iconType="3" name="/images/documentos.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Todos los documentos"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar todos los documentos"/>
@@ -130,7 +130,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnProfileUser">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\wirte - copia.png"/>
+                  <Image iconType="3" name="/images/perfil.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Perfil del usuario"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite actualizar los datos del empleado."/>
@@ -155,7 +155,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnControlEmp">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\redaccion - copia.png"/>
+                  <Image iconType="3" name="/images/empleados.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir empleado"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite a&#xf1;adir un empleado"/>
@@ -170,7 +170,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnAllEmp">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\parra\Downloads\buscar (1) - copia.png"/>
+                  <Image iconType="3" name="/images/buscar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Todos los empleados"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar todos los empleados."/>

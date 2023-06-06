@@ -236,7 +236,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TableAbsence);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logotipo2.png"))); // NOI18N
 
         lblIdAbs.setEnabled(false);
         lblIdAbs.setFocusable(false);

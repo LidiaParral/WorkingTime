@@ -69,7 +69,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
         lblUser = new javax.swing.JLabel();
         lblForgotPss = new javax.swing.JLabel();
-        lblFondoLogin = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         txtUserLogin = new javax.swing.JTextField();
         txtPswLogin = new javax.swing.JPasswordField();
@@ -82,7 +81,8 @@ public class LoginScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(506, 390));
+        setMaximumSize(new java.awt.Dimension(506, 279));
+        setMinimumSize(new java.awt.Dimension(506, 279));
         setResizable(false);
 
         lblUser.setBackground(new java.awt.Color(255, 255, 255));
@@ -96,8 +96,6 @@ public class LoginScreen extends javax.swing.JFrame {
                 lblForgotPssMouseClicked(evt);
             }
         });
-
-        lblFondoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login_2.png"))); // NOI18N
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Contraseña:");
@@ -133,29 +131,29 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFondoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblForgotPss)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblUser)
                                     .addComponent(lblPassword))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIconoPass)
-                            .addComponent(lblIconoUser))
-                        .addGap(85, 85, 85))
+                            .addComponent(lblIconoUser)
+                            .addComponent(lblIconoPass))
+                        .addGap(79, 79, 79))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 494, Short.MAX_VALUE)
                                 .addComponent(lblIdEmp))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDpto)
@@ -168,26 +166,23 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addComponent(lblIdEmp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDpto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblUser))
-                            .addComponent(lblIconoUser))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPassword)))
-                    .addComponent(lblIconoPass, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(0, 0, 0)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUser))
+                    .addComponent(lblIconoUser, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPassword))
+                    .addComponent(lblIconoPass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblForgotPss)
-                .addGap(32, 32, 32)
+                .addGap(35, 35, 35)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblFondoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(66, 66, 66))
         );
 
         pack();
@@ -310,7 +305,6 @@ public class LoginScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnLogin;
     public javax.swing.JLabel lblDpto;
-    private javax.swing.JLabel lblFondoLogin;
     public javax.swing.JLabel lblForgotPss;
     private javax.swing.JLabel lblIconoPass;
     private javax.swing.JLabel lblIconoUser;

@@ -147,7 +147,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         });
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logotipo2.png"))); // NOI18N
 
         btnReturn.setBackground(new java.awt.Color(204, 204, 204));
         btnReturn.setForeground(new java.awt.Color(255, 255, 255));
