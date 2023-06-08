@@ -22,8 +22,9 @@ import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class AllDocumentsScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class AllDocumentsScreen extends javax.swing.JFrame {
 
@@ -236,10 +237,21 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     *
+     * @param evt
+     */
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
+    /**
+     * Botón Search: Este botón permite buscar un documento por una fecha
+     * seleccionada.
+     *
+     * @param evt
+     */
     private void btnSearchDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDocActionPerformed
         search = dtFechaSubida.getDateFormatString();
         if (search.equals("")) {
@@ -254,6 +266,12 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchDocActionPerformed
 
+    /**
+     * Botón Actualizar: Este botón permite actualizar los datos de un registro
+     * del documento seleccionado.
+     *
+     * @param evt
+     */
     private void btnUpdateDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDocActionPerformed
         selectedRow = TablaDoc.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
@@ -265,7 +283,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 updateDocument();
-                consultar();
+                consult();
             }
         } else if (election == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
@@ -273,6 +291,12 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         btnUpdateDoc.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateDocActionPerformed
 
+    /**
+     * Botón Eliminar: Este botón permite eliminar un registro del documento
+     * seleccionado.
+     *
+     * @param evt
+     */
     private void btnDeleteDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDocActionPerformed
         selectedRow = TablaDoc.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
@@ -284,7 +308,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 deleteDocument();
-                consultar();
+                consult();
             }
         } else if (election == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
@@ -292,6 +316,10 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         btnDeleteDoc.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteDocActionPerformed
 
+    /**
+     * Método existDoc: Este botón permite comprobar si existe un registro del
+     * documento con una fecha concreta en la base de datos.
+     */
     public void existDoc() {
         fecha = new SimpleDateFormat("yyyy-MM-dd").format(dtFechaSubida.getDate());
 
@@ -325,7 +353,11 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
 
     }
 
-    public void consultar() {
+    /**
+     * Método consult: Este método permite consultar todos los documentos de un
+     * empleado en la base de datos.
+     */
+    public void consult() {
         idUser = lblIdEmp.getText();
         try {
             sql = "SELECT * FROM documentos_empleado WHERE IdEmpleado ='" + idUser + "'";
@@ -352,6 +384,10 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel2);
     }
 
+    /**
+     * Método updateDocument: Este método permite actualizar los datos de un
+     * registro de un documento seleccionado en la base de datos.
+     */
     public void updateDocument() {
         nomDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
         idUser = lblIdEmp.getText();
@@ -369,6 +405,10 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         lmp.tableCleaning(modelo);
     }
 
+    /**
+     * Método deleteDocument: Este método permite eliminar un registro de un
+     * documento seleccionado en la base de datos.
+     */
     public void deleteDocument() {
         idUser = lblIdEmp.getText();
         try {
@@ -382,6 +422,19 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
         }
         lmp.tableCleaning(modelo);
+    }
+
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return image
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     /**
@@ -419,14 +472,6 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             new AllDocumentsScreen().setVisible(true);
         });
     }
-
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaDoc;

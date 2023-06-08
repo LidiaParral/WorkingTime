@@ -30,8 +30,10 @@ import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
 
 /**
+ * Class AddDocScreen
  *
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class AddDocScreen extends javax.swing.JFrame {
 
@@ -53,29 +55,28 @@ public class AddDocScreen extends javax.swing.JFrame {
     String typeDoc;
     String idEmp;
     String path;
-    
+
     JFileChooser selected = new JFileChooser();
     byte[] img;
-    
+
     FileInputStream input;
     FileOutputStream out;
     File file;
-    
-    
+
     /**
      * Creates new form AddDocumentoScreen
      */
     public AddDocScreen() {
-        initComponents();      
+        initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         txtPathDoc.setVisible(false);
         lblIdEmp.setVisible(false);
-        lblTypeDoc.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblNamDoc.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblDateUpdateDoc.setFont(new Font("Century Gothic",Font.BOLD,14));
-        btnAddDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnSaveDoc.setFont(new Font("Century Gothic",Font.BOLD,12));
+        lblTypeDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblNamDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDateUpdateDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        btnAddDoc.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnSaveDoc.setFont(new Font("Century Gothic", Font.BOLD, 12));
     }
 
     /**
@@ -272,13 +273,18 @@ public class AddDocScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Añadir: Este botón permite añadir un documento a la aplicación.
+     *
+     * @param evt
+     */
     private void btnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDocActionPerformed
         btnAddDoc.setBackground(new Color(145, 150, 255));
-        if(selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
+        if (selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
-            if(file.canRead()){
-                if(file.getName().endsWith(".pdf") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx") 
-                        || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")){
+            if (file.canRead()) {
+                if (file.getName().endsWith(".pdf") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx")
+                        || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")) {
                     try {
                         img = addFile(file);
                         txtPathDoc.setText(file.getAbsolutePath());
@@ -288,60 +294,81 @@ public class AddDocScreen extends javax.swing.JFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No puede abrir un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                        + ".pdf,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
+                            + ".pdf,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
-        btnAddDoc.setBackground(new Color(255,126,60));
+        btnAddDoc.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnAddDocActionPerformed
 
+    /**
+     * Botón Guadar: Este botón permite guardar el documento añadido.
+     *
+     * @param evt
+     */
     private void btnSaveDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDocActionPerformed
         btnSaveDoc.setBackground(new Color(252, 201, 131));
-        if(selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION){
+        if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
-            if(!file.getName().endsWith(".pdf") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx") 
-                        && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")){
+            if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
+                    && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")) {
                 JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
                         + ".pdf,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
             } else {
                 String respuesta = saveFile(file, img);
                 saveDocument();
-                if(respuesta != null){
+                if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
                 }
             }
         }
-         btnSaveDoc.setBackground(new Color(38,70,166));
+        btnSaveDoc.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveDocActionPerformed
 
-    public byte[] addFile(File archivo) throws IOException{
-        byte[] contenido = new byte[1024*1000];
-        try{
-            input = new FileInputStream(archivo);
-            input.read(contenido);
-        } catch(FileNotFoundException e){
-            
-        }    
-        return contenido;
+    /**
+     * Método addFile: Este método permite añadir un archivo.
+     *
+     * @param file
+     * @return content
+     * @throws java.io.IOException
+     */
+    public byte[] addFile(File file) throws IOException {
+        byte[] content = new byte[1024 * 1000];
+        try {
+            input = new FileInputStream(file);
+            input.read(content);
+        } catch (FileNotFoundException e) {
+
+        }
+        return content;
     }
-    
-    
-    public String saveFile(File archivo, byte[] contenido){
-        String resp = null;       
-        try{
-            out = new FileOutputStream(archivo);
-            out.write(contenido);
+
+    /**
+     * Método saveFile: Este método permite guardar un archivo.
+     *
+     * @param file
+     * @param content
+     * @return resp
+     */
+    public String saveFile(File file, byte[] content) {
+        String resp = null;
+        try {
+            out = new FileOutputStream(file);
+            out.write(content);
             resp = "Se ha guardado el archivo correctamente.";
-        }catch(IOException e){
-            
-        } 
-        return resp;   
+        } catch (IOException e) {
+
+        }
+        return resp;
     }
-    
-    
-    public void saveDocument(){
+
+    /**
+     * Método saveDocument: Este método permite guardar un documento en la base
+     * de datos.
+     */
+    public void saveDocument() {
         idEmp = lblIdEmp.getText();
         name = txtNomDoc.getText();
         path = txtPathDoc.getText();
@@ -353,20 +380,25 @@ public class AddDocScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
             } else {
                 sql = "INSERT INTO documentos_empleado(IdEmpleado,TipoDocumento,NombreDoc,RutaArchivo,FechaSubida) VALUES "
-                        + "('" + idEmp + "','" + typeDoc + "','" + name + "','" + path + "'," 
+                        + "('" + idEmp + "','" + typeDoc + "','" + name + "','" + path + "',"
                         + "STR_TO_DATE('" + date + "','%d-%m-%Y')" + ")";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Registro con éxito", "DOCUMENTOS", JOptionPane.INFORMATION_MESSAGE);               
+                JOptionPane.showMessageDialog(null, "Registro con éxito", "DOCUMENTOS", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
         }
     }
-    
-     void typeDocuments() {
+
+    /**
+     * Método typeRequest: Este método permite añadir el valor del tipo de
+     * documento en la base de datos, según se seleccione en el campo del
+     * comboBox.
+     */
+    void typeDocuments() {
         switch (cmbTypeDoc.getSelectedIndex()) {
             case 0:
                 typeDoc = "PDF";
@@ -382,16 +414,20 @@ public class AddDocScreen extends javax.swing.JFrame {
         }
 
     }
-     
 
-         
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return image
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("images/logotipo.png"));
         return retValue;
     }
-    
+
     /**
      * @param args the command line arguments
      */

@@ -18,8 +18,10 @@ import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
 
 /**
+ * Class AllEmpScreen
  *
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public final class AllEmpScreen extends javax.swing.JFrame {
 
@@ -54,10 +56,10 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblNamSearch.setFont(new Font("Century Gothic",Font.BOLD,14));
-        btnUpdateEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnDeleteEmp.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        lblNamSearch.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        btnUpdateEmp.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnDeleteEmp.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -275,6 +277,12 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Search: Este botón permite buscar un empleado por nombre o
+     * apellidos de éste.
+     *
+     * @param evt
+     */
     private void btnSearchEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmpActionPerformed
         search = txtSearchEmp.getText();
         if (search.equals("")) {
@@ -289,6 +297,12 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchEmpActionPerformed
 
+    /**
+     * Botón Actualizar: Este botón permite actualizar los datos de un registro
+     * del empleado seleccionado.
+     *
+     * @param evt
+     */
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
         selectedRow = TablaEmp.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de confirmación",
@@ -300,7 +314,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 updateEmp();
-                consultar();
+                consult();
             }
         } else if (election == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
@@ -308,6 +322,12 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         btnUpdateEmp.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateEmpActionPerformed
 
+    /**
+     * Botón Eliminar: Este botón permite eliminar un registro del empleado
+     * seleccionado.
+     *
+     * @param evt
+     */
     private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
         selectedRow = TablaEmp.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de confirmación",
@@ -319,7 +339,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 deleteEmp();
-                consultar();
+                consult();
             }
         } else if (election == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
@@ -327,11 +347,20 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         btnDeleteEmp.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteEmpActionPerformed
 
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     *
+     * @param evt
+     */
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
-    public void consultar() {
+    /**
+     * Método consult: Este método permite consultar todos los empleados en la
+     * base de datos.
+     */
+    public void consult() {
         sql = "SELECT IdEmpleado,Nombre,Apellidos,DNI,FechaNac,Departamento,Email,Telefono FROM empleados";
 
         try {
@@ -359,6 +388,10 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método updateEmp: Este método permite actualizar los datos de un registro
+     * de un empleado seleccionado en la base de datos.
+     */
     public void updateEmp() {
         idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
         email = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 5));
@@ -379,6 +412,10 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         lmp.tableCleaning(modelo);
     }
 
+    /**
+     * Método deleteEmp: Este método permite eliminar un registro de un empleado
+     * seleccionado en la base de datos.
+     */
     public void deleteEmp() {
         idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
         try {
@@ -395,8 +432,8 @@ public final class AllEmpScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método que permite comprobar si existe un cliente con ese nombre en la
-     * tabla Clientes de la base de datos.
+     * Método searchEmp: Este método que permite comprobar si existe un cliente
+     * con ese nombre en la tabla Clientes de la base de datos.
      */
     public void searchEmp() {
         sql = "SELECT * FROM empleados WHERE Nombre LIKE'%" + txtSearchEmp.getText() + "%' OR Apellidos LIKE'%"

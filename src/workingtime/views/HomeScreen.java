@@ -381,7 +381,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void mnAllDocumentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllDocumentsActionPerformed
         AllDocumentsScreen doc = new AllDocumentsScreen();
         doc.lblIdEmp.setText(lblIdEmp.getText());
-        doc.consultar();
+        doc.consult();
         doc.setVisible(true);
     }//GEN-LAST:event_mnAllDocumentsActionPerformed
 
@@ -406,7 +406,7 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void mnAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllEmpActionPerformed
         AllEmpScreen allEmp = new AllEmpScreen();
-        allEmp.consultar();
+        allEmp.consult();
         allEmp.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
 

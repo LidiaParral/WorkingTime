@@ -22,8 +22,10 @@ import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
 
 /**
+ * Class AllTimesScreen
  *
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public final class AllTimesScreen extends javax.swing.JFrame {
 
@@ -57,6 +59,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form TodosHorariosScreen
+     *
      * @throws java.lang.ClassNotFoundException
      */
     public AllTimesScreen() throws ClassNotFoundException {
@@ -64,13 +67,13 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocationRelativeTo(null);
         lblIdEmp.setVisible(false);
-        lblNumEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblNomEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblJobEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        btnUpdateTime.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnDeleteTime.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnCancelar.setFont(new Font("Century Gothic",Font.PLAIN,12)); 
+        lblNumEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblNomEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblJobEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDptoEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        btnUpdateTime.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnDeleteTime.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnCancelar.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -300,6 +303,12 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Eliminar: Este botón permite eliminar un registro del horario
+     * laboral seleccionado.
+     *
+     * @param evt
+     */
     private void btnDeleteTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTimeActionPerformed
         selectedRow = TableTime.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
@@ -319,6 +328,12 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         btnDeleteTime.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteTimeActionPerformed
 
+    /**
+     * Botón Actualizar: Este botón permite actualizar los datos de un registro
+     * del horario laboral seleccionado.
+     *
+     * @param evt
+     */
     private void btnUpdateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTimeActionPerformed
         selectedRow = TableTime.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
@@ -338,12 +353,22 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         btnUpdateTime.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateTimeActionPerformed
 
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     *
+     * @param evt
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Método existWorkingDay: Este botón permite comprobar si existe un
+     * registro
+     */
     public void existWorkingDay() {
-        sql = "SELECT FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas FROM registro_horas WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
+        sql = "SELECT FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas FROM registro_horas "
+                + "WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
 
         try {
             conect = conn.getConexion();
@@ -359,7 +384,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                 horario[4] = rs.getTime("HoraInicioRazones");
                 horario[5] = rs.getTime("HoraFinRazones");
                 horario[6] = rs.getInt("HorasImputadas");
-                
+
                 model.addRow(horario);
             }
             TableTime.setModel(model);
@@ -369,6 +394,9 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     public void deleteWorkingDay() {
         idUser = lblIdEmp.getText();
         try {
@@ -384,6 +412,9 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+    /**
+     *
+     */
     public void updateWorkingDay() {
         date = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 0));
         timeStart = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 1));
@@ -391,11 +422,11 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         timeReasonStart = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 4));
         timeReasonFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 5));
         hours = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 6));
-        
+
         try {
 
             sql = "UPDATE registro_horas SET HoraInicio='" + timeStart + "', HoraFin='" + timeFin + "', HoraInicioRazones='" + timeReasonStart + "', HoraFinRazones='" + timeReasonFin
-                    + "', HorasImputadas='"+ hours +"' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
+                    + "', HorasImputadas='" + hours + "' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -407,7 +438,10 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
-        
+    /**
+     *
+     * @return
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
@@ -415,7 +449,6 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         return retValue;
     }
 
-    
     /**
      * @param args the command line arguments
      */

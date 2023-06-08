@@ -194,11 +194,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         lblDpto.setText("Departamento:");
 
         txtEmailEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEmailEmp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailEmpActionPerformed(evt);
-            }
-        });
 
         dtDateOfBirthEmp.setBackground(new java.awt.Color(255, 255, 255));
         dtDateOfBirthEmp.setToolTipText("El usuario registrado debe ser mayor de edad");
@@ -479,10 +474,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         groupProfesional();
     }//GEN-LAST:event_cmbGroupProfActionPerformed
 
-    private void txtEmailEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailEmpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailEmpActionPerformed
-
     public void addEmployee() {
         name = txtNameEmp.getText().toUpperCase();
         surnames = txtSurnamesEmp.getText().toUpperCase();
@@ -543,11 +534,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         LocalDate ahora = LocalDate.now();
 
         Period periodo = Period.between(fechaNac, ahora);
-//        if(periodo.getYears() < 18) {
-//             System.out.printf("Menor de edad");
-//        } else {
-//            System.out.printf("Mayor de edad");
-//        }
         return periodo.getYears();
     }
     

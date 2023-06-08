@@ -18,8 +18,9 @@ import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class AddSalaryScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class AddSalaryScreen extends javax.swing.JFrame {
 
@@ -299,15 +300,25 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     * @param evt 
+     */
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
+    /**
+     * Botón Guardar: Este botón permite guardar los datos de la nómina de un empleado.
+     * @param evt 
+     */
     private void btnSaveSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveSalaryActionPerformed
         searchNomina();
     }//GEN-LAST:event_btnSaveSalaryActionPerformed
 
-    
+    /**
+     * Método addSalary: Este método permite añadir los datos de la nómina en la base de datos.
+     */
     public void addSalary(){
         idUser = lblIdEmp.getText();
         job = lblPuesto.getText();
@@ -344,7 +355,10 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel1);
     }
     
-     public void searchNomina() {
+    /**
+     * Método searchNomina: Este método permite comprobar si existe un registro de nómina en la base de datos buscando a través del mes y del id del empleado.
+     */
+    public void searchNomina() {
         month = cmbMonths.getSelectedItem().toString();
         idUser = lblIdEmp.getText();
         try {
@@ -363,7 +377,10 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         }
     }
      
-     
+    /**
+     * Método calculateLiquidoTotal: Este método permite calcular el valor del liquido total.
+     * @return total
+     */
     public int calculateLiquidoTotal(){
       ded = Integer.parseInt (totalDed);
       dev = Integer.parseInt (totalDev);
@@ -371,6 +388,8 @@ public class AddSalaryScreen extends javax.swing.JFrame {
       
       return total;
     }
+    
+    
     /**
      * @param args the command line arguments
      */

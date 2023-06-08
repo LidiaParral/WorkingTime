@@ -26,8 +26,9 @@ import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class AbsencesScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public final class AbsencesScreen extends javax.swing.JFrame {
 
@@ -360,6 +361,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Guardar: Este botón permite guardar los datos de la ausencia de un empleado.
+     * @param evt 
+     */
     private void btnSaveAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAusenciaActionPerformed
         btnSaveAusencia.setBackground(new Color(252, 201, 131));
         existDate();
@@ -367,6 +372,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         btnSaveAusencia.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveAusenciaActionPerformed
 
+    /**
+     * Botón Actualizar: Este botón permite actualizar los datos de la ausencia seleccionada de un empleado.
+     * @param evt 
+     */
     private void btnUpdateAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAusenciaActionPerformed
         selectedRow = TableAbsence.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
@@ -386,6 +395,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         btnUpdateAusencia.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateAusenciaActionPerformed
 
+    /**
+     * Botón Eliminar: Este botón permite eliminar los datos de la ausencia seleccionada de un empleado
+     * @param evt 
+     */
     private void btnDeleteAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAusenciaActionPerformed
         selectedRow = TableAbsence.getSelectedRow();
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea eliminar los datos del empleado permanentemente", "Mensaje de Confirmacion",
@@ -405,6 +418,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         btnDeleteAusencia.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteAusenciaActionPerformed
 
+    /**
+     * Método saveAbsence: Este método permite guardar los datos de la ausencia en la base de datos.
+     */
     public void saveAbsence() {
         idUser = lblIdEmp.getText();
         dpto = lblDepartment.getText();
@@ -443,6 +459,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+    /**
+     * Método cleanData: Este método permite limpiar los campos del formulario.
+     */
     public void cleanData() {
         reset.ResetPanel(jPanel1);
         dtDateStartAb.setCalendar(null);
@@ -451,6 +470,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         txtaReasonAb.setText("");
     }
 
+    /**
+     * Método updateAbsence: Este método permite actualizar los datos de la ausencia en la base de datos.
+     */
     public void updateAbsence() {
         idUser = lblIdEmp.getText();
         dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
@@ -472,6 +494,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+    /**
+     * Método deleteAbsence: Este método permite eliminar los datos de la ausencia en la base de datos.
+     */
     public void deleteAbsence() {
         idUser = lblIdEmp.getText();
         dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
@@ -492,6 +517,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+    /**
+     * Método consult: Este método permite consultar los datos de todas las ausencias de la base de datos.
+     */
     public void consult() {
         sql = "SELECT * FROM registro_ausencia";
 
@@ -516,7 +544,45 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
         }
     }
+    
+    /**
+     * Método existDate: Este método permite comprobar si existe la fecha seleccionada de la ausencia del empleado, en la base de da
+     */
+    public void existDate() {
+        idUser = lblIdEmp.getText();
+        dateStart = dtDateStartAb.getDateFormatString();
+        dateFin = dtDateFinAb.getDateFormatString();
+        try {
+            sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND "
+                    + "FechaFin='" + dateFin + "'";
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
+                        + dateStart, "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                saveAbsence();
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+        }
+    }
+      
+      
+    /**
+     * Método getDay: Este método permite comprobar el dia de la semana de la fecha seleccionada.
+     * @param day 
+     */
+    public void getDay(JCalendar day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(day.getDate());
+        dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();  
+    }
 
+    /**
+     * Método typeRequest: Este método permite añadir el valor del tipo de motivo de la ausencia en la base de datos, según se seleccione en el campo del comboBox.
+     */
     void typeRequest() {
         switch (cmbTypeRequestVacation.getSelectedIndex()) {
             case 0:
@@ -543,35 +609,12 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     }
 
-      public void existDate() {
-        idUser = lblIdEmp.getText();
-        dateStart = dtDateStartAb.getDateFormatString();
-        dateFin = dtDateFinAb.getDateFormatString();
-        try {
-            sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND "
-                    + "FechaFin='" + dateFin + "'";
-            conect = conn.getConexion();
-            ps = conect.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
-                        + dateStart, "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else {
-                saveAbsence();
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
-        }
-    }
-      
-      
-    public void getDay(JCalendar day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(day.getDate());
-        dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
-//        System.out.println(dayOfWeek);  
-    }
-
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return image
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
