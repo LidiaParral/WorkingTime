@@ -63,29 +63,31 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtSSNumEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
-                      <Component id="lblJob" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblGroupPro" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDNIEmp" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
-                      <Component id="cmbEmpJob" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                          <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSurnames" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDNI" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSSNumEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
+                          <Component id="lblGroupPro" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDNIEmp" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSurnames" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDNI" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtEmailEmp" min="-2" pref="132" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="cmbGroupProf" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
+                          <Component id="txtNameEmp" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
+                          <Component id="txtSurnamesEmp" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cmbEmpDepartment" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtEmailEmp" min="-2" pref="132" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="lblCapital" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbGroupProf" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
-                      <Component id="txtCapitalEmp" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
-                      <Component id="txtNameEmp" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
-                      <Component id="txtSurnamesEmp" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbEmpCountry" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="lblDpto" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -97,26 +99,26 @@
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtCapitalEmp" min="-2" pref="208" max="-2" attributes="0"/>
                               <Component id="lblGroupCot" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDpto" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbEmpDepartment" alignment="0" pref="196" max="32767" attributes="0"/>
                               <Component id="lblDateBirth" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="txtGroupCotEmp" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                              <Component id="txtPhoneEmp" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtPhoneEmp" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="lblCapital" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmbEmpCountry" min="-2" pref="230" max="-2" attributes="0"/>
                               <Component id="lblDateOld" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="dtDateOfSeniorityEmp" alignment="0" pref="171" max="32767" attributes="0"/>
                                   <Component id="dtDateOfBirthEmp" alignment="0" pref="171" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="lblJob" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEmpJob" min="-2" pref="233" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -147,57 +149,59 @@
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="txtSurnamesEmp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDNI" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDateBirth" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtDNIEmp" min="-2" max="-2" attributes="0"/>
-                      <Component id="dtDateOfBirthEmp" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDateOld" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtSSNumEmp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblJob" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDpto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDateBirth" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cmbEmpJob" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbEmpDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtDNIEmp" min="-2" max="-2" attributes="0"/>
+                              <Component id="dtDateOfBirthEmp" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDateOld" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtSSNumEmp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblJob" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblDpto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cmbEmpDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbEmpJob" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtEmailEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPhoneEmp" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblCapital" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblCountry" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="dtDateOfSeniorityEmp" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtEmailEmp" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPhoneEmp" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCapital" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCountry" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtCapitalEmp" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbEmpCountry" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="cmbEmpCountry" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="dtDateOfSeniorityEmp" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCapitalEmp" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">

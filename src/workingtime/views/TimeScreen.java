@@ -5,7 +5,6 @@
 package workingtime.views;
 
 import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -30,11 +29,15 @@ import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class TimeScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public final class TimeScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
@@ -76,7 +79,7 @@ public final class TimeScreen extends javax.swing.JFrame {
     SimpleDateFormat dateFormat;
 
     /**
-     * Creates new form HorarioScreen
+     * Creates new form TimeScreen
      */
     public TimeScreen() {
         initComponents();
@@ -91,7 +94,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         lblDateNow.setFont(new Font("Century Gothic", Font.BOLD, 12));
         lblDateActual.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnSaveTime.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        btnCancelar.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         dateAct.setTodayButtonVisible(true);
         dateAct.setTodayButtonText("Hoy");
         dateAct.setWeekOfYearVisible(false);
@@ -111,7 +114,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         dateAct = new com.toedter.calendar.JCalendar();
         lblTimeFin = new javax.swing.JLabel();
         dtTimeFin = new com.toedter.calendar.JDateChooser();
-        btnCancelar = new javax.swing.JButton();
+        btnReturn = new javax.swing.JButton();
         cmbOtherReasons = new javax.swing.JComboBox<>();
         dtReasonStart = new com.toedter.calendar.JDateChooser();
         btnSaveTime = new javax.swing.JButton();
@@ -149,13 +152,13 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtTimeFin.setDateFormatString("HH:mm:ss");
         dtTimeFin.setMinSelectableDate(new Date());
 
-        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.setToolTipText("Este botón permite volver a la página anterior.");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnReturn.setBackground(new java.awt.Color(204, 204, 204));
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
+        btnReturn.setText("CANCELAR");
+        btnReturn.setToolTipText("Este botón permite volver a la página anterior.");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnReturnActionPerformed(evt);
             }
         });
 
@@ -238,7 +241,7 @@ public final class TimeScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSaveTime, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(33, 33, 33))))
@@ -281,19 +284,28 @@ public final class TimeScreen extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSaveTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Guardar: Este botón permite guardar el horario laboral del empleado.
+     * 
+     * @param evt 
+     */
     private void btnSaveTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveTimeActionPerformed
         btnSaveTime.setBackground(new Color(252, 201, 131));
         existDate();
         btnSaveTime.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveTimeActionPerformed
 
+    /**
+     * DateChooser dateActPropertyChange: Este método permite añadir la fecha seleccionada en el Label.
+     * @param evt 
+     */
     private void dateActPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateActPropertyChange
         if (evt.getOldValue() != null) {
             Date fecha = dateAct.getDate();
@@ -303,10 +315,19 @@ public final class TimeScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dateActPropertyChange
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     * 
+     * @param evt 
+     */
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnReturnActionPerformed
 
+    /**
+     * Método getTimeOfDay: Este método permite obtener las horas mediante la diferencia entre dos fechas seleccionadas.
+     * @return hours
+     */
     public int getTimeOfDay() {
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         start = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
@@ -334,6 +355,10 @@ public final class TimeScreen extends javax.swing.JFrame {
         return horas;
     }
 
+    /**
+     * Método getTimeOfReason: Este método permite obtener las horas mediante la diferencia entre dos fechas seleccionadas.
+     * @return hours
+     */
     public int getTimeOfReason() {
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         startR = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
@@ -361,12 +386,20 @@ public final class TimeScreen extends javax.swing.JFrame {
         return horas;
     }
 
+    /**
+     * Método getDay: Este método permite obtener el día de la semana de la fecha seleccionada.
+     * @param day 
+     */
     public void getDay(JCalendar day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(day.getDate());
         dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
     }
 
+    /**
+     * Método calculateHours: Este método permite calcular las horas.
+     * @return totalHours
+     */
     public int calculateHours() {
         int hoursDay = getTimeOfDay();
         int hoursReason = getTimeOfReason();
@@ -376,6 +409,9 @@ public final class TimeScreen extends javax.swing.JFrame {
         return totalHours;
     }
 
+    /**
+     * Método saveTimeWorkingDay: Este método permite guardar los datos de la jornada laboral en la base de datos.
+     */
     public void saveTimeWorkingDay() {
         idUser = lblIdEmp.getText();
         timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
@@ -418,6 +454,9 @@ public final class TimeScreen extends javax.swing.JFrame {
         cleanData();
     }
     
+    /**
+     * Método cleanData: Este método permite limpiar los campos del formulario.
+     */
     public void cleanData(){     
         dtTimeStart.setCalendar(null);
         dtTimeFin.setCalendar(null);
@@ -426,6 +465,10 @@ public final class TimeScreen extends javax.swing.JFrame {
         lblDateActual.setText(""); 
     }
 
+    /**
+     * Método existDate: Este método permite comprobar si existe un registro con la fecha previamente seleccionada
+     * en la base de datos.
+     */
     public void existDate() {
         idUser = lblIdEmp.getText();
         dateNow = lblDateActual.getText();
@@ -445,6 +488,9 @@ public final class TimeScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método otherReasons:  Este método permite añadir el valor del tipo de razón del horario laboral, según se seleccione en el campo del comboBox.
+     */
     void otherReasons() {
         switch (cmbOtherReasons.getSelectedIndex()) {
             case 0:
@@ -460,6 +506,19 @@ public final class TimeScreen extends javax.swing.JFrame {
                 throw new AssertionError();
         }
 
+    }
+
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     * 
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     /**
@@ -496,16 +555,8 @@ public final class TimeScreen extends javax.swing.JFrame {
         });
     }
 
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnReturn;
     public javax.swing.JButton btnSaveTime;
     private javax.swing.JComboBox<String> cmbOtherReasons;
     private com.toedter.calendar.JCalendar dateAct;

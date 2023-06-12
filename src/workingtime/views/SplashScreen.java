@@ -12,8 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Class SplashScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class SplashScreen extends javax.swing.JFrame {
 
@@ -22,7 +23,7 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public SplashScreen() {
         initComponents();
-        loadSplash();       
+        loadSplash();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
     }
@@ -96,13 +97,49 @@ public class SplashScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Método loadSplash: Este método permite ir cargando hasta el 100% el
+     * componente ProgressBar, en una secuencia de 280 milisegundos.
+     */
+    private void loadSplash() {
+        Thread hilo;
+        hilo = new Thread() {
+            @Override
+            public void run() {
+                for (int i = 1; i <= 100; i++) {
+                    try {
+                        sleep(280);
+                        pgbarSplash.setValue(i);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+        };
+        hilo.start();
+    }
+
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -127,34 +164,7 @@ public class SplashScreen extends javax.swing.JFrame {
             new SplashScreen().setVisible(true);
         });
     }
-    
-    private void loadSplash(){
-        Thread hilo;
-        hilo = new Thread(){
-            @Override
-            public void run(){
-                for(int i = 1; i<= 100; i++){
-                    try{
-                        sleep(280);
-                        pgbarSplash.setValue(i);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-             
-        };
-        hilo.start();
-    }
 
-    
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;

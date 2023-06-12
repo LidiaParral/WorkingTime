@@ -14,7 +14,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/hora.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registro jornada"/>
+                <Property name="text" type="java.lang.String" value="Registro jornadas"/>
                 <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite registrar la jornada del empleado."/>
               </Properties>
               <Events>
@@ -55,21 +55,6 @@
             <Property name="text" type="java.lang.String" value="Pago"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnNomina">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/buscarnomina.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="N&#xf3;mina"/>
-                <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar y actualizar la n&#xf3;mina del empleado."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnNominaActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnAddSalary">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -80,6 +65,21 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAddSalaryActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnNomina">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/buscarnomina.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Todas las n&#xf3;minas"/>
+                <Property name="toolTipText" type="java.lang.String" value="Esta opci&#xf3;n permite consultar y actualizar la n&#xf3;mina del empleado."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnNominaActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

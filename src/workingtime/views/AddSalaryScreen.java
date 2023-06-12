@@ -7,12 +7,15 @@ package workingtime.views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
@@ -24,6 +27,9 @@ import workingtime.model.ResetFields;
  */
 public class AddSalaryScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
     
     Conexion conn = new Conexion();
@@ -42,13 +48,18 @@ public class AddSalaryScreen extends javax.swing.JFrame {
     String totalDev;
     String totalDed;
     String liqTotal;
-    String days;
     String job;
     String month;
     
     int ded;
     int dev;
     int total;
+    int m;
+    int monthDS;
+    int monthDF;
+    int dayDS;
+    int dayDF;
+    int days;
     /**
      * Creates new form AddSalaryScreen
      */
@@ -104,6 +115,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -135,6 +147,8 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         txtLiqTotal.setFocusable(false);
 
         txtWorkDays.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtWorkDays.setEnabled(false);
+        txtWorkDays.setFocusable(false);
 
         dtDateS.setBackground(new java.awt.Color(255, 255, 255));
         dtDateS.setToolTipText("Seleccione una fecha inicial");
@@ -323,17 +337,26 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         idUser = lblIdEmp.getText();
         job = lblPuesto.getText();
         month = cmbMonths.getSelectedItem().toString();
+        m = cmbMonths.getSelectedIndex();
+        monthDS = dtDateS.getDate().getMonth();
+        monthDF = dtDateF.getDate().getMonth();
+        dayDS = dtDateS.getJCalendar().getDayChooser().getDay();
+        dayDF = dtDateF.getJCalendar().getDayChooser().getDay();
         dateS = new SimpleDateFormat("dd-MM-yyyy").format(dtDateS.getDate());
         dateF = new SimpleDateFormat("dd-MM-yyyy").format(dtDateF.getDate());
         salary = txtSalaryB.getText();
         totalDed = txtTotalDed.getText();
         totalDev = txtTotalDev.getText();
-        days = txtWorkDays.getText();        
+        days = daysWorkingMonth();
         liqTotal = Integer.toString(calculateLiquidoTotal());
       
         if (idUser.isEmpty() || dateS.isEmpty() || dateF.isEmpty() || salary.isEmpty() || totalDed.isEmpty()
-                || totalDev.isEmpty() || liqTotal.isEmpty() || days.isEmpty()) {
+                || totalDev.isEmpty() || liqTotal.isEmpty() || days == 0) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if((monthDS != m) || (monthDF != m)){
+            JOptionPane.showMessageDialog(null, "El mes no coincide con el campo del mes seleccionado.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);         
+        } else if((dayDS != 1)){
+            JOptionPane.showMessageDialog(null, "La fecha de inicio sólo se puede seleccionar el día 1 de cada mes.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);                
         } else {
             try {
                 sql = "INSERT INTO nominas(IdEmpleado,PuestoTrabajo,Mes,FechaInicio,FechaFin,SalarioBase,TotalDevengado,TotalDeducciones,LiquidoTotal,DiasTrabajados) VALUES "
@@ -353,6 +376,27 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         dtDateF.setCalendar(null);
         cmbMonths.setSelectedIndex(0);
         reset.ResetPanel(jPanel1);
+    }
+    
+    /**
+     * Método daysWorkingMonth: Este método permite calcular el total de días trabajados en base a la diferencia entre la
+     * fecha de inicio y de fin de la nómina.
+     * @return day
+     */
+    public int daysWorkingMonth(){
+        int day = -1;
+        if(dtDateS.getDate() != null || dtDateF.getDate() != null){
+            Calendar init = dtDateS.getCalendar();
+            Calendar fin = dtDateF.getCalendar();
+            
+            while(init.before(fin) || init.equals(fin)){
+               day++;
+               init.add(Calendar.DATE, 1);
+            }
+            String numDay= String.valueOf(day);
+            txtWorkDays.setText(numDay);
+        }
+        return day;
     }
     
     /**
@@ -389,6 +433,17 @@ public class AddSalaryScreen extends javax.swing.JFrame {
       return total;
     }
     
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
     
     /**
      * @param args the command line arguments
@@ -426,7 +481,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnSaveSalary;
-    private javax.swing.JComboBox<String> cmbMonths;
+    public javax.swing.JComboBox<String> cmbMonths;
     private com.toedter.calendar.JDateChooser dtDateF;
     private com.toedter.calendar.JDateChooser dtDateS;
     private javax.swing.JLabel jLabel1;

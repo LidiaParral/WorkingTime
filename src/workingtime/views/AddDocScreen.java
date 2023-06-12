@@ -31,12 +31,14 @@ import workingtime.model.ResetFields;
 
 /**
  * Class AddDocScreen
- *
  * @author Lidia Parral
  * @version 1.0.0
  */
 public class AddDocScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
@@ -64,7 +66,7 @@ public class AddDocScreen extends javax.swing.JFrame {
     File file;
 
     /**
-     * Creates new form AddDocumentoScreen
+     * Creates new form AddDocScreen
      */
     public AddDocScreen() {
         initComponents();
@@ -332,7 +334,7 @@ public class AddDocScreen extends javax.swing.JFrame {
      *
      * @param file
      * @return content
-     * @throws java.io.IOException
+     * @throws FileNotFoundException
      */
     public byte[] addFile(File file) throws IOException {
         byte[] content = new byte[1024 * 1000];
@@ -419,7 +421,7 @@ public class AddDocScreen extends javax.swing.JFrame {
      * Método getIconImage: Este método permite obtener el icono de la
      * aplicación.
      *
-     * @return image
+     * @return icon
      */
     @Override
     public Image getIconImage() {

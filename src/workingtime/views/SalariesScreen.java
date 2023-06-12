@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,15 +26,27 @@ import workingtime.model.CleanTable;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class SalariesScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public final class SalariesScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
+
+    /**
+     *
+     */
     public ExportExcel export = new ExportExcel();
+
+    /**
+     *
+     */
     public CleanTable lmp = new CleanTable();
-    
+
     Conexion conn = new Conexion();
     Connection conect;
 
@@ -55,22 +68,22 @@ public final class SalariesScreen extends javax.swing.JFrame {
     int selectedRow;
 
     /**
-     * Creates new form NominaScreen
+     * Creates new form SalariesScreen
      */
     public SalariesScreen() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblIdUser.setVisible(false);      
-        lblName.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblSurnames.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblNumSSEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblGrupoCotizEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblGrupoProfEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDNIEmp1.setFont(new Font("Century Gothic",Font.BOLD,12));
-        lblDateSearch.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnUpdateNomina.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        lblIdUser.setVisible(false);
+        lblName.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblSurnames.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblNumSSEmp1.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblGrupoCotizEmp1.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblGrupoProfEmp1.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDNIEmp1.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        lblDateSearch.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnUpdateNomina.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -274,7 +287,8 @@ public final class SalariesScreen extends javax.swing.JFrame {
         });
 
         dtDateSalaries.setBackground(new java.awt.Color(255, 255, 255));
-        dtDateSalaries.setDateFormatString("yyyy-MM-dd");
+        dtDateSalaries.setDateFormatString("MM-dd-yyyy");
+        dtDateSalaries.setMaxSelectableDate(new Date());
 
         lblDateSearch.setText("Fecha de búsqueda:");
 
@@ -352,10 +366,21 @@ public final class SalariesScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     *
+     * @param evt
+     */
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
+    /**
+     * Botón Download: Este botón permite al usuario descargarse la nómina
+     * seleccionada.
+     *
+     * @param evt
+     */
     private void btnDownloadNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadNominaActionPerformed
         selectedRow = TableSalaries.getSelectedRow();
         if (selectedRow < 0) {
@@ -363,13 +388,19 @@ public final class SalariesScreen extends javax.swing.JFrame {
         } else {
             try {
                 JOptionPane.showMessageDialog(null, "Se va a descargar el documento en Excel", "EXPORTAR DOCUMENTO", JOptionPane.PLAIN_MESSAGE);
-                export.exportarExcel(TableSalaries);
+                export.exportExcel(TableSalaries);
             } catch (IOException ex) {
                 Logger.getLogger(SalariesScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnDownloadNominaActionPerformed
 
+    /**
+     * Botón Buscar: Este botón permite al usuario buscar por una fecha concreta
+     * el registro de una nómina.
+     *
+     * @param evt
+     */
     private void btnSearchNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNominaActionPerformed
         search = dtDateSalaries.getDateFormatString();
         if (search.equals("")) {
@@ -384,6 +415,10 @@ public final class SalariesScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchNominaActionPerformed
 
+    /**
+     * Botón Actualizar: Este botón permite actualizar los datos de la nómina de un empleado.
+     * @param evt
+     */
     private void btnUpdateNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNominaActionPerformed
         selectedRow = TableSalaries.getSelectedRow();
         btnUpdateNomina.setBackground(new Color(252, 201, 131));
@@ -393,9 +428,12 @@ public final class SalariesScreen extends javax.swing.JFrame {
             updateNomina();
             existSalary();
         }
-        btnUpdateNomina.setBackground(new Color(38,70,166));
+        btnUpdateNomina.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateNominaActionPerformed
 
+    /**
+     * Método existSalary: Este método permite comprobar si existe algun registro de la nómina de un empleado en concreto.
+     */
     public void existSalary() {
         idUser = lblIdUser.getText();
         try {
@@ -423,10 +461,13 @@ public final class SalariesScreen extends javax.swing.JFrame {
         }
     }
 
-    public void searchNomina() {
+    /**
+     * Método searchNomina: Este método permite buscar un registro de una nómina en la base de datos.
+     */
+    public void searchNomina() {       
         date = new SimpleDateFormat("yyyy-MM-dd").format(dtDateSalaries.getDate());
         try {
-            sql = "SELECT * FROM nominas WHERE FechaInicio='" + date + "'";
+            sql = "SELECT * FROM nominas WHERE FechaInicio='" + date + "' AND IdEmpleado='" + lblIdUser.getText() + "'";
 
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
@@ -448,9 +489,11 @@ public final class SalariesScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
         }
     }
-    
-    
-     public void updateNomina() {
+
+    /**
+     * Método updateNomina: Este método permite actualizar los datos de los datos de una nómina en la base de datos.
+     */
+    public void updateNomina() {
         idUser = lblIdUser.getText();
         dev = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 1));
         ded = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 2));
@@ -470,6 +513,18 @@ public final class SalariesScreen extends javax.swing.JFrame {
         lmp.tableCleaning(model);
     }
 
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
 
     /**
      * @param args the command line arguments
@@ -503,13 +558,6 @@ public final class SalariesScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new SalariesScreen().setVisible(true);
         });
-    }
-
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

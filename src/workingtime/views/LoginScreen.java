@@ -21,11 +21,15 @@ import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class LoginScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class LoginScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
@@ -44,6 +48,7 @@ public class LoginScreen extends javax.swing.JFrame {
     String name;
     String idUser;
     String dpto;
+
     /**
      * Creates new form LoginScreen
      */
@@ -188,6 +193,12 @@ public class LoginScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Login: Este botón permite al usuario ingresar a la aplicación con
+     * sus credenciales.
+     *
+     * @param evt
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         btnLogin.setBackground(new Color(252, 201, 131));
         try {
@@ -195,15 +206,28 @@ public class LoginScreen extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        btnLogin.setBackground(new Color(38,70,166));
+        btnLogin.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    /**
+     * Label ¿Olvidaste la contraseña?: A partir de hacer click en este texto se
+     * abre la pantalla ForgotPsswdScreen.
+     *
+     * @param evt
+     */
     private void lblForgotPssMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPssMouseClicked
         ForgotPsswdScreen forgot = new ForgotPsswdScreen();
         forgot.setVisible(true);
         this.hide();
     }//GEN-LAST:event_lblForgotPssMouseClicked
 
+    /**
+     * Método existEmployee: Este método permite comprobar si existe el usuario
+     * en la base de datos según el usuario y contraseña introducidos
+     * previamente.
+     *
+     * @throws InterruptedException
+     */
     public void existEmployee() throws InterruptedException {
         pass = txtPswLogin.getText();
         user = txtUserLogin.getText();
@@ -262,6 +286,12 @@ public class LoginScreen extends javax.swing.JFrame {
         reset.ResetFrame(this);
     }
 
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return icon
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().

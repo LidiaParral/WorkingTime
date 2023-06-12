@@ -19,11 +19,15 @@ import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class ForgotPsswdScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class ForgotPsswdScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
@@ -40,8 +44,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
     String confiPassNew;
     String idUser;
     String user;
+
     /**
-     * Creates new form ForgotPasswordScreen
+     * Creates new form ForgotPsswdScreen
      */
     public ForgotPsswdScreen() {
         initComponents();
@@ -53,7 +58,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         lblUsername.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblConfPassNew.setFont(new Font("Century Gothic", Font.BOLD, 14));
         btnSavePsswd.setFont(new Font("Century Gothic", Font.BOLD, 12));
-        btnCancelar.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -69,7 +74,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         lblPassNew = new javax.swing.JLabel();
         lblConfPassNew = new javax.swing.JLabel();
         btnSavePsswd = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnReturn = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
         txtOldPass = new javax.swing.JPasswordField();
         txtPassNew = new javax.swing.JPasswordField();
@@ -103,14 +108,14 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.setToolTipText("Este botón permite volver a la página anterior.");
-        btnCancelar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnReturn.setBackground(new java.awt.Color(204, 204, 204));
+        btnReturn.setForeground(new java.awt.Color(255, 255, 255));
+        btnReturn.setText("CANCELAR");
+        btnReturn.setToolTipText("Este botón permite volver a la página anterior.");
+        btnReturn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnReturnActionPerformed(evt);
             }
         });
 
@@ -139,7 +144,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
                 .addGap(140, 140, 140)
                 .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -205,26 +210,40 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSavePsswd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla LoginScreen.
+     * 
+     * @param evt
+     */
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
         LoginScreen login = new LoginScreen();
         login.setVisible(true);
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnReturnActionPerformed
 
+    /**
+     * Botón Guardar: Este botón permite guardar la nueva contraseña del usuario.
+     * 
+     * @param evt
+     */
     private void btnSavePsswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePsswdActionPerformed
         btnSavePsswd.setBackground(new Color(145, 150, 255));
-        consultar();
-        btnSavePsswd.setBackground(new Color(255,126,60));
+        consult();
+        btnSavePsswd.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnSavePsswdActionPerformed
 
-    public void consultar() {
+    /**
+     * Método consult: Este método permite consultar si existe un empleado con una contraseña y nombre de usuario,
+     * en la base de datos.
+     */
+    public void consult() {
         passOld = txtOldPass.getText();
         user = txtUsername.getText();
         try {
@@ -247,6 +266,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         txtPassNew.setText("");
     }
 
+    /**
+     * Método changePassword: Este método permite cambiar la contraseña del usuario en la base de datos.
+     */
     public void changePassword() {
         idUser = lblIdEmp.getText();
         passNew = txtPassNew.getText();
@@ -262,15 +284,28 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             } catch (HeadlessException | SQLException ex) {
                 System.err.println("Error:" + ex);
             }
-        } else if(passNew.equals("") || confiPassNew.equals("") || passOld.equals("") || user.equals("")) {
-            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE); 
-        } else if((passNew.length() > 12) || (passNew.length() < 12) || (passOld.length() > 12) || (passOld.length() < 12)
-                    || (confiPassNew.length() > 12) || (confiPassNew.length() < 12)){
-            JOptionPane.showMessageDialog(null, "El campo debe contener 12 caracteres.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE); 
+        } else if (passNew.equals("") || confiPassNew.equals("") || passOld.equals("") || user.equals("")) {
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+        } else if ((passNew.length() > 12) || (passNew.length() < 12) || (passOld.length() > 12) || (passOld.length() < 12)
+                || (confiPassNew.length() > 12) || (confiPassNew.length() < 12)) {
+            JOptionPane.showMessageDialog(null, "El campo debe contener 12 caracteres.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Debe de coincidir ambas contraseñas.", "ERROR", JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(null, "Debe de coincidir ambas contraseñas.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         reset.ResetFrame(this);
+    }
+
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     * 
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     /**
@@ -280,7 +315,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -306,17 +341,9 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             new ForgotPsswdScreen().setVisible(true);
         });
     }
-    
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnReturn;
     public javax.swing.JButton btnSavePsswd;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

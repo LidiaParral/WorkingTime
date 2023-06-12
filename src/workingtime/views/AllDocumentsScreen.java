@@ -28,8 +28,19 @@ import workingtime.model.ResetFields;
  */
 public class AllDocumentsScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ExportExcel export = new ExportExcel();
+
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
+
+    /**
+     *
+     */
     public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
@@ -53,7 +64,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
     int election;
 
     /**
-     * Creates new form DocumentosScreen
+     * Creates new form AllDocumentsScreen
      */
     public AllDocumentsScreen() {
         initComponents();
@@ -428,7 +439,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
      * Método getIconImage: Este método permite obtener el icono de la
      * aplicación.
      *
-     * @return image
+     * @return icon
      */
     @Override
     public Image getIconImage() {
@@ -444,7 +455,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

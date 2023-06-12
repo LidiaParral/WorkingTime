@@ -11,15 +11,27 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Class Conexion
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class Conexion {
     
-     public static final String URL = "jdbc:mysql://localhost:3306/workingtime";
+    /**
+     *
+     */
+    public static final String URL = "jdbc:mysql://localhost:3306/workingtime";
     //Añadir el usuario de PhpMyAdmin
+
+    /**
+     *
+     */
     public static final String USER = "root";
     //Añadir la contraseña de PhpMyAdmin
+
+    /**
+     *
+     */
     public static final String CLAVE = "";
 
     /**
@@ -38,7 +50,5 @@ public class Conexion {
 
         }
         return con;
-    }
-
-    
+    }    
 }

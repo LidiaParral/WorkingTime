@@ -14,8 +14,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * @version 1.0 Diciembre del 2022
+ * Class ResetFields
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class ResetFields {
     

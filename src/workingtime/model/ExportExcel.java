@@ -18,12 +18,18 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
- *
+ * Class ExportExcel
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class ExportExcel {
     
-    public void exportarExcel(JTable t) throws IOException {
+    /**
+     * Método exportExcel: Este método permite guardar y exportar los documentos seleccionados en formato Excel.
+     * @param t
+     * @throws IOException 
+     */
+    public void exportExcel(JTable t) throws IOException {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de excel", "xls");
         chooser.setFileFilter(filter);

@@ -7,16 +7,22 @@ package workingtime.model;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Class CleanTable
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class CleanTable {
+
     
-      public void tableCleaning(DefaultTableModel modelo) {
-        int rowCount = modelo.getRowCount();
-        //Remove rows one by one from the end of the table
+    /**
+     * Método tableCleaning: Este método permite limpiar todos los registros de la tabla.
+     * @param model 
+     */
+    public void tableCleaning(DefaultTableModel model) {
+        int rowCount = model.getRowCount();
+        
         for (int i = rowCount - 1; i >= 0; i--) {
-            modelo.removeRow(i);
+            model.removeRow(i);
         }
     }
 }

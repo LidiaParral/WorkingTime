@@ -12,12 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Class HomeScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class HomeScreen extends javax.swing.JFrame {
 
     private final LoginScreen login = new LoginScreen();
+
     /**
      * Creates new form HomeScreen
      */
@@ -35,23 +37,23 @@ public class HomeScreen extends javax.swing.JFrame {
         lblNumSS.setVisible(false);
         lblJobEmp.setVisible(false);
         lblDepartmentEmp.setVisible(false);
-        btnLogout.setFont(new Font("Century Gothic",Font.BOLD,12));
-        mnAddDoc.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnAddSalary.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnAllEmp.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnControlEmp.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnNomina.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnProfileUser.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnRegisterAbsence.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnRegisterWorkingDay.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnAllDocuments.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnAllTimes.setFont(new Font("Century Gothic",Font.PLAIN,12));
-        mnDocuments.setFont(new Font("Century Gothic",Font.PLAIN,14));
-        mnEmple.setFont(new Font("Century Gothic",Font.PLAIN,14));
-        mnHorario.setFont(new Font("Century Gothic",Font.PLAIN,14));
-        mnSalary.setFont(new Font("Century Gothic",Font.PLAIN,14));
-        mnProfile.setFont(new Font("Century Gothic",Font.PLAIN,14));
-        
+        btnLogout.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        mnAddDoc.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnAddSalary.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnAllEmp.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnControlEmp.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnNomina.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnProfileUser.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnRegisterAbsence.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnRegisterWorkingDay.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnAllDocuments.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnAllTimes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnDocuments.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        mnEmple.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        mnHorario.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        mnSalary.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+        mnProfile.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+
         mnAddDoc.setBackground(Color.WHITE);
         mnAddSalary.setBackground(Color.WHITE);
         mnAllEmp.setBackground(Color.WHITE);
@@ -93,8 +95,8 @@ public class HomeScreen extends javax.swing.JFrame {
         mnRegisterAbsence = new javax.swing.JMenuItem();
         mnAllTimes = new javax.swing.JMenuItem();
         mnSalary = new javax.swing.JMenu();
-        mnNomina = new javax.swing.JMenuItem();
         mnAddSalary = new javax.swing.JMenuItem();
+        mnNomina = new javax.swing.JMenuItem();
         mnDocuments = new javax.swing.JMenu();
         mnAddDoc = new javax.swing.JMenuItem();
         mnAllDocuments = new javax.swing.JMenuItem();
@@ -223,7 +225,7 @@ public class HomeScreen extends javax.swing.JFrame {
         mnHorario.setText("Horario");
 
         mnRegisterWorkingDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hora.png"))); // NOI18N
-        mnRegisterWorkingDay.setText("Registro jornada");
+        mnRegisterWorkingDay.setText("Registro jornadas");
         mnRegisterWorkingDay.setToolTipText("Esta opción permite registrar la jornada del empleado.");
         mnRegisterWorkingDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,16 +258,6 @@ public class HomeScreen extends javax.swing.JFrame {
 
         mnSalary.setText("Pago");
 
-        mnNomina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarnomina.png"))); // NOI18N
-        mnNomina.setText("Nómina");
-        mnNomina.setToolTipText("Esta opción permite consultar y actualizar la nómina del empleado.");
-        mnNomina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnNominaActionPerformed(evt);
-            }
-        });
-        mnSalary.add(mnNomina);
-
         mnAddSalary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nomina.png"))); // NOI18N
         mnAddSalary.setText("Añadir nómina");
         mnAddSalary.setToolTipText("Esta opción permite añadir los datos de la nómina del emplado");
@@ -275,6 +267,16 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
         mnSalary.add(mnAddSalary);
+
+        mnNomina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscarnomina.png"))); // NOI18N
+        mnNomina.setText("Todas las nóminas");
+        mnNomina.setToolTipText("Esta opción permite consultar y actualizar la nómina del empleado.");
+        mnNomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnNominaActionPerformed(evt);
+            }
+        });
+        mnSalary.add(mnNomina);
 
         mnbHome.add(mnSalary);
 
@@ -359,12 +361,26 @@ public class HomeScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método mnRegisterWorkingDayActionPerformed: Este método permite al
+     * usuario que al seleccionar el menú Registro jornadas se abra la pantalla
+     * TimeScreen, para añadir el horario laboral.
+     *
+     * @param evt
+     */
     private void mnRegisterWorkingDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegisterWorkingDayActionPerformed
         TimeScreen time = new TimeScreen();
         time.lblIdEmp.setText(lblIdEmp.getText());
         time.setVisible(true);
     }//GEN-LAST:event_mnRegisterWorkingDayActionPerformed
 
+    /**
+     * Método mnNominaActionPerformed: Este método permite al usuario que al
+ seleccionar el menú Todas las nóminas se abra la pantalla SalariesScreen,
+ para consult las nóminas.
+     *
+     * @param evt
+     */
     private void mnNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNominaActionPerformed
         SalariesScreen salaries = new SalariesScreen();
         salaries.lblIdUser.setText(lblIdEmp.getText());
@@ -378,6 +394,13 @@ public class HomeScreen extends javax.swing.JFrame {
         salaries.setVisible(true);
     }//GEN-LAST:event_mnNominaActionPerformed
 
+    /**
+     * Método mnAllDocumentsActionPerformed: Este método permite al usuario que
+ al seleccionar el menú Todos los documentos se abra la pantalla
+ AllDocumentsScreen, para consult todos los documentos subidos.
+     *
+     * @param evt
+     */
     private void mnAllDocumentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllDocumentsActionPerformed
         AllDocumentsScreen doc = new AllDocumentsScreen();
         doc.lblIdEmp.setText(lblIdEmp.getText());
@@ -385,6 +408,13 @@ public class HomeScreen extends javax.swing.JFrame {
         doc.setVisible(true);
     }//GEN-LAST:event_mnAllDocumentsActionPerformed
 
+    /**
+     * Método mnRegisterAbsenceActionPerformed: Este método permite al usuario
+     * que al seleccionar el menú Registrar ausencias se abra la pantalla
+     * AbsencesScreen, para añadir una ausencia.
+     *
+     * @param evt
+     */
     private void mnRegisterAbsenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegisterAbsenceActionPerformed
         AbsencesScreen aus = new AbsencesScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
@@ -393,23 +423,51 @@ public class HomeScreen extends javax.swing.JFrame {
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegisterAbsenceActionPerformed
 
+    /**
+     * Método mnControlEmpActionPerformed: Este método permite al usuario que al
+     * seleccionar el menú Añadir empleado se abra la pantalla ControlEmpScreen,
+     * para añadir los datos de un empleado.
+     *
+     * @param evt
+     */
     private void mnControlEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnControlEmpActionPerformed
         ControlEmpScreen control = new ControlEmpScreen();
         control.setVisible(true);
     }//GEN-LAST:event_mnControlEmpActionPerformed
 
+    /**
+     * Método mnAddDocActionPerformed: Este método permite al usuario que al
+     * seleccionar el menú Añadir documento se abra la pantalla AddDocScreen,
+     * para añadir un documento
+     *
+     * @param evt
+     */
     private void mnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddDocActionPerformed
         AddDocScreen addDoc = new AddDocScreen();
         addDoc.lblIdEmp.setText(lblIdEmp.getText());
         addDoc.setVisible(true);
     }//GEN-LAST:event_mnAddDocActionPerformed
 
+    /**
+     * Método mnAllEmpActionPerformed: Este método permite al usuario que al
+        seleccionar el menú Todos los empleados se abra la pantalla AllEmpScreen,
+        para consult todos los empleados.
+     *
+     * @param evt
+     */
     private void mnAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllEmpActionPerformed
         AllEmpScreen allEmp = new AllEmpScreen();
         allEmp.consult();
         allEmp.setVisible(true);
     }//GEN-LAST:event_mnAllEmpActionPerformed
 
+    /**
+     * Método mnAllTimesActionPerformed: Este método permite al usuario que al
+ seleccionar el menú Todos los Registros se abra la pantalla
+ AllTimesScreen, para consult todos los registros del horario laboral.
+     *
+     * @param evt
+     */
     private void mnAllTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAllTimesActionPerformed
         try {
             AllTimesScreen allTimes = new AllTimesScreen();
@@ -418,26 +476,46 @@ public class HomeScreen extends javax.swing.JFrame {
             allTimes.lblNom.setText(lblNamEmp.getText());
             allTimes.lblPuesto.setText(lblJobEmp.getText());
             allTimes.lblDpto.setText(lblDepartmentEmp.getText());
-            allTimes.existWorkingDay();        
+            allTimes.existWorkingDay();
             allTimes.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mnAllTimesActionPerformed
 
+    /**
+     * Botón Logout: Este botón permite al usuario desloguearse y volver a la
+     * pantalla LoginScreen.
+     *
+     * @param evt
+     */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         btnLogout.setBackground(new Color(252, 201, 131));
         this.dispose();
         login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    /**
+     * Método mnProfileUserActionPerformed: Este método permite al usuario que
+     * al seleccionar el menú Profile se abra la pantalla ProfileEmpScreen, para
+     * actualizar los datos del empleado.
+     *
+     * @param evt
+     */
     private void mnProfileUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProfileUserActionPerformed
         ProfileEmpScreen profile = new ProfileEmpScreen();
         profile.txtIdEmp.setText(lblIdEmp.getText());
-        profile.consultar();
+        profile.consult();
         profile.setVisible(true);
     }//GEN-LAST:event_mnProfileUserActionPerformed
 
+    /**
+     * Método mnAddSalaryActionPerformed: Este método permite al usuario que al
+     * seleccionar el menú Añadir nómina se abra la pantalla AddSalaryScreen,
+     * para añadir la nómina de un empleado.
+     *
+     * @param evt
+     */
     private void mnAddSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddSalaryActionPerformed
         AddSalaryScreen addS = new AddSalaryScreen();
         addS.lblIdEmp.setText(lblIdEmp.getText());
@@ -446,13 +524,26 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_mnAddSalaryActionPerformed
 
     /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -465,21 +556,13 @@ public class HomeScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new HomeScreen().setVisible(true);
         });
-    }
-    
-    
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -19,11 +19,15 @@ import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
 
 /**
- *
+ * Class ProfileEmpScreen
  * @author Lidia Parral
+ * @version 1.0.0
  */
 public class ProfileEmpScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
@@ -50,19 +54,19 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        lblNumEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblNomEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblApeEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblDNIEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblTlfEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblEmailEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblDptoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblPuestoEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblCountryEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblCapitalEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        lblDateBirthEmp.setFont(new Font("Century Gothic",Font.BOLD,14));
-        btnUpdateProfile.setFont(new Font("Century Gothic",Font.BOLD,12));
-        btnReturn.setFont(new Font("Century Gothic",Font.PLAIN,12));
+        lblNumEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblNomEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblApeEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDNIEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblTlfEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblEmailEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDptoEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblPuestoEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblCountryEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblCapitalEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDateBirthEmp.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        btnUpdateProfile.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
     /**
@@ -315,6 +319,12 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón Actualizar: Este botón permite actualizar los datos personales del
+     * empleado.
+     *
+     * @param evt
+     */
     private void btnUpdateProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateProfileActionPerformed
         election = JOptionPane.showOptionDialog(rootPane, "En realidad desea actualizar los datos del empleado permanentemente", "Mensaje de Confirmacion",
                 JOptionPane.YES_NO_OPTION,
@@ -328,11 +338,20 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         btnUpdateProfile.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnUpdateProfileActionPerformed
 
+    /**
+     * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
+     *
+     * @param evt
+     */
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-        this.dispose();      
+        this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
-    public void consultar() {
+    /**
+     * Método consult: Este método permite consultar todos los datos personales
+     * del empleado de la base de datos.
+     */
+    public void consult() {
         sql = "SELECT * FROM empleados WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
 
         try {
@@ -359,6 +378,10 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método updateProfile: Este método permite actualizar algunos de los datos
+     * personales del empleado, en la base de datos.
+     */
     public void updateProfile() {
         name = txtNombre.getText();
         surnames = txtApellidos.getText();
@@ -383,13 +406,26 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     }
 
     /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -410,14 +446,6 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
             new ProfileEmpScreen().setVisible(true);
         });
     }
-
-    @Override
-    public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
-        return retValue;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnUpdateProfile;

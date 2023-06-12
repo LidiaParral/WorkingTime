@@ -32,7 +32,14 @@ import workingtime.model.ResetFields;
  */
 public final class AbsencesScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
+
+    /**
+     *
+     */
     public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
@@ -61,7 +68,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     int election;
 
     /**
-     * Creates new form AusenciasScreen
+     * Creates new form AbsencesScreen
      */
     public AbsencesScreen() {
         initComponents();
@@ -613,7 +620,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
      * Método getIconImage: Este método permite obtener el icono de la
      * aplicación.
      *
-     * @return image
+     * @return icon
      */
     @Override
     public Image getIconImage() {

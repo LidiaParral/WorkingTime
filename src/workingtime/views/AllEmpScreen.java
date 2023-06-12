@@ -6,6 +6,8 @@ package workingtime.views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +27,14 @@ import workingtime.model.ResetFields;
  */
 public final class AllEmpScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
+
+    /**
+     *
+     */
     public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
@@ -50,7 +59,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
     int election;
 
     /**
-     * Creates new form TodosEmpScreen
+     * Creates new form AllEmpScreen
      */
     public AllEmpScreen() {
         initComponents();
@@ -85,6 +94,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -466,6 +476,19 @@ public final class AllEmpScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel2);
         reset.ResetPanel(jPanel1);
 
+    }
+
+    /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
+     *
+     * @return icon
+     */
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/logotipo.png"));
+        return retValue;
     }
 
     /**

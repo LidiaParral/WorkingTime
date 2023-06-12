@@ -23,13 +23,19 @@ import workingtime.model.ResetFields;
 
 /**
  * Class AllTimesScreen
- *
  * @author Lidia Parral
  * @version 1.0.0
  */
 public final class AllTimesScreen extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public ResetFields reset = new ResetFields();
+
+    /**
+     *
+     */
     public CleanTable lmp = new CleanTable();
 
     Conexion conn = new Conexion();
@@ -58,7 +64,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     int election;
 
     /**
-     * Creates new form TodosHorariosScreen
+     * Creates new form AllTimesScreen
      *
      * @throws java.lang.ClassNotFoundException
      */
@@ -364,7 +370,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
     /**
      * Método existWorkingDay: Este botón permite comprobar si existe un
-     * registro
+     * registro.
      */
     public void existWorkingDay() {
         sql = "SELECT FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas FROM registro_horas "
@@ -395,7 +401,8 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * Método deleteWorkingDay: Este método permite eliminar un registro del
+     * horario laboral de la base de datos.
      */
     public void deleteWorkingDay() {
         idUser = lblIdEmp.getText();
@@ -413,7 +420,8 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * Método updateWorkingDay: Este método que permite actualizar los datos del
+     * horario laboral en la base de datos.
      */
     public void updateWorkingDay() {
         date = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 0));
@@ -439,8 +447,10 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     }
 
     /**
+     * Método getIconImage: Este método permite obtener el icono de la
+     * aplicación.
      *
-     * @return
+     * @return icon
      */
     @Override
     public Image getIconImage() {
@@ -507,7 +517,4 @@ public final class AllTimesScreen extends javax.swing.JFrame {
     public javax.swing.JLabel lblPuesto;
     // End of variables declaration//GEN-END:variables
 
-    private Object getValueAt(int i, int column) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
