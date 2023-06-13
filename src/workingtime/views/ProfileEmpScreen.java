@@ -191,6 +191,8 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEmail.setEnabled(false);
+        txtEmail.setFocusable(false);
 
         txtDpto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDpto.setEnabled(false);
@@ -392,7 +394,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
                 && !email.isEmpty() && !txtDpto.equals("") && !txtPuesto.equals("") && !txtCiudad.equals("") && !txtPais.equals("") && !txtFecha.equals("")) {
             try {
                 sql = "UPDATE empleados SET Nombre='" + name + "', Apellidos='" + surnames + "', Telefono='" + phone
-                        + "', Email='" + email + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
+                        + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
                 conect = conn.getConexion();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
