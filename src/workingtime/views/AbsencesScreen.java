@@ -431,7 +431,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     public void saveAbsence() {
         idUser = lblIdEmp.getText();
         dpto = lblDepartment.getText();
-        manager = txtManager.getText();
+        manager = txtManager.getText().toUpperCase();
         dateStart = new SimpleDateFormat("dd-MM-yyyy").format(dtDateStartAb.getDate());
         dateFin = new SimpleDateFormat("dd-MM-yyyy").format(dtDateFinAb.getDate());
         reason = txtaReasonAb.getText();
@@ -553,14 +553,14 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     }
     
     /**
-     * Método existDate: Este método permite comprobar si existe la fecha seleccionada de la ausencia del empleado, en la base de da
+     * Método existDate: Este método permite comprobar si existe la fecha seleccionada de la ausencia del empleado, en la base de datos.
      */
     public void existDate() {
         idUser = lblIdEmp.getText();
-        dateStart = dtDateStartAb.getDateFormatString();
-        dateFin = dtDateFinAb.getDateFormatString();
+        dateStart = new SimpleDateFormat("yyyy-MM-dd").format(dtDateStartAb.getDate());
+        dateFin = new SimpleDateFormat("yyyy-MM-dd").format(dtDateFinAb.getDate());
         try {
-            sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND "
+            sql = "SELECT * FROM registro_ausencia WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND "
                     + "FechaFin='" + dateFin + "'";
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);

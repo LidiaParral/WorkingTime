@@ -31,6 +31,7 @@ import workingtime.model.ResetFields;
 
 /**
  * Class AddDocScreen
+ *
  * @author Lidia Parral
  * @version 1.0.0
  */
@@ -74,6 +75,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         txtPathDoc.setVisible(false);
         lblIdEmp.setVisible(false);
+        btnSaveDoc.setEnabled(false);
         lblTypeDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblNamDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblDateUpdateDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
@@ -285,19 +287,21 @@ public class AddDocScreen extends javax.swing.JFrame {
         if (selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
             if (file.canRead()) {
-                if (file.getName().endsWith(".pdf") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx")
+                if (file.getName().endsWith(".pdf") || file.getName().endsWith(".odt") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx")
                         || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")) {
                     try {
                         img = addFile(file);
                         txtPathDoc.setText(file.getAbsolutePath());
                         txtNomDoc.setText(file.getName());
+                        btnSaveDoc.setEnabled(true);
                     } catch (IOException ex) {
                         Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No puede abrir un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                            + ".pdf,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
+                            + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         }
         btnAddDoc.setBackground(new Color(255, 126, 60));
@@ -312,10 +316,10 @@ public class AddDocScreen extends javax.swing.JFrame {
         btnSaveDoc.setBackground(new Color(252, 201, 131));
         if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
-            if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
+            if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".odt") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
                     && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")) {
                 JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                        + ".pdf,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
+                        + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
             } else {
                 String respuesta = saveFile(file, img);
                 saveDocument();
