@@ -139,11 +139,13 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         txtManager.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         dtDateStartAb.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateStartAb.setToolTipText("dd-MM-yyyy");
         dtDateStartAb.setDateFormatString("dd-MM-yyyy");
         dtDateStartAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateStartAb.setMinSelectableDate(new Date());
 
         dtDateFinAb.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateFinAb.setToolTipText("dd-MM-yyyy");
         dtDateFinAb.setDateFormatString("dd-MM-yyyy");
         dtDateFinAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateFinAb.setMinSelectableDate(new Date());

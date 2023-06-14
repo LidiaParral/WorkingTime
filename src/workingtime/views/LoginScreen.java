@@ -248,8 +248,9 @@ public class LoginScreen extends javax.swing.JFrame {
                     lblIdEmp.setText(rs.getString("IdEmpleado"));
                     idUser = lblIdEmp.getText();
                     dpto = lblDpto.getText();
+                    user = lblUser.getText();
                     HomeScreen home = new HomeScreen();
-                    if (idUser.equals("1") || dpto.equalsIgnoreCase("RRHH")) {
+                    if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECCIÓN")) {
                         home.mnControlEmp.setVisible(true);
                         home.mnAllEmp.setVisible(true);
                         home.mnEmple.setVisible(true);

@@ -130,6 +130,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         txtNomDoc.setFocusable(false);
 
         dtFechaSubDoc.setBackground(new java.awt.Color(255, 255, 255));
+        dtFechaSubDoc.setToolTipText("dd-MM-yyyy");
         dtFechaSubDoc.setDateFormatString("dd-MM-yyyy");
         dtFechaSubDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtFechaSubDoc.setMaxSelectableDate(new Date());

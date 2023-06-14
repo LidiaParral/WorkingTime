@@ -151,11 +151,12 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         txtWorkDays.setFocusable(false);
 
         dtDateS.setBackground(new java.awt.Color(255, 255, 255));
-        dtDateS.setToolTipText("Seleccione una fecha inicial");
+        dtDateS.setToolTipText("dd-MM-yyyy");
         dtDateS.setDateFormatString("dd-MM-yyyy");
         dtDateS.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         dtDateF.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateF.setToolTipText("dd-MM-yyyy");
         dtDateF.setDateFormatString("dd-MM-yyyy");
         dtDateF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
@@ -199,7 +200,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTotalDed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtWorkDays, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtWorkDays, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLiquidoTotal)

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/AllDocumentsScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/AllTimesScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/AddSalaryScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/ControlEmpScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/AddDocScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/TimeScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/ProfileEmpScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/SplashScreen.java</file>
         </group>
     </open-files>
 </project-private>

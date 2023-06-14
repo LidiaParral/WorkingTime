@@ -199,12 +199,13 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         txtEmailEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         dtDateOfBirthEmp.setBackground(new java.awt.Color(255, 255, 255));
-        dtDateOfBirthEmp.setToolTipText("El usuario registrado debe ser mayor de edad");
+        dtDateOfBirthEmp.setToolTipText("dd-MM-yyyy");
         dtDateOfBirthEmp.setDateFormatString("dd-MM-yyyy");
         dtDateOfBirthEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateOfBirthEmp.setMaxSelectableDate(new Date());
 
         dtDateOfSeniorityEmp.setBackground(new java.awt.Color(255, 255, 255));
+        dtDateOfSeniorityEmp.setToolTipText("dd-MM-yyyy");
         dtDateOfSeniorityEmp.setDateFormatString("dd-MM-yyyy");
         dtDateOfSeniorityEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateOfSeniorityEmp.setMaxSelectableDate(new Date());
