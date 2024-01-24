@@ -2,6 +2,6 @@
 
 Beta 1.0.0:
 
-*Login* | *Home* |
+*Splash* | *Login* |
 ------ | ------ |
-![](img/Login.jpg)| ![](img/Home.jpg)
+![](img/Splash.jpg)| ![](img/Login.jpg)
