@@ -33,9 +33,9 @@ public class HomeScreen extends javax.swing.JFrame {
         lblDNIEmp.setVisible(false);
         lblEmailEmp.setVisible(false);
         lblGroupCot.setVisible(false);
-        lblGroupProf.setVisible(false);
+        lblCatProf.setVisible(false);
         lblNumSS.setVisible(false);
-        lblJobEmp.setVisible(false);
+        lblPosEmp.setVisible(false);
         lblDepartmentEmp.setVisible(false);
         btnLogout.setFont(new Font("Century Gothic", Font.BOLD, 12));
         mnAddDoc.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -81,11 +81,11 @@ public class HomeScreen extends javax.swing.JFrame {
         lblIdEmp = new javax.swing.JLabel();
         lblEmailEmp = new javax.swing.JLabel();
         lblSurnamesEmp = new javax.swing.JLabel();
-        lblJobEmp = new javax.swing.JLabel();
+        lblPosEmp = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
         lblNumSS = new javax.swing.JLabel();
         lblGroupCot = new javax.swing.JLabel();
-        lblGroupProf = new javax.swing.JLabel();
+        lblCatProf = new javax.swing.JLabel();
         lblDNIEmp = new javax.swing.JLabel();
         lblDepartmentEmp = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
@@ -125,8 +125,8 @@ public class HomeScreen extends javax.swing.JFrame {
         lblSurnamesEmp.setEnabled(false);
         lblSurnamesEmp.setFocusable(false);
 
-        lblJobEmp.setEnabled(false);
-        lblJobEmp.setFocusable(false);
+        lblPosEmp.setEnabled(false);
+        lblPosEmp.setFocusable(false);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/workingtime_home.png"))); // NOI18N
 
@@ -155,7 +155,7 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addComponent(lblGroupCot)
                         .addGap(58, 58, 58)
-                        .addComponent(lblGroupProf)
+                        .addComponent(lblCatProf)
                         .addGap(98, 98, 98))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -167,7 +167,7 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSurnamesEmp)
-                            .addComponent(lblJobEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblPosEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblDNIEmp)
@@ -198,14 +198,14 @@ public class HomeScreen extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addComponent(lblSurnamesEmp)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblJobEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblPosEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNumSS)
                             .addComponent(lblGroupCot)
-                            .addComponent(lblGroupProf))
+                            .addComponent(lblCatProf))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
@@ -388,7 +388,7 @@ public class HomeScreen extends javax.swing.JFrame {
         salaries.lblApellidosEmp.setText(lblSurnamesEmp.getText().toUpperCase());
         salaries.lblDNIEmp.setText(lblDNIEmp.getText());
         salaries.lblGrupoCotizEmp.setText(lblGroupCot.getText());
-        salaries.lblGrupoProfEmp.setText(lblGroupProf.getText().toUpperCase());
+        salaries.lblGrupoProfEmp.setText(lblCatProf.getText().toUpperCase());
         salaries.lblNumSSEmp.setText(lblNumSS.getText());
         salaries.existSalary();
         salaries.setVisible(true);
@@ -474,7 +474,7 @@ public class HomeScreen extends javax.swing.JFrame {
             allTimes.lblIdEmp.setText(lblIdEmp.getText());
             allTimes.lblId.setText(lblIdEmp.getText());
             allTimes.lblNom.setText(lblNamEmp.getText());
-            allTimes.lblPuesto.setText(lblJobEmp.getText());
+            allTimes.lblPuesto.setText(lblPosEmp.getText());
             allTimes.lblDpto.setText(lblDepartmentEmp.getText());
             allTimes.existWorkingDay();
             allTimes.setVisible(true);
@@ -519,7 +519,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void mnAddSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAddSalaryActionPerformed
         AddSalaryScreen addS = new AddSalaryScreen();
         addS.lblIdEmp.setText(lblIdEmp.getText());
-        addS.lblPuesto.setText(lblJobEmp.getText());
+        addS.lblPuesto.setText(lblPosEmp.getText());
         addS.setVisible(true);
     }//GEN-LAST:event_mnAddSalaryActionPerformed
 
@@ -573,9 +573,9 @@ public class HomeScreen extends javax.swing.JFrame {
     public javax.swing.JLabel lblDepartmentEmp;
     public javax.swing.JLabel lblEmailEmp;
     public javax.swing.JLabel lblGroupCot;
-    public javax.swing.JLabel lblGroupProf;
+    public javax.swing.JLabel lblCatProf;
     public javax.swing.JLabel lblIdEmp;
-    public javax.swing.JLabel lblJobEmp;
+    public javax.swing.JLabel lblPosEmp;
     public javax.swing.JLabel lblNamEmp;
     public javax.swing.JLabel lblNumSS;
     public javax.swing.JLabel lblSurnamesEmp;

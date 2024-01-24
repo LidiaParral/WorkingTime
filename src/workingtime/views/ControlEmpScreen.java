@@ -57,7 +57,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     String sql;
     String name;
     String surnames;
-    String job;
+    String position;
     String phone;
     String email;
     String dateOfBirth;
@@ -69,7 +69,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     String country;
     String capital;
     String dateOfSeniority;
-    String groupProf;
+    String categProf;
     String groupCot;
 
     /**
@@ -81,7 +81,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         getDepartment();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        cmbEmpJob.setEnabled(false);
+        cmbEmpPos.setEnabled(false);
         lblName.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblSurnames.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblDNI.setFont(new Font("Century Gothic", Font.BOLD, 14));
@@ -136,7 +136,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         txtGroupCotEmp = new javax.swing.JTextField();
         lblPhone = new javax.swing.JLabel();
         txtPhoneEmp = new javax.swing.JTextField();
-        cmbEmpJob = new javax.swing.JComboBox<>();
+        cmbEmpPos = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -159,7 +159,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         lblNumSS.setText("Número Seguridad Social:");
 
-        lblJob.setText("Puesto de Trabajo:");
+        lblJob.setText("Posicion:");
 
         lblEmail.setText("Email:");
 
@@ -169,7 +169,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         lblCountry.setText("País:");
 
-        lblGroupPro.setText("Grupo Profesional:");
+        lblGroupPro.setText("Categoria Profesional:");
 
         lblDateOld.setText("Fecha de Antigüedad:");
 
@@ -215,6 +215,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         cmbEmpCountry.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpCountry.setToolTipText("Seleccione el pais del usuario");
+        cmbEmpCountry.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cmbEmpCountry.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEmpCountryItemStateChanged(evt);
@@ -229,8 +230,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         txtPhoneEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
-        cmbEmpJob.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbEmpJob.setToolTipText("Seleccione el puesto de trabajo del usuario");
+        cmbEmpPos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbEmpPos.setToolTipText("Seleccione el puesto de trabajo del usuario");
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel15.setText("@workingtime.com");
@@ -256,29 +257,32 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblEmail)
-                        .addComponent(txtSSNumEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblGroupPro)
-                        .addComponent(txtDNIEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNumSS)
-                            .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSurnames, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDNI, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel15))
-                        .addComponent(cmbGroupProf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtSurnamesEmp)
-                        .addComponent(cmbEmpDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lblCountry)
-                    .addComponent(cmbEmpCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDpto))
-                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblEmail)
+                                .addComponent(txtSSNumEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblGroupPro)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNumSS)
+                                    .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSurnames, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDNI, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(cmbGroupProf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSurnamesEmp)
+                                .addComponent(cmbEmpDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDNIEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCountry)
+                            .addComponent(cmbEmpCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDpto))
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtEmailEmp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel15)
+                        .addGap(52, 52, 52)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 5, Short.MAX_VALUE)
@@ -292,18 +296,18 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                             .addComponent(lblGroupCot)
                             .addComponent(lblPhone)
                             .addComponent(lblDateBirth)
-                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCapital))
+                            .addComponent(lblCapital)
+                            .addComponent(txtGroupCotEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDateOld)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                            .addComponent(lblJob)
-                            .addComponent(cmbEmpJob, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPhoneEmp, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDateOld, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblJob, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbEmpPos, javax.swing.GroupLayout.Alignment.LEADING, 0, 233, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -311,19 +315,22 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSurnames))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(12, 12, 12)
-                .addComponent(txtSurnamesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(lblName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblSurnames))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSurnamesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -349,7 +356,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cmbEmpDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbEmpJob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbEmpPos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblEmail)
@@ -471,8 +478,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
      */
     private void cmbEmpDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpDepartmentItemStateChanged
         if (cmbEmpDepartment.getSelectedIndex() > 0) {
-            cmbEmpJob.setEnabled(true);
-            cmbEmpJob.removeAllItems();
+            cmbEmpPos.setEnabled(true);
+            cmbEmpPos.removeAllItems();
             getEmpJob();
         }
     }//GEN-LAST:event_cmbEmpDepartmentItemStateChanged
@@ -525,15 +532,15 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         phone = txtPhoneEmp.getText();
         user = txtEmailEmp.getText();
         password = generateRandomPassword(12, 48, 122);
-        groupProf = cmbGroupProf.getSelectedItem().toString().toUpperCase();
+        categProf = cmbGroupProf.getSelectedItem().toString().toUpperCase();
         groupCot = txtGroupCotEmp.getText();
         department = cmbEmpDepartment.getSelectedItem().toString().toUpperCase();
         country = cmbEmpCountry.getSelectedItem().toString().toUpperCase();
-        job = cmbEmpJob.getSelectedItem().toString().toUpperCase();
+        position = cmbEmpPos.getSelectedItem().toString().toUpperCase();
         capital = txtCapitalEmp.getText().toUpperCase();
 
         int edad = getAdultsAge();
-        if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || groupProf.equals("") || groupCot.equals("")
+        if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || categProf.equals("") || groupCot.equals("")
                 || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else if (edad < 18) {
@@ -543,15 +550,15 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         } else {
             try {
 
-                sql = "INSERT INTO empleados(Nombre,Apellidos,DNI,Usuario,Password,FechaNac,Departamento,PuestoTrabajo,Ciudad,Pais,Email,Telefono,NumeroSeguridadSocial,GrupoProfesional,GrupoCotizacion,FechaAntiguedad) VALUES "
-                        + "('" + name + "','" + surnames + "','" + dni + "','" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + department + "','"
-                        + job + "','" + capital + "','" + country + "','" + email + "','" + phone + "','" + SSNumber + "','" + groupProf
-                        + "','" + groupCot + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y'))";
+                sql = "INSERT INTO usuarios(Usuario,Password,FechaNac,Nombre,Apellidos,Email,DNI,Ciudad,Pais,Telefono,GrupoCotizacion,CategoriaProfesional,FechaAntiguedad,NumeroSeguridadSocial,Posicion,Departamento) VALUES "
+                        + "('" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + name + "','" + surnames + "','" + email + "','" + dni + "','" + capital + "','"
+                        + country + "','" + phone + "','" + groupCot + "','" + categProf + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y')),'" +  SSNumber + "','" 
+                        + position+ "','" + department + "')";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Recuerde las credenciales.\nRegistro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Guarde las credenciales.\nRegistro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
                 saveCredentials();
 
             } catch (HeadlessException | SQLException ex) {
@@ -568,7 +575,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         reset.ResetPanel(jPanel1);
         cmbEmpCountry.setSelectedIndex(0);
         cmbEmpDepartment.setSelectedIndex(0);
-        cmbEmpJob.setSelectedIndex(0);
+        cmbEmpPos.setSelectedIndex(0);
     }
 
     /**
@@ -639,14 +646,14 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     public void getEmpJob() {
         department = cmbEmpDepartment.getSelectedItem().toString();
         try {
-            sql = "SELECT PuestoTrabajo FROM departamentos WHERE Departamento='" + department + "'";
+            sql = "SELECT Posicion FROM departamentos WHERE Departamento='" + department + "'";
 
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
 
             while (rs.next()) {
-                cmbEmpJob.addItem(rs.getString("PuestoTrabajo").toUpperCase());
+                cmbEmpPos.addItem(rs.getString("Posicion").toUpperCase());
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
@@ -744,43 +751,43 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     void groupProfesional() {
         switch (cmbGroupProf.getSelectedIndex()) {
             case 0:
-                groupProf = "INGENIEROS Y LICENCIADOS";
+                categProf = "INGENIEROS Y LICENCIADOS";
                 txtGroupCotEmp.setText("1");
                 break;
             case 1:
-                groupProf = "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS";
+                categProf = "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS";
                 txtGroupCotEmp.setText("2");
                 break;
             case 2:
-                groupProf = "JEFES ADMINISTRATIVOS Y DE TALLER";
+                categProf = "JEFES ADMINISTRATIVOS Y DE TALLER";
                 txtGroupCotEmp.setText("3");
                 break;
             case 3:
-                groupProf = "AYUDANTES NO TITULADOS";
+                categProf = "AYUDANTES NO TITULADOS";
                 txtGroupCotEmp.setText("4");
                 break;
             case 4:
-                groupProf = "OFICIALES ADMINISTRATIVOS";
+                categProf = "OFICIALES ADMINISTRATIVOS";
                 txtGroupCotEmp.setText("5");
                 break;
             case 5:
-                groupProf = "SUBALTERNOS";
+                categProf = "SUBALTERNOS";
                 txtGroupCotEmp.setText("6");
                 break;
             case 6:
-                groupProf = "AUXILIARES ADMINISTRATIVOS";
+                categProf = "AUXILIARES ADMINISTRATIVOS";
                 txtGroupCotEmp.setText("7");
                 break;
             case 7:
-                groupProf = "OFICIALES DE PRIMERA Y SEGUNDA";
+                categProf = "OFICIALES DE PRIMERA Y SEGUNDA";
                 txtGroupCotEmp.setText("8");
                 break;
             case 8:
-                groupProf = "OFICIALES DE TERCERA Y ESPECIALISTAS";
+                categProf = "OFICIALES DE TERCERA Y ESPECIALISTAS";
                 txtGroupCotEmp.setText("9");
                 break;
             case 9:
-                groupProf = "PEONES";
+                categProf = "PEONES";
                 txtGroupCotEmp.setText("10");
                 break;
             default:
@@ -840,7 +847,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnSaveEmp;
     public javax.swing.JComboBox<String> cmbEmpCountry;
     public javax.swing.JComboBox<String> cmbEmpDepartment;
-    public javax.swing.JComboBox<String> cmbEmpJob;
+    public javax.swing.JComboBox<String> cmbEmpPos;
     private javax.swing.JComboBox<String> cmbGroupProf;
     public com.toedter.calendar.JDateChooser dtDateOfBirthEmp;
     public com.toedter.calendar.JDateChooser dtDateOfSeniorityEmp;

@@ -20,7 +20,7 @@ public class Conexion {
     /**
      *
      */
-    public static final String URL = "jdbc:mysql://localhost:3306/workingtime";
+    public static final String URL = "jdbc:mysql://localhost:3307/workingtime";
     //Añadir el usuario de PhpMyAdmin
 
     /**
@@ -42,7 +42,7 @@ public class Conexion {
         Connection con = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection(URL, USER, CLAVE);           
+            con = (Connection) DriverManager.getConnection(URL,USER,CLAVE);           
             //JOptionPane.showMessageDialog(null, "Conexión establecida con éxito","Conexion",JOptionPane.INFORMATION_MESSAGE);
         }catch(HeadlessException | ClassNotFoundException | SQLException e){
             System.out.println("Error: " + e.getMessage());

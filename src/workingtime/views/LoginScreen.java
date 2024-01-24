@@ -237,7 +237,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
                 reset.ResetFrame(this);
             } else {
-                sql = "SELECT * FROM empleados WHERE Usuario= '" + user + "' AND Password='" + pass + "'";
+                sql = "SELECT * FROM usuarios WHERE Usuario= '" + user + "' AND Password='" + pass + "'";
 
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
@@ -250,7 +250,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     dpto = lblDpto.getText();
                     user = lblUser.getText();
                     HomeScreen home = new HomeScreen();
-                    if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECCIÓN")) {
+                    if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECTOR")) {
                         home.mnControlEmp.setVisible(true);
                         home.mnAllEmp.setVisible(true);
                         home.mnEmple.setVisible(true);
@@ -267,9 +267,9 @@ public class LoginScreen extends javax.swing.JFrame {
                     home.lblEmailEmp.setText(rs.getString("Email"));
                     home.lblDNIEmp.setText(rs.getString("DNI"));
                     home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
-                    home.lblGroupProf.setText(rs.getString("GrupoProfesional"));
+                    home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
                     home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
-                    home.lblJobEmp.setText(rs.getString("PuestoTrabajo"));
+                    home.lblPosEmp.setText(rs.getString("Posicion"));
                     home.lblDepartmentEmp.setText(rs.getString("Departamento"));
                     home.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);

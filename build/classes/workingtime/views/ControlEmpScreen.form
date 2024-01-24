@@ -63,33 +63,38 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSSNumEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
-                          <Component id="lblGroupPro" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDNIEmp" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblSurnames" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDNI" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSSNumEmp" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
+                                  <Component id="lblGroupPro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="lblNumSS" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblSurnames" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblDNI" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="cmbGroupProf" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
+                                  <Component id="txtNameEmp" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
+                                  <Component id="txtSurnamesEmp" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cmbEmpDepartment" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="txtDNIEmp" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEmpCountry" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="lblDpto" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtEmailEmp" min="-2" pref="132" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="cmbGroupProf" alignment="0" min="-2" pref="308" max="-2" attributes="0"/>
-                          <Component id="txtNameEmp" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
-                          <Component id="txtSurnamesEmp" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cmbEmpDepartment" alignment="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbEmpCountry" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                      <Component id="lblDpto" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="txtEmailEmp" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
@@ -104,21 +109,21 @@
                               <Component id="lblGroupCot" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblDateBirth" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtGroupCotEmp" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                              <Component id="txtPhoneEmp" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                               <Component id="lblCapital" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtGroupCotEmp" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblDateOld" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txtPhoneEmp" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblDateOld" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblJob" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEmpPos" alignment="0" pref="233" max="32767" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="dtDateOfSeniorityEmp" alignment="0" pref="171" max="32767" attributes="0"/>
+                                  <Component id="dtDateOfSeniorityEmp" alignment="0" max="32767" attributes="0"/>
                                   <Component id="dtDateOfBirthEmp" alignment="0" pref="171" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="lblJob" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbEmpJob" min="-2" pref="233" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -130,24 +135,29 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtNameEmp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblSurnames" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="jLabel16" min="-2" pref="82" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtNameEmp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblSurnames" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSurnamesEmp" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel17" min="-2" pref="85" max="-2" attributes="0"/>
-                              <Component id="jLabel16" min="-2" pref="82" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jLabel17" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Component id="txtSurnamesEmp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
@@ -177,7 +187,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cmbEmpDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cmbEmpJob" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbEmpPos" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -246,7 +256,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblJob">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Puesto de Trabajo:"/>
+            <Property name="text" type="java.lang.String" value="Posicion:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEmail">
@@ -271,7 +281,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblGroupPro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Grupo Profesional:"/>
+            <Property name="text" type="java.lang.String" value="Categoria Profesional:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDateOld">
@@ -413,6 +423,9 @@
               <Font name="Century Gothic" size="12" style="0"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Seleccione el pais del usuario"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor Por defecto"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbEmpCountryItemStateChanged"/>
@@ -449,7 +462,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbEmpJob">
+        <Component class="javax.swing.JComboBox" name="cmbEmpPos">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="12" style="0"/>
