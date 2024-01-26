@@ -108,8 +108,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="dateAct" min="-2" pref="141" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="dateAct" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -162,6 +162,9 @@
           <Connection code="new Date()" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dtTimeStartPropertyChange"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JCalendar" name="dateAct">
       <Properties>
@@ -192,6 +195,9 @@
           <Connection code="new Date()" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dtTimeFinPropertyChange"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnReturn">
       <Properties>
@@ -233,6 +239,9 @@
           <Connection code="new Date()" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dtReasonStartPropertyChange"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSaveTime">
       <Properties>

@@ -4,12 +4,14 @@
  */
 package workingtime.views;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,9 +22,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +38,7 @@ import workingtime.model.ResetFields;
 
 /**
  * Class ControlEmpScreen
+ *
  * @author Lidia Parral
  * @version 1.0.0
  */
@@ -71,6 +76,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     String dateOfSeniority;
     String categProf;
     String groupCot;
+    
+    int dayOfWeek;
 
     /**
      * Creates new form ControlEmpScreen
@@ -209,6 +216,11 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         dtDateOfSeniorityEmp.setDateFormatString("dd-MM-yyyy");
         dtDateOfSeniorityEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateOfSeniorityEmp.setMaxSelectableDate(new Date());
+        dtDateOfSeniorityEmp.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtDateOfSeniorityEmpPropertyChange(evt);
+            }
+        });
 
         txtCapitalEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCapitalEmp.setEnabled(false);
@@ -305,9 +317,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                             .addComponent(lblDateOld, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblJob, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbEmpPos, javax.swing.GroupLayout.Alignment.LEADING, 0, 233, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
+                            .addComponent(dtDateOfSeniorityEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dtDateOfBirthEmp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -517,6 +528,16 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         groupProfesional();
     }//GEN-LAST:event_cmbGroupProfActionPerformed
 
+    private void dtDateOfSeniorityEmpPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtDateOfSeniorityEmpPropertyChange
+         if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);                
+                dtDateOfSeniorityEmp.setDateFormatString("");
+            }
+        }
+    }//GEN-LAST:event_dtDateOfSeniorityEmpPropertyChange
+
     /**
      * Método addEmployee: Este método permite añadir los datos del empleado en
      * la base de datos.
@@ -552,8 +573,8 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
                 sql = "INSERT INTO usuarios(Usuario,Password,FechaNac,Nombre,Apellidos,Email,DNI,Ciudad,Pais,Telefono,GrupoCotizacion,CategoriaProfesional,FechaAntiguedad,NumeroSeguridadSocial,Posicion,Departamento) VALUES "
                         + "('" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + name + "','" + surnames + "','" + email + "','" + dni + "','" + capital + "','"
-                        + country + "','" + phone + "','" + groupCot + "','" + categProf + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y')),'" +  SSNumber + "','" 
-                        + position+ "','" + department + "')";
+                        + country + "','" + phone + "'," + groupCot + ",'" + categProf + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y'),'" + SSNumber + "','"
+                        + position + "','" + department + "')";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();
@@ -666,7 +687,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
      */
     private void getDepartment() {
         try {
-            sql = "SELECT DISTINCT Departamento FROM departamentos";
+            sql = "SELECT DISTINCT Departamento FROM departamentos ORDER BY Departamento";
 
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
@@ -709,7 +730,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     public void getCountry() {
 
         try {
-            sql = "SELECT * FROM paises";
+            sql = "SELECT * FROM paises ORDER BY Pais";
 
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
@@ -755,7 +776,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 txtGroupCotEmp.setText("1");
                 break;
             case 1:
-                categProf = "INGENIEROS TÉCNICOS, PERITOS Y AYUDANTES TITULADOS";
+                categProf = "INGENIEROS TECNICOS, PERITOS Y AYUDANTES TITULADOS";
                 txtGroupCotEmp.setText("2");
                 break;
             case 2:
@@ -794,6 +815,15 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                 throw new AssertionError();
         }
 
+    }
+
+    private boolean notWorkingDay(Date fecha) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+
+        dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
     }
 
     /**

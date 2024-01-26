@@ -4,6 +4,7 @@
  */
 package workingtime.views;
 
+import com.mysql.jdbc.Blob;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -386,9 +387,9 @@ public class AddDocScreen extends javax.swing.JFrame {
             if (name.equals("") || date.equals("")) {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
             } else {
-                sql = "INSERT INTO documentos_empleado(IdEmpleado,TipoDocumento,NombreDoc,RutaArchivo,FechaSubida) VALUES "
-                        + "('" + idEmp + "','" + typeDoc + "','" + name + "','" + path + "',"
-                        + "STR_TO_DATE('" + date + "','%d-%m-%Y')" + ")";
+                sql = "INSERT INTO documentos_empleado(IdEmpleado,TipoDocumento,NombreDoc,FechaSubida,Archivo) VALUES "
+                        + "('" + idEmp + "','" + typeDoc + "','" + name + "'," + "',"
+                        + "STR_TO_DATE('" + date + "','%d-%m-%Y')" + "),'" + path + "'";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();

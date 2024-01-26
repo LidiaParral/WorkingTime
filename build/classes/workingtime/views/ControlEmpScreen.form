@@ -120,10 +120,8 @@
                               <Component id="lblDateOld" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblJob" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbEmpPos" alignment="0" pref="233" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="dtDateOfSeniorityEmp" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dtDateOfBirthEmp" alignment="0" pref="171" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="dtDateOfSeniorityEmp" alignment="0" max="32767" attributes="0"/>
+                              <Component id="dtDateOfBirthEmp" alignment="0" pref="171" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -402,6 +400,9 @@
               <Connection code="new Date()" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dtDateOfSeniorityEmpPropertyChange"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

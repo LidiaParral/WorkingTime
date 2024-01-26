@@ -30,6 +30,7 @@ import workingtime.model.ResetFields;
 
 /**
  * Class TimeScreen
+ *
  * @author Lidia Parral
  * @version 1.0.0
  */
@@ -72,6 +73,7 @@ public final class TimeScreen extends javax.swing.JFrame {
     int dias = 0;
     int totalHours;
     int total;
+    int day;
 
     Date horaInicio;
     Date horaFinal;
@@ -95,8 +97,6 @@ public final class TimeScreen extends javax.swing.JFrame {
         lblDateActual.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnSaveTime.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-        dateAct.setTodayButtonVisible(true);
-        dateAct.setTodayButtonText("Hoy");
         dateAct.setWeekOfYearVisible(false);
     }
 
@@ -138,6 +138,11 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtTimeStart.setToolTipText("HH:mm:ss");
         dtTimeStart.setDateFormatString("HH:mm:ss");
         dtTimeStart.setMinSelectableDate(new Date());
+        dtTimeStart.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtTimeStartPropertyChange(evt);
+            }
+        });
 
         dateAct.setBackground(new java.awt.Color(255, 255, 255));
         dateAct.setMinSelectableDate(new Date());
@@ -153,6 +158,11 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtTimeFin.setToolTipText("HH:mm:ss");
         dtTimeFin.setDateFormatString("HH:mm:ss");
         dtTimeFin.setMinSelectableDate(new Date());
+        dtTimeFin.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtTimeFinPropertyChange(evt);
+            }
+        });
 
         btnReturn.setBackground(new java.awt.Color(204, 204, 204));
         btnReturn.setForeground(new java.awt.Color(255, 255, 255));
@@ -170,6 +180,11 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtReasonStart.setToolTipText("HH:mm:ss");
         dtReasonStart.setDateFormatString("HH:mm:ss");
         dtReasonStart.setMinSelectableDate(new Date());
+        dtReasonStart.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtReasonStartPropertyChange(evt);
+            }
+        });
 
         btnSaveTime.setBackground(new java.awt.Color(38, 70, 166));
         btnSaveTime.setForeground(new java.awt.Color(255, 255, 255));
@@ -264,8 +279,8 @@ public final class TimeScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateAct, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateAct, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -296,9 +311,10 @@ public final class TimeScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Botón Guardar: Este botón permite guardar el horario laboral del empleado.
-     * 
-     * @param evt 
+     * Botón Guardar: Este botón permite guardar el horario laboral del
+     * empleado.
+     *
+     * @param evt
      */
     private void btnSaveTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveTimeActionPerformed
         btnSaveTime.setBackground(new Color(252, 201, 131));
@@ -307,29 +323,67 @@ public final class TimeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveTimeActionPerformed
 
     /**
-     * DateChooser dateActPropertyChange: Este método permite añadir la fecha seleccionada en el Label.
-     * @param evt 
-     */
-    private void dateActPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateActPropertyChange
-        if (evt.getOldValue() != null) {
-            Date fecha = dateAct.getDate();
-            DateFormat f = new SimpleDateFormat("dd-MM-yyyy");
-            dateActual = f.format(fecha);
-            lblDateActual.setText(dateActual);
-        }
-    }//GEN-LAST:event_dateActPropertyChange
-
-    /**
      * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnReturnActionPerformed
 
+    private void dtTimeStartPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtTimeStartPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay2(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                dtTimeStart.setDateFormatString("");
+            }
+        }
+    }//GEN-LAST:event_dtTimeStartPropertyChange
+
+    private void dtTimeFinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtTimeFinPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay2(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                dtTimeFin.setDateFormatString("");
+            }
+        }
+    }//GEN-LAST:event_dtTimeFinPropertyChange
+
+    private void dtReasonStartPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtReasonStartPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay2(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                dtReasonStart.setDateFormatString("");
+            }
+        }
+    }//GEN-LAST:event_dtReasonStartPropertyChange
+
     /**
-     * Método getTimeOfDay: Este método permite obtener las horas mediante la diferencia entre dos fechas seleccionadas.
+     * DateChooser dateActPropertyChange: Este método permite añadir la fecha
+     * seleccionada en el Label.
+     *
+     * @param evt
+     */
+    private void dateActPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateActPropertyChange
+        if ("calendar".equals(evt.getPropertyName())) {
+            Calendar nuevaFecha = (Calendar) evt.getNewValue();
+            if (notWorkingDay(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                lblDateActual.setText("");
+            } else {
+                SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+                lblDateActual.setText(f.format(nuevaFecha.getTime()));
+            }
+        }
+    }//GEN-LAST:event_dateActPropertyChange
+
+    /**
+     * Método getTimeOfDay: Este método permite obtener las horas mediante la
+     * diferencia entre dos fechas seleccionadas.
+     *
      * @return hours
      */
     public int getTimeOfDay() {
@@ -360,7 +414,9 @@ public final class TimeScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método getTimeOfReason: Este método permite obtener las horas mediante la diferencia entre dos fechas seleccionadas.
+     * Método getTimeOfReason: Este método permite obtener las horas mediante la
+     * diferencia entre dos fechas seleccionadas.
+     *
      * @return hours
      */
     public int getTimeOfReason() {
@@ -391,8 +447,10 @@ public final class TimeScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método getDay: Este método permite obtener el día de la semana de la fecha seleccionada.
-     * @param day 
+     * Método getDay: Este método permite obtener el día de la semana de la
+     * fecha seleccionada.
+     *
+     * @param day
      */
     public void getDay(JCalendar day) {
         Calendar calendar = Calendar.getInstance();
@@ -402,6 +460,7 @@ public final class TimeScreen extends javax.swing.JFrame {
 
     /**
      * Método calculateHours: Este método permite calcular las horas.
+     *
      * @return totalHours
      */
     public int calculateHours() {
@@ -414,7 +473,8 @@ public final class TimeScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método saveTimeWorkingDay: Este método permite guardar los datos de la jornada laboral en la base de datos.
+     * Método saveTimeWorkingDay: Este método permite guardar los datos de la
+     * jornada laboral en la base de datos.
      */
     public void saveTimeWorkingDay() {
         idUser = lblIdEmp.getText();
@@ -437,7 +497,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         } else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
             JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
-        } else if((dtTimeFin.getDate().before(dtTimeStart.getDate())) || (dtReasonFin.getDate().before(dtReasonStart.getDate()))){
+        } else if ((dtTimeFin.getDate().before(dtTimeStart.getDate())) || (dtReasonFin.getDate().before(dtReasonStart.getDate()))) {
             JOptionPane.showMessageDialog(null, "El campo de la hora de fin no puede ser anterior a la hora de inicio .", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
         } else {
@@ -457,21 +517,21 @@ public final class TimeScreen extends javax.swing.JFrame {
         }
         cleanData();
     }
-    
+
     /**
      * Método cleanData: Este método permite limpiar los campos del formulario.
      */
-    public void cleanData(){     
+    public void cleanData() {
         dtTimeStart.setCalendar(null);
         dtTimeFin.setCalendar(null);
         dtReasonStart.setCalendar(null);
-        dtReasonFin.setCalendar(null);      
-        lblDateActual.setText(""); 
+        dtReasonFin.setCalendar(null);
+        lblDateActual.setText("");
     }
 
     /**
-     * Método existDate: Este método permite comprobar si existe un registro con la fecha previamente seleccionada
-     * en la base de datos.
+     * Método existDate: Este método permite comprobar si existe un registro con
+     * la fecha previamente seleccionada en la base de datos.
      */
     public void existDate() {
         idUser = lblIdEmp.getText();
@@ -493,7 +553,8 @@ public final class TimeScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método otherReasons:  Este método permite añadir el valor del tipo de razón del horario laboral, según se seleccione en el campo del comboBox.
+     * Método otherReasons: Este método permite añadir el valor del tipo de
+     * razón del horario laboral, según se seleccione en el campo del comboBox.
      */
     void otherReasons() {
         switch (cmbOtherReasons.getSelectedIndex()) {
@@ -512,10 +573,26 @@ public final class TimeScreen extends javax.swing.JFrame {
 
     }
 
+    private boolean notWorkingDay(Calendar fecha) {
+        day = fecha.get(Calendar.DAY_OF_WEEK);
+
+        return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
+    }
+
+    private boolean notWorkingDay2(Date fecha) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+
+        day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // Verificar si es sábado o domingo
+        return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
+    }
+
     /**
      * Método getIconImage: Este método permite obtener el icono de la
      * aplicación.
-     * 
+     *
      * @return icon
      */
     @Override
@@ -578,4 +655,8 @@ public final class TimeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblTimeStart;
     private javax.swing.JLabel lblTimeStartR;
     // End of variables declaration//GEN-END:variables
+
+    private boolean notWorkingDay(Date nuevaFecha) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

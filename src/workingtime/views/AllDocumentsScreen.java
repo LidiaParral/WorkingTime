@@ -111,11 +111,11 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Tipo de Documento", "Archivo", "Fecha subida"
+                "Nombre", "Tipo de Documento", "Fecha subida", "Archivo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
             };
             boolean[] canEdit = new boolean [] {
                 true, false, false, false
@@ -340,7 +340,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Este campo no puede estar vacío", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                sql = "SELECT * FROM documentos_empleado WHERE FechaSubida ='" + fecha + "'";
+                sql = "SELECT * FROM documentos_empleados WHERE FechaSubida ='" + fecha + "'";
 
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
@@ -348,10 +348,10 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                 Object[] documento = new Object[4];
                 modelo = (DefaultTableModel) TablaDoc.getModel();
                 while (rs.next()) {
-                    documento[0] = rs.getString("NombreDoc");
-                    documento[1] = rs.getString("TipoDocumento");
-                    documento[2] = rs.getString("RutaArchivo");
-                    documento[3] = rs.getString("FechaSubida");
+                    documento[0] = rs.getString("TipoDocumento");
+                    documento[1] = rs.getString("NombreDoc");
+                    documento[2] = rs.getString("FechaSubida");
+                    documento[3] = rs.getString("Archivo");
 
                     modelo.addRow(documento);
                 }
@@ -373,7 +373,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
     public void consult() {
         idUser = lblIdEmp.getText();
         try {
-            sql = "SELECT * FROM documentos_empleado WHERE IdEmpleado ='" + idUser + "'";
+            sql = "SELECT * FROM documentos_empleados WHERE IdEmpleado ='" + idUser + "'";
 
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
@@ -382,10 +382,10 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             Object[] documento = new Object[4];
             modelo = (DefaultTableModel) TablaDoc.getModel();
             while (rs.next()) {
-                documento[0] = rs.getString("NombreDoc");
-                documento[1] = rs.getString("TipoDocumento");
-                documento[2] = rs.getString("RutaArchivo");
-                documento[3] = rs.getString("FechaSubida");
+                documento[0] = rs.getString("TipoDocumento");
+                documento[1] = rs.getString("NombreDoc");
+                documento[2] = rs.getString("FechaSubida");
+                documento[3] = rs.getString("Archivo");
 
                 modelo.addRow(documento);
             }
@@ -406,7 +406,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         idUser = lblIdEmp.getText();
         try {
 
-            sql = "UPDATE documentos_empleado SET NombreDoc='" + nomDoc + "' WHERE IdEmpleado ='" + idUser + "'";
+            sql = "UPDATE documentos_empleados SET NombreDoc='" + nomDoc + "' WHERE IdEmpleado ='" + idUser + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -425,7 +425,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
     public void deleteDocument() {
         idUser = lblIdEmp.getText();
         try {
-            sql = "DELETE FROM documentos_empleado WHERE IdEmpleado='" + idUser + "'";
+            sql = "DELETE FROM documentos_empleados WHERE IdEmpleado='" + idUser + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
