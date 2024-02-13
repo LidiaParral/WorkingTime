@@ -15,7 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -335,7 +334,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         if ("date".equals(evt.getPropertyName())) {
             Date nuevaFecha = (Date) evt.getNewValue();
             if (notWorkingDay2(nuevaFecha)) {
-                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtTimeStart.setDateFormatString("");
             }
         }
@@ -345,7 +344,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         if ("date".equals(evt.getPropertyName())) {
             Date nuevaFecha = (Date) evt.getNewValue();
             if (notWorkingDay2(nuevaFecha)) {
-                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtTimeFin.setDateFormatString("");
             }
         }
@@ -355,7 +354,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         if ("date".equals(evt.getPropertyName())) {
             Date nuevaFecha = (Date) evt.getNewValue();
             if (notWorkingDay2(nuevaFecha)) {
-                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtReasonStart.setDateFormatString("");
             }
         }
@@ -371,7 +370,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         if ("calendar".equals(evt.getPropertyName())) {
             Calendar nuevaFecha = (Calendar) evt.getNewValue();
             if (notWorkingDay(nuevaFecha)) {
-                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 lblDateActual.setText("");
             } else {
                 SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
@@ -575,7 +574,6 @@ public final class TimeScreen extends javax.swing.JFrame {
 
     private boolean notWorkingDay(Calendar fecha) {
         day = fecha.get(Calendar.DAY_OF_WEEK);
-
         return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
     }
 

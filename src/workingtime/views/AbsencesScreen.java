@@ -66,6 +66,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     int selectedRow;
     Object[] options = {"Aceptar", "Cancelar"};
     int election;
+    int day;
 
     /**
      * Creates new form AbsencesScreen
@@ -143,12 +144,22 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         dtDateStartAb.setDateFormatString("dd-MM-yyyy");
         dtDateStartAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateStartAb.setMinSelectableDate(new Date());
+        dtDateStartAb.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtDateStartAbPropertyChange(evt);
+            }
+        });
 
         dtDateFinAb.setBackground(new java.awt.Color(255, 255, 255));
         dtDateFinAb.setToolTipText("dd-MM-yyyy");
         dtDateFinAb.setDateFormatString("dd-MM-yyyy");
         dtDateFinAb.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         dtDateFinAb.setMinSelectableDate(new Date());
+        dtDateFinAb.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtDateFinAbPropertyChange(evt);
+            }
+        });
 
         lblTypeRequest.setText("Tipo de solicitud");
 
@@ -427,6 +438,26 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         btnDeleteAusencia.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteAusenciaActionPerformed
 
+    private void dtDateStartAbPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtDateStartAbPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                dtDateStartAb.setDateFormatString("");
+            }
+        }
+    }//GEN-LAST:event_dtDateStartAbPropertyChange
+
+    private void dtDateFinAbPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtDateFinAbPropertyChange
+         if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                dtDateFinAb.setDateFormatString("");
+            }
+        }
+    }//GEN-LAST:event_dtDateFinAbPropertyChange
+
     /**
      * Método saveAbsence: Este método permite guardar los datos de la ausencia en la base de datos.
      */
@@ -443,12 +474,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         if (dpto.isEmpty() || manager.isEmpty() || dateStart.isEmpty() || dateFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
-            JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if(dtDateFinAb.getDate().before(dtDateStartAb.getDate())){
-            JOptionPane.showMessageDialog(null, "El campo de la fecha de fin no puede ser anterior a la fecha de inicio.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La fecha de fin no puede ser anterior a la fecha de inicio.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else if(dtDateStartAb.getDate().after(dtDateFinAb.getDate())){
-            JOptionPane.showMessageDialog(null, "El campo de la fecha de inicio no puede ser posterior a la fecha de fin.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser posterior a la fecha de fin.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         }else {
             try {
                 typeRequest();
@@ -631,6 +660,16 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         return retValue;
     }
 
+    
+    private boolean notWorkingDay(Date fecha) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+
+        day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // Verificar si es sábado o domingo
+        return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
+    }
     
     /**
      * @param args the command line arguments
