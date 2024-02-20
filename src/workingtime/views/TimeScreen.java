@@ -408,6 +408,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         } catch (ParseException ex) {
             Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return horas;
     }
@@ -441,6 +442,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         } catch (ParseException ex) {
             Logger.getLogger(TimeScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return horas;
     }
@@ -512,6 +514,7 @@ public final class TimeScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
             } catch (HeadlessException | SQLException ex) {
                 System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
         cleanData();
@@ -548,6 +551,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

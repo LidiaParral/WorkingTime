@@ -371,6 +371,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO NÓMINA", JOptionPane.INFORMATION_MESSAGE);
             } catch (HeadlessException | SQLException ex) {
                 System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
         dtDateS.setCalendar(null);
@@ -419,6 +420,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
      

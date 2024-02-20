@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Class SplashScreen
@@ -111,6 +112,7 @@ public class SplashScreen extends javax.swing.JFrame {
                         pgbarSplash.setValue(i);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }

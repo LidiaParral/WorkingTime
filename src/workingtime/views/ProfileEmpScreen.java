@@ -377,6 +377,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -401,6 +402,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El perfil se actualizó correctamente.", "ACTUALIZACIÓN PERFIL", JOptionPane.INFORMATION_MESSAGE);
             } catch (HeadlessException | SQLException ex) {
                 System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);

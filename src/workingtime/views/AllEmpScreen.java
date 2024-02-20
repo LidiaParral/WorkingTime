@@ -397,6 +397,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
             TablaEmp.setModel(modelo);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -420,6 +421,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(modelo);
     }
@@ -439,6 +441,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(modelo);
     }
@@ -473,6 +476,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
         reset.ResetPanel(jPanel2);

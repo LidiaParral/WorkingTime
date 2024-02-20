@@ -348,7 +348,7 @@ public class AddDocScreen extends javax.swing.JFrame {
             input = new FileInputStream(file);
             input.read(content);
         } catch (FileNotFoundException e) {
-
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return content;
     }
@@ -367,7 +367,7 @@ public class AddDocScreen extends javax.swing.JFrame {
             out.write(content);
             resp = "Se ha guardado el archivo correctamente.";
         } catch (IOException e) {
-
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return resp;
     }
@@ -398,6 +398,7 @@ public class AddDocScreen extends javax.swing.JFrame {
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

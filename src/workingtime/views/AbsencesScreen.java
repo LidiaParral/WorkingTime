@@ -491,6 +491,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO AUSENCIA", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
                 System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
         cleanData();
@@ -528,6 +529,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El registro se actualizó correctamente.", "ACTUALIZACIÓN AUSENCIA", JOptionPane.INFORMATION_MESSAGE);
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(model);
     }
@@ -551,6 +553,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(model);
     }
@@ -580,6 +583,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             TableAbsence.setModel(model);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -604,6 +608,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
       

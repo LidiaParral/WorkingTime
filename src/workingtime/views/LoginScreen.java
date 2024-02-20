@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import static java.lang.System.console;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ import workingtime.model.ResetFields;
 
 /**
  * Class LoginScreen
+ *
  * @author Lidia Parral
  * @version 1.0.0
  */
@@ -48,6 +50,8 @@ public class LoginScreen extends javax.swing.JFrame {
     String name;
     String idUser;
     String dpto;
+
+    int count = 0;
 
     /**
      * Creates new form LoginScreen
@@ -237,12 +241,13 @@ public class LoginScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
                 reset.ResetFrame(this);
             } else {
+
                 sql = "SELECT * FROM usuarios WHERE Usuario= '" + user + "' AND Password='" + pass + "'";
 
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
-                if (rs.next()) {
+                if (rs.next() && count < 2) {
                     this.hide();
                     Thread.sleep(200);
                     lblIdEmp.setText(rs.getString("IdEmpleado"));
@@ -272,19 +277,26 @@ public class LoginScreen extends javax.swing.JFrame {
                     home.lblPosEmp.setText(rs.getString("Posicion"));
                     home.lblDepartmentEmp.setText(rs.getString("Departamento"));
                     home.setVisible(true);
-                    JOptionPane.showMessageDialog(null, "Bienvenido/a a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
+                    reset.ResetFrame(this);
+                    JOptionPane.showMessageDialog(null, "Bienvenido " + rs.getString("Nombre") + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
 
                 } else {
+                    JOptionPane.showMessageDialog(null, "Usuario incorrecto. Tiene 3 intentos.\n"
+                            + "Intento " + (1 + count) + " de 3 intentos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                     txtPswLogin.setText("");
                     txtUserLogin.setText("");
-                    JOptionPane.showMessageDialog(null, "Usuario incorrecto.\nVuelva a intentarlo", "ERROR", JOptionPane.ERROR_MESSAGE);
-
+                    count++;
+                    if (count == 3) {
+                        JOptionPane.showMessageDialog(null, "Usuario bloqueado. Total: " + count + " intentos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        this.dispose();
+                        System.exit(0);
+                    }
                 }
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        reset.ResetFrame(this);
     }
 
     /**

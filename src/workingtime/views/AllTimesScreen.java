@@ -397,6 +397,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -415,6 +416,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(model);
     }
@@ -442,6 +444,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(model);
     }

@@ -584,6 +584,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
             } catch (HeadlessException | SQLException ex) {
                 System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
         cleanData();
@@ -645,6 +646,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
         JFileChooser window = new JFileChooser(System.getProperty("user.dir"));
@@ -655,6 +657,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
                     Desktop.getDesktop().open(file);
                 } catch (IOException ex) {
                     Logger.getLogger(ControlEmpScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -678,6 +681,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -699,6 +703,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -720,6 +725,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -742,6 +748,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

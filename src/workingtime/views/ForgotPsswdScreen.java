@@ -258,6 +258,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         txtOldPass.setText("");
         txtConfPass.setText("");

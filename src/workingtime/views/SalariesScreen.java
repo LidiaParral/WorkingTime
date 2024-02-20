@@ -393,6 +393,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
                 export.exportExcel(TableSalaries);
             } catch (IOException ex) {
                 Logger.getLogger(SalariesScreen.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnDownloadNominaActionPerformed
@@ -460,6 +461,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
             TableSalaries.setModel(model);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -489,6 +491,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
             TableSalaries.setModel(model);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -511,6 +514,7 @@ public final class SalariesScreen extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(model);
     }
