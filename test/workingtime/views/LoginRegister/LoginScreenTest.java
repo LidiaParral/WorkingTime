@@ -4,6 +4,7 @@
  */
 package workingtime.views.LoginRegister;
 
+import workingtime.views.LoginForgotPsswd.LoginScreen;
 import java.awt.Image;
 import org.junit.Test;
 import static org.junit.Assert.*;

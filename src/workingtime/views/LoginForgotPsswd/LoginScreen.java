@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package workingtime.views.LoginRegister;
+package workingtime.views.LoginForgotPsswd;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -247,50 +247,55 @@ public class LoginScreen extends javax.swing.JFrame {
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
-                if (rs.next() && count < 2) {
-                    this.hide();
-                    Thread.sleep(200);
-                    lblIdEmp.setText(rs.getString("IdEmpleado"));
-                    idUser = lblIdEmp.getText();
-                    dpto = lblDpto.getText();
-                    user = lblUser.getText();
-                    HomeScreen home = new HomeScreen();
-                    if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECTOR")) {
-                        home.mnControlEmp.setVisible(true);
-                        home.mnAllEmp.setVisible(true);
-                        home.mnEmple.setVisible(true);
-                        home.mnAddSalary.setVisible(true);
+                if (rs.next()) {
+                    if (count < 2) {
+                        this.hide();
+                        Thread.sleep(200);
+                        lblIdEmp.setText(rs.getString("IdEmpleado"));
+                        idUser = lblIdEmp.getText();
+                        dpto = lblDpto.getText();
+                        user = lblUser.getText();
+                        HomeScreen home = new HomeScreen();
+                        if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECTOR")) {
+                            home.mnControlEmp.setVisible(true);
+                            home.mnAllEmp.setVisible(true);
+                            home.mnEmple.setVisible(true);
+                            home.mnAddSalary.setVisible(true);
+                        } else {
+                            home.mnControlEmp.setVisible(false);
+                            home.mnAllEmp.setVisible(false);
+                            home.mnEmple.setVisible(false);
+                            home.mnAddSalary.setVisible(false);
+                        }
+                        home.lblIdEmp.setText(rs.getString("IdEmpleado"));
+                        home.lblNamEmp.setText(rs.getString("Nombre"));
+                        home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
+                        home.lblEmailEmp.setText(rs.getString("Email"));
+                        home.lblDNIEmp.setText(rs.getString("DNI"));
+                        home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
+                        home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
+                        home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
+                        home.lblPosEmp.setText(rs.getString("Posicion"));
+                        home.lblDepartmentEmp.setText(rs.getString("Departamento"));
+                        home.setVisible(true);
+                        reset.ResetFrame(this);
+                        JOptionPane.showMessageDialog(null, "Bienvenido " + rs.getString("Nombre") + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
+
                     } else {
-                        home.mnControlEmp.setVisible(false);
-                        home.mnAllEmp.setVisible(false);
-                        home.mnEmple.setVisible(false);
-                        home.mnAddSalary.setVisible(false);
+                        JOptionPane.showMessageDialog(null, "Usuario incorrecto. Tiene 3 intentos.\n"
+                                + "Intento " + (1 + count) + " de 3 intentos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                        txtPswLogin.setText("");
+                        txtUserLogin.setText("");
+                        count++;
+                        if (count == 3) {
+                            JOptionPane.showMessageDialog(null, "Usuario bloqueado. Total: " + count + " intentos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            this.dispose();
+                            System.exit(0);
+                        }
                     }
-                    home.lblIdEmp.setText(rs.getString("IdEmpleado"));
-                    home.lblNamEmp.setText(rs.getString("Nombre"));
-                    home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
-                    home.lblEmailEmp.setText(rs.getString("Email"));
-                    home.lblDNIEmp.setText(rs.getString("DNI"));
-                    home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
-                    home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
-                    home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
-                    home.lblPosEmp.setText(rs.getString("Posicion"));
-                    home.lblDepartmentEmp.setText(rs.getString("Departamento"));
-                    home.setVisible(true);
-                    reset.ResetFrame(this);
-                    JOptionPane.showMessageDialog(null, "Bienvenido " + rs.getString("Nombre") + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Usuario incorrecto. Tiene 3 intentos.\n"
-                            + "Intento " + (1 + count) + " de 3 intentos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
-                    txtPswLogin.setText("");
-                    txtUserLogin.setText("");
-                    count++;
-                    if (count == 3) {
-                        JOptionPane.showMessageDialog(null, "Usuario bloqueado. Total: " + count + " intentos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-                        this.dispose();
-                        System.exit(0);
-                    }
+                    JOptionPane.showMessageDialog(null, "Usuario no ha sido encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (SQLException ex) {

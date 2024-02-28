@@ -6,7 +6,7 @@ package workingtime.views.Home;
 
 import workingtime.views.Salary.AddSalaryScreen;
 import workingtime.views.Salary.ListSalariesScreen;
-import workingtime.views.LoginRegister.LoginScreen;
+import workingtime.views.LoginForgotPsswd.LoginScreen;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;

@@ -4,8 +4,8 @@
  */
 package workingtime;
 
-import workingtime.views.LoginRegister.LoginScreen;
-import workingtime.views.LoginRegister.SplashScreen;
+import workingtime.views.LoginForgotPsswd.LoginScreen;
+import workingtime.views.LoginForgotPsswd.SplashScreen;
 
 /**
  * Class WorkingTime

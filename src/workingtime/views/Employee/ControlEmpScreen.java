@@ -35,6 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.model.ResetFields;
+import workingtime.views.Home.HomeScreen;
 
 /**
  * Class ControlEmpScreen
@@ -76,8 +77,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     String dateOfSeniority;
     String categProf;
     String groupCot;
-    
+
     int dayOfWeek;
+
+    boolean empExist;
 
     /**
      * Creates new form ControlEmpScreen
@@ -529,10 +532,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbGroupProfActionPerformed
 
     private void dtDateOfSeniorityEmpPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtDateOfSeniorityEmpPropertyChange
-         if ("date".equals(evt.getPropertyName())) {
+        if ("date".equals(evt.getPropertyName())) {
             Date nuevaFecha = (Date) evt.getNewValue();
             if (notWorkingDay(nuevaFecha)) {
-                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);                
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada es SÁBADO o DOMINGO.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtDateOfSeniorityEmp.setDateFormatString("");
             }
         }
@@ -559,34 +562,40 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         country = cmbEmpCountry.getSelectedItem().toString().toUpperCase();
         position = cmbEmpPos.getSelectedItem().toString().toUpperCase();
         capital = txtCapitalEmp.getText().toUpperCase();
-
         int edad = getAdultsAge();
-        if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || categProf.equals("") || groupCot.equals("")
-                || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
-            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if (edad < 18) {
-            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de edad para poder ser registrado.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else if ((phone.length() > 9) || (phone.length() < 9)) {
-            JOptionPane.showMessageDialog(null, "El campo del número de teléfono debe contener 9 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
+        empExist = existEmployee();
 
-                sql = "INSERT INTO usuarios(Usuario,Password,FechaNac,Nombre,Apellidos,Email,DNI,Ciudad,Pais,Telefono,GrupoCotizacion,CategoriaProfesional,FechaAntiguedad,NumeroSeguridadSocial,Posicion,Departamento) VALUES "
-                        + "('" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + name + "','" + surnames + "','" + email + "','" + dni + "','" + capital + "','"
-                        + country + "','" + phone + "'," + groupCot + ",'" + categProf + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y'),'" + SSNumber + "','"
-                        + position + "','" + department + "')";
+        if (!empExist) {
+            if (name.equals("") || surnames.equals("") || email.equals("") || phone.equals("") || categProf.equals("") || groupCot.equals("")
+                    || dateOfSeniority.equals("") || dateOfBirth.equals("") || phone.equals("") || user.equals("") || dni.equals("")) {
+                JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+            } else if (edad < 18) {
+                JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de edad para poder ser registrado.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+            } else if ((phone.length() > 9) || (phone.length() < 9)) {
+                JOptionPane.showMessageDialog(null, "El campo del número de teléfono debe contener 9 números.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
 
-                conect = conn.getConexion();
-                st = conect.createStatement();
-                st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Guarde las credenciales.\nRegistro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
-                saveCredentials();
+                    sql = "INSERT INTO usuarios(Usuario,Password,FechaNac,Nombre,Apellidos,Email,DNI,Ciudad,Pais,Telefono,GrupoCotizacion,CategoriaProfesional,FechaAntiguedad,NumeroSeguridadSocial,Posicion,Departamento) VALUES "
+                            + "('" + user + "','" + password + "',STR_TO_DATE('" + dateOfBirth + "','%d-%m-%Y'),'" + name + "','" + surnames + "','" + email + "','" + dni + "','" + capital + "','"
+                            + country + "','" + phone + "'," + groupCot + ",'" + categProf + "',STR_TO_DATE('" + dateOfSeniority + "','%d-%m-%Y'),'" + SSNumber + "','"
+                            + position + "','" + department + "')";
 
-            } catch (HeadlessException | SQLException ex) {
-                System.err.println("Error:" + ex);
-                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    conect = conn.getConexion();
+                    st = conect.createStatement();
+                    st.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(null, "Guarde las credenciales.\nRegistro con éxito\nUsuario: " + user + "\nPassword: " + password, "Registro del empleado", JOptionPane.PLAIN_MESSAGE);
+                    saveCredentials();
+
+                } catch (HeadlessException | SQLException ex) {
+                    System.err.println("Error:" + ex);
+                    JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario ya está registrado.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+
         cleanData();
     }
 
@@ -831,6 +840,33 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
         return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
+    }
+
+    /**
+     * Método existEmployee: Este método permite comprobar si existe el usuario
+     * en la base de datos según el usuario y contraseña introducidos
+     * previamente.
+     *
+     * @return si existe el empleado TRUE, y sino FALSE
+     */
+    public boolean existEmployee() {
+        try {
+            sql = "SELECT * FROM usuarios WHERE Usuario= '" + email + "'";
+
+            conect = conn.getConexion();
+            ps = conect.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Usuario ya está registrado en la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
     }
 
     /**
