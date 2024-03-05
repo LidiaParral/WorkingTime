@@ -658,8 +658,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
-        JFileChooser window = new JFileChooser(System.getProperty("user.dir"));
+        JFileChooser window = new JFileChooser();
         if (window.showDialog(this, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
+            window.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            window.setAcceptAllFileFilterUsed(false);
             file = window.getSelectedFile();
             if (file.canRead()) {
                 try {
