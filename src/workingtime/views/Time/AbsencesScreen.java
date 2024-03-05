@@ -22,8 +22,8 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.CleanTable;
-import workingtime.model.ResetFields;
+import workingtime.utilities.CleanTable;
+import workingtime.utilities.ResetFields;
 
 /**
  * Class AbsencesScreen
@@ -112,6 +112,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaReasonAb = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        btnTypeAbsence = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAbsence = new javax.swing.JTable();
@@ -164,7 +165,12 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblTypeRequest.setText("Tipo de solicitud");
 
         cmbTypeRequestVacation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbTypeRequestVacation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "PERMISO RETRIBUIDO", "PERMISO NO RETRIBUIDO", "DÍA LIBRE", "DÍA FESTIVO", "CITA MEDICA" }));
+        cmbTypeRequestVacation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BAJA", "CITA MEDICA", "DÍA FESTIVO", "DÍA LIBRE", "PERMISO NO RETRIBUIDO", "PERMISO RETRIBUIDO", "VACACIONES" }));
+        cmbTypeRequestVacation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTypeRequestVacationActionPerformed(evt);
+            }
+        });
 
         lblReason.setText("Motivo de ausencia:");
 
@@ -176,6 +182,17 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tiempo.png"))); // NOI18N
 
+        btnTypeAbsence.setBackground(new java.awt.Color(255, 126, 60));
+        btnTypeAbsence.setForeground(new java.awt.Color(255, 255, 255));
+        btnTypeAbsence.setText("BAJA");
+        btnTypeAbsence.setToolTipText("Este botón abre modal para añadir la ausencia de tipo BAJA.");
+        btnTypeAbsence.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnTypeAbsence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTypeAbsenceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,10 +200,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dtDateStartAb, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDepartment))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblReason)
                     .addComponent(lblDateFin)
@@ -201,8 +214,16 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblIdEmp)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lblIdEmp))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(dtDateStartAb, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDepartment)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTypeAbsence, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +255,9 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 .addComponent(lblReason)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
+                .addGap(27, 27, 27)
+                .addComponent(btnTypeAbsence, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -374,7 +397,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 .addGap(0, 2, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -458,6 +481,21 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dtDateFinAbPropertyChange
 
+    private void btnTypeAbsenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTypeAbsenceActionPerformed
+        AbsencesLeavesScreen leave = new AbsencesLeavesScreen();
+        leave.setVisible(true);
+        typeRequest = leave.typeAbs;
+        dateStart = leave.dateStart;
+        dateFin = leave.dateFin;
+    }//GEN-LAST:event_btnTypeAbsenceActionPerformed
+
+    private void cmbTypeRequestVacationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTypeRequestVacationActionPerformed
+        if(cmbTypeRequestVacation.getSelectedItem().equals("BAJA")){
+            dtDateStartAb.setEnabled(false);
+            dtDateFinAb.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbTypeRequestVacationActionPerformed
+
     /**
      * Método saveAbsence: Este método permite guardar los datos de la ausencia en la base de datos.
      */
@@ -481,7 +519,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         }else {
             try {
                 typeRequest();
-                sql = "INSERT INTO registro_ausencia(IdEmpleado,Departamento,Responsable,FechaInicio,FechaFin,TipoSolicitud,MotivoAusencia) VALUES"
+                sql = "INSERT INTO registro_ausencia(IdEmpleado,Departamento,Manager,FechaInicio,FechaFin,TipoSolicitud,AusenciaDesc) VALUES"
                         + "('" + idUser + "','" + dpto + "','" + manager + "',STR_TO_DATE('" + dateStart + "','%d-%m-%Y')"
                         + ",STR_TO_DATE('" + dateFin + "','%d-%m-%Y'),'" + typeRequest + "','" + reason + "')";
 
@@ -576,7 +614,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 absence[1] = rs.getDate("FechaInicio");
                 absence[2] = rs.getDate("FechaFin");
                 absence[3] = rs.getString("TipoSolicitud");
-                absence[4] = rs.getString("MotivoAusencia");
+                absence[4] = rs.getString("AusenciaDesc");
 
                 model.addRow(absence);
             }
@@ -629,22 +667,22 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     void typeRequest() {
         switch (cmbTypeRequestVacation.getSelectedIndex()) {
             case 0:
-                typeRequest = "VACACIONES";
+                typeRequest = "CITA MEDICA";
                 break;
             case 1:
-                typeRequest = "PERMISO RETRIBUIDO";
-                break;
-            case 2:
-                typeRequest = "PERMISO NO RETRIBUIDO";
-                break;
-            case 3:
-                typeRequest = "DIA LIBRE";
-                break;
-            case 4:
                 typeRequest = "DIA FESTIVO";
                 break;
+            case 2:
+                typeRequest = "DIA LIBRE";
+                break;
+            case 3:
+                typeRequest = "PERMISO NO RETRIBUIDO";
+                break;
+            case 4:
+                typeRequest = "PERMISO RETRIBUIDO";
+                break;
             case 5:
-                typeRequest = "CITA MEDICA";
+                typeRequest = "VACACIONES";
                 break;
             default:
                 throw new AssertionError();
@@ -714,6 +752,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     private javax.swing.JTable TableAbsence;
     private javax.swing.JButton btnDeleteAusencia;
     private javax.swing.JButton btnSaveAusencia;
+    private javax.swing.JButton btnTypeAbsence;
     private javax.swing.JButton btnUpdateAusencia;
     public javax.swing.JComboBox<String> cmbTypeRequestVacation;
     public com.toedter.calendar.JDateChooser dtDateFinAb;

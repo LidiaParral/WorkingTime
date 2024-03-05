@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
-import workingtime.model.ResetFields;
+import workingtime.utilities.ResetFields;
 
 /**
  * Class AddSalaryScreen
@@ -360,7 +360,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La fecha de inicio sólo se puede seleccionar el día 1 de cada mes.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);                
         } else {
             try {
-                sql = "INSERT INTO nominas(IdEmpleado,PuestoTrabajo,Mes,FechaInicio,FechaFin,SalarioBase,TotalDevengado,TotalDeducciones,LiquidoTotal,DiasTrabajados) VALUES "
+                sql = "INSERT INTO nominas(IdEmpleado,Posicion,Mes,FechaInicio,FechaFin,SalarioBase,TotalDevengado,TotalDeducciones,LiquidoTotal,DiasTrabajados) VALUES "
                         + "('" + idUser + "','" + job + "','" +  month + "', STR_TO_DATE('" + dateS + "','%d-%m-%Y')"
                         + ", STR_TO_DATE('" + dateF + "','%d-%m-%Y'),'" + salary + "','" + totalDev + "','" + totalDed
                         + "','"+ liqTotal + "','" + days + "')";

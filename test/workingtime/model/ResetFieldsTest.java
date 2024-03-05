@@ -4,6 +4,7 @@
  */
 package workingtime.model;
 
+import workingtime.utilities.ResetFields;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.junit.Test;

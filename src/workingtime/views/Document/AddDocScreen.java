@@ -28,7 +28,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.ResetFields;
+import workingtime.utilities.ResetFields;
 
 /**
  * Class AddDocScreen

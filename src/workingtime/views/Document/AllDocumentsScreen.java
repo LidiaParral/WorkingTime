@@ -17,9 +17,9 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.ExportExcel;
-import workingtime.model.CleanTable;
-import workingtime.model.ResetFields;
+import workingtime.utilities.ExportExcel;
+import workingtime.utilities.CleanTable;
+import workingtime.utilities.ResetFields;
 
 /**
  * Class AllDocumentsScreen

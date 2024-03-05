@@ -71,11 +71,6 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="dtDateStartAb" min="-2" pref="171" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <Component id="lblReason" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDateFin" min="-2" max="-2" attributes="0"/>
@@ -93,8 +88,18 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="lblIdEmp" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="dtDateStartAb" min="-2" pref="171" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnTypeAbsence" min="-2" pref="106" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,7 +137,9 @@
                   <Component id="lblReason" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="btnTypeAbsence" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -230,16 +237,20 @@
               <Font name="Century Gothic" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="VACACIONES"/>
-                <StringItem index="1" value="PERMISO RETRIBUIDO"/>
-                <StringItem index="2" value="PERMISO NO RETRIBUIDO"/>
+              <StringArray count="7">
+                <StringItem index="0" value="BAJA"/>
+                <StringItem index="1" value="CITA MEDICA"/>
+                <StringItem index="2" value="D&#xcd;A FESTIVO"/>
                 <StringItem index="3" value="D&#xcd;A LIBRE"/>
-                <StringItem index="4" value="D&#xcd;A FESTIVO"/>
-                <StringItem index="5" value="CITA MEDICA"/>
+                <StringItem index="4" value="PERMISO NO RETRIBUIDO"/>
+                <StringItem index="5" value="PERMISO RETRIBUIDO"/>
+                <StringItem index="6" value="VACACIONES"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTypeRequestVacationActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -280,6 +291,26 @@
               <Image iconType="3" name="/images/tiempo.png"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnTypeAbsence">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="3c" green="7e" red="ff" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="BAJA"/>
+            <Property name="toolTipText" type="java.lang.String" value="Este bot&#xf3;n abre modal para a&#xf1;adir la ausencia de tipo BAJA."/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTypeAbsenceActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

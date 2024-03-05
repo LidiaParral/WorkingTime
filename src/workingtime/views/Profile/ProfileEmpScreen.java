@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import workingtime.database.Conexion;
-import workingtime.model.ResetFields;
+import workingtime.utilities.ResetFields;
 
 /**
  * Class ProfileEmpScreen

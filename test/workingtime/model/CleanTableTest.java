@@ -4,6 +4,7 @@
  */
 package workingtime.model;
 
+import workingtime.utilities.CleanTable;
 import javax.swing.table.DefaultTableModel;
 import org.junit.Test;
 import static org.junit.Assert.*;

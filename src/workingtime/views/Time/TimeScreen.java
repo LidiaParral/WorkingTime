@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
-import workingtime.model.ResetFields;
+import workingtime.utilities.ResetFields;
 
 /**
  * Class TimeScreen
@@ -503,7 +503,7 @@ public final class TimeScreen extends javax.swing.JFrame {
             cleanData();
         } else {
             try {
-                sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas) VALUES "
+                sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,Razon,HoraInicioRaz,HoraFinRaz,TotalHoras) VALUES "
                         + "('" + idUser + "','" + dateActual + "', STR_TO_DATE('" + timeStart + "','%H:%i:%s')"
                         + ", STR_TO_DATE('" + timeFin + "','%H:%i:%s'),'" + reason + "', STR_TO_DATE('" + timeReasonStart + "','%H:%i:%s')"
                         + ", STR_TO_DATE('" + timeReasonFin + "','%H:%i:%s'),'" + total + "')";

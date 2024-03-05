@@ -4,6 +4,7 @@
  */
 package workingtime.model;
 
+import workingtime.utilities.ExportExcel;
 import javax.swing.JTable;
 import org.junit.Test;
 import static org.junit.Assert.*;
