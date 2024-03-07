@@ -65,6 +65,7 @@ public final class TimeScreen extends javax.swing.JFrame {
     String start;
     String fin;
     String dayOfWeek;
+    Calendar hourDay;
 
     int diferencia;
     int horas = 0;
@@ -456,6 +457,9 @@ public final class TimeScreen extends javax.swing.JFrame {
     public void getDay(JCalendar day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(day.getDate());
+        if(calendar == null){
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
         dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
     }
 
@@ -479,10 +483,14 @@ public final class TimeScreen extends javax.swing.JFrame {
      */
     public void saveTimeWorkingDay() {
         idUser = lblIdEmp.getText();
-        timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
-        timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
-        timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate());
-        timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
+        try{
+            timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate().toString());
+            timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate().toString());
+            timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate().toString());
+            timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate().toString());
+        } catch(NullPointerException ex){
+           JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE); 
+        }
 
         total = calculateHours();
         getDay(dateAct);
@@ -495,12 +503,17 @@ public final class TimeScreen extends javax.swing.JFrame {
                 || timeReasonFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
-        } else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
+        } else if (idUser.isEmpty() || dateActual == null|| timeStart == null || timeFin == null || timeReasonStart == null
+                || timeReasonFin == null || reason.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cleanData();       
+        }else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
             JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
         } else if ((dtTimeFin.getDate().before(dtTimeStart.getDate())) || (dtReasonFin.getDate().before(dtReasonStart.getDate()))) {
             JOptionPane.showMessageDialog(null, "El campo de la hora de fin no puede ser anterior a la hora de inicio .", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
+            
         } else {
             try {
                 sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,Razon,HoraInicioRaz,HoraFinRaz,TotalHoras) VALUES "
@@ -512,7 +525,7 @@ public final class TimeScreen extends javax.swing.JFrame {
                 st = conect.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
-            } catch (HeadlessException | SQLException ex) {
+            } catch (HeadlessException | SQLException | NullPointerException ex) {
                 System.err.println("Error:" + ex);
                 JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -538,20 +551,24 @@ public final class TimeScreen extends javax.swing.JFrame {
     public void existDate() {
         idUser = lblIdEmp.getText();
         dateNow = lblDateActual.getText();
-        try {
-            sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaActual='" + dateNow + "'";
-            conect = conn.getConexion();
-            ps = conect.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
-                        + dateNow, "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else {
-                saveTimeWorkingDay();
+        if (!idUser.isEmpty() || !dateNow.isEmpty()) {
+            try {
+                sql = "SELECT * FROM registro_horas WHERE IdEmpleado='" + idUser + "' AND FechaActual='" + dateNow + "'";
+                conect = conn.getConexion();
+                ps = conect.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Este usuario ya tiene un registro\n para esa fecha:"
+                            + dateNow, "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    saveTimeWorkingDay();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
-            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
