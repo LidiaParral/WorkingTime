@@ -126,7 +126,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, true, true, true
+                false, false, false, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -146,7 +146,6 @@ public final class AllEmpScreen extends javax.swing.JFrame {
             TablaEmp.getColumnModel().getColumn(0).setPreferredWidth(50);
             TablaEmp.getColumnModel().getColumn(3).setResizable(false);
             TablaEmp.getColumnModel().getColumn(4).setResizable(false);
-            TablaEmp.getColumnModel().getColumn(5).setResizable(false);
             TablaEmp.getColumnModel().getColumn(6).setResizable(false);
         }
 
@@ -373,7 +372,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
      * base de datos.
      */
     public void consult() {
-        sql = "SELECT IdEmpleado,Nombre,Apellidos,DNI,FechaNac,Departamento,Email,Telefono FROM empleados";
+        sql = "SELECT IdEmpleado,Nombre,Apellidos,DNI,FechaNac,Departamento,Email,Telefono FROM usuarios";
 
         try {
             conect = conn.getConexion();
@@ -407,12 +406,11 @@ public final class AllEmpScreen extends javax.swing.JFrame {
      */
     public void updateEmp() {
         idUser = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 0));
-        email = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 5));
         tlf = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 6));
         dpto = String.valueOf(modelo.getValueAt(TablaEmp.getSelectedRow(), 7));
         try {
 
-            sql = "UPDATE empleados SET Email='" + email + "', Telefono='" + tlf + "', Departamento='" + dpto
+            sql = "UPDATE usuarios SET Telefono='" + tlf + "', Departamento='" + dpto
                     + "' WHERE IdEmpleado ='" + idUser + "'";
 
             conect = conn.getConexion();
@@ -451,7 +449,7 @@ public final class AllEmpScreen extends javax.swing.JFrame {
      * con ese nombre en la tabla Clientes de la base de datos.
      */
     public void searchEmp() {
-        sql = "SELECT * FROM empleados WHERE Nombre LIKE'%" + txtSearchEmp.getText() + "%' OR Apellidos LIKE'%"
+        sql = "SELECT * FROM usuarios WHERE Nombre LIKE'%" + txtSearchEmp.getText() + "%' OR Apellidos LIKE'%"
                 + txtSearchEmp.getText() + "%'";
 
         try {

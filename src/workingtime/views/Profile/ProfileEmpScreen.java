@@ -354,7 +354,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
      * del empleado de la base de datos.
      */
     public void consult() {
-        sql = "SELECT * FROM empleados WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
+        sql = "SELECT * FROM usuarios WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
 
         try {
             conect = conn.getConexion();
@@ -368,7 +368,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
                 txtTelefono.setText(rs.getString("Telefono"));
                 txtEmail.setText(rs.getString("Email"));
                 txtDpto.setText(rs.getString("Departamento").toUpperCase());
-                txtPuesto.setText(rs.getString("PuestoTrabajo").toUpperCase());
+                txtPuesto.setText(rs.getString("Posicion").toUpperCase());
                 txtPais.setText(rs.getString("Pais").toUpperCase());
                 txtCiudad.setText(rs.getString("Ciudad").toUpperCase());
                 txtFecha.setText(rs.getString("FechaNac").toUpperCase());
@@ -394,7 +394,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
         if (!txtIdEmp.equals("") && !name.isEmpty() && !surnames.isEmpty() && !txtDNI.equals("") && !phone.isEmpty()
                 && !email.isEmpty() && !txtDpto.equals("") && !txtPuesto.equals("") && !txtCiudad.equals("") && !txtPais.equals("") && !txtFecha.equals("")) {
             try {
-                sql = "UPDATE empleados SET Nombre='" + name + "', Apellidos='" + surnames + "', Telefono='" + phone
+                sql = "UPDATE usuarios SET Nombre='" + name + "', Apellidos='" + surnames + "', Telefono='" + phone
                         + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
                 conect = conn.getConexion();
                 st = conect.createStatement();

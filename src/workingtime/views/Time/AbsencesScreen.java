@@ -629,9 +629,12 @@ public final class AbsencesScreen extends javax.swing.JFrame {
      * Método existDate: Este método permite comprobar si existe la fecha seleccionada de la ausencia del empleado, en la base de datos.
      */
     public void existDate() {
-        idUser = lblIdEmp.getText();
+        idUser = lblIdEmp.getText();     
         dateStart = new SimpleDateFormat("yyyy-MM-dd").format(dtDateStartAb.getDate());
         dateFin = new SimpleDateFormat("yyyy-MM-dd").format(dtDateFinAb.getDate());
+        if(dateStart == null || dateFin == null){   
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
         try {
             sql = "SELECT * FROM registro_ausencia WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND "
                     + "FechaFin='" + dateFin + "'";

@@ -23,6 +23,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.utilities.ResetFields;
@@ -208,6 +209,11 @@ public final class TimeScreen extends javax.swing.JFrame {
         dtReasonFin.setToolTipText("HH:mm:ss");
         dtReasonFin.setDateFormatString("HH:mm:ss");
         dtReasonFin.setMinSelectableDate(new Date());
+        dtReasonFin.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dtReasonFinPropertyChange(evt);
+            }
+        });
 
         lblTimeStartR.setText("Inicio:");
 
@@ -380,6 +386,18 @@ public final class TimeScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dateActPropertyChange
 
+    private void dtReasonFinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dtReasonFinPropertyChange
+         if ("date".equals(evt.getPropertyName())) {
+            Date nuevaFecha = (Date) evt.getNewValue();
+            if (notWorkingDay2(nuevaFecha)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
+                dtReasonFin.setDateFormatString("");
+            } else {
+                timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate());
+            }
+        }
+    }//GEN-LAST:event_dtReasonFinPropertyChange
+
     /**
      * Método getTimeOfDay: Este método permite obtener las horas mediante la
      * diferencia entre dos fechas seleccionadas.
@@ -483,14 +501,6 @@ public final class TimeScreen extends javax.swing.JFrame {
      */
     public void saveTimeWorkingDay() {
         idUser = lblIdEmp.getText();
-        try{
-            timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate().toString());
-            timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate().toString());
-            timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate().toString());
-            timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate().toString());
-        } catch(NullPointerException ex){
-           JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE); 
-        }
 
         total = calculateHours();
         getDay(dateAct);
@@ -517,13 +527,23 @@ public final class TimeScreen extends javax.swing.JFrame {
         } else {
             try {
                 sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,Razon,HoraInicioRaz,HoraFinRaz,TotalHoras) VALUES "
-                        + "('" + idUser + "','" + dateActual + "', STR_TO_DATE('" + timeStart + "','%H:%i:%s')"
-                        + ", STR_TO_DATE('" + timeFin + "','%H:%i:%s'),'" + reason + "', STR_TO_DATE('" + timeReasonStart + "','%H:%i:%s')"
-                        + ", STR_TO_DATE('" + timeReasonFin + "','%H:%i:%s'),'" + total + "')";
+                        + "('" + idUser + "','" + dateActual + "', STR_TO_DATE('" + timeStart + "','%H:%i:%S')"
+                        + ", STR_TO_DATE('" + timeFin + "','%H:%i:%S'),'" + reason + "', STR_TO_DATE('" + timeReasonStart + "','%H:%i:%S')"
+                        + ", STR_TO_DATE('" + timeReasonFin + "','%H:%i:%S'),'" + total + "')";
 
                 conect = conn.getConexion();
-                st = conect.createStatement();
-                st.executeUpdate(sql);
+                ps = conect.prepareStatement(sql);
+                ps.setInt(1, Integer.parseInt(lblIdEmp.getText()));
+                ps.setString(2, dateActual);
+                ps.setString(3, ((JTextField) dtTimeStart.getDateEditor().getUiComponent()).getText());
+                ps.setString(4, ((JTextField) dtTimeFin.getDateEditor().getUiComponent()).getText());
+                ps.setString(5, reason);
+                ps.setString(6, ((JTextField) dtReasonStart.getDateEditor().getUiComponent()).getText());
+                ps.setString(7, ((JTextField) dtReasonFin.getDateEditor().getUiComponent()).getText());
+                ps.setInt(8, total);
+                
+                ps.executeUpdate(sql);
+                
                 JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
             } catch (HeadlessException | SQLException | NullPointerException ex) {
                 System.err.println("Error:" + ex);
@@ -601,9 +621,7 @@ public final class TimeScreen extends javax.swing.JFrame {
     private boolean notWorkingDay2(Date fecha) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fecha);
-
         day = calendar.get(Calendar.DAY_OF_WEEK);
-
         // Verificar si es sábado o domingo
         return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
     }
