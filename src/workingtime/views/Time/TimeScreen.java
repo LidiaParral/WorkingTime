@@ -509,8 +509,7 @@ public final class TimeScreen extends javax.swing.JFrame {
         getDay(dtReasonStart.getJCalendar());
         getDay(dtReasonFin.getJCalendar());
         otherReasons();
-        if (idUser.isEmpty() || dateActual.isEmpty() || timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty()
-                || timeReasonFin.isEmpty() || reason.isEmpty()) {
+        if (timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty() || timeReasonFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
         } else if (idUser.isEmpty() || dateActual == null|| timeStart == null || timeFin == null || timeReasonStart == null

@@ -670,22 +670,25 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     void typeRequest() {
         switch (cmbTypeRequestVacation.getSelectedIndex()) {
             case 0:
-                typeRequest = "CITA MEDICA";
+                typeRequest = "BAJA";
                 break;
             case 1:
-                typeRequest = "DIA FESTIVO";
+                typeRequest = "CITA MEDICA";
                 break;
             case 2:
-                typeRequest = "DIA LIBRE";
+                typeRequest = "DIA FESTIVO";
                 break;
             case 3:
-                typeRequest = "PERMISO NO RETRIBUIDO";
+                typeRequest = "DIA LIBRE";
                 break;
             case 4:
-                typeRequest = "PERMISO RETRIBUIDO";
+                typeRequest = "PERMISO NO RETRIBUIDO";
                 break;
             case 5:
-                typeRequest = "VACACIONES";
+                typeRequest = "PERMISO RETRIBUIDO";
+                break;
+            case 6:
+                typeRequest ="VACACIONES";
                 break;
             default:
                 throw new AssertionError();
