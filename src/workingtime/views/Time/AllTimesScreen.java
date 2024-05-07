@@ -120,14 +120,14 @@ public final class AllTimesScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Hora Inicio", "Hora Fin", "Razon", "Hora Inicio", "Hora Fin", "Horas Imputadas"
+                "Fecha", "Hora Inicio", "Hora Fin", "Razon", "Hora Inicio", "Hora Fin"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, true, true, true
+                false, true, true, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -373,7 +373,7 @@ public final class AllTimesScreen extends javax.swing.JFrame {
      * registro.
      */
     public void existWorkingDay() {
-        sql = "SELECT FechaActual,HoraInicio,HoraFin,OtrasRazones,HoraInicioRazones,HoraFinRazones,HorasImputadas FROM registro_horas "
+        sql = "SELECT FechaActual,HoraInicio,HoraFin,Razon,HoraInicioRaz,HoraFinRaz FROM registro_horas "
                 + "WHERE IdEmpleado='" + lblIdEmp.getText() + "'";
 
         try {
@@ -386,10 +386,9 @@ public final class AllTimesScreen extends javax.swing.JFrame {
                 horario[0] = rs.getString("FechaActual");
                 horario[1] = rs.getTime("HoraInicio");
                 horario[2] = rs.getTime("HoraFin");
-                horario[3] = rs.getString("OtrasRazones");
-                horario[4] = rs.getTime("HoraInicioRazones");
-                horario[5] = rs.getTime("HoraFinRazones");
-                horario[6] = rs.getInt("HorasImputadas");
+                horario[3] = rs.getString("Razon");
+                horario[4] = rs.getTime("HoraInicioRaz");
+                horario[5] = rs.getTime("HoraFinRaz");
 
                 model.addRow(horario);
             }
