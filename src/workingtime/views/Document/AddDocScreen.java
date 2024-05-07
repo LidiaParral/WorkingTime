@@ -15,11 +15,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -321,15 +323,20 @@ public class AddDocScreen extends javax.swing.JFrame {
             if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".odt") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
                     && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")) {
                 JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                        + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
+                        + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.WARNING_MESSAGE);
             } else {
-                String respuesta = saveFile(file, img);
-                saveDocument();
-                if (respuesta != null) {
-                    JOptionPane.showMessageDialog(null, respuesta);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
+                try {
+                    String respuesta = saveFile(file, img);
+                    if (respuesta != null) {
+                        JOptionPane.showMessageDialog(null, respuesta);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    saveDocument();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
             }
         }
         btnSaveDoc.setBackground(new Color(38, 70, 166));
@@ -375,25 +382,33 @@ public class AddDocScreen extends javax.swing.JFrame {
     /**
      * Método saveDocument: Este método permite guardar un documento en la base
      * de datos.
+     * @throws java.io.FileNotFoundException
      */
-    public void saveDocument() {
+    public void saveDocument() throws FileNotFoundException {
         idEmp = lblIdEmp.getText();
         name = txtNomDoc.getText();
         path = txtPathDoc.getText();
         date = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaSubDoc.getDate());
-
+        
+        InputStream ip = new FileInputStream(path);
         try {
             typeDocuments();
             if (name.equals("") || date.equals("")) {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
             } else {
-                sql = "INSERT INTO documentos_empleado(IdEmpleado,TipoDocumento,NombreDoc,FechaSubida,Archivo) VALUES "
-                        + "('" + idEmp + "','" + typeDoc + "','" + name + "'," + "',"
-                        + "STR_TO_DATE('" + date + "','%d-%m-%Y')" + "),'" + path + "'";
+                sql = "INSERT INTO documentos_empleados(IdEmpleado,TipoDocumento,NombreDoc,FechaSubida,Archivo) VALUES "
+                        + "(?,?,?,?,?)";
 
                 conect = conn.getConexion();
-                st = conect.createStatement();
-                st.executeUpdate(sql);
+                ps = conect.prepareStatement(sql);
+                ps.setInt(1, Integer.parseInt(lblIdEmp.getText()));
+                ps.setString(2, typeDoc);
+                ps.setString(3, name);
+                ps.setDate(4, new java.sql.Date(dtFechaSubDoc.getDate().getTime()));
+                 ps.setBinaryStream(5, ip, (int)path.length());
+
+                ps.executeUpdate();
+
                 JOptionPane.showMessageDialog(null, "Registro con éxito", "DOCUMENTOS", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (HeadlessException | SQLException ex) {

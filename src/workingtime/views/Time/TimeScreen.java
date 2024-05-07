@@ -10,11 +10,13 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -343,6 +345,8 @@ public final class TimeScreen extends javax.swing.JFrame {
             if (notWorkingDay2(nuevaFecha)) {
                 JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtTimeStart.setDateFormatString("");
+            } else {
+                timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate());
             }
         }
     }//GEN-LAST:event_dtTimeStartPropertyChange
@@ -353,6 +357,8 @@ public final class TimeScreen extends javax.swing.JFrame {
             if (notWorkingDay2(nuevaFecha)) {
                 JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtTimeFin.setDateFormatString("");
+            } else {
+                timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate());
             }
         }
     }//GEN-LAST:event_dtTimeFinPropertyChange
@@ -363,6 +369,8 @@ public final class TimeScreen extends javax.swing.JFrame {
             if (notWorkingDay2(nuevaFecha)) {
                 JOptionPane.showMessageDialog(null, "La fecha seleccionada no es válida.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
                 dtReasonStart.setDateFormatString("");
+            } else {
+                timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate());
             }
         }
     }//GEN-LAST:event_dtReasonStartPropertyChange
@@ -502,12 +510,13 @@ public final class TimeScreen extends javax.swing.JFrame {
     public void saveTimeWorkingDay() {
         idUser = lblIdEmp.getText();
 
-        total = calculateHours();
-        getDay(dateAct);
-        getDay(dtTimeStart.getJCalendar());
-        getDay(dtTimeFin.getJCalendar());
-        getDay(dtReasonStart.getJCalendar());
-        getDay(dtReasonFin.getJCalendar());
+        dateActual = lblDateActual.getText();
+        timeStart = new SimpleDateFormat("HH:mm:ss").format(dtTimeStart.getDate().getTime());
+        timeFin = new SimpleDateFormat("HH:mm:ss").format(dtTimeFin.getDate().getTime());
+        timeReasonStart = new SimpleDateFormat("HH:mm:ss").format(dtReasonStart.getDate().getTime());
+        timeReasonFin = new SimpleDateFormat("HH:mm:ss").format(dtReasonFin.getDate().getTime());
+
+
         otherReasons();
         if (timeStart.isEmpty() || timeFin.isEmpty() || timeReasonStart.isEmpty() || timeReasonFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -516,32 +525,26 @@ public final class TimeScreen extends javax.swing.JFrame {
                 || timeReasonFin == null || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();       
-        }else if (dayOfWeek.equalsIgnoreCase("SATURDAY") || dayOfWeek.equalsIgnoreCase("SUNDAY")) {
-            JOptionPane.showMessageDialog(null, "No se puede agregar el día seleccionado.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            cleanData();
-        } else if ((dtTimeFin.getDate().before(dtTimeStart.getDate())) || (dtReasonFin.getDate().before(dtReasonStart.getDate()))) {
+        }else if ((dtTimeFin.getDate().before(dtTimeStart.getDate())) || (dtReasonFin.getDate().before(dtReasonStart.getDate()))) {
             JOptionPane.showMessageDialog(null, "El campo de la hora de fin no puede ser anterior a la hora de inicio .", "ERROR", JOptionPane.ERROR_MESSAGE);
             cleanData();
             
         } else {
             try {
-                sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,Razon,HoraInicioRaz,HoraFinRaz,TotalHoras) VALUES "
-                        + "('" + idUser + "','" + dateActual + "', STR_TO_DATE('" + timeStart + "','%H:%i:%S')"
-                        + ", STR_TO_DATE('" + timeFin + "','%H:%i:%S'),'" + reason + "', STR_TO_DATE('" + timeReasonStart + "','%H:%i:%S')"
-                        + ", STR_TO_DATE('" + timeReasonFin + "','%H:%i:%S'),'" + total + "')";
+                sql = "INSERT INTO registro_horas(IdEmpleado,FechaActual,HoraInicio,HoraFin,Razon,HoraInicioRaz,HoraFinRaz) VALUES "
+                        + "(?,?,?,?,?,?,?,?)";
 
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 ps.setInt(1, Integer.parseInt(lblIdEmp.getText()));
-                ps.setString(2, dateActual);
-                ps.setString(3, ((JTextField) dtTimeStart.getDateEditor().getUiComponent()).getText());
-                ps.setString(4, ((JTextField) dtTimeFin.getDateEditor().getUiComponent()).getText());
+                ps.setString(2, dateActual);             
+                ps.setTime(3, new Time(dtTimeStart.getDate().getTime()));
+                ps.setTime(4, new Time(dtTimeFin.getDate().getTime()));
                 ps.setString(5, reason);
-                ps.setString(6, ((JTextField) dtReasonStart.getDateEditor().getUiComponent()).getText());
-                ps.setString(7, ((JTextField) dtReasonFin.getDateEditor().getUiComponent()).getText());
-                ps.setInt(8, total);
+                ps.setTime(6, new Time(dtReasonStart.getDate().getTime()));
+                ps.setTime(7, new Time(dtReasonFin.getDate().getTime()));
                 
-                ps.executeUpdate(sql);
+                ps.executeUpdate();
                 
                 JOptionPane.showMessageDialog(null, "El registro se realizó correctamente.", "REGISTRO JORNADA", JOptionPane.INFORMATION_MESSAGE);
             } catch (HeadlessException | SQLException | NullPointerException ex) {
