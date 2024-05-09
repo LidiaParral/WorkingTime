@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import workingtime.database.Conexion;
 import workingtime.utilities.ExportExcel;
 import workingtime.utilities.CleanTable;
@@ -82,7 +83,7 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
         lblGrupoProfEmp1.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblDNIEmp1.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblDateSearch.setFont(new Font("Century Gothic", Font.BOLD, 14));
-        btnUpdateNomina.setFont(new Font("Century Gothic", Font.BOLD, 12));
+        btnDeleteSalary.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnReturn.setFont(new Font("Century Gothic", Font.PLAIN, 12));
     }
 
@@ -114,7 +115,7 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableSalaries = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btnUpdateNomina = new javax.swing.JButton();
+        btnDeleteSalary = new javax.swing.JButton();
         btnSearchNomina = new javax.swing.JButton();
         btnDownloadNomina = new javax.swing.JButton();
         dtDateSalaries = new com.toedter.calendar.JDateChooser();
@@ -212,14 +213,14 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Salario Base", "Total Devengado", "Total Deducido", "Liquido Total", "Dias Trabajados", "Fecha Inicio", "Fecha Fin"
+                "Nº.Nomina", "Salario Base", "Total Devengado", "Total Deducido", "Liquido Total", "Dias Trabajados", "Fecha Inicio", "Fecha Fin"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, false, false, false
+                false, false, true, true, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -231,17 +232,21 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TableSalaries);
+        if (TableSalaries.getColumnModel().getColumnCount() > 0) {
+            TableSalaries.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnUpdateNomina.setBackground(new java.awt.Color(38, 70, 166));
-        btnUpdateNomina.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateNomina.setText("ACTUALIZAR");
-        btnUpdateNomina.setToolTipText("Este botón permite actualizar ls nómina seleccionada.");
-        btnUpdateNomina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnUpdateNomina.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteSalary.setBackground(new java.awt.Color(38, 70, 166));
+        btnDeleteSalary.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDeleteSalary.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteSalary.setText("ELIMINAR");
+        btnDeleteSalary.setToolTipText("Este botón permite eliminar la nómina seleccionada.");
+        btnDeleteSalary.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDeleteSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateNominaActionPerformed(evt);
+                btnDeleteSalaryActionPerformed(evt);
             }
         });
 
@@ -251,14 +256,14 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(142, Short.MAX_VALUE)
-                .addComponent(btnUpdateNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(btnUpdateNomina, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -422,17 +427,17 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
      * Botón Actualizar: Este botón permite actualizar los datos de la nómina de un empleado.
      * @param evt
      */
-    private void btnUpdateNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateNominaActionPerformed
+    private void btnDeleteSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteSalaryActionPerformed
         selectedRow = TableSalaries.getSelectedRow();
-        btnUpdateNomina.setBackground(new Color(252, 201, 131));
+        btnDeleteSalary.setBackground(new Color(252, 201, 131));
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para eliminar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            updateNomina();
+            deleteSalary();
             existSalary();
         }
-        btnUpdateNomina.setBackground(new Color(38, 70, 166));
-    }//GEN-LAST:event_btnUpdateNominaActionPerformed
+        btnDeleteSalary.setBackground(new Color(38, 70, 166));
+    }//GEN-LAST:event_btnDeleteSalaryActionPerformed
 
     /**
      * Método existSalary: Este método permite comprobar si existe algun registro de la nómina de un empleado en concreto.
@@ -446,16 +451,17 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
 
-            Object[] nomina = new Object[7];
+            Object[] nomina = new Object[8];
             model = (DefaultTableModel) TableSalaries.getModel();
             while (rs.next()) {
-                nomina[0] = rs.getString("SalarioBase");
-                nomina[1] = rs.getString("TotalDevengado");
-                nomina[2] = rs.getString("TotalDeducciones");
-                nomina[3] = rs.getString("LiquidoTotal");
-                nomina[4] = rs.getString("DiasTrabajados");
-                nomina[5] = rs.getDate("FechaInicio");
-                nomina[6] = rs.getDate("FechaFin");
+                nomina[0] = rs.getInt("IdNomina");
+                nomina[1] = rs.getDouble("SalarioBase");
+                nomina[2] = rs.getDouble("TotalDevengado");
+                nomina[3] = rs.getDouble("TotalDeducciones");
+                nomina[4] = rs.getDouble("LiquidoTotal");
+                nomina[5] = rs.getInt("DiasTrabajados");
+                nomina[6] = rs.getDate("FechaInicio");
+                nomina[7] = rs.getDate("FechaFin");
                 model.addRow(nomina);
             }
             TableSalaries.setModel(model);
@@ -476,16 +482,17 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
             conect = conn.getConexion();
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
-            Object[] nomina = new Object[7];
+            Object[] nomina = new Object[8];
             model = (DefaultTableModel) TableSalaries.getModel();
             while (rs.next()) {
-                nomina[0] = rs.getString("SalarioBase");
-                nomina[1] = rs.getString("TotalDevengado");
-                nomina[2] = rs.getString("TotalDeducciones");
-                nomina[3] = rs.getString("LiquidoTotal");
-                nomina[4] = rs.getString("DiasTrabajados");
-                nomina[5] = rs.getDate("FechaInicio");
-                nomina[6] = rs.getDate("FechaFin");
+                nomina[0] = rs.getInt("IdNomina");
+                nomina[1] = rs.getDouble("SalarioBase");
+                nomina[2] = rs.getDouble("TotalDevengado");
+                nomina[3] = rs.getDouble("TotalDeducciones");
+                nomina[4] = rs.getDouble("LiquidoTotal");
+                nomina[5] = rs.getInt("DiasTrabajados");
+                nomina[6] = rs.getDate("FechaInicio");
+                nomina[7] = rs.getDate("FechaFin");
                 model.addRow(nomina);
             }
             TableSalaries.setModel(model);
@@ -496,22 +503,25 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método updateNomina: Este método permite actualizar los datos de los datos de una nómina en la base de datos.
+     * Método deleteSalary: Este método permite actualizar los datos de los datos de una nómina en la base de datos.
      */
-    public void updateNomina() {
-        idUser = lblIdUser.getText();
-        dev = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 1));
-        ded = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 2));
-        liqTotal = String.valueOf(model.getValueAt(TableSalaries.getSelectedRow(), 3));
+    public void deleteSalary() {
+        int id = 0;
         try {
 
-            sql = "UPDATE nominas SET TotalDevengado='" + dev + "', TotalDeducciones='" + ded + "', LiquidoTotal='" + liqTotal
-                    + "' WHERE IdEmpleado ='" + idUser + "'";
+            TableModel m = TableSalaries.getModel();
+            for(int i = 0; i<m.getRowCount(); i++){
+                //Se toman los datos de la tabla cliente
+                id = (int) m.getValueAt(selectedRow, 0);//suponiendo que el id lo muestras en la primera columna
+            }
+            sql = "DELETE FROM nominas WHERE IdEmpleado='" + lblIdUser.getText() + "' AND IdNomina='" + id + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
-
+            
+            JOptionPane.showMessageDialog(null, "Registro eliminado correctamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -570,10 +580,10 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableSalaries;
+    public javax.swing.JButton btnDeleteSalary;
     private javax.swing.JButton btnDownloadNomina;
     private javax.swing.JButton btnReturn;
     private javax.swing.JButton btnSearchNomina;
-    public javax.swing.JButton btnUpdateNomina;
     public com.toedter.calendar.JDateChooser dtDateSalaries;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

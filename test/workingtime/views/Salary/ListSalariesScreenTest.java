@@ -38,13 +38,13 @@ public class ListSalariesScreenTest {
     }
 
     /**
-     * Test of updateNomina method, of class ListSalariesScreen.
+     * Test of deleteSalary method, of class ListSalariesScreen.
      */
     @Test
     public void testUpdateNomina() {
         System.out.println("updateNomina");
         ListSalariesScreen instance = new ListSalariesScreen();
-        instance.updateNomina();
+        instance.deleteSalary();
     }
 
     /**

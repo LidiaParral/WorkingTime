@@ -12,9 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Time/TimeScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/test/workingtime/views/Employee/AllEmpScreenTest.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Document/AddDocScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/WorkingTime.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Time/AllTimesScreen.java</file>
         </group>
     </open-files>
 </project-private>

@@ -233,22 +233,28 @@ public class LoginScreen extends javax.swing.JFrame {
      * @throws InterruptedException
      */
     public void existEmployee() throws InterruptedException {
-        pass = txtPswLogin.getText();
-        user = txtUserLogin.getText();
-        try {
+        int attempts = 3; // Número máximo de intentos permitidos
+        boolean loggedIn = false; // Bandera para verificar si el usuario ha iniciado sesión correctamente
+
+        while (attempts > 0 && !loggedIn) {
+            user = txtUserLogin.getText();
+            pass = txtPswLogin.getText();
 
             if (user.equals("") || pass.equals("")) {
                 JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
                 reset.ResetFrame(this);
-            } else {
 
-                sql = "SELECT * FROM usuarios WHERE Usuario= '" + user + "' AND Password='" + pass + "'";
+                try {
+                    String sql = "SELECT * FROM usuarios WHERE Usuario = ? AND Password = ?";
+                    conect = conn.getConexion();
+                    ps = conect.prepareStatement(sql);
+                    ps.setString(1, user);
+                    ps.setString(2, pass);
+                    rs = ps.executeQuery();
 
-                conect = conn.getConexion();
-                ps = conect.prepareStatement(sql);
-                rs = ps.executeQuery(sql);
-                if (rs.next()) {
-                    if (count < 2) {
+                    if (rs.next()) {
+                        // Inicio de sesión exitoso
+                        loggedIn = true;
                         this.hide();
                         Thread.sleep(200);
                         lblIdEmp.setText(rs.getString("IdEmpleado"));
@@ -256,6 +262,8 @@ public class LoginScreen extends javax.swing.JFrame {
                         dpto = lblDpto.getText();
                         user = lblUser.getText();
                         HomeScreen home = new HomeScreen();
+
+                        // Mostrar u ocultar elementos según el rol del usuario
                         if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECTOR")) {
                             home.mnControlEmp.setVisible(true);
                             home.mnAllEmp.setVisible(true);
@@ -267,6 +275,8 @@ public class LoginScreen extends javax.swing.JFrame {
                             home.mnEmple.setVisible(false);
                             home.mnAddSalary.setVisible(false);
                         }
+
+                        // Configurar datos de usuario en la pantalla de inicio
                         home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                         home.lblNamEmp.setText(rs.getString("Nombre"));
                         home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
@@ -280,27 +290,25 @@ public class LoginScreen extends javax.swing.JFrame {
                         home.setVisible(true);
                         reset.ResetFrame(this);
                         JOptionPane.showMessageDialog(null, "Bienvenido " + rs.getString("Nombre") + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
-
                     } else {
-                        JOptionPane.showMessageDialog(null, "Usuario incorrecto. Tiene 3 intentos.\n"
-                                + "Intento " + (1 + count) + " de 3 intentos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                        // Usuario incorrecto
+                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos. Intentos restantes: " + (--attempts), "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                         txtPswLogin.setText("");
                         txtUserLogin.setText("");
-                        count++;
-                        if (count == 3) {
-                            JOptionPane.showMessageDialog(null, "Usuario bloqueado. Total: " + count + " intentos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            this.dispose();
-                            System.exit(0);
-                        }
                     }
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario no ha sido encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+                    System.err.println("Error: " + ex);
+                    JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        } catch (SQLException ex) {
-            System.err.println("Error:" + ex);
-            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        if (!loggedIn) {
+            // Bloquear usuario después de tres intentos fallidos
+            JOptionPane.showMessageDialog(null, "Usuario bloqueado. Total: 3 intentos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+            System.exit(0);
         }
     }
 
