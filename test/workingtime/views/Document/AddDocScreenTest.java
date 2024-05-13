@@ -6,6 +6,9 @@ package workingtime.views.Document;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -50,9 +53,13 @@ public class AddDocScreenTest {
      */
     @Test
     public void testSaveDocument() {
-        System.out.println("saveDocument");
-        AddDocScreen instance = new AddDocScreen();
-        instance.saveDocument();
+        try {
+            System.out.println("saveDocument");
+            AddDocScreen instance = new AddDocScreen();
+            instance.saveDocument();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddDocScreenTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
