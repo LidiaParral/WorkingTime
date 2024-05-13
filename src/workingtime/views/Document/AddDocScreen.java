@@ -78,11 +78,9 @@ public class AddDocScreen extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         txtPathDoc.setVisible(false);
         lblIdEmp.setVisible(false);
-        btnSaveDoc.setEnabled(false);
         lblTypeDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblNamDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblDateUpdateDoc.setFont(new Font("Century Gothic", Font.BOLD, 14));
-        btnAddDoc.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnSaveDoc.setFont(new Font("Century Gothic", Font.BOLD, 12));
     }
 
@@ -103,7 +101,6 @@ public class AddDocScreen extends javax.swing.JFrame {
         txtNomDoc = new javax.swing.JTextField();
         dtFechaSubDoc = new com.toedter.calendar.JDateChooser();
         cmbTypeDoc = new javax.swing.JComboBox<>();
-        btnAddDoc = new javax.swing.JButton();
         btnSaveDoc = new javax.swing.JButton();
         lblIdEmp = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -128,9 +125,9 @@ public class AddDocScreen extends javax.swing.JFrame {
 
         lblDateUpdateDoc.setText("Fecha de subida:");
 
+        txtNomDoc.setEditable(false);
+        txtNomDoc.setBackground(new java.awt.Color(255, 255, 255));
         txtNomDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNomDoc.setEnabled(false);
-        txtNomDoc.setFocusable(false);
 
         dtFechaSubDoc.setBackground(new java.awt.Color(255, 255, 255));
         dtFechaSubDoc.setToolTipText("dd-MM-yyyy");
@@ -141,17 +138,6 @@ public class AddDocScreen extends javax.swing.JFrame {
 
         cmbTypeDoc.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbTypeDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PDF", "Excel", "Word" }));
-
-        btnAddDoc.setBackground(new java.awt.Color(255, 126, 60));
-        btnAddDoc.setForeground(new java.awt.Color(255, 255, 255));
-        btnAddDoc.setText("AÑADIR");
-        btnAddDoc.setToolTipText("Este botón permite añadir el documento");
-        btnAddDoc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAddDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddDocActionPerformed(evt);
-            }
-        });
 
         btnSaveDoc.setBackground(new java.awt.Color(38, 70, 166));
         btnSaveDoc.setForeground(new java.awt.Color(255, 255, 255));
@@ -176,7 +162,10 @@ public class AddDocScreen extends javax.swing.JFrame {
                 .addComponent(lblIdEmp)
                 .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel1)
@@ -187,14 +176,7 @@ public class AddDocScreen extends javax.swing.JFrame {
                             .addComponent(lblNamDoc)
                             .addComponent(lblTypeDoc)
                             .addComponent(cmbTypeDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(46, 46, 46))
         );
         jPanel3Layout.setVerticalGroup(
@@ -219,11 +201,9 @@ public class AddDocScreen extends javax.swing.JFrame {
                         .addComponent(lblDateUpdateDoc)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dtFechaSubDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                .addGap(34, 34, 34)
+                .addComponent(btnSaveDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -282,12 +262,12 @@ public class AddDocScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Botón Añadir: Este botón permite añadir un documento a la aplicación.
+     * Botón Guadar: Este botón permite guardar el documento añadido.
      *
      * @param evt
      */
-    private void btnAddDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDocActionPerformed
-        btnAddDoc.setBackground(new Color(145, 150, 255));
+    private void btnSaveDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDocActionPerformed
+        btnSaveDoc.setBackground(new Color(252, 201, 131));
         if (selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
             if (file.canRead()) {
@@ -297,7 +277,27 @@ public class AddDocScreen extends javax.swing.JFrame {
                         img = addFile(file);
                         txtPathDoc.setText(file.getAbsolutePath());
                         txtNomDoc.setText(file.getName());
-                        btnSaveDoc.setEnabled(true);
+                        if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
+                            file = selected.getSelectedFile();
+                            if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".odt") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
+                                    && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")) {
+                                JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
+                                        + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                try {
+                                    String respuesta = saveFile(file, img);
+                                    if (respuesta != null) {
+                                        JOptionPane.showMessageDialog(null, respuesta);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
+                                    }
+                                    saveDocument();
+                                } catch (FileNotFoundException ex) {
+                                    Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                            }
+                        }
                     } catch (IOException ex) {
                         Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -308,37 +308,7 @@ public class AddDocScreen extends javax.swing.JFrame {
 
             }
         }
-        btnAddDoc.setBackground(new Color(255, 126, 60));
-    }//GEN-LAST:event_btnAddDocActionPerformed
 
-    /**
-     * Botón Guadar: Este botón permite guardar el documento añadido.
-     *
-     * @param evt
-     */
-    private void btnSaveDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDocActionPerformed
-        btnSaveDoc.setBackground(new Color(252, 201, 131));
-        if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
-            file = selected.getSelectedFile();
-            if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".odt") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
-                    && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")) {
-                JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                        + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.WARNING_MESSAGE);
-            } else {
-                try {
-                    String respuesta = saveFile(file, img);
-                    if (respuesta != null) {
-                        JOptionPane.showMessageDialog(null, respuesta);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    saveDocument();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        }
         btnSaveDoc.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveDocActionPerformed
 
@@ -382,6 +352,7 @@ public class AddDocScreen extends javax.swing.JFrame {
     /**
      * Método saveDocument: Este método permite guardar un documento en la base
      * de datos.
+     *
      * @throws java.io.FileNotFoundException
      */
     public void saveDocument() throws FileNotFoundException {
@@ -389,7 +360,7 @@ public class AddDocScreen extends javax.swing.JFrame {
         name = txtNomDoc.getText();
         path = txtPathDoc.getText();
         date = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaSubDoc.getDate());
-        
+
         InputStream ip = new FileInputStream(path);
         try {
             typeDocuments();
@@ -405,7 +376,7 @@ public class AddDocScreen extends javax.swing.JFrame {
                 ps.setString(2, typeDoc);
                 ps.setString(3, name);
                 ps.setDate(4, new java.sql.Date(dtFechaSubDoc.getDate().getTime()));
-                 ps.setBinaryStream(5, ip, (int)path.length());
+                ps.setBinaryStream(5, ip, (int) path.length());
 
                 ps.executeUpdate();
 
@@ -487,7 +458,6 @@ public class AddDocScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAddDoc;
     public javax.swing.JButton btnSaveDoc;
     public javax.swing.JComboBox<String> cmbTypeDoc;
     public com.toedter.calendar.JDateChooser dtFechaSubDoc;

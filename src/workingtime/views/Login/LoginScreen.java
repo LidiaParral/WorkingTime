@@ -87,6 +87,7 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIconoPass = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
         lblDpto = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -168,6 +169,10 @@ public class LoginScreen extends javax.swing.JFrame {
                                 .addComponent(lblDpto)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblName)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +180,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addComponent(lblIdEmp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDpto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,8 +196,12 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addComponent(lblForgotPss)
                 .addGap(35, 35, 35)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addGap(32, 32, 32)
+                .addComponent(lblName)
+                .addGap(18, 18, 18))
         );
+
+        lblName.getAccessibleContext().setAccessibleName("lblName");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -233,82 +242,63 @@ public class LoginScreen extends javax.swing.JFrame {
      * @throws InterruptedException
      */
     public void existEmployee() throws InterruptedException {
-        int attempts = 3; // Número máximo de intentos permitidos
-        boolean loggedIn = false; // Bandera para verificar si el usuario ha iniciado sesión correctamente
+        int intentosRestantes = 3;
 
-        while (attempts > 0 && !loggedIn) {
+        while (intentosRestantes > 0) {
             user = txtUserLogin.getText();
             pass = txtPswLogin.getText();
 
-            if (user.equals("") || pass.equals("")) {
-                JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "Validación campos", JOptionPane.ERROR_MESSAGE);
-                reset.ResetFrame(this);
+            try {
+                if (user.isEmpty() || pass.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese tanto el usuario como la contraseña.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+                    reset.ResetFrame(this);
+                    return;
+                }
 
-                try {
-                    String sql = "SELECT * FROM usuarios WHERE Usuario = ? AND Password = ?";
-                    conect = conn.getConexion();
-                    ps = conect.prepareStatement(sql);
-                    ps.setString(1, user);
-                    ps.setString(2, pass);
-                    rs = ps.executeQuery();
+                sql = "SELECT * FROM usuarios WHERE Usuario ='"+ user + "' AND Password ='" + pass + "'";
+                conect = conn.getConexion();
+                ps = conect.prepareStatement(sql);
+                rs = ps.executeQuery();
 
-                    if (rs.next()) {
-                        // Inicio de sesión exitoso
-                        loggedIn = true;
-                        this.hide();
+                if (rs.next()) {
+                     this.hide();
                         Thread.sleep(200);
                         lblIdEmp.setText(rs.getString("IdEmpleado"));
+                        lblName.setText(rs.getString("Nombre"));
+                        name = lblName.getText();
                         idUser = lblIdEmp.getText();
                         dpto = lblDpto.getText();
                         user = lblUser.getText();
                         HomeScreen home = new HomeScreen();
-
-                        // Mostrar u ocultar elementos según el rol del usuario
                         if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECTOR")) {
                             home.mnControlEmp.setVisible(true);
                             home.mnAllEmp.setVisible(true);
-                            home.mnEmple.setVisible(true);
-                            home.mnAddSalary.setVisible(true);
-                        } else {
-                            home.mnControlEmp.setVisible(false);
-                            home.mnAllEmp.setVisible(false);
                             home.mnEmple.setVisible(false);
                             home.mnAddSalary.setVisible(false);
                         }
-
-                        // Configurar datos de usuario en la pantalla de inicio
                         home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                         home.lblNamEmp.setText(rs.getString("Nombre"));
                         home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
-                        home.lblEmailEmp.setText(rs.getString("Email"));
-                        home.lblDNIEmp.setText(rs.getString("DNI"));
-                        home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
-                        home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
-                        home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
-                        home.lblPosEmp.setText(rs.getString("Posicion"));
-                        home.lblDepartmentEmp.setText(rs.getString("Departamento"));
                         home.setVisible(true);
                         reset.ResetFrame(this);
-                        JOptionPane.showMessageDialog(null, "Bienvenido " + rs.getString("Nombre") + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Bienvenido " + name + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
+                    // Aquí abrirías la pantalla principal o realizarías otras acciones.
+                    return;
+                } else {
+                    intentosRestantes--;
+                    if (intentosRestantes > 0) {
+                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos. Intentos restantes: " + intentosRestantes, "Error de inicio de sesión", JOptionPane.WARNING_MESSAGE);
+                        txtPswLogin.setText(""); // Limpia el campo de contraseña
                     } else {
-                        // Usuario incorrecto
-                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos. Intentos restantes: " + (--attempts), "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
-                        txtPswLogin.setText("");
-                        txtUserLogin.setText("");
+                        JOptionPane.showMessageDialog(null, "Ha excedido el número máximo de intentos. El programa se cerrará.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+                        System.exit(0); // Cierra el programa
                     }
-                } catch (SQLException ex) {
-                    System.err.println("Error: " + ex);
-                    JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
+            } catch (SQLException ex) {
+                System.err.println("Error: " + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-
-        }
-
-        if (!loggedIn) {
-            // Bloquear usuario después de tres intentos fallidos
-            JOptionPane.showMessageDialog(null, "Usuario bloqueado. Total: 3 intentos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            this.dispose();
-            System.exit(0);
         }
     }
 
@@ -365,6 +355,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblIconoPass;
     private javax.swing.JLabel lblIconoUser;
     public javax.swing.JLabel lblIdEmp;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUser;
     public javax.swing.JPasswordField txtPswLogin;

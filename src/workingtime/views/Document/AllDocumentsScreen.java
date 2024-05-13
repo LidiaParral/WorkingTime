@@ -4,16 +4,26 @@
  */
 package workingtime.views.Document;
 
+import com.mysql.jdbc.Blob;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
@@ -23,6 +33,7 @@ import workingtime.utilities.ResetFields;
 
 /**
  * Class AllDocumentsScreen
+ *
  * @author Lidia Parral
  * @version 1.0.0
  */
@@ -58,6 +69,11 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
     String fecha;
     String nomDoc;
     String idUser;
+    String idDoc;
+    public static String ext;
+    public static String extension = "";
+
+    Blob blob;
 
     int selectedRow;
     Object[] options = {"Aceptar", "Cancelar"};
@@ -97,6 +113,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnReturn = new javax.swing.JButton();
         btnDeleteDoc = new javax.swing.JButton();
+        btnDownloadFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -111,14 +128,14 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Tipo de Documento", "Fecha subida", "Archivo"
+                "IdDocumento", "Nombre", "Tipo de Documento", "Fecha subida", "Archivo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false
+                false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -130,6 +147,9 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(TablaDoc);
+        if (TablaDoc.getColumnModel().getColumnCount() > 0) {
+            TablaDoc.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         lblDateSearch.setText("Fecha de búsqueda:");
 
@@ -181,6 +201,14 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             }
         });
 
+        btnDownloadFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/download.png"))); // NOI18N
+        btnDownloadFile.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnDownloadFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDownloadFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -204,7 +232,9 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                         .addComponent(btnSearchDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblIdEmp)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDownloadFile)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -217,7 +247,8 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dtFechaSubida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchDoc))
+                            .addComponent(btnSearchDoc)
+                            .addComponent(btnDownloadFile))
                         .addGap(28, 28, 28))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,6 +360,14 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         btnDeleteDoc.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteDocActionPerformed
 
+    private void btnDownloadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadFileActionPerformed
+        try {
+            downloadFile();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AllDocumentsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDownloadFileActionPerformed
+
     /**
      * Método existDoc: Este botón permite comprobar si existe un registro del
      * documento con una fecha concreta en la base de datos.
@@ -380,13 +419,14 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             ps = conect.prepareStatement(sql);
             rs = ps.executeQuery(sql);
 
-            Object[] documento = new Object[4];
+            Object[] documento = new Object[5];
             modelo = (DefaultTableModel) TablaDoc.getModel();
             while (rs.next()) {
-                documento[0] = rs.getString("TipoDocumento");
-                documento[1] = rs.getString("NombreDoc");
-                documento[2] = rs.getString("FechaSubida");
-                documento[3] = rs.getString("Archivo");
+                documento[0] = rs.getInt("IdDocumento");
+                documento[1] = rs.getString("TipoDocumento");
+                documento[2] = rs.getString("NombreDoc");
+                documento[3] = rs.getString("FechaSubida");
+                documento[4] = rs.getString("Archivo");
 
                 modelo.addRow(documento);
             }
@@ -404,7 +444,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
      * registro de un documento seleccionado en la base de datos.
      */
     public void updateDocument() {
-        nomDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
+        nomDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 1));
         idUser = lblIdEmp.getText();
         try {
 
@@ -439,6 +479,77 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(modelo);
+    }
+
+    public void downloadFile() throws FileNotFoundException {
+        try {
+            idDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
+            try {
+                conect = conn.getConexion();
+                st = conect.createStatement();
+                
+                String nombre = JOptionPane.showInputDialog(null, "Nombre", "ARCHIVO");
+                rs = st.executeQuery("SELECT Archivo, TipoDocumento FROM documentos_empleados WHERE IdEmpleado='" + idUser + "' AND IdDocumento='" + idDoc + "'");
+                
+                while (rs.next()) {
+                    blob = (Blob) rs.getBlob("Archivo");
+                    ext = rs.getString("TipoDocumento");
+                    InputStream ls = blob.getBinaryStream();
+                    try {
+                        extension = addFileExtension(ext);
+                        File fichero = new File(nombre + extension);
+                        String rutaDescargas = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + fichero;
+                        saveFile(ls, rutaDescargas);
+                        JOptionPane.showMessageDialog(null,"Archivo guardado en: " + rutaDescargas, "FILE", JOptionPane.PLAIN_MESSAGE);
+                    } catch (IOException ex) {
+                        System.err.println("Error:" + ex);
+                        JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error:" + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            conect.close();
+        } catch (SQLException ex) {
+             Logger.getLogger(AllDocumentsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void saveFile(InputStream ls, String ruta) throws FileNotFoundException, IOException {
+
+        BufferedInputStream in = new BufferedInputStream(ls);
+
+        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(ruta))) {
+            byte[] bytes = new byte[8096];
+            
+            int len = 0;
+            
+            while ((len = in.read(bytes)) > 0) {
+                out.write(bytes,0,len);
+            }
+            
+            out.flush();
+            
+            out.close();
+            
+            in.close();
+        }
+    }
+    
+    
+    public static String addFileExtension(String typeDoc){
+        
+        if(typeDoc.equalsIgnoreCase("PDF")){
+            extension = ".pdf";
+        } 
+        else if(typeDoc.equalsIgnoreCase("EXCEL")) {
+            extension = ".xlsx";
+        } else {
+            extension = ".doc";
+        }
+        
+        return extension;
     }
 
     /**
@@ -493,6 +604,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaDoc;
     public javax.swing.JButton btnDeleteDoc;
+    private javax.swing.JButton btnDownloadFile;
     private javax.swing.JButton btnReturn;
     public javax.swing.JButton btnSearchDoc;
     public javax.swing.JButton btnUpdateDoc;

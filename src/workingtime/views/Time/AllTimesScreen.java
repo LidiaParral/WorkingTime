@@ -430,12 +430,11 @@ public final class AllTimesScreen extends javax.swing.JFrame {
         timeFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 2));
         timeReasonStart = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 4));
         timeReasonFin = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 5));
-        hours = String.valueOf(model.getValueAt(TableTime.getSelectedRow(), 6));
 
         try {
 
-            sql = "UPDATE registro_horas SET HoraInicio='" + timeStart + "', HoraFin='" + timeFin + "', HoraInicioRazones='" + timeReasonStart + "', HoraFinRazones='" + timeReasonFin
-                    + "', HorasImputadas='" + hours + "' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
+            sql = "UPDATE registro_horas SET HoraInicio='" + timeStart + "', HoraFin='" + timeFin + "', HoraInicioRaz='" + timeReasonStart + "', HoraFinRaz='" + timeReasonFin
+                    + "' WHERE IdEmpleado ='" + lblIdEmp.getText() + "' AND FechaActual='" + date + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
