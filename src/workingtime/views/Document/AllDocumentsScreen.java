@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -365,6 +366,8 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             downloadFile();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(AllDocumentsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AllDocumentsScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnDownloadFileActionPerformed
 
@@ -384,13 +387,14 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
-                Object[] documento = new Object[4];
+                Object[] documento = new Object[5];
                 modelo = (DefaultTableModel) TablaDoc.getModel();
                 while (rs.next()) {
-                    documento[0] = rs.getString("TipoDocumento");
+                    documento[0] = rs.getInt("IdDocumento");
                     documento[1] = rs.getString("NombreDoc");
-                    documento[2] = rs.getString("FechaSubida");
-                    documento[3] = rs.getString("Archivo");
+                    documento[2] = rs.getString("TipoDocumento");
+                    documento[3] = rs.getString("FechaSubida");
+                    documento[4] = rs.getString("Archivo");
 
                     modelo.addRow(documento);
                 }
@@ -423,8 +427,8 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             modelo = (DefaultTableModel) TablaDoc.getModel();
             while (rs.next()) {
                 documento[0] = rs.getInt("IdDocumento");
-                documento[1] = rs.getString("TipoDocumento");
-                documento[2] = rs.getString("NombreDoc");
+                documento[1] = rs.getString("NombreDoc");
+                documento[2] = rs.getString("TipoDocumento");
                 documento[3] = rs.getString("FechaSubida");
                 documento[4] = rs.getString("Archivo");
 
@@ -453,7 +457,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
-
+            JOptionPane.showMessageDialog(null, "Registro actualizado.", "DOCUMENTO", JOptionPane.OK_OPTION);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -467,13 +471,14 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
      */
     public void deleteDocument() {
         idUser = lblIdEmp.getText();
+        idDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
         try {
-            sql = "DELETE FROM documentos_empleados WHERE IdEmpleado='" + idUser + "'";
+            sql = "DELETE FROM documentos_empleados WHERE IdEmpleado='" + idUser + "' AND IdDocumento='" + idDoc + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
-
+            JOptionPane.showMessageDialog(null, "Registro eliminado.", "DOCUMENTO", JOptionPane.OK_OPTION);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -481,75 +486,59 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         lmp.tableCleaning(modelo);
     }
 
-    public void downloadFile() throws FileNotFoundException {
+    public void downloadFile() throws FileNotFoundException, IOException {
+        idUser = lblIdEmp.getText(); // Suponiendo que lblIdEmp es un JLabel donde se muestra el ID del empleado
+        selectedRow = TablaDoc.getSelectedRow(); // Suponiendo que TablaDoc es una tabla donde se muestran los documentos
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un documento.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        idDoc = String.valueOf(modelo.getValueAt(selectedRow, 0));
+
         try {
-            idDoc = String.valueOf(modelo.getValueAt(TablaDoc.getSelectedRow(), 0));
-            try {
-                conect = conn.getConexion();
-                st = conect.createStatement();
-                
-                String nombre = JOptionPane.showInputDialog(null, "Nombre", "ARCHIVO");
-                rs = st.executeQuery("SELECT Archivo, TipoDocumento FROM documentos_empleados WHERE IdEmpleado='" + idUser + "' AND IdDocumento='" + idDoc + "'");
-                
-                while (rs.next()) {
-                    blob = (Blob) rs.getBlob("Archivo");
-                    ext = rs.getString("TipoDocumento");
-                    InputStream ls = blob.getBinaryStream();
-                    try {
-                        extension = addFileExtension(ext);
-                        File fichero = new File(nombre + extension);
-                        String rutaDescargas = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + fichero;
-                        saveFile(ls, rutaDescargas);
-                        JOptionPane.showMessageDialog(null,"Archivo guardado en: " + rutaDescargas, "FILE", JOptionPane.PLAIN_MESSAGE);
-                    } catch (IOException ex) {
-                        System.err.println("Error:" + ex);
-                        JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            String nombre = JOptionPane.showInputDialog(null, "Nombre", "ARCHIVO");
+            conect = conn.getConexion();
+            sql = "SELECT TipoDocumento, NombreDoc, Archivo FROM documentos_empleados WHERE IdEmpleado=? AND IdDocumento=?";
+            try (PreparedStatement ps = conect.prepareStatement(sql)) {
+                ps.setString(1, idUser);
+                ps.setString(2, idDoc);
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        String tipoDoc = rs.getString("TipoDocumento");
+                        String name = rs.getString("NombreDoc");
+                        InputStream in = rs.getBinaryStream("Archivo");
+
+                        extension = getExtension(name);
+                        File archivo = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + nombre + extension);
+
+                        try ( OutputStream out = new FileOutputStream(archivo)) {
+                            byte[] buffer = new byte[8192 * 16];
+                            int bytesRead;
+                            while ((bytesRead = in.read(buffer)) != -1) {
+                                out.write(buffer, 0, bytesRead);
+                            }
+                            JOptionPane.showMessageDialog(null, "Archivo descargado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró el archivo en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            } catch (SQLException ex) {
-                System.err.println("Error:" + ex);
-                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            conect.close();
-        } catch (SQLException ex) {
-             Logger.getLogger(AllDocumentsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | IOException ex) {
+            System.err.println("Error al acceder a la base de datos: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void saveFile(InputStream ls, String ruta) throws FileNotFoundException, IOException {
-
-        BufferedInputStream in = new BufferedInputStream(ls);
-
-        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(ruta))) {
-            byte[] bytes = new byte[8096];
-            
-            int len = 0;
-            
-            while ((len = in.read(bytes)) > 0) {
-                out.write(bytes,0,len);
-            }
-            
-            out.flush();
-            
-            out.close();
-            
-            in.close();
-        }
-    }
-    
-    
-    public static String addFileExtension(String typeDoc){
-        
-        if(typeDoc.equalsIgnoreCase("PDF")){
-            extension = ".pdf";
-        } 
-        else if(typeDoc.equalsIgnoreCase("EXCEL")) {
-            extension = ".xlsx";
+    public static String getExtension(String filename) {
+        int index = filename.lastIndexOf('.');
+        if (index == -1) {
+            return "";
         } else {
-            extension = ".doc";
+            return filename.substring(index);
         }
-        
-        return extension;
     }
 
     /**

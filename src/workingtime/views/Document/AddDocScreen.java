@@ -268,100 +268,47 @@ public class AddDocScreen extends javax.swing.JFrame {
      */
     private void btnSaveDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDocActionPerformed
         btnSaveDoc.setBackground(new Color(252, 201, 131));
-        if (selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
+        if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
             if (file.canRead()) {
-                if (file.getName().endsWith(".pdf") || file.getName().endsWith(".odt") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx")
-                        || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")) {
-                    try {
-                        img = addFile(file);
+                try {
+                    if (file.getName().endsWith(".pdf") || file.getName().endsWith(".odt") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx")
+                            || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")) {
                         txtPathDoc.setText(file.getAbsolutePath());
                         txtNomDoc.setText(file.getName());
-                        if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
-                            file = selected.getSelectedFile();
-                            if (!file.getName().endsWith(".pdf") && !file.getName().endsWith(".odt") && !file.getName().endsWith(".doc") && !file.getName().endsWith(".docx")
-                                    && !file.getName().endsWith(".xlsx") && !file.getName().endsWith(".xls")) {
-                                JOptionPane.showMessageDialog(null, "No puede guardar un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                                        + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.WARNING_MESSAGE);
-                            } else {
-                                try {
-                                    String respuesta = saveFile(file, img);
-                                    if (respuesta != null) {
-                                        JOptionPane.showMessageDialog(null, respuesta);
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
-                                    }
-                                    saveDocument();
-                                } catch (FileNotFoundException ex) {
-                                    Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
-                                }
 
-                            }
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
+                        saveDocument(file);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No puede abrir un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
+                                + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "No puede abrir un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                            + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
-                }
 
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AddDocScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
         }
 
         btnSaveDoc.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveDocActionPerformed
 
     /**
-     * Método addFile: Este método permite añadir un archivo.
-     *
-     * @param file
-     * @return content
-     * @throws FileNotFoundException
-     */
-    public byte[] addFile(File file) throws IOException {
-        byte[] content = new byte[1024 * 1000];
-        try {
-            input = new FileInputStream(file);
-            input.read(content);
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        return content;
-    }
-
-    /**
-     * Método saveFile: Este método permite guardar un archivo.
-     *
-     * @param file
-     * @param content
-     * @return resp
-     */
-    public String saveFile(File file, byte[] content) {
-        String resp = null;
-        try {
-            out = new FileOutputStream(file);
-            out.write(content);
-            resp = "Se ha guardado el archivo correctamente.";
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        return resp;
-    }
-
-    /**
      * Método saveDocument: Este método permite guardar un documento en la base
      * de datos.
      *
+     * @param fileSave
      * @throws java.io.FileNotFoundException
      */
-    public void saveDocument() throws FileNotFoundException {
+    public void saveDocument(File fileSave) throws FileNotFoundException {
+        //String resp = null;
         idEmp = lblIdEmp.getText();
         name = txtNomDoc.getText();
         path = txtPathDoc.getText();
         date = new SimpleDateFormat("dd-MM-yyyy").format(dtFechaSubDoc.getDate());
 
-        InputStream ip = new FileInputStream(path);
+        
+        InputStream ip = new FileInputStream(fileSave);
         try {
             typeDocuments();
             if (name.equals("") || date.equals("")) {
@@ -376,7 +323,7 @@ public class AddDocScreen extends javax.swing.JFrame {
                 ps.setString(2, typeDoc);
                 ps.setString(3, name);
                 ps.setDate(4, new java.sql.Date(dtFechaSubDoc.getDate().getTime()));
-                ps.setBinaryStream(5, ip, (int) path.length());
+                ps.setBlob(5, ip, (int) path.length());
 
                 ps.executeUpdate();
 
@@ -386,6 +333,7 @@ public class AddDocScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     /**
@@ -399,10 +347,10 @@ public class AddDocScreen extends javax.swing.JFrame {
                 typeDoc = "PDF";
                 break;
             case 1:
-                typeDoc = "WORD";
+                typeDoc = "EXCEL";
                 break;
             case 2:
-                typeDoc = "EXCEL";
+                typeDoc = "WORD";
                 break;
             default:
                 throw new AssertionError();
