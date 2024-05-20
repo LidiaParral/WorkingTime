@@ -9,8 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -519,8 +517,12 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
                             while ((bytesRead = in.read(buffer)) != -1) {
                                 out.write(buffer, 0, bytesRead);
                             }
+                            out.flush();
+                            out.close();
+                            in.close();
                             JOptionPane.showMessageDialog(null, "Archivo descargado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         }
+                        
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró el archivo en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

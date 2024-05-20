@@ -20,7 +20,7 @@ public class Conexion {
     /**
      *
      */
-    public static final String URL = "jdbc:mysql://localhost:3306/workingtime";
+    public static final String URL = "jdbc:mysql://localhost:3307/workingtime";
     //Añadir el usuario de PhpMyAdmin
 
     /**

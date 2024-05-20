@@ -301,7 +301,6 @@ public class AddDocScreen extends javax.swing.JFrame {
      * @throws java.io.FileNotFoundException
      */
     public void saveDocument(File fileSave) throws FileNotFoundException {
-        //String resp = null;
         idEmp = lblIdEmp.getText();
         name = txtNomDoc.getText();
         path = txtPathDoc.getText();
@@ -420,4 +419,8 @@ public class AddDocScreen extends javax.swing.JFrame {
     public javax.swing.JTextField txtNomDoc;
     public javax.swing.JTextField txtPathDoc;
     // End of variables declaration//GEN-END:variables
+
+    void saveDocument() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

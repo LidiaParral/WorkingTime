@@ -198,9 +198,9 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
         cmbEmpDepartment.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpDepartment.setToolTipText("Seleccione el departamento del usuario");
-        cmbEmpDepartment.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbEmpDepartmentItemStateChanged(evt);
+        cmbEmpDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEmpDepartmentActionPerformed(evt);
             }
         });
 
@@ -485,20 +485,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveEmpActionPerformed
 
     /**
-     * ComboBox Departamento: Este combobox permite al usuario seleccionar uno
-     * de los valores mostrados del campo departamento.
-     *
-     * @param evt
-     */
-    private void cmbEmpDepartmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpDepartmentItemStateChanged
-        if (cmbEmpDepartment.getSelectedIndex() > 0) {
-            cmbEmpPos.setEnabled(true);
-            cmbEmpPos.removeAllItems();
-            getEmpJob();
-        }
-    }//GEN-LAST:event_cmbEmpDepartmentItemStateChanged
-
-    /**
      * ComboBox País: Este combobox permite al usuario seleccionar uno de los
      * valores mostrados del campo país.
      *
@@ -540,6 +526,10 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_dtDateOfSeniorityEmpPropertyChange
+
+    private void cmbEmpDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEmpDepartmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEmpDepartmentActionPerformed
 
     /**
      * Método addEmployee: Este método permite añadir los datos del empleado en

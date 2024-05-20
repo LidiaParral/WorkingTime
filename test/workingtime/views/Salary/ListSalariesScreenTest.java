@@ -68,5 +68,16 @@ public class ListSalariesScreenTest {
         String[] args = null;
         ListSalariesScreen.main(args);
     }
+
+    /**
+     * Test of deleteSalary method, of class ListSalariesScreen.
+     */
+    @Test
+    public void testDeleteSalary() {
+        System.out.println("deleteSalary");
+        ListSalariesScreen instance = new ListSalariesScreen();
+        instance.deleteSalary();
+        fail("The test case is a prototype.");
+    }
     
 }

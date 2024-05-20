@@ -135,5 +135,18 @@ public class ControlEmpScreenTest {
         String[] args = null;
         ControlEmpScreen.main(args);
     }
+
+    /**
+     * Test of existEmployee method, of class ControlEmpScreen.
+     */
+    @Test
+    public void testExistEmployee() {
+        System.out.println("existEmployee");
+        ControlEmpScreen instance = new ControlEmpScreen();
+        boolean expResult = false;
+        boolean result = instance.existEmployee();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
     
 }

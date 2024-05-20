@@ -44,7 +44,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
     String idUser;
     String dateS;
     String dateF;
-    String salary;
+    String salaryBase;
     String totalDev;
     String totalDed;
     String liqTotal;
@@ -345,13 +345,15 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         dayDF = dtDateF.getJCalendar().getDayChooser().getDay();
         dateS = new SimpleDateFormat("dd-MM-yyyy").format(dtDateS.getDate());
         dateF = new SimpleDateFormat("dd-MM-yyyy").format(dtDateF.getDate());
-        salary = txtSalaryB.getText();
+        salaryBase = txtSalaryB.getText();
         totalDed = txtTotalDed.getText();
         totalDev = txtTotalDev.getText();
         days = daysWorkingMonth();
         liqTotal = Integer.toString(calculateLiquidoTotal());
+        
+        double salaryTotal = Double.parseDouble(this.salaryBase) - Double.parseDouble(liqTotal);
       
-        if (idUser.isEmpty() || dateS.isEmpty() || dateF.isEmpty() || salary.isEmpty() || totalDed.isEmpty()
+        if (idUser.isEmpty() || dateS.isEmpty() || dateF.isEmpty() || this.salaryBase.isEmpty() || totalDed.isEmpty()
                 || totalDev.isEmpty() || liqTotal.isEmpty() || days == 0) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "VALIDACIÓN DE CAMPOS", JOptionPane.ERROR_MESSAGE);
         } else if((monthDS != m) || (monthDF != m)){
@@ -362,8 +364,8 @@ public class AddSalaryScreen extends javax.swing.JFrame {
             try {
                 sql = "INSERT INTO nominas(IdEmpleado,Posicion,Mes,FechaInicio,FechaFin,SalarioBase,TotalDevengado,TotalDeducciones,LiquidoTotal,DiasTrabajados) VALUES "
                         + "('" + idUser + "','" + job + "','" +  month + "', STR_TO_DATE('" + dateS + "','%d-%m-%Y')"
-                        + ", STR_TO_DATE('" + dateF + "','%d-%m-%Y'),'" + salary + "','" + totalDev + "','" + totalDed
-                        + "','"+ liqTotal + "','" + days + "')";
+                        + ", STR_TO_DATE('" + dateF + "','%d-%m-%Y'),'" + this.salaryBase + "','" + totalDev + "','" + totalDed
+                        + "','"+ salaryTotal + "','" + days + "')";
 
                 conect = conn.getConexion();
                 st = conect.createStatement();

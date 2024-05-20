@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package workingtime.model;
+package workingtime.utilities;
 
-import workingtime.utilities.ExportExcel;
 import javax.swing.JTable;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -27,6 +26,7 @@ public class ExportExcelTest {
         JTable t = null;
         ExportExcel instance = new ExportExcel();
         instance.exportExcel(t);
+        fail("The test case is a prototype.");
     }
     
 }

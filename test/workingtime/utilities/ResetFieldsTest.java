@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package workingtime.model;
+package workingtime.utilities;
 
-import workingtime.utilities.ResetFields;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.junit.Test;
@@ -28,6 +27,7 @@ public class ResetFieldsTest {
         JPanel panel = null;
         ResetFields instance = new ResetFields();
         instance.ResetPanel(panel);
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -39,6 +39,7 @@ public class ResetFieldsTest {
         JFrame frame = null;
         ResetFields instance = new ResetFields();
         instance.ResetFrame(frame);
+        fail("The test case is a prototype.");
     }
     
 }

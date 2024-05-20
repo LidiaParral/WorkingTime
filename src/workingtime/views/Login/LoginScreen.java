@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import static java.lang.System.console;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,9 +29,6 @@ import workingtime.views.Home.HomeScreen;
  */
 public class LoginScreen extends javax.swing.JFrame {
 
-    /**
-     *
-     */
     public ResetFields reset = new ResetFields();
 
     Conexion conn = new Conexion();
@@ -50,7 +46,7 @@ public class LoginScreen extends javax.swing.JFrame {
     String user;
     String name;
     String idUser;
-    String dpto;
+    String posicion;
 
     int count = 0;
 
@@ -86,7 +82,7 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIconoUser = new javax.swing.JLabel();
         lblIconoPass = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
-        lblDpto = new javax.swing.JLabel();
+        lblPosicion = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,8 +127,8 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
 
-        lblDpto.setEnabled(false);
-        lblDpto.setFocusable(false);
+        lblPosicion.setEnabled(false);
+        lblPosicion.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +162,7 @@ public class LoginScreen extends javax.swing.JFrame {
                                 .addGap(0, 494, Short.MAX_VALUE)
                                 .addComponent(lblIdEmp))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDpto)
+                                .addComponent(lblPosicion)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -179,7 +175,7 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblIdEmp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDpto)
+                .addComponent(lblPosicion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -265,20 +261,29 @@ public class LoginScreen extends javax.swing.JFrame {
                         Thread.sleep(200);
                         lblIdEmp.setText(rs.getString("IdEmpleado"));
                         lblName.setText(rs.getString("Nombre"));
+                        lblPosicion.setText(rs.getString("Posicion"));
                         name = lblName.getText();
                         idUser = lblIdEmp.getText();
-                        dpto = lblDpto.getText();
+                        posicion = lblPosicion.getText();
                         user = lblUser.getText();
                         HomeScreen home = new HomeScreen();
-                        if (idUser.equals("1") || user.equalsIgnoreCase("ADMIN") || dpto.equalsIgnoreCase("RRHH") || dpto.equalsIgnoreCase("DIRECTOR")) {
+                        if (idUser.equals("1") || posicion.equalsIgnoreCase("ADMINISTRADOR") || posicion.equalsIgnoreCase("GERENTE") || posicion.equalsIgnoreCase("DIRECTOR")) {
                             home.mnControlEmp.setVisible(true);
                             home.mnAllEmp.setVisible(true);
-                            home.mnEmple.setVisible(false);
-                            home.mnAddSalary.setVisible(false);
+                            home.mnEmple.setVisible(true);
+                            home.mnAddSalary.setVisible(true);
                         }
                         home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                         home.lblNamEmp.setText(rs.getString("Nombre"));
                         home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
+                        home.lblPosEmp.setText(rs.getString("Posicion"));
+                        home.lblDepartmentEmp.setText(rs.getString("Departamento"));
+                        home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
+                        home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
+                        home.lblDNIEmp.setText(rs.getString("DNI"));
+                        home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
+                        home.lblCiudad.setText(rs.getString("Ciudad"));
+                        home.lblPais.setText(rs.getString("Pais"));
                         home.setVisible(true);
                         reset.ResetFrame(this);
                         JOptionPane.showMessageDialog(null, "Bienvenido " + name + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
@@ -350,13 +355,13 @@ public class LoginScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnLogin;
-    public javax.swing.JLabel lblDpto;
     public javax.swing.JLabel lblForgotPss;
     private javax.swing.JLabel lblIconoPass;
     private javax.swing.JLabel lblIconoUser;
     public javax.swing.JLabel lblIdEmp;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
+    public javax.swing.JLabel lblPosicion;
     private javax.swing.JLabel lblUser;
     public javax.swing.JPasswordField txtPswLogin;
     public javax.swing.JTextField txtUserLogin;

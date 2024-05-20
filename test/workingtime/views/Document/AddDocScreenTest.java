@@ -6,9 +6,6 @@ package workingtime.views.Document;
 
 import java.awt.Image;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,47 +18,7 @@ public class AddDocScreenTest {
     public AddDocScreenTest() {
     }
 
-    /**
-     * Test of addFile method, of class AddDocScreen.
-     */
-    @Test
-    public void testAddFile() throws Exception {
-        System.out.println("addFile");
-        File file = null;
-        AddDocScreen instance = new AddDocScreen();
-        byte[] expResult = null;
-        byte[] result = instance.addFile(file);
-        assertArrayEquals(expResult, result);
-    }
-
-    /**
-     * Test of saveFile method, of class AddDocScreen.
-     */
-    @Test
-    public void testSaveFile() {
-        System.out.println("saveFile");
-        File file = null;
-        byte[] content = null;
-        AddDocScreen instance = new AddDocScreen();
-        String expResult = "";
-        String result = instance.saveFile(file, content);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of saveDocument method, of class AddDocScreen.
-     */
-    @Test
-    public void testSaveDocument() {
-        try {
-            System.out.println("saveDocument");
-            AddDocScreen instance = new AddDocScreen();
-            instance.saveDocument();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AddDocScreenTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+   
     /**
      * Test of typeDocuments method, of class AddDocScreen.
      */
@@ -92,6 +49,29 @@ public class AddDocScreenTest {
         System.out.println("main");
         String[] args = null;
         AddDocScreen.main(args);
+    }
+
+    /**
+     * Test of saveDocument method, of class AddDocScreen.
+     */
+    @Test
+    public void testSaveDocument_File() throws Exception {
+        System.out.println("saveDocument");
+        File fileSave = null;
+        AddDocScreen instance = new AddDocScreen();
+        instance.saveDocument(fileSave);
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of saveDocument method, of class AddDocScreen.
+     */
+    @Test
+    public void testSaveDocument_0args() {
+        System.out.println("saveDocument");
+        AddDocScreen instance = new AddDocScreen();
+        instance.saveDocument();
+        fail("The test case is a prototype.");
     }
     
 }

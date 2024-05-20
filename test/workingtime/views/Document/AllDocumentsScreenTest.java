@@ -78,5 +78,29 @@ public class AllDocumentsScreenTest {
         String[] args = null;
         AllDocumentsScreen.main(args);
     }
+
+    /**
+     * Test of downloadFile method, of class AllDocumentsScreen.
+     */
+    @Test
+    public void testDownloadFile() throws Exception {
+        System.out.println("downloadFile");
+        AllDocumentsScreen instance = new AllDocumentsScreen();
+        instance.downloadFile();
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getExtension method, of class AllDocumentsScreen.
+     */
+    @Test
+    public void testGetExtension() {
+        System.out.println("getExtension");
+        String filename = "";
+        String expResult = "";
+        String result = AllDocumentsScreen.getExtension(filename);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
     
 }
