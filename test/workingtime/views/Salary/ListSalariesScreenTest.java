@@ -28,13 +28,13 @@ public class ListSalariesScreenTest {
     }
 
     /**
-     * Test of searchNomina method, of class ListSalariesScreen.
+     * Test of searchPayroll method, of class ListSalariesScreen.
      */
     @Test
     public void testSearchNomina() {
         System.out.println("searchNomina");
         ListSalariesScreen instance = new ListSalariesScreen();
-        instance.searchNomina();
+        instance.searchPayroll();
     }
 
     /**

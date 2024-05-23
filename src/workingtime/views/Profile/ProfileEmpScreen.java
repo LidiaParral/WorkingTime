@@ -41,7 +41,7 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     String sql;
     String name;
     String surnames;
-    String phone;
+    String tlf;
     String email;
 
     Object[] options = {"Aceptar", "Cancelar"};
@@ -388,13 +388,13 @@ public class ProfileEmpScreen extends javax.swing.JFrame {
     public void updateProfile() {
         name = txtNombre.getText();
         surnames = txtApellidos.getText();
-        phone = txtTelefono.getText();
+        tlf = txtTelefono.getText();
         email = txtEmail.getText();
 
-        if (!txtIdEmp.equals("") && !name.isEmpty() && !surnames.isEmpty() && !txtDNI.equals("") && !phone.isEmpty()
+        if (!txtIdEmp.equals("") && !name.isEmpty() && !surnames.isEmpty() && !txtDNI.equals("") && !tlf.isEmpty()
                 && !email.isEmpty() && !txtDpto.equals("") && !txtPuesto.equals("") && !txtCiudad.equals("") && !txtPais.equals("") && !txtFecha.equals("")) {
             try {
-                sql = "UPDATE usuarios SET Nombre='" + name + "', Apellidos='" + surnames + "', Telefono='" + phone
+                sql = "UPDATE usuarios SET Nombre='" + name + "', Apellidos='" + surnames + "', Telefono='" + tlf
                         + "' WHERE IdEmpleado='" + txtIdEmp.getText() + "'";
                 conect = conn.getConexion();
                 st = conect.createStatement();

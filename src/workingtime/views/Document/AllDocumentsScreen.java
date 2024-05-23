@@ -11,10 +11,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,8 +68,8 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
     String nomDoc;
     String idUser;
     String idDoc;
-    public static String ext;
-    public static String extension = "";
+    static String extension = "";
+    String nameFile;
 
     Blob blob;
 
@@ -455,7 +454,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "Registro actualizado.", "DOCUMENTO", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Registro actualizado.", "DOCUMENTOS", JOptionPane.OK_OPTION);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -476,7 +475,7 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
             conect = conn.getConexion();
             st = conect.createStatement();
             st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "Registro eliminado.", "DOCUMENTO", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Registro eliminado.", "DOCUMENTOS", JOptionPane.OK_OPTION);
         } catch (SQLException ex) {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -496,41 +495,40 @@ public class AllDocumentsScreen extends javax.swing.JFrame {
         idDoc = String.valueOf(modelo.getValueAt(selectedRow, 0));
 
         try {
-            String nombre = JOptionPane.showInputDialog(null, "Nombre", "ARCHIVO");
+            nameFile = JOptionPane.showInputDialog(null, "Nombre del archivo:", "ARCHIVO", JOptionPane.PLAIN_MESSAGE);
             conect = conn.getConexion();
             sql = "SELECT TipoDocumento, NombreDoc, Archivo FROM documentos_empleados WHERE IdEmpleado=? AND IdDocumento=?";
-            try (PreparedStatement ps = conect.prepareStatement(sql)) {
-                ps.setString(1, idUser);
-                ps.setString(2, idDoc);
-                try ( ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        String tipoDoc = rs.getString("TipoDocumento");
-                        String name = rs.getString("NombreDoc");
-                        InputStream in = rs.getBinaryStream("Archivo");
 
-                        extension = getExtension(name);
-                        File archivo = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + nombre + extension);
+            ps = conect.prepareStatement(sql);
+            ps.setString(1, idUser);
+            ps.setString(2, idDoc);
+            rs = ps.executeQuery();
 
-                        try ( OutputStream out = new FileOutputStream(archivo)) {
-                            byte[] buffer = new byte[8192 * 16];
-                            int bytesRead;
-                            while ((bytesRead = in.read(buffer)) != -1) {
-                                out.write(buffer, 0, bytesRead);
-                            }
-                            out.flush();
-                            out.close();
-                            in.close();
-                            JOptionPane.showMessageDialog(null, "Archivo descargado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró el archivo en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (rs.next()) {
+                String name = rs.getString("NombreDoc");
+                InputStream in = rs.getBinaryStream("Archivo");
+
+                extension = getExtension(name);
+                File file = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + nameFile + extension);
+
+                try (FileWriter fw = new FileWriter(file, true)) {
+                    byte[] buffer = new byte[8192 * 4];
+                    int bytesRead;
+                    while ((bytesRead = in.read(buffer)) != -1) {
+                        fw.write(bytesRead);
                     }
+                    fw.flush();
+                    fw.close();
+                    in.close();
+                    JOptionPane.showMessageDialog(null, "Archivo descargado correctamente.", "DOCUMENTOS", JOptionPane.INFORMATION_MESSAGE);
                 }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el archivo en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException | IOException ex) {
-            System.err.println("Error al acceder a la base de datos: " + ex.getMessage());
-            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error:" + ex);
+            JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

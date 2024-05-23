@@ -48,7 +48,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblNumSS.setVisible(false);
         lblPosEmp.setVisible(false);
         lblDepartmentEmp.setVisible(false);
-        lblCiudad.setVisible(false);
+        lblCity.setVisible(false);
         lblPais.setVisible(false);
         btnLogout.setFont(new Font("Century Gothic", Font.BOLD, 12));
         mnAddDoc.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -103,7 +103,7 @@ public class HomeScreen extends javax.swing.JFrame {
         lblDepartmentEmp = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         lblPosEmp = new javax.swing.JLabel();
-        lblCiudad = new javax.swing.JLabel();
+        lblCity = new javax.swing.JLabel();
         lblPais = new javax.swing.JLabel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
@@ -201,7 +201,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(lblCiudad)
+                                            .addComponent(lblCity)
                                             .addGap(27, 27, 27))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(lblPais)
@@ -245,7 +245,7 @@ public class HomeScreen extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblCiudad)
+                                    .addComponent(lblCity)
                                     .addComponent(lblIdEmp))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblPais)))
@@ -611,7 +611,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblCatProf;
-    public javax.swing.JLabel lblCiudad;
+    public javax.swing.JLabel lblCity;
     public javax.swing.JLabel lblDNIEmp;
     public javax.swing.JLabel lblDepartmentEmp;
     public javax.swing.JLabel lblEmailEmp;

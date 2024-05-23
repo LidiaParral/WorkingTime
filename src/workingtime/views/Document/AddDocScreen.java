@@ -4,7 +4,6 @@
  */
 package workingtime.views.Document;
 
-import com.mysql.jdbc.Blob;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -14,14 +13,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -141,8 +138,8 @@ public class AddDocScreen extends javax.swing.JFrame {
 
         btnSaveDoc.setBackground(new java.awt.Color(38, 70, 166));
         btnSaveDoc.setForeground(new java.awt.Color(255, 255, 255));
-        btnSaveDoc.setText("GUARDAR");
-        btnSaveDoc.setToolTipText("Este botón permite guardar el documento.");
+        btnSaveDoc.setText("SUBIR");
+        btnSaveDoc.setToolTipText("Este botón permite almacenar el documento en la base de datos.");
         btnSaveDoc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSaveDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +265,7 @@ public class AddDocScreen extends javax.swing.JFrame {
      */
     private void btnSaveDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveDocActionPerformed
         btnSaveDoc.setBackground(new Color(252, 201, 131));
-        if (selected.showDialog(this, "GUARDAR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
+        if (selected.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             file = selected.getSelectedFile();
             if (file.canRead()) {
                 try {
@@ -280,7 +277,7 @@ public class AddDocScreen extends javax.swing.JFrame {
                         saveDocument(file);
                     } else {
                         JOptionPane.showMessageDialog(null, "No puede abrir un archivo con esa extensión.\nSólo permite las siguientes extensiones:\n"
-                                + ".pdf,.odt,.doc,.docx,.xls,.xlsx", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
+                                + ".png,.jpg,.jpge", "DOCUMENTOS", JOptionPane.ERROR_MESSAGE);
                     }
 
                 } catch (FileNotFoundException ex) {
@@ -343,13 +340,13 @@ public class AddDocScreen extends javax.swing.JFrame {
     void typeDocuments() {
         switch (cmbTypeDoc.getSelectedIndex()) {
             case 0:
-                typeDoc = "PDF";
+                typeDoc = "PNG";
                 break;
             case 1:
-                typeDoc = "EXCEL";
+                typeDoc = "JPG";
                 break;
             case 2:
-                typeDoc = "WORD";
+                typeDoc = "JPGE";
                 break;
             default:
                 throw new AssertionError();

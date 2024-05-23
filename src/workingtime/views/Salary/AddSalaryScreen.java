@@ -328,7 +328,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnSaveSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveSalaryActionPerformed
-        searchNomina();
+        searchPayroll();
     }//GEN-LAST:event_btnSaveSalaryActionPerformed
 
     /**
@@ -349,7 +349,7 @@ public class AddSalaryScreen extends javax.swing.JFrame {
         totalDed = txtTotalDed.getText();
         totalDev = txtTotalDev.getText();
         days = daysWorkingMonth();
-        liqTotal = Integer.toString(calculateLiquidoTotal());
+        liqTotal = Integer.toString(calculateTotalLiquid());
         
         double salaryTotal = Double.parseDouble(this.salaryBase) - Double.parseDouble(liqTotal);
       
@@ -404,9 +404,9 @@ public class AddSalaryScreen extends javax.swing.JFrame {
     }
     
     /**
-     * Método searchNomina: Este método permite comprobar si existe un registro de nómina en la base de datos buscando a través del mes y del id del empleado.
+     * Método searchPayroll: Este método permite comprobar si existe un registro de nómina en la base de datos buscando a través del mes y del id del empleado.
      */
-    public void searchNomina() {
+    public void searchPayroll() {
         month = cmbMonths.getSelectedItem().toString();
         idUser = lblIdEmp.getText();
         try {
@@ -427,10 +427,10 @@ public class AddSalaryScreen extends javax.swing.JFrame {
     }
      
     /**
-     * Método calculateLiquidoTotal: Este método permite calcular el valor del liquido total.
+     * Método calculateTotalLiquid: Este método permite calcular el valor del liquido total.
      * @return total
      */
-    public int calculateLiquidoTotal(){
+    public int calculateTotalLiquid(){
       ded = Integer.parseInt (totalDed);
       dev = Integer.parseInt (totalDev);
       total = dev - ded;      

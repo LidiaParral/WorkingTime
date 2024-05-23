@@ -46,7 +46,8 @@ public class LoginScreen extends javax.swing.JFrame {
     String user;
     String name;
     String idUser;
-    String posicion;
+    String position;
+    String department;
 
     int count = 0;
 
@@ -82,8 +83,9 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIconoUser = new javax.swing.JLabel();
         lblIconoPass = new javax.swing.JLabel();
         lblIdEmp = new javax.swing.JLabel();
-        lblPosicion = new javax.swing.JLabel();
+        lblPosition = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
+        lblDpto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -127,8 +129,8 @@ public class LoginScreen extends javax.swing.JFrame {
         lblIdEmp.setEnabled(false);
         lblIdEmp.setFocusable(false);
 
-        lblPosicion.setEnabled(false);
-        lblPosicion.setFocusable(false);
+        lblPosition.setEnabled(false);
+        lblPosition.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,46 +139,51 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblForgotPss)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUser)
-                                    .addComponent(lblPassword))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIconoUser)
-                            .addComponent(lblIconoPass))
-                        .addGap(79, 79, 79))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 494, Short.MAX_VALUE)
                                 .addComponent(lblIdEmp))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPosicion)
+                                .addComponent(lblPosition)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblName)
-                .addGap(29, 29, 29))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblForgotPss)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblUser)
+                                            .addComponent(lblPassword))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPswLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIconoUser)
+                                    .addComponent(lblIconoPass))
+                                .addGap(79, 79, 79))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblName)
+                                .addGap(29, 29, 29))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblDpto)
+                                .addGap(21, 21, 21))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblIdEmp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPosicion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(lblPosition)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,6 +201,8 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(lblName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDpto)
                 .addGap(18, 18, 18))
         );
 
@@ -241,59 +250,63 @@ public class LoginScreen extends javax.swing.JFrame {
         int intentosRestantes = 3;
 
         while (intentosRestantes > 0) {
+
             user = txtUserLogin.getText();
             pass = txtPswLogin.getText();
 
-            try {
-                if (user.isEmpty() || pass.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Por favor, ingrese tanto el usuario como la contraseña.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-                    reset.ResetFrame(this);
-                    return;
-                }
+            if (user.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor, rellene el campo vacío.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+                reset.ResetFrame(this);
+                return;
+            }
 
-                sql = "SELECT * FROM usuarios WHERE Usuario ='"+ user + "' AND Password ='" + pass + "'";
+            try {
+
+                sql = "SELECT * FROM usuarios WHERE Usuario ='" + user + "' AND Password ='" + pass + "'";
                 conect = conn.getConexion();
                 ps = conect.prepareStatement(sql);
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-                     this.hide();
-                        Thread.sleep(200);
-                        lblIdEmp.setText(rs.getString("IdEmpleado"));
-                        lblName.setText(rs.getString("Nombre"));
-                        lblPosicion.setText(rs.getString("Posicion"));
-                        name = lblName.getText();
-                        idUser = lblIdEmp.getText();
-                        posicion = lblPosicion.getText();
-                        user = lblUser.getText();
-                        HomeScreen home = new HomeScreen();
-                        if (idUser.equals("1") || posicion.equalsIgnoreCase("ADMINISTRADOR") || posicion.equalsIgnoreCase("GERENTE") || posicion.equalsIgnoreCase("DIRECTOR")) {
-                            home.mnControlEmp.setVisible(true);
-                            home.mnAllEmp.setVisible(true);
-                            home.mnEmple.setVisible(true);
-                            home.mnAddSalary.setVisible(true);
-                        }
-                        home.lblIdEmp.setText(rs.getString("IdEmpleado"));
-                        home.lblNamEmp.setText(rs.getString("Nombre"));
-                        home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
-                        home.lblPosEmp.setText(rs.getString("Posicion"));
-                        home.lblDepartmentEmp.setText(rs.getString("Departamento"));
-                        home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
-                        home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
-                        home.lblDNIEmp.setText(rs.getString("DNI"));
-                        home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
-                        home.lblCiudad.setText(rs.getString("Ciudad"));
-                        home.lblPais.setText(rs.getString("Pais"));
-                        home.setVisible(true);
-                        reset.ResetFrame(this);
-                        JOptionPane.showMessageDialog(null, "Bienvenido " + name + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
-                    // Aquí abrirías la pantalla principal o realizarías otras acciones.
+                    this.hide();
+                    Thread.sleep(200);
+                    lblIdEmp.setText(rs.getString("IdEmpleado"));
+                    lblName.setText(rs.getString("Nombre"));
+                    lblPosition.setText(rs.getString("Posicion"));
+                    lblDpto.setText(rs.getString("Departamento"));
+                    name = lblName.getText();
+                    idUser = lblIdEmp.getText();
+                    position = lblPosition.getText();
+                    user = lblUser.getText();
+                    department = lblDpto.getText();
+                    HomeScreen home = new HomeScreen();
+                    if (idUser.equals("1") || position.equalsIgnoreCase("ADMINISTRADOR") || position.equalsIgnoreCase("GERENTE") || position.equalsIgnoreCase("DIRECTOR")
+                            || department.equalsIgnoreCase("RRHH")) {
+                        home.mnControlEmp.setVisible(true);
+                        home.mnAllEmp.setVisible(true);
+                        home.mnEmple.setVisible(true);
+                        home.mnAddSalary.setVisible(true);
+                    }
+                    home.lblIdEmp.setText(rs.getString("IdEmpleado"));
+                    home.lblNamEmp.setText(rs.getString("Nombre"));
+                    home.lblSurnamesEmp.setText(rs.getString("Apellidos"));
+                    home.lblPosEmp.setText(rs.getString("Posicion"));
+                    home.lblDepartmentEmp.setText(rs.getString("Departamento"));
+                    home.lblGroupCot.setText(rs.getString("GrupoCotizacion"));
+                    home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
+                    home.lblDNIEmp.setText(rs.getString("DNI"));
+                    home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
+                    home.lblCity.setText(rs.getString("Ciudad"));
+                    home.lblPais.setText(rs.getString("Pais"));
+                    home.setVisible(true);
+                    reset.ResetFrame(this);
+                    JOptionPane.showMessageDialog(null, "Bienvenido " + name + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);
                     return;
                 } else {
                     intentosRestantes--;
                     if (intentosRestantes > 0) {
                         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos. Intentos restantes: " + intentosRestantes, "Error de inicio de sesión", JOptionPane.WARNING_MESSAGE);
-                        txtPswLogin.setText(""); // Limpia el campo de contraseña
+                        return;                     
                     } else {
                         JOptionPane.showMessageDialog(null, "Ha excedido el número máximo de intentos. El programa se cerrará.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
                         System.exit(0); // Cierra el programa
@@ -355,13 +368,14 @@ public class LoginScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnLogin;
+    public javax.swing.JLabel lblDpto;
     public javax.swing.JLabel lblForgotPss;
     private javax.swing.JLabel lblIconoPass;
     private javax.swing.JLabel lblIconoUser;
     public javax.swing.JLabel lblIdEmp;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
-    public javax.swing.JLabel lblPosicion;
+    public javax.swing.JLabel lblPosition;
     private javax.swing.JLabel lblUser;
     public javax.swing.JPasswordField txtPswLogin;
     public javax.swing.JTextField txtUserLogin;

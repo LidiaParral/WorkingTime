@@ -40,24 +40,24 @@ public class AddSalaryScreenTest {
     }
 
     /**
-     * Test of searchNomina method, of class AddSalaryScreen.
+     * Test of searchPayroll method, of class AddSalaryScreen.
      */
     @Test
     public void testSearchNomina() {
         System.out.println("searchNomina");
         AddSalaryScreen instance = new AddSalaryScreen();
-        instance.searchNomina();
+        instance.searchPayroll();
     }
 
     /**
-     * Test of calculateLiquidoTotal method, of class AddSalaryScreen.
+     * Test of calculateTotalLiquid method, of class AddSalaryScreen.
      */
     @Test
     public void testCalculateLiquidoTotal() {
         System.out.println("calculateLiquidoTotal");
         AddSalaryScreen instance = new AddSalaryScreen();
         int expResult = 0;
-        int result = instance.calculateLiquidoTotal();
+        int result = instance.calculateTotalLiquid();
         assertEquals(expResult, result);
     }
 

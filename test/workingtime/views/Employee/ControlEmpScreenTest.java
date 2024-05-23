@@ -60,13 +60,13 @@ public class ControlEmpScreenTest {
     }
 
     /**
-     * Test of getEmpJob method, of class ControlEmpScreen.
+     * Test of getEmpPosition method, of class ControlEmpScreen.
      */
     @Test
     public void testGetEmpJob() {
         System.out.println("getEmpJob");
         ControlEmpScreen instance = new ControlEmpScreen();
-        instance.getEmpJob();
+        instance.getEmpPosition();
         fail("The test case is a prototype.");
     }
 

@@ -415,10 +415,10 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede estar vacío este campo.", "TODOS LOS EMPLEADOS", JOptionPane.ERROR_MESSAGE);
         } else {
             if (TableSalaries.getRowCount() == 0) {
-                searchNomina();
+                searchPayroll();
             } else {
                 lmp.tableCleaning(model);
-                searchNomina();
+                searchPayroll();
             }
         }
     }//GEN-LAST:event_btnSearchNominaActionPerformed
@@ -472,9 +472,9 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
     }
 
     /**
-     * Método searchNomina: Este método permite buscar un registro de una nómina en la base de datos.
+     * Método searchPayroll: Este método permite buscar un registro de una nómina en la base de datos.
      */
-    public void searchNomina() {       
+    public void searchPayroll() {       
         date = new SimpleDateFormat("yyyy-MM-dd").format(dtDateSalaries.getDate());
         try {
             sql = "SELECT * FROM nominas WHERE FechaInicio='" + date + "' AND IdEmpleado='" + lblIdUser.getText() + "'";
