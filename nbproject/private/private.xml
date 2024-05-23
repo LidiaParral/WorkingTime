@@ -12,13 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Salary/AddSalaryScreen.java</file>
             <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Login/LoginScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Home/HomeScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Time/AllTimesScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Salary/ListSalariesScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Document/AddDocScreen.java</file>
+            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/utilities/ResetFields.java</file>
             <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Employee/ControlEmpScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Time/AbsencesScreen.java</file>
-            <file>file:/G:/SEAS/DiseñoyDesarrolloDeInterface/ProyectoFinal/WorkingTime/src/workingtime/views/Profile/ProfileEmpScreen.java</file>
         </group>
     </open-files>
 </project-private>

@@ -394,7 +394,7 @@ public final class ListSalariesScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para descargar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         } else {
             try {
-                JOptionPane.showMessageDialog(null, "Se va a descargar el documento en Excel", "EXPORTAR DOCUMENTO", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se va a descargar el documento en Excel", "DOCUMENTOS", JOptionPane.PLAIN_MESSAGE);
                 export.exportExcel(TableSalaries);
             } catch (IOException ex) {
                 Logger.getLogger(ListSalariesScreen.class.getName()).log(Level.SEVERE, null, ex);
