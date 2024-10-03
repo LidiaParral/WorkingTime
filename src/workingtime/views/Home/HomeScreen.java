@@ -20,6 +20,7 @@ import workingtime.views.Employee.AllEmpScreen;
 import workingtime.views.Time.AllTimesScreen;
 import workingtime.views.Employee.ControlEmpScreen;
 import workingtime.views.Profile.ProfileEmpScreen;
+import workingtime.views.Time.AbsencesRequestsScreen;
 import workingtime.views.Time.TimeScreen;
 
 /**
@@ -48,7 +49,6 @@ public class HomeScreen extends javax.swing.JFrame {
         lblNumSS.setVisible(false);
         lblPosEmp.setVisible(false);
         lblDepartmentEmp.setVisible(false);
-        lblCity.setVisible(false);
         lblPais.setVisible(false);
         btnLogout.setFont(new Font("Century Gothic", Font.BOLD, 12));
         mnAddDoc.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -61,6 +61,7 @@ public class HomeScreen extends javax.swing.JFrame {
         mnRegisterWorkingDay.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         mnAllDocuments.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         mnAllTimes.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        mnReqAbsen.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         mnDocuments.setFont(new Font("Century Gothic", Font.PLAIN, 14));
         mnEmple.setFont(new Font("Century Gothic", Font.PLAIN, 14));
         mnHorario.setFont(new Font("Century Gothic", Font.PLAIN, 14));
@@ -73,6 +74,7 @@ public class HomeScreen extends javax.swing.JFrame {
         mnControlEmp.setBackground(Color.WHITE);
         mnRegisterAbsence.setBackground(Color.WHITE);
         mnRegisterWorkingDay.setBackground(Color.WHITE);
+        mnReqAbsen.setBackground(Color.WHITE);
         mnAllDocuments.setBackground(Color.WHITE);
         mnProfileUser.setBackground(Color.WHITE);
         mnRegisterAbsence.setBackground(Color.WHITE);
@@ -103,12 +105,13 @@ public class HomeScreen extends javax.swing.JFrame {
         lblDepartmentEmp = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         lblPosEmp = new javax.swing.JLabel();
-        lblCity = new javax.swing.JLabel();
+        lblCiudad = new javax.swing.JLabel();
         lblPais = new javax.swing.JLabel();
         mnbHome = new javax.swing.JMenuBar();
         mnHorario = new javax.swing.JMenu();
         mnRegisterWorkingDay = new javax.swing.JMenuItem();
         mnRegisterAbsence = new javax.swing.JMenuItem();
+        mnReqAbsen = new javax.swing.JMenuItem();
         mnAllTimes = new javax.swing.JMenuItem();
         mnSalary = new javax.swing.JMenu();
         mnAddSalary = new javax.swing.JMenuItem();
@@ -201,7 +204,7 @@ public class HomeScreen extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(lblCity)
+                                            .addComponent(lblCiudad)
                                             .addGap(27, 27, 27))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(lblPais)
@@ -245,7 +248,7 @@ public class HomeScreen extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblCity)
+                                    .addComponent(lblCiudad)
                                     .addComponent(lblIdEmp))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblPais)))
@@ -284,6 +287,15 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
         mnHorario.add(mnRegisterAbsence);
+
+        mnReqAbsen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
+        mnReqAbsen.setText("Peticion ausencias");
+        mnReqAbsen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReqAbsenActionPerformed(evt);
+            }
+        });
+        mnHorario.add(mnReqAbsen);
 
         mnAllTimes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscar.png"))); // NOI18N
         mnAllTimes.setText("Todos los registros");
@@ -459,7 +471,9 @@ public class HomeScreen extends javax.swing.JFrame {
     private void mnRegisterAbsenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRegisterAbsenceActionPerformed
         AbsencesScreen aus = new AbsencesScreen();
         aus.lblIdEmp.setText(lblIdEmp.getText());
+        aus.lblNameEmp.setText(lblNamEmp.getText());
         aus.lblDepartment.setText(lblDepartmentEmp.getText());
+        aus.lblEmail.setText(lblEmailEmp.getText());
         aus.consult();
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegisterAbsenceActionPerformed
@@ -564,6 +578,14 @@ public class HomeScreen extends javax.swing.JFrame {
         addS.setVisible(true);
     }//GEN-LAST:event_mnAddSalaryActionPerformed
 
+    private void mnReqAbsenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReqAbsenActionPerformed
+        AbsencesRequestsScreen aus = new AbsencesRequestsScreen();
+        aus.lblIdEmp.setText(lblIdEmp.getText());
+        aus.lblDepartment.setText(lblDepartmentEmp.getText());
+        aus.consult();
+        aus.setVisible(true);
+    }//GEN-LAST:event_mnReqAbsenActionPerformed
+
     /**
      * Método getIconImage: Este método permite obtener el icono de la
      * aplicación.
@@ -611,7 +633,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblCatProf;
-    public javax.swing.JLabel lblCity;
+    public javax.swing.JLabel lblCiudad;
     public javax.swing.JLabel lblDNIEmp;
     public javax.swing.JLabel lblDepartmentEmp;
     public javax.swing.JLabel lblEmailEmp;
@@ -637,6 +659,7 @@ public class HomeScreen extends javax.swing.JFrame {
     public javax.swing.JMenuItem mnProfileUser;
     private javax.swing.JMenuItem mnRegisterAbsence;
     private javax.swing.JMenuItem mnRegisterWorkingDay;
+    public javax.swing.JMenuItem mnReqAbsen;
     private javax.swing.JMenu mnSalary;
     private javax.swing.JMenuBar mnbHome;
     // End of variables declaration//GEN-END:variables

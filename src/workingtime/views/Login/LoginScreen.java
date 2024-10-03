@@ -286,6 +286,7 @@ public class LoginScreen extends javax.swing.JFrame {
                         home.mnAllEmp.setVisible(true);
                         home.mnEmple.setVisible(true);
                         home.mnAddSalary.setVisible(true);
+                        home.mnReqAbsen.setVisible(true);
                     }
                     home.lblIdEmp.setText(rs.getString("IdEmpleado"));
                     home.lblNamEmp.setText(rs.getString("Nombre"));
@@ -296,8 +297,8 @@ public class LoginScreen extends javax.swing.JFrame {
                     home.lblCatProf.setText(rs.getString("CategoriaProfesional"));
                     home.lblDNIEmp.setText(rs.getString("DNI"));
                     home.lblNumSS.setText(rs.getString("NumeroSeguridadSocial"));
-                    home.lblCity.setText(rs.getString("Ciudad"));
                     home.lblPais.setText(rs.getString("Pais"));
+                    home.lblEmailEmp.setText(rs.getString("Email"));
                     home.setVisible(true);
                     reset.ResetFrame(this);
                     JOptionPane.showMessageDialog(null, "Bienvenido " + name + " a WorkingTime", "WELCOME A WORKING TIME", JOptionPane.PLAIN_MESSAGE);

@@ -269,8 +269,7 @@ public class AddDocScreen extends javax.swing.JFrame {
             file = selected.getSelectedFile();
             if (file.canRead()) {
                 try {
-                    if (file.getName().endsWith(".pdf") || file.getName().endsWith(".odt") || file.getName().endsWith(".doc") || file.getName().endsWith(".docx")
-                            || file.getName().endsWith(".xlsx") || file.getName().endsWith(".xls")) {
+                    if (file.getName().endsWith(".png") || file.getName().endsWith(".jpg") || file.getName().endsWith(".jpge")) {
                         txtPathDoc.setText(file.getAbsolutePath());
                         txtNomDoc.setText(file.getName());
 
