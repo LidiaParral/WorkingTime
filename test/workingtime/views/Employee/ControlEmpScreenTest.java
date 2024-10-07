@@ -148,5 +148,16 @@ public class ControlEmpScreenTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getEmpPosition method, of class ControlEmpScreen.
+     */
+    @Test
+    public void testGetEmpPosition() {
+        System.out.println("getEmpPosition");
+        ControlEmpScreen instance = new ControlEmpScreen();
+        instance.getEmpPosition();
+        fail("The test case is a prototype.");
+    }
     
 }

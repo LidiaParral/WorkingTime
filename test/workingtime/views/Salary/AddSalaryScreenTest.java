@@ -82,5 +82,29 @@ public class AddSalaryScreenTest {
         String[] args = null;
         AddSalaryScreen.main(args);
     }
+
+    /**
+     * Test of searchPayroll method, of class AddSalaryScreen.
+     */
+    @Test
+    public void testSearchPayroll() {
+        System.out.println("searchPayroll");
+        AddSalaryScreen instance = new AddSalaryScreen();
+        instance.searchPayroll();
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of calculateTotalLiquid method, of class AddSalaryScreen.
+     */
+    @Test
+    public void testCalculateTotalLiquid() {
+        System.out.println("calculateTotalLiquid");
+        AddSalaryScreen instance = new AddSalaryScreen();
+        int expResult = 0;
+        int result = instance.calculateTotalLiquid();
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
     
 }

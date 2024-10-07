@@ -22,7 +22,8 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Authenticator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -35,6 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import workingtime.database.Conexion;
 import workingtime.utilities.CleanTable;
+import workingtime.utilities.ColourCell;
 import workingtime.utilities.ResetFields;
 
 /**
@@ -133,7 +135,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblNameEmp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TableAbsence = new javax.swing.JTable();
+        TableAbsence = new ColourCell();
         jLabel2 = new javax.swing.JLabel();
         lblIdAbs = new javax.swing.JLabel();
         btnRequestAbs = new javax.swing.JButton();
@@ -298,6 +300,11 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TableAbsence.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableAbsenceMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TableAbsence);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logotipo2.png"))); // NOI18N
@@ -456,26 +463,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnSaveAusenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAusenciaActionPerformed
-        selectedRow = TableAbsence.getSelectedRow();
-        reqAbs  = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 5));
-        if (election == JOptionPane.YES_OPTION) {
-            if (selectedRow < 0) {
-                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún registro para actualizar", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                if(reqAbs.equals("APROBADO")){
-                    btnSaveAusencia.setBackground(new Color(252, 201, 131));
-                    existDate();
-                    consult();
-                    btnSaveAusencia.setBackground(new Color(38, 70, 166)); 
-                } else {
-                    btnSaveAusencia.setBackground(new Color(38, 70, 166));
-                    btnSaveAusencia.setEnabled(false);
-                    btnSaveAusencia.setVisible(false);
-                }
-            }
-        } else if (election == JOptionPane.NO_OPTION) {
-            JOptionPane.showMessageDialog(null, "No se ha actualizado el empleado de la base de datos", "EMPLEADO", JOptionPane.PLAIN_MESSAGE);
-        }
+        btnSaveAusencia.setBackground(new Color(252, 201, 131));
+        existDate();
+        consult();
+        btnSaveAusencia.setBackground(new Color(38, 70, 166));
     }//GEN-LAST:event_btnSaveAusenciaActionPerformed
 
     /**
@@ -524,6 +515,14 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         btnDeleteAusencia.setBackground(new Color(255, 126, 60));
     }//GEN-LAST:event_btnDeleteAusenciaActionPerformed
 
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validate(String emailStr) {
+            Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+            return matcher.matches();
+    }
+
     private void btnRequestAbsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAbsActionPerformed
         dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
         dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
@@ -531,6 +530,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         reason = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 4));
         employee = lblNameEmp.getText();
         dpto = lblDepartment.getText();
+
         try {
             Properties prop = new Properties();
             prop.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -538,20 +538,24 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             prop.setProperty("mail.smtp.port", "587");
             prop.setProperty("mail.smtp.auth", "true");
             
-            
+            //Añadir una dirección de correo electrónico + contraseña
             String emailRem = "lparralrodriguez@gmail.com";
             String passRem = "llsj usmd wily ywsp";
             String emailRec = lblEmail.getText();
             String header = "Petición de ausencias";
-            String message = "El empleado " + employee + " del departamento " + dpto  +" pide una ausencia entre las fechas:"
-                    + "Fecha de inicio:" + dateStart + " - Fecha de fin:" + dateFin
-                    + ", Razón: " + typeRequest + ", Descripción: " + reason
-                    + "Atentamente, " + employee;
+            String message = "El empleado " + employee + " del departamento " + dpto  +" pide una ausencia, entre las fechas:"
+                    + "<br><p><b>Fecha de inicio: </b>" + dateStart + "<br><b>Fecha de fin:</b> " + dateFin + ""
+                    + "<br><b>Razón:</b>" + typeRequest + " - <b>Descripción:</b> " + reason + "</p>"
+                    + "<p>Atentamente, " + employee + "</p>";
             
             // Validar que los correos no estén vacíos
             if (emailRem.isEmpty() || emailRec.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "La dirección de correo no puede estar vacía.");
-                return;  // Detenemos la ejecución si alguna dirección está vacía
+                return; 
+            //Validar que el formato del correo sea el correcto
+            } else if(!validate(emailRec) || !(validate(emailRem))){
+                JOptionPane.showMessageDialog(null, "La dirección de correo no es válida.");
+                return; 
             }
 
            Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
@@ -566,7 +570,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             mess.setFrom(new InternetAddress(emailRem));
             mess.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRec));
             mess.setSubject(header);
-            mess.setText(message);
+            mess.setText(message, "ISO-8859-1","html");
 
             // Enviar el correo
             Transport.send(mess);
@@ -578,7 +582,19 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         } catch (MessagingException ex) {
             Logger.getLogger(AbsencesScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AbsencesRequestsScreen areq = new AbsencesRequestsScreen();
+        areq.setVisible(true);
+        areq.consult();
     }//GEN-LAST:event_btnRequestAbsActionPerformed
+
+    private void TableAbsenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableAbsenceMouseClicked
+        this.txtManager.setText(model.getValueAt(TableAbsence.getSelectedRow(), 0).toString());
+        this.dtDateStartAb.setDateFormatString(model.getValueAt(TableAbsence.getSelectedRow(), 1).toString());
+        this.dtDateFinAb.setDateFormatString(model.getValueAt(TableAbsence.getSelectedRow(), 2).toString());
+        this.cmbTypeRequestVacation.setSelectedItem(model.getValueAt(TableAbsence.getSelectedRow(), 3));
+        this.txtaReasonAb.setText(model.getValueAt(TableAbsence.getSelectedRow(), 4).toString());
+        this.txtReqAbs.setText(model.getValueAt(TableAbsence.getSelectedRow(), 5).toString());
+    }//GEN-LAST:event_TableAbsenceMouseClicked
 
     /**
      * Método saveAbsence: Este método permite guardar los datos de la ausencia en la base de datos.
@@ -595,6 +611,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
         getDay(dtDateStartAb.getJCalendar());
         getDay(dtDateFinAb.getJCalendar());
+        
+        if(reqAbs.equalsIgnoreCase("")){
+            reqAbs = "PENDIENTE";
+        }
 
         if (dpto.isEmpty() || manager.isEmpty() || dateStart.isEmpty() || dateFin.isEmpty() || reason.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -642,6 +662,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
         typeRequest = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 3));
         reason = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 4));
+        reqAbs = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 5));
         try {
             sql = "UPDATE registro_ausencia SET TipoSolicitud='" + typeRequest + "', AusenciaDesc='" + reason 
                     + "' WHERE IdEmpleado='" + idUser + "' AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "'";
@@ -656,6 +677,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         lmp.tableCleaning(model);
+        cleanData();
     }
 
     /**
@@ -666,6 +688,8 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         dateStart = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 1));
         dateFin = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 2));
         typeRequest = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 3));
+        reason = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 4));
+        reqAbs = String.valueOf(model.getValueAt(TableAbsence.getSelectedRow(), 5));
         try {
             sql = "DELETE FROM registro_ausencia WHERE IdEmpleado='" + idUser + "'"
                     + " AND FechaInicio='" + dateStart + "' AND FechaFin='" + dateFin + "' AND"
@@ -711,7 +735,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * Método existDate: Este método permite comprobar si existe la fecha seleccionada de la ausencia del empleado, en la base de datos.
      */

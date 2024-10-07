@@ -120,5 +120,18 @@ public class AbsencesScreenTest {
         String[] args = null;
         AbsencesScreen.main(args);
     }
+
+    /**
+     * Test of validate method, of class AbsencesScreen.
+     */
+    @Test
+    public void testValidate() {
+        System.out.println("validate");
+        String emailStr = "";
+        boolean expResult = false;
+        boolean result = AbsencesScreen.validate(emailStr);
+        assertEquals(expResult, result);
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -79,5 +79,16 @@ public class ListSalariesScreenTest {
         instance.deleteSalary();
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of searchPayroll method, of class ListSalariesScreen.
+     */
+    @Test
+    public void testSearchPayroll() {
+        System.out.println("searchPayroll");
+        ListSalariesScreen instance = new ListSalariesScreen();
+        instance.searchPayroll();
+        fail("The test case is a prototype.");
+    }
     
 }
