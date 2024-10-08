@@ -78,6 +78,7 @@ public final class AbsencesRequestsScreen extends javax.swing.JFrame {
         lblDateStart.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblDateFin.setFont(new Font("Century Gothic", Font.BOLD, 14));
         lblTypeRequest.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        lblDepartment.setFont(new Font("Century Gothic", Font.BOLD, 14));
         btnApproved.setFont(new Font("Century Gothic", Font.BOLD, 12));
         btnRejectAbs.setFont(new Font("Century Gothic", Font.BOLD, 12));
     }

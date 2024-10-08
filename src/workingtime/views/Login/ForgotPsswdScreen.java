@@ -246,7 +246,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
         passOld = txtOldPass.getText();
         user = txtUsername.getText();
         try {
-            sql = "SELECT * FROM empleados WHERE Password='" + passOld + "' AND Usuario='" + user + "'";
+            sql = "SELECT * FROM usuarios WHERE Password='" + passOld + "' AND Usuario='" + user + "'";
 
             conect = conn.getConexion();
             st = conect.createStatement();
@@ -276,7 +276,7 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
 
         if (passNew.equalsIgnoreCase(confiPassNew)) {
             try {
-                sql = "UPDATE empleados SET Password='" + passNew + "' WHERE IdEmpleado='" + idUser + "'";
+                sql = "UPDATE usuarios SET Password='" + passNew + "' WHERE IdEmpleado='" + idUser + "'";
                 conect = conn.getConexion();
                 st = conect.createStatement();
                 st.executeUpdate(sql);

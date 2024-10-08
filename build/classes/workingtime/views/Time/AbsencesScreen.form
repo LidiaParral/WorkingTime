@@ -82,13 +82,13 @@
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblManager" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="dtDateFinAb" min="-2" pref="171" max="-2" attributes="0"/>
                               <Component id="lblDateStart" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbTypeRequestVacation" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbTypeRequestVacation" max="32767" attributes="0"/>
                               <Component id="lblTypeRequest" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtManager" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="cmbManager" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -135,8 +135,8 @@
                               <Component id="lblManager" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtManager" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cmbManager" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="lblTypeRequest" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cmbTypeRequestVacation" min="-2" max="-2" attributes="0"/>
@@ -145,7 +145,7 @@
                       </Group>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
                       <Component id="dtDateStartAb" min="-2" max="-2" attributes="0"/>
@@ -198,16 +198,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Fecha de fin:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtManager">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Century Gothic" size="12" style="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dtDateStartAb">
           <Properties>
@@ -328,6 +318,17 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbManager">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>

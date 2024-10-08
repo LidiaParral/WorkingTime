@@ -78,6 +78,8 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     String employee;
     String dayOfWeek;
     String idAbsence;
+    
+    public String emailRem;
 
     int selectedRow;
     Object[] options = {"Aceptar", "Cancelar"};
@@ -89,6 +91,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
      */
     public AbsencesScreen() {
         initComponents();
+        checkManager();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
         lblIdEmp.setVisible(false);
@@ -121,7 +124,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblManager = new javax.swing.JLabel();
         lblDateStart = new javax.swing.JLabel();
         lblDateFin = new javax.swing.JLabel();
-        txtManager = new javax.swing.JTextField();
         dtDateStartAb = new com.toedter.calendar.JDateChooser();
         dtDateFinAb = new com.toedter.calendar.JDateChooser();
         lblTypeRequest = new javax.swing.JLabel();
@@ -133,6 +135,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         txtReqAbs = new javax.swing.JTextField();
         lblReqAbs = new javax.swing.JLabel();
         lblNameEmp = new javax.swing.JLabel();
+        cmbManager = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAbsence = new ColourCell();
@@ -159,8 +162,6 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         lblDateStart.setText("Fecha de inicio:");
 
         lblDateFin.setText("Fecha de fin:");
-
-        txtManager.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         dtDateStartAb.setBackground(new java.awt.Color(255, 255, 255));
         dtDateStartAb.setToolTipText("dd-MM-yyyy");
@@ -205,13 +206,13 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblManager)
                             .addComponent(dtDateFinAb, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDateStart)
-                            .addComponent(cmbTypeRequestVacation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbTypeRequestVacation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTypeRequest)
-                            .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbManager, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(61, 61, 61)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,7 +247,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                             .addComponent(lblIdEmp)
                             .addComponent(lblManager))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblTypeRequest)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -254,7 +255,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblDateStart))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDepartment)
                     .addComponent(dtDateStartAb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -531,6 +532,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         employee = lblNameEmp.getText();
         dpto = lblDepartment.getText();
 
+        checkManager();
         try {
             Properties prop = new Properties();
             prop.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -539,7 +541,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             prop.setProperty("mail.smtp.auth", "true");
             
             //Añadir una dirección de correo electrónico + contraseña
-            String emailRem = "lparralrodriguez@gmail.com";
+            emailRem = "lparralrodriguez@gmail.com";
             String passRem = "llsj usmd wily ywsp";
             String emailRec = lblEmail.getText();
             String header = "Petición de ausencias";
@@ -549,11 +551,11 @@ public final class AbsencesScreen extends javax.swing.JFrame {
                     + "<p>Atentamente, " + employee + "</p>";
             
             // Validar que los correos no estén vacíos
-            if (emailRem.isEmpty() || emailRec.isEmpty()) {
+            if (emailRec.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "La dirección de correo no puede estar vacía.");
                 return; 
             //Validar que el formato del correo sea el correcto
-            } else if(!validate(emailRec) || !(validate(emailRem))){
+            } else if(!validate(emailRec)){
                 JOptionPane.showMessageDialog(null, "La dirección de correo no es válida.");
                 return; 
             }
@@ -574,21 +576,20 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
             // Enviar el correo
             Transport.send(mess);
-            JOptionPane.showMessageDialog(null, "Petición enviada");
+            JOptionPane.showMessageDialog(null, "Petición enviada");           
             
-                     
+            AbsencesRequestsScreen areq = new AbsencesRequestsScreen();
+            areq.setVisible(true);
+            areq.consult();        
         } catch (AddressException ex) {
             Logger.getLogger(AbsencesScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
             Logger.getLogger(AbsencesScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        AbsencesRequestsScreen areq = new AbsencesRequestsScreen();
-        areq.setVisible(true);
-        areq.consult();
     }//GEN-LAST:event_btnRequestAbsActionPerformed
 
     private void TableAbsenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableAbsenceMouseClicked
-        this.txtManager.setText(model.getValueAt(TableAbsence.getSelectedRow(), 0).toString());
+        this.cmbManager.setSelectedItem(model.getValueAt(TableAbsence.getSelectedRow(), 0).toString());
         this.dtDateStartAb.setDateFormatString(model.getValueAt(TableAbsence.getSelectedRow(), 1).toString());
         this.dtDateFinAb.setDateFormatString(model.getValueAt(TableAbsence.getSelectedRow(), 2).toString());
         this.cmbTypeRequestVacation.setSelectedItem(model.getValueAt(TableAbsence.getSelectedRow(), 3));
@@ -603,7 +604,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         idUser = lblIdEmp.getText();
         employee = lblNameEmp.getText();
         dpto = lblDepartment.getText();
-        manager = txtManager.getText().toUpperCase();
+        manager = cmbManager.getSelectedItem().toString();
         dateStart = new SimpleDateFormat("dd-MM-yyyy").format(dtDateStartAb.getDate());
         dateFin = new SimpleDateFormat("dd-MM-yyyy").format(dtDateFinAb.getDate());
         reason = txtaReasonAb.getText();
@@ -806,7 +807,41 @@ public final class AbsencesScreen extends javax.swing.JFrame {
         }
 
     }
+    
+    private void checkManager() {
+        try {
+                sql = "SELECT Nombre FROM usuarios WHERE Posicion ='DIRECTOR' OR Posicion ='GERENTE' OR Posicion ='ADMINISTRADOR' ORDER BY Nombre ASC";
+                conect = conn.getConexion();
+                ps = conect.prepareStatement(sql);
+                rs = ps.executeQuery();
 
+                while (rs.next()) {
+                    cmbManager.addItem(rs.getString("Nombre").toUpperCase());
+                }
+              
+            } catch (SQLException ex) {
+                System.err.println("Error: " + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+            }
+    }
+    
+     private void getEmailManager() {
+        try {
+                sql = "SELECT Email FROM usuarios WHERE Nombre ='"+ cmbManager.getSelectedItem().toString() +"'";
+                conect = conn.getConexion();
+                ps = conect.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    emailRem = rs.getString("Email");
+                }
+              
+            } catch (SQLException ex) {
+                System.err.println("Error: " + ex);
+                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+            }
+    }
+     
     /**
      * Método getIconImage: Este método permite obtener el icono de la
      * aplicación.
@@ -861,6 +896,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnRequestAbs;
     private javax.swing.JButton btnSaveAusencia;
     private javax.swing.JButton btnUpdateAusencia;
+    public javax.swing.JComboBox<String> cmbManager;
     public javax.swing.JComboBox<String> cmbTypeRequestVacation;
     public com.toedter.calendar.JDateChooser dtDateFinAb;
     public com.toedter.calendar.JDateChooser dtDateStartAb;
@@ -882,8 +918,8 @@ public final class AbsencesScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblReason;
     private javax.swing.JLabel lblReqAbs;
     private javax.swing.JLabel lblTypeRequest;
-    public javax.swing.JTextField txtManager;
     public javax.swing.JTextField txtReqAbs;
     public javax.swing.JTextArea txtaReasonAb;
     // End of variables declaration//GEN-END:variables
+
 }
