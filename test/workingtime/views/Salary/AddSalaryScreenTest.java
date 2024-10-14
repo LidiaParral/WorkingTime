@@ -106,5 +106,27 @@ public class AddSalaryScreenTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of cleanData method, of class AddSalaryScreen.
+     */
+    @Test
+    public void testCleanData() {
+        System.out.println("cleanData");
+        AddSalaryScreen instance = new AddSalaryScreen();
+        instance.cleanData();
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getEmployeeDpto method, of class AddSalaryScreen.
+     */
+    @Test
+    public void testGetEmployeeDpto() {
+        System.out.println("getEmployeeDpto");
+        AddSalaryScreen instance = new AddSalaryScreen();
+        instance.getEmployeeDpto();
+        fail("The test case is a prototype.");
+    }
     
 }

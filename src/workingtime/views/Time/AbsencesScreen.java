@@ -640,6 +640,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             }
         }
         cleanData();
+        reset.ResetFrame(this);
         lmp.tableCleaning(model);
     }
 
@@ -647,11 +648,12 @@ public final class AbsencesScreen extends javax.swing.JFrame {
      * Método cleanData: Este método permite limpiar los campos del formulario.
      */
     public void cleanData() {
-        reset.ResetPanel(jPanel1);
-        dtDateStartAb.setCalendar(null);
-        dtDateFinAb.setCalendar(null);
+        dtDateStartAb.setDateFormatString("");
+        dtDateFinAb.setDateFormatString("");
         cmbTypeRequestVacation.setSelectedIndex(0);
+        cmbManager.setSelectedIndex(0);
         txtaReasonAb.setText("");
+        txtReqAbs.setText("");
     }
 
     /**
@@ -677,8 +679,10 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        lmp.tableCleaning(model);
+        
         cleanData();
+        reset.ResetFrame(this);
+        lmp.tableCleaning(model);
     }
 
     /**
@@ -704,6 +708,8 @@ public final class AbsencesScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        cleanData();
+        reset.ResetFrame(this);
         lmp.tableCleaning(model);
     }
 
@@ -711,7 +717,7 @@ public final class AbsencesScreen extends javax.swing.JFrame {
      * Método consult: Este método permite consultar los datos de todas las ausencias de la base de datos.
      */
     public void consult() {
-        sql = "SELECT * FROM registro_ausencia";
+        sql = "SELECT * FROM registro_ausencia WHERE IdEmpleado='" + lblIdEmp + "'";
 
         try {
             conect = conn.getConexion();
@@ -808,39 +814,27 @@ public final class AbsencesScreen extends javax.swing.JFrame {
 
     }
     
-    private void checkManager() {
-        try {
-                sql = "SELECT Nombre FROM usuarios WHERE Posicion ='DIRECTOR' OR Posicion ='GERENTE' OR Posicion ='ADMINISTRADOR' ORDER BY Nombre ASC";
-                conect = conn.getConexion();
-                ps = conect.prepareStatement(sql);
-                rs = ps.executeQuery();
+    /**
+     * Método checkManager: Este método permite comprobar el manager del empleado.
+     */
+    public void checkManager() {
+    try {
+        sql = "SELECT Nombre FROM usuarios WHERE (Posicion = 'DIRECTOR' OR Posicion = 'GERENTE' OR Posicion = 'ADMINISTRADOR') " +
+              "AND Departamento = ? ORDER BY Nombre ASC";
+        
+        conect = conn.getConexion();
+        ps = conect.prepareStatement(sql);
+        ps.setString(1, lblDepartment.getText());
+        rs = ps.executeQuery();
 
-                while (rs.next()) {
-                    cmbManager.addItem(rs.getString("Nombre").toUpperCase());
-                }
-              
-            } catch (SQLException ex) {
-                System.err.println("Error: " + ex);
-                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-            }
+        while (rs.next()) {
+            cmbManager.addItem(rs.getString("Nombre").toUpperCase());
+        }
+    } catch (SQLException ex) {
+        System.err.println("Error: " + ex);
+        JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
     }
-    
-     private void getEmailManager() {
-        try {
-                sql = "SELECT Email FROM usuarios WHERE Nombre ='"+ cmbManager.getSelectedItem().toString() +"'";
-                conect = conn.getConexion();
-                ps = conect.prepareStatement(sql);
-                rs = ps.executeQuery();
-
-                if (rs.next()) {
-                    emailRem = rs.getString("Email");
-                }
-              
-            } catch (SQLException ex) {
-                System.err.println("Error: " + ex);
-                JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-            }
-    }
+}
      
     /**
      * Método getIconImage: Este método permite obtener el icono de la

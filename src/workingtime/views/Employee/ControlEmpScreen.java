@@ -191,6 +191,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         txtDNIEmp.setToolTipText("El campo del DNI debe contener 8 números y 1 caracter");
 
         txtSSNumEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtSSNumEmp.setToolTipText("Añadir 12 dígitos numéricos.");
 
         cmbEmpDepartment.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpDepartment.setToolTipText("Seleccione el departamento del usuario");
@@ -227,11 +228,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         cmbEmpCountry.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEmpCountry.setToolTipText("Seleccione el pais del usuario");
         cmbEmpCountry.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cmbEmpCountry.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbEmpCountryItemStateChanged(evt);
-            }
-        });
 
         txtGroupCotEmp.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtGroupCotEmp.setEnabled(false);
@@ -483,19 +479,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveEmpActionPerformed
 
     /**
-     * ComboBox País: Este combobox permite al usuario seleccionar uno de los
-     * valores mostrados del campo país.
-     *
-     * @param evt
-     */
-    private void cmbEmpCountryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEmpCountryItemStateChanged
-        if (cmbEmpCountry.getSelectedIndex() > 0) {
-            txtCapitalEmp.setText("");
-            getEmpCapital();
-        }
-    }//GEN-LAST:event_cmbEmpCountryItemStateChanged
-
-    /**
      * Botón Cancelar: Este botón permite retornar a la pantalla HomeScreen.
      *
      * @param evt
@@ -587,6 +570,7 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         }
 
         cleanData();
+        reset.ResetFrame(this);
     }
 
     /**
@@ -597,6 +581,16 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
         cmbEmpCountry.setSelectedIndex(0);
         cmbEmpDepartment.setSelectedIndex(0);
         cmbEmpPos.setSelectedIndex(0);
+        txtCapitalEmp.setText("");
+        txtDNIEmp.setText("");
+        txtEmailEmp.setText("");
+        txtGroupCotEmp.setText("");
+        txtNameEmp.setText("");
+        txtPhoneEmp.setText("");
+        txtSSNumEmp.setText("");
+        txtSurnamesEmp.setText("");
+        dtDateOfBirthEmp.setDateFormatString("");
+        dtDateOfSeniorityEmp.setDateFormatString("");
     }
 
     /**
@@ -703,7 +697,6 @@ public final class ControlEmpScreen extends javax.swing.JFrame {
 
             while (rs.next()) {
                 cmbEmpDepartment.addItem(rs.getString("Departamento").toUpperCase());
-
             }
         } catch (HeadlessException | SQLException ex) {
             System.err.println("Error:" + ex);

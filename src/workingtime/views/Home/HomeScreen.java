@@ -475,6 +475,7 @@ public class HomeScreen extends javax.swing.JFrame {
         aus.lblDepartment.setText(lblDepartmentEmp.getText());
         aus.lblEmail.setText(lblEmailEmp.getText());
         aus.consult();
+        aus.checkManager();
         aus.setVisible(true);
     }//GEN-LAST:event_mnRegisterAbsenceActionPerformed
 
@@ -575,6 +576,8 @@ public class HomeScreen extends javax.swing.JFrame {
         AddSalaryScreen addS = new AddSalaryScreen();
         addS.lblIdEmp.setText(lblIdEmp.getText());
         addS.lblPuesto.setText(lblPosEmp.getText());
+        addS.lblDepartam.setText(lblDepartmentEmp.getText());
+        addS.getEmployeeDpto();
         addS.setVisible(true);
     }//GEN-LAST:event_mnAddSalaryActionPerformed
 

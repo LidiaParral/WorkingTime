@@ -261,11 +261,22 @@ public class ForgotPsswdScreen extends javax.swing.JFrame {
             System.err.println("Error:" + ex);
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        cleanData();
+        reset.ResetFrame(this);
+    }
+
+    
+    /**
+     * Método cleanData: Este método permite limpiar los campos del formulario.
+     */
+    public void cleanData() {
+        txtUsername.setText("");
         txtOldPass.setText("");
         txtConfPass.setText("");
         txtPassNew.setText("");
     }
-
+    
+    
     /**
      * Método changePassword: Este método permite cambiar la contraseña del usuario en la base de datos.
      */

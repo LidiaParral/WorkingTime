@@ -62,5 +62,16 @@ public class ForgotPsswdScreenTest {
         ForgotPsswdScreen.main(args);
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of cleanData method, of class ForgotPsswdScreen.
+     */
+    @Test
+    public void testCleanData() {
+        System.out.println("cleanData");
+        ForgotPsswdScreen instance = new ForgotPsswdScreen();
+        instance.cleanData();
+        fail("The test case is a prototype.");
+    }
     
 }

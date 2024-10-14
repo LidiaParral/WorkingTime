@@ -133,5 +133,16 @@ public class AbsencesScreenTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of checkManager method, of class AbsencesScreen.
+     */
+    @Test
+    public void testCheckManager() {
+        System.out.println("checkManager");
+        AbsencesScreen instance = new AbsencesScreen();
+        instance.checkManager();
+        fail("The test case is a prototype.");
+    }
     
 }

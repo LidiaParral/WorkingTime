@@ -146,7 +146,10 @@ public final class TimeScreen extends javax.swing.JFrame {
         });
 
         dateAct.setBackground(new java.awt.Color(255, 255, 255));
-        dateAct.setMinSelectableDate(new Date());
+        dateAct.setDecorationBackgroundColor(new java.awt.Color(102, 102, 255));
+        dateAct.setTodayButtonText("");
+        dateAct.setTodayButtonVisible(true);
+        dateAct.setWeekdayForeground(new java.awt.Color(255, 255, 255));
         dateAct.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dateActPropertyChange(evt);
@@ -484,7 +487,7 @@ public final class TimeScreen extends javax.swing.JFrame {
     public void getDay(JCalendar day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(day.getDate());
-        if(calendar == null){
+        if(calendar.toString() == null){
             JOptionPane.showMessageDialog(null, "Error interno en el sistema.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ROOT).toUpperCase();
@@ -554,16 +557,17 @@ public final class TimeScreen extends javax.swing.JFrame {
             }
         }
         cleanData();
+        reset.ResetFrame(this);
     }
 
     /**
      * Método cleanData: Este método permite limpiar los campos del formulario.
      */
     public void cleanData() {
-        dtTimeStart.setCalendar(null);
-        dtTimeFin.setCalendar(null);
-        dtReasonStart.setCalendar(null);
-        dtReasonFin.setCalendar(null);
+        dtTimeStart.setDateFormatString("");
+        dtTimeFin.setDateFormatString("");
+        dtReasonStart.setDateFormatString("");
+        dtReasonFin.setDateFormatString("");
         lblDateActual.setText("");
     }
 
